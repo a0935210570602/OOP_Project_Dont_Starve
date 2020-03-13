@@ -3,11 +3,26 @@ var MapTile = function() {
     this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
     this.mapFloor.scale = 2;
 
-    // this.terrain_plain = new Framework.Sprite(define.imagePath + 'floor3.png');
-    // this.terrain_plain.scale = 2;
+    this.terrain_plain = new Framework.Sprite(define.imagePath + 'terrain_plain.png');
+    this.terrain_plain.scale = 2;
 
-    // this.terrain_water = new Framework.Sprite(define.imagePath + 'terrain_water.png');
-    // this.terrain_water.scale = 2;
+    this.terrain_water = new Framework.Sprite(define.imagePath + 'terrain_water.png');
+    this.terrain_water.scale = 2;
+
+    this.terrain_mountain = new Framework.Sprite(define.imagePath + 'terrain_mountain.png');
+    this.terrain_mountain.scale = 2;
+
+    this.terrain_blood_water = new Framework.Sprite(define.imagePath + 'terrain_blood_water.png');
+    this.terrain_blood_water.scale = 2;
+
+    this.terrain_forest = new Framework.Sprite(define.imagePath + 'terrain_forest.png');
+    this.terrain_forest.scale = 2;
+
+    this.terrain_lava = new Framework.Sprite(define.imagePath + 'terrain_lava.png');
+    this.terrain_lava.scale = 2;
+
+    this.terrain_snow_ground = new Framework.Sprite(define.imagePath + 'terrain_snow_ground.png');
+    this.terrain_snow_ground.scale = 2;
 
     this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
     this.mapWall.scale = 2;
@@ -40,6 +55,20 @@ var MapTile = function() {
             this.increaseBombPower.draw(ctx);
         }else if(this._tileType === -3){
             this.stopMonster.draw(ctx);
+        }else if(this._tileType === -4){
+            this.terrain_plain.draw(ctx);
+        }else if(this._tileType === -5){
+            this.terrain_water.draw(ctx);
+        }else if(this._tileType === -6){
+            this.terrain_mountain.draw(ctx);
+        }else if(this._tileType === -7){
+            this.terrain_blood_water.draw(ctx);
+        }else if(this._tileType === -8){
+            this.terrain_forest.draw(ctx);
+        }else if(this._tileType === -9){
+            this.terrain_lava.draw(ctx);
+        }else if(this._tileType === -10){
+            this.terrain_snow_ground.draw(ctx);
         }
     }
 
@@ -56,6 +85,13 @@ Object.defineProperty(MapTile.prototype, 'position', {
         this.increaseBombNum.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.increaseBombPower.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.stopMonster.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_plain.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_water.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_mountain.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_blood_water.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_forest.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_lava.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.terrain_snow_ground.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
 

@@ -6,6 +6,27 @@ var Map = function(map)
 
         this.score = new Score();
         this.score.position = {x:1000,y:0};
+        this.terrain_plain = new Framework.Sprite(define.imagePath + 'terrain_plain.png');
+        this.terrain_plain.scale = 2;
+    
+        this.terrain_water = new Framework.Sprite(define.imagePath + 'terrain_water.png');
+        this.terrain_water.scale = 2;
+    
+        this.terrain_mountain = new Framework.Sprite(define.imagePath + 'terrain_mountain.png');
+        this.terrain_mountain.scale = 2;
+    
+        this.terrain_blood_water = new Framework.Sprite(define.imagePath + 'terrain_blood_water.png');
+        this.terrain_blood_water.scale = 2;
+    
+        this.terrain_forest = new Framework.Sprite(define.imagePath + 'terrain_forest.png');
+        this.terrain_forest.scale = 2;
+    
+        this.terrain_lava = new Framework.Sprite(define.imagePath + 'terrain_lava.png');
+        this.terrain_lava.scale = 2;
+    
+        this.terrain_snow_ground = new Framework.Sprite(define.imagePath + 'terrain_snow_ground.png');
+        this.terrain_snow_ground.scale = 2;
+    
         this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
         this.mapFloor.scale = 2;
         this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
@@ -40,9 +61,10 @@ var Map = function(map)
         this.tileArray = [];
         this.exploreArray = [];
 
-        for(var i=4; i<8; i++){
+        for(var i=0; i<5; i++){
+            console.log(55);
             var line = this.mapArray[i];
-            for(var j=9; j<14; j++){
+            for(var j=0; j<5; j++){
                 var tile = new MapTile();
                 tile.tileType = 0;
                 tile.position = {x:j,y:i}
@@ -62,10 +84,27 @@ var Map = function(map)
                     var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
                     box.position = {x:j, y:i};
                     this.boxArray.push(box);
-                }else
+                }else if(line[j] === 192){
+                    tile.tileType = -4
+                }else if(line[j] === 200){
+                    tile.tileType = -5
+                }else if(line[j] === 137){
+                    tile.tileType = -6
+                }else if(line[j] === 91){
+                    tile.tileType = -7
+                }else if(line[j] === 123){
+                    tile.tileType = -8
+                }else if(line[j] === 196){
+                    console.log(196);
+                    tile.tileType = -9
+                }else if(line[j] === 255){
+                    tile.tileType = -10
+                }
+                else
                 {
                     tile.tileType = line[j];
                 }
+                console.log("push");
                 this.tileArray.push(tile);
             }
         }
@@ -159,9 +198,9 @@ var Map = function(map)
         this.tileArray = [];
         this.exploreArray = [];
         console.log(this.addition);
-        for(var i=4+ this.addition.y; i<8+ this.addition.y; i++){
+        for(var i=250+ this.addition.y -4; i<250+ this.addition.y+4; i++){
             var line = this.mapArray[i];
-            for(var j=9+ this.addition.x; j<14+ this.addition.x; j++){
+            for(var j=250+ this.addition.x -4; j<250 + this.addition.x+4; j++){
                 var tile = new MapTile();
                 tile._tileType = 0;
                 tile.position = {x:j-this.addition.x,y:i-this.addition.y};
@@ -181,7 +220,22 @@ var Map = function(map)
                     var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
                     box.position = {x:j-this.addition.x, y:i-this.addition.y};
                     this.boxArray.push(box);
-                }else
+                }else if(line[j] === 192){
+                    tile.tileType = -4
+                }else if(line[j] === 200){
+                    tile.tileType = -5
+                }else if(line[j] === 137){
+                    tile.tileType = -6
+                }else if(line[j] === 91){
+                    tile.tileType = -7
+                }else if(line[j] === 123){
+                    tile.tileType = -8
+                }else if(line[j] === 196){
+                    tile.tileType = -9
+                }else if(line[j] === 255){
+                    tile.tileType = -10
+                }
+                else
                 {
                     tile.tileType = line[j];
                 }
@@ -320,10 +374,12 @@ var Map = function(map)
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y+1)){
                 //this.player1.walk({x:0,y:1});
                 // this.playerWalkDirection = {x:0,y:1};
+                console.log(this.player1.position);
                 this.pressWalk = true;
                 this.keyPress = "Down";
                 this.addition.x += 0;
                 this.addition.y += 1;
+                m_map.draw(Framework.Game._context);
             }
         }
 
@@ -335,6 +391,7 @@ var Map = function(map)
                 this.keyPress = "Left";
                 this.addition.x += -1;
                 this.addition.y += 0;
+                m_map.draw(Framework.Game._context);
             }
         }
 
@@ -346,6 +403,7 @@ var Map = function(map)
                 this.keyPress = "Right";
                 this.addition.x += 1;
                 this.addition.y += 0;
+                m_map.draw(Framework.Game._context);
             }
         }
 
@@ -357,6 +415,7 @@ var Map = function(map)
                 this.keyPress = "Up";
                 this.addition.x += 0;
                 this.addition.y += -1;
+                m_map.draw(Framework.Game._context);
             }
         }
 
