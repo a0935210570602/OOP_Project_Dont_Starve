@@ -15,7 +15,7 @@
 		},
 		'imagePath': {
 			value: mainPath + 'image/',
-			writable: false
+			writable: true
 		}
 
 	});

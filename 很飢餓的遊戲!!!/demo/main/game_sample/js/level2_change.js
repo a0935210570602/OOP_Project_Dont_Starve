@@ -2,19 +2,32 @@ var Level2_change = Framework.Class(Framework.Level , {
     
     load: function() {
         //0 空地  1牆壁  2空木箱  3增加炸彈木箱  4增加威力木箱  -1增加炸彈數  -2增加炸彈power
+        //6 平原  7異世界洪水
         this.mapArray = [];
         this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //1
-        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //2
-        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //3
-        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //4
-        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //5
-        this.mapArray.push([1,0,0,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //6
-        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //7
-        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //8
-        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //9
-        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //10
-        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]); //11
+        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1]); //2
+        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1]); //3
+        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //4
+        this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //5
+        this.mapArray.push([1,0,0,3,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //0
+        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1]); //7
+        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2,2,1]); //8
+        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,2,0,2,2,0,2,0,0,1,1]); //9
+        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1]); //10
+        this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1]); //11
         this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //12
+        // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //1
+        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //2
+        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //3
+        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //4
+        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //5
+        // this.mapArray.push([1,6,6,3,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //6
+        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //7
+        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //8
+        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //9
+        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //16
+        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //11
+        // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //12
 
         this.map = new Map(this.mapArray);
         this.map.load();
@@ -23,12 +36,12 @@ var Level2_change = Framework.Class(Framework.Level , {
     initialize: function() {
         
         this.map.init();
-        this.map.setPlayerPosition({x:1,y:1});
-        for(var i=0; i<5; i++){
-            for(var j=0; j<5; j++){
-                this.map.addMonster({x:6+i, y:6+j});
-            }
-        }
+        this.map.setPlayerPosition({x:this.mapArray[0].length/2,y:this.mapArray.length/2});
+        // for(var i=0; i<5; i++){
+        //     for(var j=0; j<5; j++){
+        //         this.map.addMonster({x:6+i, y:6+j});
+        //     }
+        // }
         // this.map.addMonster({x:3, y:4});
         // this.map.addMonster({x:3, y:9});
         // this.map.addMonster({x:9, y:4});

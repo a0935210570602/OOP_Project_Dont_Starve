@@ -1,6 +1,7 @@
 var Map = function(map)
 {
     this.mapArray = map;
+    this.addition = {x: 0, y: 0};
     this.load = function(){
 
         this.score = new Score();
@@ -39,9 +40,9 @@ var Map = function(map)
         this.tileArray = [];
         this.exploreArray = [];
 
-        for(var i=0; i<this.mapArray.length; i++){
+        for(var i=4; i<8; i++){
             var line = this.mapArray[i];
-            for(var j=0; j<line.length; j++){
+            for(var j=9; j<14; j++){
                 var tile = new MapTile();
                 tile.tileType = 0;
                 tile.position = {x:j,y:i}
@@ -72,6 +73,7 @@ var Map = function(map)
 
     this.setPlayerPosition = function(playerPosition){
         this.player1.position = playerPosition;
+        console.log(this.player1.position);
     }
     this.addMonster = function(monsterPosition)
     {
@@ -150,6 +152,42 @@ var Map = function(map)
         }
 	}
 	this.draw = function(ctx) {
+        console.log("draw");
+        this.boxArray = [];
+        this.bombArray = [];
+        this.itemArray = [];
+        this.tileArray = [];
+        this.exploreArray = [];
+        console.log(this.addition);
+        for(var i=4+ this.addition.y; i<8+ this.addition.y; i++){
+            var line = this.mapArray[i];
+            for(var j=9+ this.addition.x; j<14+ this.addition.x; j++){
+                var tile = new MapTile();
+                tile._tileType = 0;
+                tile.position = {x:j-this.addition.x,y:i-this.addition.y};
+                if(line[j] === 2){
+                    var box = new Box(this.constants.ItemEnum.NONE);
+                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
+                    this.boxArray.push(box);
+                }else if(line[j] === 3){
+                    var box = new Box(this.constants.ItemEnum.INCREASE_BOMB);
+                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
+                    this.boxArray.push(box);
+                }else if(line[j] === 4){
+                    var box = new Box(this.constants.ItemEnum.INCREASE_POWER);
+                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
+                    this.boxArray.push(box);
+                }else if(line[j] === 5){
+                    var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
+                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
+                    this.boxArray.push(box);
+                }else
+                {
+                    tile.tileType = line[j];
+                }
+                this.tileArray.push(tile);
+            }
+        }
 		// for(var i=0; i<this.mapArray.length; i++){
 		// 	var line = this.mapArray[i];
 		// 	for(var j=0; j<line.length; j++){
@@ -281,36 +319,44 @@ var Map = function(map)
         if(e.key === 'Down') {
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y+1)){
                 //this.player1.walk({x:0,y:1});
-                this.playerWalkDirection = {x:0,y:1};
+                // this.playerWalkDirection = {x:0,y:1};
                 this.pressWalk = true;
                 this.keyPress = "Down";
+                this.addition.x += 0;
+                this.addition.y += 1;
             }
         }
 
         if(e.key === 'Left') {
             if(this.checkIsWalkAble(playerPosition.x-1,playerPosition.y)){
                 //this.player1.walk({x:-1,y:0});
-                this.playerWalkDirection = {x:-1,y:0};
+                // this.playerWalkDirection = {x:-1,y:0};
                 this.pressWalk = true;
                 this.keyPress = "Left";
+                this.addition.x += -1;
+                this.addition.y += 0;
             }
         }
 
         if(e.key === 'Right') {
             if(this.checkIsWalkAble(playerPosition.x+1,playerPosition.y)){
                 //this.player1.walk({x:1,y:0});
-                this.playerWalkDirection = {x:1,y:0};
+                // this.playerWalkDirection = {x:1,y:0};
                 this.pressWalk = true;
                 this.keyPress = "Right";
+                this.addition.x += 1;
+                this.addition.y += 0;
             }
         }
 
         if(e.key === 'Up') {
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y-1)){
                 //this.player1.walk({x:0,y:-1});
-                this.playerWalkDirection = {x:0,y:-1};
+                // this.playerWalkDirection = {x:0,y:-1};
                 this.pressWalk = true;
                 this.keyPress = "Up";
+                this.addition.x += 0;
+                this.addition.y += -1;
             }
         }
 

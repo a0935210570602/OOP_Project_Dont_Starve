@@ -3,6 +3,12 @@ var MapTile = function() {
     this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
     this.mapFloor.scale = 2;
 
+    // this.terrain_plain = new Framework.Sprite(define.imagePath + 'floor3.png');
+    // this.terrain_plain.scale = 2;
+
+    // this.terrain_water = new Framework.Sprite(define.imagePath + 'terrain_water.png');
+    // this.terrain_water.scale = 2;
+
     this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
     this.mapWall.scale = 2;
 
