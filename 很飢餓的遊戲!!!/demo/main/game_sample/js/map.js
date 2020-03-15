@@ -61,10 +61,9 @@ var Map = function(map)
         this.tileArray = [];
         this.exploreArray = [];
 
-        for(var i=0; i<5; i++){
-            console.log(55);
+        for(var i=0; i<10; i++){
             var line = this.mapArray[i];
-            for(var j=0; j<5; j++){
+            for(var j=0; j<10; j++){
                 var tile = new MapTile();
                 tile.tileType = 0;
                 tile.position = {x:j,y:i}
@@ -95,7 +94,6 @@ var Map = function(map)
                 }else if(line[j] === 123){
                     tile.tileType = -8
                 }else if(line[j] === 196){
-                    console.log(196);
                     tile.tileType = -9
                 }else if(line[j] === 255){
                     tile.tileType = -10
@@ -198,9 +196,9 @@ var Map = function(map)
         this.tileArray = [];
         this.exploreArray = [];
         console.log(this.addition);
-        for(var i=250+ this.addition.y -4; i<250+ this.addition.y+4; i++){
+        for(var i=0+ this.addition.y; i<10+ this.addition.y; i++){
             var line = this.mapArray[i];
-            for(var j=250+ this.addition.x -4; j<250 + this.addition.x+4; j++){
+            for(var j=0+ this.addition.x; j<10+ this.addition.x; j++){
                 var tile = new MapTile();
                 tile._tileType = 0;
                 tile.position = {x:j-this.addition.x,y:i-this.addition.y};
@@ -283,7 +281,7 @@ var Map = function(map)
             this.monster[i].draw(ctx);
         }
         this.player1.draw(ctx);
-        this.score.draw(ctx);
+        // this.score.draw(ctx);
 	}	
 
     var m_map = this;
@@ -374,11 +372,11 @@ var Map = function(map)
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y+1)){
                 //this.player1.walk({x:0,y:1});
                 // this.playerWalkDirection = {x:0,y:1};
-                console.log(this.player1.position);
                 this.pressWalk = true;
                 this.keyPress = "Down";
                 this.addition.x += 0;
                 this.addition.y += 1;
+                console.log("Down");
                 m_map.draw(Framework.Game._context);
             }
         }
@@ -443,7 +441,7 @@ var Map = function(map)
         if(x < 0 || x > this.mapArray[0].length){ return false; }
         if(y < 0 || y > this.mapArray.length){ return false; }
 
-        if(this.mapArray[y][x] > 0){ return false; }
+        // if(this.mapArray[y][x] > 0){ return false; }
         else{ return true;}
     }
 
