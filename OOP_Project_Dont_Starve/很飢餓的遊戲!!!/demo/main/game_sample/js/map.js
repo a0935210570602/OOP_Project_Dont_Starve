@@ -102,7 +102,6 @@ var Map = function(map)
                 {
                     tile.tileType = line[j];
                 }
-                console.log("push");
                 this.tileArray.push(tile);
             }
         }
@@ -147,26 +146,63 @@ var Map = function(map)
 
 	this.update = function()
 	{
-        for(var i=0; i<this.boxArray.length; i++)
-        {
-            this.boxArray[i].update();
-        }
-        for(var i=0; i<this.bombArray.length; i++)
-        {
-            this.bombArray[i].update();
-        }
-        for(var i=0; i<this.exploreArray.length; i++)
-        {
-            this.exploreArray[i].update();
-        }
-        if(this.pressWalk === true && this.player1.isWalking === false)
+        // for(var i=0; i<this.boxArray.length; i++)
+        // {
+        //     this.boxArray[i].update();
+        // }
+        // for(var i=0; i<this.bombArray.length; i++)
+        // {
+        //     this.bombArray[i].update();
+        // }
+        // for(var i=0; i<this.exploreArray.length; i++)
+        // {
+        //     this.exploreArray[i].update();
+        // }
+
+        // if(this.pressWalk === true && this.player1.isWalking === false)
+        if(this.pressWalk === true)
         {
             if(this.checkIsWalkAble(this.player1.position.x+this.playerWalkDirection.x,this.player1.position.y+this.playerWalkDirection.y))
             {
-                console.log("x1=",this.player1.position.x+this.playerWalkDirection.x);
-                console.log("y1=",this.player1.position.y+this.playerWalkDirection.y);
-                this.player1.walk(this.playerWalkDirection);
+                // this.player1.walk(this.playerWalkDirection);
+                if(this.keyPress == "Down") {
+                    // console.log("x2= ",playerPosition.x);
+                    // console.log("y2= ",playerPosition.y);
+                    this.player1.walk({x:0,y:1});
+                    this.player1.position.y+=1;
+                    this.addition.x += 0;
+                    this.addition.y += 1;
+                    // m_map.draw(Framework.Game._context);
+                }
+        
+                if(this.keyPress == "Left") {
+                    this.player1.walk({x:-1,y:0});
+                    this.player1.position.x-=1;
+                    this.addition.x += -1;
+                    this.addition.y += 0;
+                    // m_map.draw(Framework.Game._context);
+                }
+        
+                if(this.keyPress == "Right") {
+                    this.player1.walk({x:1,y:0});
+                    this.player1.position.x+=1;
+                    this.addition.x += 1;
+                    this.addition.y += 0;
+                    // m_map.draw(Framework.Game._context);
+                }
+        
+                if(this.keyPress == "Up") {
+                    this.player1.walk({x:0,y:-1});
+                    this.player1.position.y-=1;
+                    this.addition.x += 0;
+                    this.addition.y += -1;
+                    // m_map.draw(Framework.Game._context);
+                }
             }
+            console.log("addition:",this.addition);
+            console.log("position",this.player1.position);
+            console.log("pressWalk",this.pressWalk);
+            console.log("keyPress",this.keyPress);
         }
         this.player1.update();
         if(this.stopMonster === true)
@@ -190,14 +226,12 @@ var Map = function(map)
         }
 	}
 	this.draw = function(ctx) {
-        console.log("draw");
+        // console.log("draw");
         this.boxArray = [];
         this.bombArray = [];
         this.itemArray = [];
         this.tileArray = [];
         this.exploreArray = [];
-        console.log(this.addition);
-        console.log(this.player1.position);
         for(var i=2+ this.addition.y; i<13+ this.addition.y; i++){
             var line = this.mapArray[i];
             for(var j=9+ this.addition.x; j<20+ this.addition.x; j++){
@@ -374,54 +408,33 @@ var Map = function(map)
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y+1)){
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
-                //this.player1.walk({x:0,y:1});
-                // this.playerWalkDirection = {x:0,y:1};
                 this.pressWalk = true;
                 this.keyPress = "Down";
-                this.addition.x += 0;
-                this.addition.y += 1;
-                this.player1.position.y+=1;
-                console.log("Down");
-                m_map.draw(Framework.Game._context);
+                this.playerWalkDirection = {x:0,y:1};
             }
         }
 
         if(e.key === 'Left') {
             if(this.checkIsWalkAble(playerPosition.x-1,playerPosition.y)){
-                //this.player1.walk({x:-1,y:0});
-                // this.playerWalkDirection = {x:-1,y:0};
-                this.player1.position.x-=1;
                 this.pressWalk = true;
                 this.keyPress = "Left";
-                this.addition.x += -1;
-                this.addition.y += 0;
-                m_map.draw(Framework.Game._context);
+                this.playerWalkDirection = {x:-1,y:0};
             }
         }
 
         if(e.key === 'Right') {
             if(this.checkIsWalkAble(playerPosition.x+1,playerPosition.y)){
-                //this.player1.walk({x:1,y:0});
-                // this.playerWalkDirection = {x:1,y:0};
-                this.player1.position.x+=1;
                 this.pressWalk = true;
                 this.keyPress = "Right";
-                this.addition.x += 1;
-                this.addition.y += 0;
-                m_map.draw(Framework.Game._context);
+                this.playerWalkDirection = {x:1,y:0};
             }
         }
 
         if(e.key === 'Up') {
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y-1)){
-                //this.player1.walk({x:0,y:-1});
-                // this.playerWalkDirection = {x:0,y:-1};
-                this.player1.position.y-=1;
                 this.pressWalk = true;
                 this.keyPress = "Up";
-                this.addition.x += 0;
-                this.addition.y += -1;
-                m_map.draw(Framework.Game._context);
+                this.playerWalkDirection = {x:0,y:-1};
             }
         }
 
@@ -435,7 +448,6 @@ var Map = function(map)
                 this.mapArray[bombPosition.y][bombPosition.x] = 3;
             }
         }
-        this.pressWalk = false;
     }
 
     this.stopAllMonsterWalk = function()
@@ -454,8 +466,7 @@ var Map = function(map)
 
         // if(this.mapArray[y][x] > 0){ return false; }
         // else{ return true;}
-        console.log("999",this.mapArray[x][y]);
-        if(this.mapArray[x][y] == 91){
+        if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200){
             return false;
         }
         else{ 
