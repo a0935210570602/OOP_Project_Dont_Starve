@@ -163,9 +163,9 @@ var Map = function(map)
         {
             if(this.checkIsWalkAble(this.player1.position.x+this.playerWalkDirection.x,this.player1.position.y+this.playerWalkDirection.y))
             {
-                console.log("x1=",this.player1.position.x+this.playerWalkDirection.x);
-                console.log("y1=",this.player1.position.y+this.playerWalkDirection.y);
-                this.player1.walk(this.playerWalkDirection);
+                // console.log("x1=",this.player1.position.x+this.playerWalkDirection.x);
+                // console.log("y1=",this.player1.position.y+this.playerWalkDirection.y);
+                // this.player1.walk(this.playerWalkDirection);
             }
         }
         this.player1.update();
@@ -374,8 +374,8 @@ var Map = function(map)
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y+1)){
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
-                //this.player1.walk({x:0,y:1});
-                // this.playerWalkDirection = {x:0,y:1};
+                this.player1.walk({x:0,y:1});
+                this.playerWalkDirection = {x:0,y:1};
                 this.pressWalk = true;
                 this.keyPress = "Down";
                 this.addition.x += 0;
@@ -388,8 +388,8 @@ var Map = function(map)
 
         if(e.key === 'Left') {
             if(this.checkIsWalkAble(playerPosition.x-1,playerPosition.y)){
-                //this.player1.walk({x:-1,y:0});
-                // this.playerWalkDirection = {x:-1,y:0};
+                this.player1.walk({x:-1,y:0});
+                this.playerWalkDirection = {x:-1,y:0};
                 this.player1.position.x-=1;
                 this.pressWalk = true;
                 this.keyPress = "Left";
@@ -401,8 +401,8 @@ var Map = function(map)
 
         if(e.key === 'Right') {
             if(this.checkIsWalkAble(playerPosition.x+1,playerPosition.y)){
-                //this.player1.walk({x:1,y:0});
-                // this.playerWalkDirection = {x:1,y:0};
+                this.player1.walk({x:1,y:0});
+                this.playerWalkDirection = {x:1,y:0};
                 this.player1.position.x+=1;
                 this.pressWalk = true;
                 this.keyPress = "Right";
@@ -414,8 +414,8 @@ var Map = function(map)
 
         if(e.key === 'Up') {
             if(this.checkIsWalkAble(playerPosition.x,playerPosition.y-1)){
-                //this.player1.walk({x:0,y:-1});
-                // this.playerWalkDirection = {x:0,y:-1};
+                this.player1.walk({x:0,y:-1});
+                this.playerWalkDirection = {x:0,y:-1};
                 this.player1.position.y-=1;
                 this.pressWalk = true;
                 this.keyPress = "Up";
@@ -454,8 +454,8 @@ var Map = function(map)
 
         // if(this.mapArray[y][x] > 0){ return false; }
         // else{ return true;}
-        console.log("999",this.mapArray[x][y]);
-        if(this.mapArray[x][y] == 91){
+        // console.log("999",this.mapArray[x][y]);
+        if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200){
             return false;
         }
         else{ 

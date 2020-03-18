@@ -17,6 +17,7 @@ var BombMan = function(file, options) {
     this.maxBombNum = 1;
     this.bombNum = 0;
     this.bombPower = 1;
+    this.pic_count = 0;
 
     this.isWalking = false;
 
@@ -49,7 +50,7 @@ var BombMan = function(file, options) {
                 this.playerDirection = this.constants.DirectionEnum.UP;
             }
             this.isWalking = true;
-            this.mapPosition = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
+            //this.mapPosition = {x:this.mapPosition.x, y:this.mapPosition.y};
             this.sprite.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
         }
     }
@@ -61,45 +62,51 @@ var BombMan = function(file, options) {
 
     this.walkEnd = function(){    }
 
-    var walkSpeed = 8;
-    this.walkAlittle = function(){
-        //console.log("player walk a little " + walkSpeed);
-        if(this.playerDirection === this.constants.DirectionEnum.DOWN){
-            this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + walkSpeed};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.LEFT){
-            this.spritePosition = {x:this.spritePosition.x - walkSpeed, y:this.spritePosition.y};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.RIGHT){
-            this.spritePosition = {x:this.spritePosition.x + walkSpeed, y:this.spritePosition.y};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.UP){
-            this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - walkSpeed};
-        }
-    }
+    // var walkSpeed = 8;
+    // this.walkAlittle = function(){
+    //     //console.log("player walk a little " + walkSpeed);
+    //     if(this.playerDirection === this.constants.DirectionEnum.DOWN){
+    //         this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + walkSpeed};
+    //     }
+    //     else if(this.playerDirection === this.constants.DirectionEnum.LEFT){
+    //         this.spritePosition = {x:this.spritePosition.x - walkSpeed, y:this.spritePosition.y};
+    //     }
+    //     else if(this.playerDirection === this.constants.DirectionEnum.RIGHT){
+    //         this.spritePosition = {x:this.spritePosition.x + walkSpeed, y:this.spritePosition.y};
+    //     }
+    //     else if(this.playerDirection === this.constants.DirectionEnum.UP){
+    //         this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - walkSpeed};
+    //     }
+    // }
 
     this.update = function(){
-        this.sprite.update();
+        // this.sprite.update();
         if(this.isWalking){
-            if(this.mapPosition.x * PIXEL_CONST === this.spritePosition.x && this.mapPosition.y * PIXEL_CONST === this.spritePosition.y){
-                this.isWalking = false;
-                this.sprite.stop();
-                this.sprite.index = this.playerDirection * 3 + 1;
+            // if(this.mapPosition.x * PIXEL_CONST === this.spritePosition.x && this.mapPosition.y * PIXEL_CONST === this.spritePosition.y){
+            // for(var i =0;i<10;i++){
+            //     setTimeout(this.draw(Framework.Game._context), 200);
+            // }  
+            this.isWalking = false;
+            this.sprite.index = this.playerDirection * 3 + 1;
 
-                //callback
-                for(var i=0; i<this.StepMovedCallBack.length; i++){
-                    this.StepMovedCallBack[i](this);
-                }
-            }else{
-                this.walkAlittle();
+            //callback
+            for(var i=0; i<this.StepMovedCallBack.length; i++){
+                this.StepMovedCallBack[i](this);
             }
         }
+            // else{
+            //      this.walkAlittle();
+            // }
     }
 
 
     this.draw = function(ctx){
+        // console.log("this.sprite.position");
+        // console.log(this.sprite.position);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
+        this.sprite.update();
         this.sprite.draw(ctx);
+      
     }
 
     this.increaseBombNum = function(){
