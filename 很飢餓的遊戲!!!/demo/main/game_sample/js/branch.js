@@ -31,22 +31,16 @@ var Branch = function() {
         // console.log(this.tileType);
 
         if(this.tileType === 1){
-            this.item_1.position = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
             this.item_1.draw(ctx);
         }else if(this.tileType === 2){
-            this.item_2.tileType = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
             this.item_2.draw(ctx);
-        }else if(this._tileType === 3){
-            this.item_3.tileType = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
+        }else if(this.tileType === 3){
             this.item_3.draw(ctx);
         }else if(this.tileType === 4){
-            this.item_4.position = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
             this.item_4.draw(ctx);
         }else if(this.tileType === 5){
-            this.item_5.position = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
             this.item_5.draw(ctx);
         }else if(this.tileType === 6){
-            this.mapBranch.position = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
             this.mapBranch.draw(ctx);
         }
         
@@ -61,6 +55,11 @@ Object.defineProperty(Branch.prototype, 'position', {
     set: function(newValue) {
         this.mapPosition = newValue;
         this.mapBranch.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_1.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_2.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_3.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_4.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_5.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
 

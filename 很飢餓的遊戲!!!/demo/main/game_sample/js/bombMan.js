@@ -90,7 +90,7 @@ var BombMan = function(file, options) {
 
             //callback
             for(var i=0; i<this.StepMovedCallBack.length; i++){
-                this.StepMovedCallBack[i](this);
+                this.StepMovedCallBack[i];
             }
         }
             // else{
