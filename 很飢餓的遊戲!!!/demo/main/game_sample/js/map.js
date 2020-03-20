@@ -81,30 +81,28 @@ var Map = function(map, item_map)
         this.item_tileArray = [];
         this.tileArray = [];
         this.exploreArray = [];
-
-        for(var i=0; i<11; i++){
+        this.tileMap = [];
+        this.tileArrayPosition = [];
+        this.tilePosition = [];
+        this.initialPosition = {x:5,y:5};
+        //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
+        this.playerPositionOnMap = {x:7,y:8};
+        this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x,y:this.playerPositionOnMap.y-this.initialPosition.y};
+        for(var i = 0; i < 11;i++){
+            this.tileArrayPosition = [];
+            for(var j = 0; j < 11; j++){
+                this.tileArrayPosition.push({x: j+8, y: i+2});
+            }
+            this.tilePosition.push(this.tileArrayPosition);
+        }
+        console.log(this.tilePosition);
+        for(var i=0; i<this.mapArray.length; i++){
             var line = this.mapArray[i];
-            for(var j=0; j<11; j++){
+            this.tileArray = [];
+            for(var j=0; j<this.mapArray[i].length; j++){
                 var tile = new MapTile();
                 tile.tileType = 0;
-                tile.position = {x:j,y:i}
-                if(line[j] === 2){
-                    var box = new Box(this.constants.ItemEnum.NONE);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 3){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_BOMB);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 4){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_POWER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 5){
-                    var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 192){
+                if(line[j] === 192){
                     tile.tileType = -4
                 }else if(line[j] === 200){
                     tile.tileType = -5
@@ -119,61 +117,10 @@ var Map = function(map, item_map)
                 }else if(line[j] === 255){
                     tile.tileType = -10
                 }
-                else
-                {
-                    tile.tileType = line[j];
-                }
                 this.tileArray.push(tile);
             }
+            this.tileMap.push(this.tileArray);
         }
-
-
-        for(var i=0; i<11; i++){
-            var line = this.mapArray[i];
-            for(var j=0; j<11; j++){
-                var tile = new Branch();
-                tile.tileType = 0;
-                tile.position = {x:j,y:i}
-                if(line[j] === 2){
-                    var box = new Box(this.constants.ItemEnum.NONE);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 3){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_BOMB);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 4){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_POWER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 5){
-                    var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 192){
-                    tile.tileType = -4
-                }else if(line[j] === 200){
-                    tile.tileType = -5
-                }else if(line[j] === 137){
-                    tile.tileType = -6
-                }else if(line[j] === 91){
-                    tile.tileType = -7
-                }else if(line[j] === 123){
-                    tile.tileType = -8
-                }else if(line[j] === 196){
-                    tile.tileType = -9
-                }else if(line[j] === 255){
-                    tile.tileType = -10
-                }
-                else
-                {
-                    tile.tileType = line[j];
-                }
-                this.tileArray.push(tile);
-            }
-        }
-        // this.branch = new Branch();
-        // this.branch.position = {x:10, y:10};
 	};
 
     this.setPlayerPosition = function(playerPosition){
@@ -215,63 +162,38 @@ var Map = function(map, item_map)
 
 	this.update = function()
 	{
-        // for(var i=0; i<this.boxArray.length; i++)
-        // {
-        //     this.boxArray[i].update();
-        // }
-        // for(var i=0; i<this.bombArray.length; i++)
-        // {
-        //     this.bombArray[i].update();
-        // }
-        // for(var i=0; i<this.exploreArray.length; i++)
-        // {
-        //     this.exploreArray[i].update();
-        // }
-
-        // if(this.pressWalk === true && this.player1.isWalking === false)
         if(this.pressWalk === true)
         {
-            if(this.checkIsWalkAble(this.player1.position.x+this.playerWalkDirection.x,this.player1.position.y+this.playerWalkDirection.y))
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
-                // this.player1.walk(this.playerWalkDirection);
                 if(this.keyPress == "Down") {
-                    // console.log("x2= ",playerPosition.x);
-                    // console.log("y2= ",playerPosition.y);
                     this.player1.walk({x:0,y:1});
-                    this.player1.position.y+=1;
+                    this.playerPositionOnMap.y+=1;
                     this.addition.x += 0;
                     this.addition.y += 1;
-                    // m_map.draw(Framework.Game._context);
                 }
         
                 if(this.keyPress == "Left") {
                     this.player1.walk({x:-1,y:0});
-                    this.player1.position.x-=1;
+                    this.playerPositionOnMap.x-=1;
                     this.addition.x += -1;
                     this.addition.y += 0;
-                    // m_map.draw(Framework.Game._context);
                 }
         
                 if(this.keyPress == "Right") {
                     this.player1.walk({x:1,y:0});
-                    this.player1.position.x+=1;
+                    this.playerPositionOnMap.x+=1;
                     this.addition.x += 1;
                     this.addition.y += 0;
-                    // m_map.draw(Framework.Game._context);
                 }
         
                 if(this.keyPress == "Up") {
                     this.player1.walk({x:0,y:-1});
-                    this.player1.position.y-=1;
+                    this.playerPositionOnMap.y-=1;
                     this.addition.x += 0;
                     this.addition.y += -1;
-                    // m_map.draw(Framework.Game._context);
                 }
             }
-            console.log("addition:",this.addition);
-            console.log("position",this.player1.position);
-            console.log("pressWalk",this.pressWalk);
-            console.log("keyPress",this.keyPress);
         }
         this.player1.update();
         if(this.stopMonster === true)
@@ -302,93 +224,14 @@ var Map = function(map, item_map)
         this.tileArray = [];
         this.exploreArray = [];
 
-        for(var i=2+ this.addition.y; i<13+ this.addition.y; i++){
-            var line = this.mapArray[i];
-            for(var j=9+ this.addition.x; j<20+ this.addition.x; j++){
-                var tile = new MapTile();
-                tile._tileType = 0;
-                tile.position = {x:j-this.addition.x,y:i-this.addition.y};
-                if(line[j] === 2){
-                    var box = new Box(this.constants.ItemEnum.NONE);
-                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
-                    this.boxArray.push(box);
-                }else if(line[j] === 3){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_BOMB);
-                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
-                    this.boxArray.push(box);
-                }else if(line[j] === 4){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_POWER);
-                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
-                    this.boxArray.push(box);
-                }else if(line[j] === 5){
-                    var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
-                    box.position = {x:j-this.addition.x, y:i-this.addition.y};
-                    this.boxArray.push(box);
-                }else if(line[j] === 192){
-                    tile.tileType = -4
-                }else if(line[j] === 200){
-                    tile.tileType = -5
-                }else if(line[j] === 137){
-                    tile.tileType = -6
-                }else if(line[j] === 91){
-                    tile.tileType = -7
-                }else if(line[j] === 123){
-                    tile.tileType = -8
-                }else if(line[j] === 196){
-                    tile.tileType = -9
-                }else if(line[j] === 255){
-                    tile.tileType = -10
-                }
-                else
-                {
-                    tile.tileType = line[j];
-                }
-                this.tileArray.push(tile);
+        for(var i=0; i<11; i++){
+            for(var j=0; j<11; j++){
+                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
+                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
             }
         }
-		// for(var i=0; i<this.mapArray.length; i++){
-		// 	var line = this.mapArray[i];
-		// 	for(var j=0; j<line.length; j++){
-		// 		this.mapFloor.position = {x: j * 64, y: i * 64};
-		// 		this.mapFloor.draw(ctx);
-  //               if(line[j] === 1){
-  //                   this.mapWall.position = {x: j * 64, y: i * 64};
-  //                   this.mapWall.draw(ctx);
-  //               }else if(line[j] === -1){
-  //                   this.increaseBombNum.position = {x: j * 64, y: i * 64};
-  //                   this.increaseBombNum.draw(ctx);
-  //               }else if(line[j] === -2){
-  //                   this.increaseBombPower.position = {x: j * 64, y: i * 64};
-  //                   this.increaseBombPower.draw(ctx);
-  //               }
-		// 	}
-		// }
-
-
-        for(var i=0; i<this.tileArray.length; i++)
-        {
-            this.tileArray[i].draw(ctx);
-        }
-
-        for(var i=0; i<this.boxArray.length; i++)
-        {
-            this.boxArray[i].draw(ctx);
-        }
-        for(var i=0; i<this.bombArray.length; i++)
-        {
-            this.bombArray[i].draw(ctx);
-        }
-        for(var i=0; i<this.exploreArray.length; i++)
-        {
-            this.exploreArray[i].draw(ctx);
-        }
-        for(var i=0;i<this.monster.length;i++)
-        {
-            this.monster[i].draw(ctx);
-        }
+      
         this.player1.draw(ctx);
-        // this.score.draw(ctx);
-        // this.branch.draw(ctx);
 	}	
 
     var m_map = this;

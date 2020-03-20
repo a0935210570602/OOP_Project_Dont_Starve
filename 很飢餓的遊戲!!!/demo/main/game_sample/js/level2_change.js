@@ -144,7 +144,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         
         this.map.init();
         //for demo
-        this.map.setPlayerPosition({x:14,y:7});
+        this.map.setPlayerPosition({x:13,y:7});
         // this.map.setPlayerPosition({x:this.mapArray[0].length/2,y:this.mapArray.length/2});
         // for(var i=0; i<5; i++){
         //     for(var j=0; j<5; j++){
