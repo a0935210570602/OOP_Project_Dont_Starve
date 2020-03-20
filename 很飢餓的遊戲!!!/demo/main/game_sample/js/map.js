@@ -1,6 +1,7 @@
 var Map = function(map, item_map)
 {
     this.mapArray = map;
+    this.item_map_Array = item_map;
     this.addition = {x: 0, y: 0};
     this.load = function(){
 
@@ -33,23 +34,23 @@ var Map = function(map, item_map)
         this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
         this.mapWall.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + 'branch_1.png');
+        this.mapBranch = new Framework.Sprite(define.materialPath + '0.png');
         this.mapBranch.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '1.png');
-        this.mapBranch.scale = 2;
+        this.item_1 = new Framework.Sprite(define.materialPath + '1.png');
+        this.item_1.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '2.png');
-        this.mapBranch.scale = 2;
+        this.item_2 = new Framework.Sprite(define.materialPath + '2.png');
+        this.item_2.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '3.png');
-        this.mapBranch.scale = 2;
+        this.item_3 = new Framework.Sprite(define.materialPath + '3.png');
+        this.item_3.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '4.png');
-        this.mapBranch.scale = 2;
+        this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
+        this.item_4.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '5.png');
-        this.mapBranch.scale = 2;
+        this.item_5 = new Framework.Sprite(define.materialPath + '5.png');
+        this.item_5.scale = 2;
 
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
@@ -129,47 +130,27 @@ var Map = function(map, item_map)
 
 
         for(var i=0; i<11; i++){
-            var line = this.mapArray[i];
+            var line = this.item_map_Array[i];
             for(var j=0; j<11; j++){
                 var tile = new Branch();
                 tile.tileType = 0;
                 tile.position = {x:j,y:i}
-                if(line[j] === 2){
-                    var box = new Box(this.constants.ItemEnum.NONE);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
+                if(line[j] === 1){
+                    tile.tileType = this.constants.Items.ITEM_1;
+                }else if(line[j] ===2){
+                    tile.tileType = this.constants.Items.ITEM_2;
                 }else if(line[j] === 3){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_BOMB);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
+                    tile.tileType = this.constants.Items.ITEM_3;
                 }else if(line[j] === 4){
-                    var box = new Box(this.constants.ItemEnum.INCREASE_POWER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
+                    tile.tileType = this.constants.Items.ITEM_4;
                 }else if(line[j] === 5){
-                    var box = new Box(this.constants.ItemEnum.STOP_MONSTER);
-                    box.position = {x:j, y:i};
-                    this.boxArray.push(box);
-                }else if(line[j] === 192){
-                    tile.tileType = -4
-                }else if(line[j] === 200){
-                    tile.tileType = -5
-                }else if(line[j] === 137){
-                    tile.tileType = -6
-                }else if(line[j] === 91){
-                    tile.tileType = -7
-                }else if(line[j] === 123){
-                    tile.tileType = -8
-                }else if(line[j] === 196){
-                    tile.tileType = -9
-                }else if(line[j] === 255){
-                    tile.tileType = -10
+                    tile.tileType = this.constants.Items.ITEM_5;
+                }else{
+                    // tile.tileType = this.constants.Items.BRANCH;
                 }
-                else
-                {
-                    tile.tileType = line[j];
+                if(tile.tileType != 0){
+                    this.item_tileArray.push(tile);
                 }
-                this.tileArray.push(tile);
             }
         }
         // this.branch = new Branch();
@@ -295,12 +276,13 @@ var Map = function(map, item_map)
         }
 	}
 	this.draw = function(ctx) {
-        // console.log("draw");
+
         this.boxArray = [];
         this.bombArray = [];
         this.itemArray = [];
-        this.tileArray = [];
+        this.item_tileArray = [];
         this.exploreArray = [];
+        this.tileArray = [];
 
         for(var i=2+ this.addition.y; i<13+ this.addition.y; i++){
             var line = this.mapArray[i];
@@ -346,6 +328,36 @@ var Map = function(map, item_map)
                 this.tileArray.push(tile);
             }
         }
+        // console.log(this.item_map_Array);
+        // console.log("this.item_map_Array");
+        for(var i=2+ this.addition.y; i<13+ this.addition.y; i++){
+            var line = this.item_map_Array[i];
+            for(var j=9+ this.addition.x; j<20+ this.addition.x; j++){
+                var tile = new Branch();
+                tile.tileType = 0;
+                tile.position = {x:j-this.addition.x,y:i-this.addition.y};
+                if(line[j] === 1){
+                    // console.log(1);
+                    tile.tileType = this.constants.Items.ITEM_1;
+                }else if(line[j] ===2){
+                    tile.tileType = this.constants.Items.ITEM_2;
+                }else if(line[j] === 3){
+                    tile.tileType = this.constants.Items.ITEM_3;
+                }else if(line[j] === 4){
+                    tile.tileType = this.constants.Items.ITEM_4;
+                }else if(line[j] === 5){
+                    tile.tileType = this.constants.Items.ITEM_5;
+                }else{
+                    // tile.tileType = this.constants.Items.BRANCH;
+                }
+                if(tile.tileType != 0){
+                    this.item_tileArray.push(tile);
+                }
+            }
+        }
+        // console.log("this.item_tileArray");
+        // console.log(this.item_tileArray);
+
 		// for(var i=0; i<this.mapArray.length; i++){
 		// 	var line = this.mapArray[i];
 		// 	for(var j=0; j<line.length; j++){
@@ -367,16 +379,14 @@ var Map = function(map, item_map)
 
         for(var i=0; i<this.tileArray.length; i++)
         {
+            // console.log("dr",i);
+            // console.log(this.tileArray[i]);
             this.tileArray[i].draw(ctx);
         }
 
         for(var i=0; i<this.boxArray.length; i++)
         {
             this.boxArray[i].draw(ctx);
-        }
-        for(var i=0; i<this.bombArray.length; i++)
-        {
-            this.bombArray[i].draw(ctx);
         }
         for(var i=0; i<this.exploreArray.length; i++)
         {
@@ -385,6 +395,16 @@ var Map = function(map, item_map)
         for(var i=0;i<this.monster.length;i++)
         {
             this.monster[i].draw(ctx);
+        }
+        for(var i=0;i<this.monster.length;i++)
+        {
+            this.monster[i].draw(ctx);
+        }
+        for(var i=0; i<this.item_tileArray.length; i++)
+        {
+            // console.log("drawing",i);
+            // console.log(this.item_tileArray[i]);
+            this.item_tileArray[i].draw(ctx);
         }
         this.player1.draw(ctx);
         // this.score.draw(ctx);
