@@ -17,6 +17,7 @@ var BombMan = function(file, options) {
     this.maxBombNum = 1;
     this.bombNum = 0;
     this.bombPower = 1;
+    this.pic_count = 0;
 
     this.isWalking = false;
 

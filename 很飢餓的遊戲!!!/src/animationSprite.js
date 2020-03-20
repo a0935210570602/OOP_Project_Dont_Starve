@@ -231,7 +231,7 @@ var Framework = (function (Framework) {
 
         update: function(){  
             if(this._start) {
-                var addFrame = this.speed / 30;
+                var addFrame = this.speed / 50;
                 this.speedCounter += addFrame;
                 while(this.speedCounter > 1){
                     this._nextFrame();
