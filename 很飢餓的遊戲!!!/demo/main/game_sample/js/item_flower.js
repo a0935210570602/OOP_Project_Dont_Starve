@@ -1,7 +1,6 @@
 var Item_flower = function() {
     this.item_flower = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
     this.item_flower.scale = 2;
-    this.item_flower.index = 1;
     this.mapPosition = {x:0, y:0};
 
     this.update = function(){

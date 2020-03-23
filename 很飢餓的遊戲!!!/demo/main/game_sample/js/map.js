@@ -34,14 +34,11 @@ var Map = function(map, item_map)
         this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
         this.mapWall.scale = 2;
 
-        this.mapBranch = new Framework.Sprite(define.materialPath + '0.png');
-        this.mapBranch.scale = 2;
+        this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png');
+        this.item_branch.scale = 2;
 
         this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
         this.item_spider_web.scale = 2;
-
-        this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
-        this.item_4.scale = 2;
 
         this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
         this.item_grass.scale = 2;
@@ -58,17 +55,15 @@ var Map = function(map, item_map)
         this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
         this.item_waikei_homework.scale = 2;
         
+        this.item_blank = new Framework.Sprite(define.materialPath + 'item_blank.png');
+        this.item_blank.scale = 2;
+
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
         var newMonster = new Monster(define.imagePath + 'monster.png',this, {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         
-        this.increaseBombNum  = new Framework.Sprite(define.imagePath + 'increaseBombNum.png');
-        this.increaseBombNum.scale = 1.5;
-        this.increaseBombPower  = new Framework.Sprite(define.imagePath + 'increaseBombPower.png');
-        this.increaseBombPower.scale = 1.5;
-        this.stopMonster  = new Framework.Sprite(define.imagePath + 'stopMonster.png');
-        this.stopMonster.scale = 1.5;
+        
         this.player1 = new BombMan(define.imagePath + 'player1.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.position = {x:1, y:1};
 
@@ -108,32 +103,23 @@ var Map = function(map, item_map)
             var line = this.item_map_Array[i];
             this.itemArray = [];
             for(var j=0; j<this.item_map_Array[i].length; j++){
-                var tile = new Branch();
                 // tile.tileType = 0;
                 // tile.position = {x:j,y:i}
                 if(line[j] === 1){
-                    tile.tileType = this.constants.Items.ITEM_1;
-                    this.itemArray.push(tile);
+                    this.itemArray.push(new Item_flower());
                 }else if(line[j] ===2){
-                    var spider_web = new Item_spider_web();
-                    this.itemArray.push(spider_web);
+                    this.itemArray.push(new Item_spider_web());
                 }else if(line[j] === 3){
-                    var stone = new Item_stone();
-                    this.itemArray.push(stone);
-                    // console.log("3");
+                    this.itemArray.push(new Item_stone());
                 }else if(line[j] === 4){
-                    tile.tileType = this.constants.Items.ITEM_4;
-                    this.itemArray.push(tile);
+                    this.itemArray.push(new Item_branch());
                 }else if(line[j] === 5){
-                    var waikei_homework = new Item_waikei_homework();
-                    this.itemArray.push(waikei_homework);
+                    this.itemArray.push(new Item_waikei_homework());
                 }else if(line[j] === 6){
-                    var grass = new Item_grass();
-                    this.itemArray.push(grass);
+                    this.itemArray.push(new Item_grass());
                 }else{
-                    this.itemArray.push(tile);
+                    this.itemArray.push(new Item_blank());
                 }
-                // this.itemArray.push(tile);
             }
             this.itemMap.push(this.itemArray);
         }
@@ -274,7 +260,6 @@ var Map = function(map, item_map)
 
         for(var i=0; i<11; i++){
             for(var j=0; j<11; j++){
-                console.log("babubau");
                 this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
                 this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
             }
