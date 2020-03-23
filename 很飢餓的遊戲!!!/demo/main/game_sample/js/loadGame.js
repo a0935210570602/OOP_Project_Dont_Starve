@@ -58,6 +58,7 @@ var loadGameEnd;
         { src: 'game_sample/js/score.js', lookFor: 'Score' },
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },
         { src: 'game_sample/js/monster.js', lookFor: 'Monster' },
+        { src: 'game_sample/js/item_grass.js', lookFor: 'Item_grass' },
         { src: 'game_sample/js/branch.js', lookFor: 'Branch' },
         { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
         { src: 'game_sample/js/bomb.js', lookFor: 'Bomb' },

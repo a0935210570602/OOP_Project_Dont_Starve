@@ -52,6 +52,9 @@ var Map = function(map, item_map)
         this.item_5 = new Framework.Sprite(define.materialPath + '5.png');
         this.item_5.scale = 2;
 
+        this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
+        this.item_grass.scale = 2;
+
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
@@ -107,19 +110,27 @@ var Map = function(map, item_map)
                 // tile.position = {x:j,y:i}
                 if(line[j] === 1){
                     tile.tileType = this.constants.Items.ITEM_1;
+                    this.itemArray.push(tile);
                 }else if(line[j] ===2){
                     tile.tileType = this.constants.Items.ITEM_2;
+                    this.itemArray.push(tile);
                 }else if(line[j] === 3){
                     tile.tileType = this.constants.Items.ITEM_3;
-                    console.log("3");
+                    this.itemArray.push(tile);
+                    // console.log("3");
                 }else if(line[j] === 4){
                     tile.tileType = this.constants.Items.ITEM_4;
+                    this.itemArray.push(tile);
                 }else if(line[j] === 5){
                     tile.tileType = this.constants.Items.ITEM_5;
+                    this.itemArray.push(tile);
+                }else if(line[j] === 6){
+                    var grass = new Item_grass();
+                    this.itemArray.push(grass);
                 }else{
-                    // tile.tileType = this.constants.Items.BRANCH;
+                    this.itemArray.push(tile);
                 }
-                this.itemArray.push(tile);
+                // this.itemArray.push(tile);
             }
             this.itemMap.push(this.itemArray);
         }
@@ -265,58 +276,7 @@ var Map = function(map, item_map)
                 this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
             }
         }
-        // console.log(this.item_map_Array);
-        // console.log("this.item_map_Array");
-        // for(var i=2+ this.addition.y; i<13+ this.addition.y; i++){
-        //     var line = this.item_map_Array[i];
-        //     for(var j=9+ this.addition.x; j<20+ this.addition.x; j++){
-        //         var tile = new Branch();
-        //         tile.tileType = 0;
-        //         tile.position = {x:j-this.addition.x,y:i-this.addition.y};
-        //         if(line[j] === 1){
-        //             // console.log(1);
-        //             tile.tileType = this.constants.Items.ITEM_1;
-        //         }else if(line[j] ===2){
-        //             tile.tileType = this.constants.Items.ITEM_2;
-        //         }else if(line[j] === 3){
-        //             tile.tileType = this.constants.Items.ITEM_3;
-        //         }else if(line[j] === 4){
-        //             tile.tileType = this.constants.Items.ITEM_4;
-        //         }else if(line[j] === 5){
-        //             tile.tileType = this.constants.Items.ITEM_5;
-        //         }else{
-        //             // tile.tileType = this.constants.Items.BRANCH;
-        //         }
-        //         if(tile.tileType != 0){
-        //             this.item_tileArray.push(tile);
-        //         }
-        //     }
-        // }
 
-
-
-        // for(var i=0; i<this.boxArray.length; i++)
-        // {
-        //     this.boxArray[i].draw(ctx);
-        // }
-        // for(var i=0; i<this.exploreArray.length; i++)
-        // {
-        //     this.exploreArray[i].draw(ctx);
-        // }
-        // for(var i=0;i<this.monster.length;i++)
-        // {
-        //     this.monster[i].draw(ctx);
-        // }
-        // for(var i=0;i<this.monster.length;i++)
-        // {
-        //     this.monster[i].draw(ctx);
-        // }
-        // for(var i=0; i<this.item_tileArray.length; i++)
-        // {
-        //     // console.log("drawing",i);
-        //     // console.log(this.item_tileArray[i]);
-        //     this.item_tileArray[i].draw(ctx);
-        // }
         this.player1.draw(ctx);
 	}	
 
