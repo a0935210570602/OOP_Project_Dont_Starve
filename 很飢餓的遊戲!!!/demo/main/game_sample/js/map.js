@@ -353,6 +353,7 @@ var Map = function(map, item_map)
     this.keydown = function(e, list){
         var playerPosition = this.player1.position;
         if(e.key === 'Down') {
+            this.player1.walk({x:0,y:1});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
@@ -363,6 +364,7 @@ var Map = function(map, item_map)
         }
 
         if(e.key === 'Left') {
+            this.player1.walk({x:-1,y:0});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
                 this.keyPress = "Left";
@@ -371,6 +373,7 @@ var Map = function(map, item_map)
         }
 
         if(e.key === 'Right') {
+            this.player1.walk({x:1,y:0});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
                 this.keyPress = "Right";
@@ -379,6 +382,7 @@ var Map = function(map, item_map)
         }
 
         if(e.key === 'Up') {
+            this.player1.walk({x:0,y:-1});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
                 this.pressWalk = true;
                 this.keyPress = "Up";

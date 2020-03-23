@@ -80,23 +80,14 @@ var BombMan = function(file, options) {
     // }
 
     this.update = function(){
-        // this.sprite.update();
         if(this.isWalking){
-            // if(this.mapPosition.x * PIXEL_CONST === this.spritePosition.x && this.mapPosition.y * PIXEL_CONST === this.spritePosition.y){
-            // for(var i =0;i<10;i++){
-            //     setTimeout(this.draw(Framework.Game._context), 200);
-            // }  
             this.isWalking = false;
             this.sprite.index = this.playerDirection * 3 + 1;
 
-            //callback
             for(var i=0; i<this.StepMovedCallBack.length; i++){
                 this.StepMovedCallBack[i];
             }
         }
-            // else{
-            //      this.walkAlittle();
-            // }
     }
 
 
