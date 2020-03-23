@@ -44,10 +44,14 @@ var Map = function(map, item_map)
         this.item_grass.scale = 2;
 
         this.item_grass_mowed = new Framework.Sprite(define.materialPath + 'item_grass_mowed.png'); 
-        this.item_grass_mowed .scale = 2;
+        this.item_grass_mowed.scale = 2;
         
         this.item_flower = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
-        this.item_flower .scale = 2;
+        this.item_flower.scale = 2;
+
+        this.item_flower_pulled = new Framework.Sprite(define.materialPath + 'item_flower_pulled.png'); 
+        this.item_flower_pulled.scale = 2;
+
         
         this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
         this.item_stone.scale = 2;
@@ -105,20 +109,28 @@ var Map = function(map, item_map)
             for(var j=0; j<this.item_map_Array[i].length; j++){
                 // tile.tileType = 0;
                 // tile.position = {x:j,y:i}
-                if(line[j] === 1){
-                    this.itemArray.push(new Item_flower());
-                }else if(line[j] ===2){
-                    this.itemArray.push(new Item_spider_web());
-                }else if(line[j] === 3){
-                    this.itemArray.push(new Item_stone());
-                }else if(line[j] === 4){
-                    this.itemArray.push(new Item_branch());
-                }else if(line[j] === 5){
-                    this.itemArray.push(new Item_waikei_homework());
-                }else if(line[j] === 6){
-                    this.itemArray.push(new Item_grass());
-                }else{
-                    this.itemArray.push(new Item_blank());
+                switch(line[j]){
+                    case 1:
+                        this.itemArray.push(new Item_flower());
+                        break;
+                    case 2:
+                        this.itemArray.push(new Item_spider_web());
+                        break;
+                    case 3:
+                        this.itemArray.push(new Item_stone());
+                        break;
+                    case 4:
+                        this.itemArray.push(new Item_branch());
+                        break;
+                    case 5:
+                        this.itemArray.push(new Item_waikei_homework());
+                        break;
+                    case 6:      
+                        this.itemArray.push(new Item_grass());
+                        break;
+                    default:
+                        this.itemArray.push(new Item_blank());
+                        break;    
                 }
             }
             this.itemMap.push(this.itemArray);
@@ -130,20 +142,30 @@ var Map = function(map, item_map)
             for(var j=0; j<this.mapArray[i].length; j++){
                 var tile = new MapTile();
                 tile.tileType = 0;
-                if(line[j] === 192){
-                    tile.tileType = -4
-                }else if(line[j] === 200){
-                    tile.tileType = -5
-                }else if(line[j] === 137){
-                    tile.tileType = -6
-                }else if(line[j] === 91){
-                    tile.tileType = -7
-                }else if(line[j] === 123){
-                    tile.tileType = -8
-                }else if(line[j] === 196){
-                    tile.tileType = -9
-                }else if(line[j] === 255){
-                    tile.tileType = -10
+                switch(line[j]){
+                    case 192:
+                        tile.tileType = -4;
+                        break;
+                    case 200:
+                        tile.tileType = -5;
+                        break;
+                    case 137:
+                        tile.tileType = -6;
+                        break;
+                    case 91:
+                        tile.tileType = -7;
+                        break;
+                    case 123:
+                        tile.tileType = -8;
+                        break;
+                    case 196:      
+                        tile.tileType = -9;
+                        break;
+                    case 255:      
+                        tile.tileType = -10;
+                        break;
+                    default:
+                        break;    
                 }
                 this.tileArray.push(tile);
             }
@@ -243,7 +265,9 @@ var Map = function(map, item_map)
                 }
             }
         }
-	}
+    }
+    this.generation_time;
+
 	this.draw = function(ctx) {
         console.log("draw")
         this.boxArray = [];
@@ -354,50 +378,87 @@ var Map = function(map, item_map)
         var playerPosition = this.player1.position;
         if(e.key === 'Down') {
             this.player1.walk({x:0,y:1});
+            this.playerWalkDirection = {x:0,y:1};
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
                 this.pressWalk = true;
                 this.keyPress = "Down";
-                this.playerWalkDirection = {x:0,y:1};
             }
         }
 
         if(e.key === 'Left') {
+            this.playerWalkDirection = {x:-1,y:0};
             this.player1.walk({x:-1,y:0});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
                 this.keyPress = "Left";
-                this.playerWalkDirection = {x:-1,y:0};
             }
         }
 
         if(e.key === 'Right') {
+            this.playerWalkDirection = {x:1,y:0};
             this.player1.walk({x:1,y:0});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
                 this.keyPress = "Right";
-                this.playerWalkDirection = {x:1,y:0};
             }
         }
 
         if(e.key === 'Up') {
+            this.playerWalkDirection = {x:0,y:-1};
             this.player1.walk({x:0,y:-1});
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
                 this.pressWalk = true;
                 this.keyPress = "Up";
-                this.playerWalkDirection = {x:0,y:-1};
             }
         }
 
+        // && this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status
+
         if(e.key === 'Space'){
-            if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6 
-                && this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status){
-                    console.log("running_space");
-                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].update();
-                    m_map.draw(Framework.Game._context);
+            if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 0){
+                    switch(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]){
+                        case 1:
+                            console.log(999);
+                            if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
+                                this.pickRegenerateObject();
+                            break;
+                        case 2:
+                            this.pickObject();
+                            break;
+                        case 3:
+                            this.pickObject();
+                            break;
+                        case 4:
+                            this.pickObject();
+                            break;
+                        case 5:
+                            this.pickObject();
+                            break;
+                        case 6:
+                            if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
+                                this.pickRegenerateObject();
+                            break;
+                    }
             }
         }
+    }
+
+    this.pickRegenerateObject = function(){
+        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].update();
+        m_map.draw(Framework.Game._context);
+        this.regeneration_time = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].regeneration_time;
+        this.callDrawRegenerationTime();
+    }
+    this.callDrawRegenerationTime = function(){
+        setTimeout(()=>{m_map.draw(Framework.Game._context)},this.regeneration_time);
+    }
+    this.pickObject = function(){
+        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_blank();
+        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 0;
+        m_map.draw(Framework.Game._context);
+
     }
 
     this.stopAllMonsterWalk = function()

@@ -7,9 +7,10 @@ var Item_grass = function() {
 
     this.mapPosition = {x:0, y:0};
     this.status = true;
+    this.regeneration_time = 3000;
 
     this.reset = function(){
-        setTimeout(()=>{  this.status = true}, 3000);
+        setTimeout(()=>{  this.status = true}, this.regeneration_time);
     }
 
     this.update = function(){

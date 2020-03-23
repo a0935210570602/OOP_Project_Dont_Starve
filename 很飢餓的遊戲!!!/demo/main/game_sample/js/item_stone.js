@@ -3,13 +3,15 @@ var Item_stone = function() {
     this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png'); 
     this.item_stone.scale = 2;
     this.mapPosition = {x:0, y:0};
+    this.status = true;
 
     this.update = function(){
-
+        this.status = false;
     }
 
     this.draw = function(ctx){
-        this.item_stone.draw(ctx);
+        if(this.status)
+            this.item_stone.draw(ctx);
     }
 
 };

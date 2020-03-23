@@ -3,13 +3,14 @@ var Item_spider_web = function() {
     this.item_spider_web.scale = 2;
 
     this.mapPosition = {x:0, y:0};
-
+    this.status = true;
     this.update = function(){
-        
+        this.status = false;
     }
 
     this.draw = function(ctx){
-        this.item_spider_web.draw(ctx);
+        if(this.status)
+            this.item_spider_web.draw(ctx);
     }
 };
 
