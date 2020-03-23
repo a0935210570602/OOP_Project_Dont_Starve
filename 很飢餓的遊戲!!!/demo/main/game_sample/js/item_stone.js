@@ -1,6 +1,6 @@
 
-var Box = function() {
-    this.sprite = new Framework.Sprite(define.imagePath + 'box.png'); 
+var Item_stone = function(item) {
+    this.sprite = new Framework.Sprite(define.materialPath + 'item_stone.png'); 
     this.sprite.scale = 2;
     this.sprite.index = 1;  //?
     var PIXEL_CONST = 64;
@@ -27,11 +27,12 @@ var Box = function() {
 
 };
 
-Object.defineProperty(Box.prototype, 'position', {
+Object.defineProperty(Item_stone.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },
     set: function(newValue) {
         this.mapPosition = newValue;
+        this.mapPosition.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 

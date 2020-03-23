@@ -8,14 +8,8 @@ var Branch = function() {
     this.item_2 = new Framework.Sprite(define.materialPath + '2.png');
     this.item_2.scale = 2;
 
-    this.item_3 = new Framework.Sprite(define.materialPath + '3.png');
-    this.item_3.scale = 2;
-
     this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
     this.item_4.scale = 2;
-
-    this.item_5 = new Framework.Sprite(define.materialPath + '5.png');
-    this.item_5.scale = 2;
 
     this.mapPosition = {x:0, y:0};
     this.spritePosition = {}
@@ -39,7 +33,6 @@ var Branch = function() {
         }else if(this.tileType === 4){
             this.item_4.draw(ctx);
         }else if(this.tileType === 5){
-            this.item_5.draw(ctx);
         }else if(this.tileType === 6){
             this.mapBranch.draw(ctx);
         }
@@ -57,9 +50,7 @@ Object.defineProperty(Branch.prototype, 'position', {
         this.mapBranch.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.item_1.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.item_2.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        this.item_3.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.item_4.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        this.item_5.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
 

@@ -43,17 +43,14 @@ var Map = function(map, item_map)
         this.item_2 = new Framework.Sprite(define.materialPath + '2.png');
         this.item_2.scale = 2;
 
-        this.item_3 = new Framework.Sprite(define.materialPath + '3.png');
-        this.item_3.scale = 2;
-
         this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
         this.item_4.scale = 2;
 
-        this.item_5 = new Framework.Sprite(define.materialPath + '5.png');
-        this.item_5.scale = 2;
-
         this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
         this.item_grass.scale = 2;
+
+        this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
+        this.item_stone.scale = 2;
 
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
@@ -115,8 +112,8 @@ var Map = function(map, item_map)
                     tile.tileType = this.constants.Items.ITEM_2;
                     this.itemArray.push(tile);
                 }else if(line[j] === 3){
-                    tile.tileType = this.constants.Items.ITEM_3;
-                    this.itemArray.push(tile);
+                    var stone = new Item_stone();
+                    this.itemArray.push(stone);
                     // console.log("3");
                 }else if(line[j] === 4){
                     tile.tileType = this.constants.Items.ITEM_4;

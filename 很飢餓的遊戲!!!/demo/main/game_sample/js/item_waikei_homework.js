@@ -1,6 +1,5 @@
-
-var Box = function() {
-    this.sprite = new Framework.Sprite(define.imagePath + 'box.png'); 
+var Item_waikei_homework = function(item) {
+    this.sprite = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png'); 
     this.sprite.scale = 2;
     this.sprite.index = 1;  //?
     var PIXEL_CONST = 64;
@@ -27,7 +26,7 @@ var Box = function() {
 
 };
 
-Object.defineProperty(Box.prototype, 'position', {
+Object.defineProperty(Item_waikei_homework.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },

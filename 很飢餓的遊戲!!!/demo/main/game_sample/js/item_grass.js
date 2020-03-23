@@ -1,5 +1,5 @@
 
-var Item_grass = function(item) {
+var Item_grass = function() {
     this.sprite = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
     this.sprite.scale = 2;
     this.sprite.index = 1;  //?
@@ -8,7 +8,6 @@ var Item_grass = function(item) {
     this.mapPosition = {x:0, y:0};
 
     this.constants = new Constants();
-    this.item = item;
 
     //被割掉的function
     this.mow = function(){
