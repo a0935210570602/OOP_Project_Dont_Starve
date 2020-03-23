@@ -2,9 +2,6 @@ var Branch = function() {
     this.mapBranch = new Framework.Sprite(define.materialPath + '0.png');
     this.mapBranch.scale = 2;
 
-    this.item_2 = new Framework.Sprite(define.materialPath + '2.png');
-    this.item_2.scale = 2;
-
     this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
     this.item_4.scale = 2;
 

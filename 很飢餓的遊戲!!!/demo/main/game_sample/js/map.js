@@ -37,8 +37,8 @@ var Map = function(map, item_map)
         this.mapBranch = new Framework.Sprite(define.materialPath + '0.png');
         this.mapBranch.scale = 2;
 
-        // this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
-        // this.item_spider_web.scale = 2;
+        this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
+        this.item_spider_web.scale = 2;
 
         this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
         this.item_4.scale = 2;
@@ -115,8 +115,8 @@ var Map = function(map, item_map)
                     tile.tileType = this.constants.Items.ITEM_1;
                     this.itemArray.push(tile);
                 }else if(line[j] ===2){
-                    // var spider_web = new Item_spider_web();
-                    // this.itemArray.push(spider_web);
+                    var spider_web = new Item_spider_web();
+                    this.itemArray.push(spider_web);
                 }else if(line[j] === 3){
                     var stone = new Item_stone();
                     this.itemArray.push(stone);

@@ -61,7 +61,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_grass.js', lookFor: 'Item_grass' },
         { src: 'game_sample/js/item_stone.js', lookFor: 'Item_stone' },
         { src: 'game_sample/js/item_waikei_homework.js', lookFor: 'Item_waikei_homework' },
-        // { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
+        { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/branch.js', lookFor: 'Branch' },
         { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
         { src: 'game_sample/js/bomb.js', lookFor: 'Bomb' },
