@@ -16,6 +16,7 @@ var Branch = function() {
     this.tileType = 0;
     var PIXEL_CONST = 64;
 
+    // Test
     this.update = function(){
 
     }
