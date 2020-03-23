@@ -37,11 +37,8 @@ var Map = function(map, item_map)
         this.mapBranch = new Framework.Sprite(define.materialPath + '0.png');
         this.mapBranch.scale = 2;
 
-        this.item_1 = new Framework.Sprite(define.materialPath + '1.png');
-        this.item_1.scale = 2;
-
-        this.item_2 = new Framework.Sprite(define.materialPath + '2.png');
-        this.item_2.scale = 2;
+        // this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
+        // this.item_spider_web.scale = 2;
 
         this.item_4 = new Framework.Sprite(define.materialPath + '4.png');
         this.item_4.scale = 2;
@@ -49,9 +46,18 @@ var Map = function(map, item_map)
         this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
         this.item_grass.scale = 2;
 
+        this.item_grass_mowed = new Framework.Sprite(define.materialPath + 'item_grass_mowed.png'); 
+        this.item_grass_mowed .scale = 2;
+        
+        this.item_flower = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
+        this.item_flower .scale = 2;
+        
         this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
         this.item_stone.scale = 2;
-
+        
+        this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
+        this.item_waikei_homework.scale = 2;
+        
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
@@ -109,8 +115,8 @@ var Map = function(map, item_map)
                     tile.tileType = this.constants.Items.ITEM_1;
                     this.itemArray.push(tile);
                 }else if(line[j] ===2){
-                    tile.tileType = this.constants.Items.ITEM_2;
-                    this.itemArray.push(tile);
+                    // var spider_web = new Item_spider_web();
+                    // this.itemArray.push(spider_web);
                 }else if(line[j] === 3){
                     var stone = new Item_stone();
                     this.itemArray.push(stone);
@@ -119,8 +125,8 @@ var Map = function(map, item_map)
                     tile.tileType = this.constants.Items.ITEM_4;
                     this.itemArray.push(tile);
                 }else if(line[j] === 5){
-                    tile.tileType = this.constants.Items.ITEM_5;
-                    this.itemArray.push(tile);
+                    var waikei_homework = new Item_waikei_homework();
+                    this.itemArray.push(waikei_homework);
                 }else if(line[j] === 6){
                     var grass = new Item_grass();
                     this.itemArray.push(grass);
@@ -253,7 +259,7 @@ var Map = function(map, item_map)
         }
 	}
 	this.draw = function(ctx) {
-
+        console.log("draw")
         this.boxArray = [];
         this.bombArray = [];
         this.exploreArray = [];
@@ -396,13 +402,11 @@ var Map = function(map, item_map)
         }
 
         if(e.key === 'Space'){
-            var bomb = this.player1.placeBomb();
-            if(!Framework.Util.isNull(bomb))
-            {
-                bomb.ExploredCallBack.push(Framework.Game._currentLevel.map.bombExploredHandler);
-                this.bombArray.push(bomb);
-                var bombPosition = bomb.position;
-                this.mapArray[bombPosition.y][bombPosition.x] = 3;
+            if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6 
+                && this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status){
+                    console.log("running_space");
+                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].update();
+                    m_map.draw(Framework.Game._context);
             }
         }
     }

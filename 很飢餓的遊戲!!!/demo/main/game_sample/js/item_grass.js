@@ -1,29 +1,29 @@
-
 var Item_grass = function() {
-    this.sprite = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
-    this.sprite.scale = 2;
-    this.sprite.index = 1;  //?
-    var PIXEL_CONST = 64;
+    this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
+    this.item_grass_mowed = new Framework.Sprite(define.materialPath + 'item_grass_mowed.png'); 
+
+    this.item_grass.scale = 2;
+    this.item_grass_mowed.scale = 2;
 
     this.mapPosition = {x:0, y:0};
+    this.status = true;
 
-    this.constants = new Constants();
-
-    //被割掉的function
-    this.mow = function(){
-
+    this.reset = function(){
+        setTimeout(()=>{  this.status = true}, 3000);
     }
 
     this.update = function(){
-
+        this.status = false;
+        this.reset();
     }
-
 
     this.draw = function(ctx){
-        this.sprite.position = {x: this.mapPosition.x * PIXEL_CONST, y: this.mapPosition.y * PIXEL_CONST};
-        this.sprite.draw(ctx);
+        if(this.status){
+            this.item_grass.draw(ctx);
+        }else{
+            this.item_grass_mowed.draw(ctx);
+        }
     }
-
 };
 
 Object.defineProperty(Item_grass.prototype, 'position', {
@@ -32,5 +32,7 @@ Object.defineProperty(Item_grass.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
+        this.item_grass.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_grass_mowed.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
