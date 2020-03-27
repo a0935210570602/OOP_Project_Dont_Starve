@@ -76,10 +76,12 @@ var Map = function(map, item_map)
         this.stopMonsterCounter =0;
 
         this.backpack = new Backpack();
+        this.characterStatus = new CharacterStatus();
     }
 
     this.init = function()
     {
+        this.characterStatus.init();
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
         //this.mapArray = [];
@@ -272,10 +274,10 @@ var Map = function(map, item_map)
 
 	this.draw = function(ctx) {
         console.log("draw")
-        this.boxArray = [];
-        this.bombArray = [];
-        this.exploreArray = [];
-        this.tileArray = [];
+        // this.boxArray = [];
+        // this.bombArray = [];
+        // this.exploreArray = [];
+        // this.tileArray = [];
 
         // for(var i=0; i<11; i++){
         //     for(var j=0; j<11; j++){
@@ -327,7 +329,7 @@ var Map = function(map, item_map)
         }
 
         this.backpack.draw(ctx);
-
+        this.characterStatus.draw(ctx);
         this.player1.draw(ctx);
 	}	
 

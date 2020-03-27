@@ -84,9 +84,12 @@ var Backpack = function() {
                     break;
             }
 
-            ctx.font = "25px Arial";
-            ctx.fillStyle = "black";
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "white";
             ctx.fillText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+10);
+            ctx.strokeStyle = 'blue';
+            ctx.lineWidth = 2.5;
+            ctx.strokeText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+10);
         }
     }
 };
