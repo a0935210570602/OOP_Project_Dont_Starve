@@ -362,7 +362,7 @@ var Framework = (function (Framework) {
 		that._canvasContainer.style.textAlign = 'center';
 		that._canvasContainer.style.verticalAlign = 'middle';
 		that._canvas = document.createElement('canvas');	
-		that._canvas.style.backgroundColor = '#fff';		
+		that._canvas.style.backgroundColor = '#BEBEBE';		
 		that._canvas.setAttribute('id', '__game_canvas__');
 		that._canvas.width = that._config.canvasWidth;
 		that._canvas.height = that._config.canvasHeight;
