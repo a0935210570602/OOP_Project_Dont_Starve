@@ -67,6 +67,7 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
     },
 
     mousedown: function(e) {
+        Framework.Game.goToLevel('menu');
         //console.log為Browser提供的function, 可以在debugger的console內看到被印出的訊息                    
     },
 

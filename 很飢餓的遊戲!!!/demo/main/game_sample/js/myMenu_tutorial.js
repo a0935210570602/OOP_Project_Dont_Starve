@@ -64,13 +64,11 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
     },
 
     mousedown: function(e) {
-        console.log(e);
         //console.log為Browser提供的function, 可以在debugger的console內看到被印出的訊息                    
-        Framework.Game.goToNextLevel();
+        Framework.Game.goToLevel('menu');
     },
 
     click:function(e){      
-        Framework.Game.goToNextLevel();
 
     },
 
