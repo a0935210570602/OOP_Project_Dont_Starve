@@ -18,7 +18,7 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
     },
 
     load: function() {
-        this.menu = new Framework.Sprite(define.materialPath + 'item_blank.png');
+        this.go_back_menu = new Framework.Sprite(define.welcomimgPath + 'go_back_menu.png');
     },
 
     initialize: function() {
@@ -26,12 +26,12 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
 
         //為了讓之後的位置較好操控, new出一個位於中心點且可以黏貼任何東西的容器
         //注意, Position都是用中心點
-        this.menu.position = {
+        this.go_back_menu.position = {
             x: Framework.Game.getCanvasWidth() / 2,
             y: Framework.Game.getCanvasHeight() / 2
         };
-        this.menu.scale = 2;
-        this.rootScene.attach(this.menu);
+        this.go_back_menu.scale = 4;
+        this.rootScene.attach(this.go_back_menu);
 
         this.rectPosition = { 
             x: Framework.Game.getCanvasWidth() / 2 - 130,
@@ -49,16 +49,14 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
 
     draw: function(parentCtx) { 
         //this.rootScene.draw();一定要在第一行
-        this.rootScene.draw(parentCtx); 
-        this.menu.draw(parentCtx);
         parentCtx.textAlign = 'center';
         parentCtx.fillStyle = 'black';
         parentCtx.fillText("遊戲專案團隊", 750, 100);
         parentCtx.fillText("106820003 電資三潘建蒼", 750, 200);
-        parentCtx.fillText("106820046 電資三凃育安", 750, 300);
+        parentCtx.fillText("106820046 電資三凃昱安", 750, 300);
         parentCtx.fillText("PS.偉凱好帥", 750, 800);
         this.rootScene.draw(parentCtx); 
-        //this.rootScene.draw();
+        this.go_back_menu.draw(parentCtx);
         //可支援畫各種單純的圖形和字
         
     },
@@ -67,8 +65,8 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
     },
 
     mousedown: function(e) {
-        Framework.Game.goToLevel('menu');
-        //console.log為Browser提供的function, 可以在debugger的console內看到被印出的訊息                    
+        if(e.x<915 && e.x>682 && e.y<573 && e.y>285)
+            Framework.Game.goToLevel('menu');                   
     },
 
     click:function(e){      
