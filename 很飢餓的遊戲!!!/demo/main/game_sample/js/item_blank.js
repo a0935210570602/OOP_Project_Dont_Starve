@@ -1,7 +1,7 @@
 var Item_blank = function() {
     this.item_blank = new Framework.Sprite(define.materialPath + 'item_blank.png'); 
     this.mapPosition = {x:0, y:0};
-
+    this.isRegenerate = false;
     this.draw = function(ctx){
     }
 };

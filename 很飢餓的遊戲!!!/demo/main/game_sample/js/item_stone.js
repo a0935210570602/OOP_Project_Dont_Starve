@@ -4,6 +4,8 @@ var Item_stone = function() {
     this.item_stone.scale = 2;
     this.mapPosition = {x:0, y:0};
     this.status = true;
+    this.isRegenerate = false;
+
 
     this.update = function(){
         this.status = false;

@@ -74,6 +74,8 @@ var Map = function(map, item_map)
         this.monster = [];
         this.stopMonster = false;
         this.stopMonsterCounter =0;
+
+        this.backpack = new Backpack();
     }
 
     this.init = function()
@@ -275,10 +277,45 @@ var Map = function(map, item_map)
         this.exploreArray = [];
         this.tileArray = [];
 
+        // for(var i=0; i<11; i++){
+        //     for(var j=0; j<11; j++){
+        //         this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
+        //         this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
+        //     }
+        // }
+
         for(var i=0; i<11; i++){
             for(var j=0; j<11; j++){
-                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
-                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
+                switch(this.mapArray[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]){
+                    case 192:
+                        this.terrain_plain.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_plain.draw(ctx);
+                        break;
+                    case 200:
+                        this.terrain_water.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_water.draw(ctx);
+                        break;
+                    case 137:
+                        this.terrain_mountain.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_mountain.draw(ctx);
+                        break;
+                    case 91:
+                        this.terrain_blood_water.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_blood_water.draw(ctx);
+                        break;
+                    case 123:
+                        this.terrain_forest.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_forest.draw(ctx);
+                        break;
+                    case 196:     
+                        this.terrain_lava.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_lava.draw(ctx);
+                        break;
+                    case 255:      
+                        this.terrain_snow_ground.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_snow_ground.draw(ctx);
+                        break;
+                }
             }
         }
 
@@ -288,6 +325,8 @@ var Map = function(map, item_map)
                 this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
             }
         }
+
+        this.backpack.draw(ctx);
 
         this.player1.draw(ctx);
 	}	
@@ -417,30 +456,15 @@ var Map = function(map, item_map)
         // && this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status
 
         if(e.key === 'Space'){
-            if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 0){
-                    switch(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]){
-                        case 1:
-                            console.log(999);
-                            if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
-                                this.pickRegenerateObject();
-                            break;
-                        case 2:
-                            this.pickObject();
-                            break;
-                        case 3:
-                            this.pickObject();
-                            break;
-                        case 4:
-                            this.pickObject();
-                            break;
-                        case 5:
-                            this.pickObject();
-                            break;
-                        case 6:
-                            if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
-                                this.pickRegenerateObject();
-                            break;
-                    }
+            if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
+                if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
+                {
+                    this.backpack.addItem(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
+                    if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate)
+                        this.pickRegenerateObject();
+                    else
+                        this.pickObject();
+                }
             }
         }
     }

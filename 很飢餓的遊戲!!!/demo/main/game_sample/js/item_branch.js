@@ -2,6 +2,8 @@ var Item_branch = function() {
     this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png'); 
     this.item_branch.scale = 2;
     this.mapPosition = {x:0, y:0};
+    this.status = true;
+    this.isRegenerate = false;
 
     this.update = function(){
 

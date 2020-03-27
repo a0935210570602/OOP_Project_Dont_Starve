@@ -3,6 +3,8 @@ var Item_waikei_homework = function() {
     this.item_waikei_homework.scale = 2;
     this.mapPosition = {x:0, y:0};
     this.status = true;
+    this.isRegenerate = false;
+
 
     this.update = function(){
         this.status = false;

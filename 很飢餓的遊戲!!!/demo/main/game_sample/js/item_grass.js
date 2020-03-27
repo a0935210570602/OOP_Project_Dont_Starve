@@ -7,6 +7,8 @@ var Item_grass = function() {
 
     this.mapPosition = {x:0, y:0};
     this.status = true;
+    this.isRegenerate = true;
+
     this.regeneration_time = 3000;
 
     this.reset = function(){
