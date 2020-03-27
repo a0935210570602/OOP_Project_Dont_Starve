@@ -35,10 +35,11 @@ var CharacterStatus = function() {
         var healthInterval = setInterval(()=>{
             this.currentHealth = this.currentHealth - 5;
             character_status.draw(Framework.Game._context);
-            if(this.currentHunger > 0)
-            {
+            if(this.currentHunger > 0){
                 clearInterval(healthInterval);
                 this.decreaseHunger();
+            }else if(this.currentHealth == 0){
+                clearInterval(healthInterval);
             }
         }, 500);
     }
@@ -62,12 +63,12 @@ var CharacterStatus = function() {
 
         ctx.beginPath();
         ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64*(1-this.currentHealth/this.totalHealth));
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.fill();
       
         ctx.beginPath();
         ctx.rect(this.hungry.position.x-32, this.hungry.position.y-32, 64, 64*(1-this.currentHunger/this.totalHunger));
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.fill();
 
         this.heart.draw(ctx);

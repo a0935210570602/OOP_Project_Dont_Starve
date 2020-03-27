@@ -1,5 +1,18 @@
 var Level2_change = Framework.Class(Framework.Level , {
-    
+    initializeProgressResource: function() {
+        this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
+        this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
+
+        //為了或得到this.loading這個Sprite的絕對位置, 故需要先計算一次(在Game Loop執行時, 則會自動計算, 但因為loadingProgress只支援draw故需要自行計算)                  
+    },
+    loadingProgress: function(ctx, requestInfo) {
+        //console.log(Framework.ResourceManager.getFinishedRequestPercent())
+        this.loading.draw(ctx);
+        ctx.font ='90px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'white';
+        ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
+    },
     load: function() {
         //0 空地  1牆壁  2空木箱  3增加炸彈木箱  4增加威力木箱  -1增加炸彈數  -2增加炸彈power
         //91 異世界洪水  192平原 123森林 137山區 255雪地 196岩漿 200池塘

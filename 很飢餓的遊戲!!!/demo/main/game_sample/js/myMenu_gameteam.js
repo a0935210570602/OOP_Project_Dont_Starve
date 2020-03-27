@@ -1,4 +1,4 @@
-var MyMenu = Framework.exClass(Framework.GameMainMenu , {
+var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
             //初始化loadingProgress需要用到的圖片
     initializeProgressResource: function() {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
@@ -18,12 +18,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
     },
 
     load: function() {
-        this.menu = new Framework.Sprite(define.imagePath + 'Title.png');
-        this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game.png');
-        this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game.png');
-        this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game.png');
-        this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game.png');
-
+        this.menu = new Framework.Sprite(define.materialPath + 'item_blank.png');
     },
 
     initialize: function() {
@@ -36,91 +31,52 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
             y: Framework.Game.getCanvasHeight() / 2
         };
         this.menu.scale = 2;
-        // this.rootScene.attach(this.menu);
+        this.rootScene.attach(this.menu);
 
         this.rectPosition = { 
             x: Framework.Game.getCanvasWidth() / 2 - 130,
             // y: Framework.Game.getCanvasHeight() / 2
             y: 0
         };
-        this.botton_start.position = {
-            x: 1050,
-            y: 350
-        };
-        this.botton_start.scale = 1;
-        this.rootScene.attach(this.botton_start);
-
-        this.botton_tutorial.position = {
-            x: 1050,
-            y: 460
-        };
-        this.botton_tutorial.scale = 1;
-        this.rootScene.attach(this.botton_tutorial);
-        
-        this.botton_quit.position = {
-            x: 1050,
-            y: 570
-        };
-        this.botton_quit.scale = 1;
-        this.rootScene.attach(this.botton_quit);
-        
-        this.botton_team.position = {
-            x: 1050,
-            y: 680
-        };
-        this.botton_team.scale = 1;
-        this.rootScene.attach(this.botton_team);
-        // this.botton_rootScene.attach(this.botton_start);
     },
 
     update:function(){     
         //this.rootScene.update();一定要在第一行
         this.rootScene.update(); 
-        // this.botton_rootScene.update(); 
 
         //目前的Framework, 當任何一個GameObject不做attach時, 則必須要自行update
     },
 
     draw: function(parentCtx) { 
         //this.rootScene.draw();一定要在第一行
-        this.rootScene.draw(parentCtx);
+        this.rootScene.draw(parentCtx); 
         this.menu.draw(parentCtx);
-        this.botton_start.draw(parentCtx);
-        this.botton_tutorial.draw(parentCtx);
-        this.botton_quit.draw(parentCtx);
-        this.botton_team.draw(parentCtx);
-        
-        // this.botton_rootScene.draw(parentCtx);
+        parentCtx.textAlign = 'center';
+        parentCtx.fillStyle = 'black';
+        parentCtx.fillText("遊戲專案團隊", 750, 100);
+        parentCtx.fillText("106820003 電資三潘建蒼", 750, 200);
+        parentCtx.fillText("106820046 電資三凃育安", 750, 300);
+        parentCtx.fillText("PS.偉凱好帥", 750, 800);
+        this.rootScene.draw(parentCtx); 
         //this.rootScene.draw();
         //可支援畫各種單純的圖形和字
+        
+    },
+
+    mouseup: function(e) {
     },
 
     mousedown: function(e) {
         //console.log為Browser提供的function, 可以在debugger的console內看到被印出的訊息                    
-        // Framework.Game.goToNextLevel();
     },
 
     click:function(e){      
-        // Framework.Game.goToNextLevel();
-        // console.log(e);
-        if(e.x<1300 && e.x>1058 && e.y<465 && e.y>365)
-            Framework.Game.goToLevel('level1');  
-        if(e.x<1300 && e.x>1058 && e.y<577 && e.y>480)
-            Framework.Game.goToLevel('menu_tutorial');  
-        if(e.x<1300 && e.x>1058 && e.y<686 && e.y>588)
-            window.close();   
-        if(e.x<1300 && e.x>1058 && e.y<798 && e.y>699)
-            Framework.Game.goToLevel('menu_gameteam');  
-
     },
 
     mousemove: function(e) {               
     },
 
     mouseup: function(e) {
-        // console.log("mouseup");
-        // console.log(e);
-
         this.isTouchArrow = false;
     },
 

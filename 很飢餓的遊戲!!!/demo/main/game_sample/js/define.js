@@ -20,6 +20,10 @@
 		'materialPath': {
 			value: mainPath + 'material/',
 			writable: true
+		},
+		'welcomimgPath': {
+			value: mainPath + 'welcoming_page/',
+			writable: true
 		}
 
 	});

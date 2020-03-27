@@ -54,6 +54,8 @@ var loadGameEnd;
     [
         { src: 'game_sample/js/define.js', lookFor: 'define' },
         { src: 'game_sample/js/myMenu.js', lookFor: 'MyMenu' },
+        { src: 'game_sample/js/myMenu_tutorial.js', lookFor: 'MyMenu_tutorial' },
+        { src: 'game_sample/js/myMenu_gameteam.js', lookFor: 'MyMenu_gameteam' },
         { src: 'game_sample/js/constants.js', lookFor: 'Constants' },
         { src: 'game_sample/js/score.js', lookFor: 'Score' },
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },

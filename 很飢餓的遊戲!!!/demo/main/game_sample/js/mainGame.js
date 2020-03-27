@@ -10,4 +10,7 @@ Framework.Game.addNewLevel({menu: new MyMenu()});
 Framework.Game.addNewLevel({level1: new Level2_change()});
 Framework.Game.addNewLevel({gameOver: new GameOver()});
 Framework.Game.start();
+Framework.Game.addNewLevel({menu_tutorial: new MyMenu_tutorial()});
+Framework.Game.addNewLevel({menu_gameteam: new MyMenu_gameteam()});
+
 
