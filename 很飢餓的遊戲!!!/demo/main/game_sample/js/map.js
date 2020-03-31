@@ -420,42 +420,40 @@ var Map = function(map, item_map)
         if(e.key === 'Down') {
             this.player1.walk({x:0,y:1});
             this.playerWalkDirection = {x:0,y:1};
+            this.keyPress = "Down";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
                 this.pressWalk = true;
-                this.keyPress = "Down";
             }
         }
 
         if(e.key === 'Left') {
             this.playerWalkDirection = {x:-1,y:0};
             this.player1.walk({x:-1,y:0});
+            this.keyPress = "Left";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
-                this.keyPress = "Left";
             }
         }
 
         if(e.key === 'Right') {
             this.playerWalkDirection = {x:1,y:0};
             this.player1.walk({x:1,y:0});
+            this.keyPress = "Right";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
-                this.keyPress = "Right";
             }
         }
 
         if(e.key === 'Up') {
             this.playerWalkDirection = {x:0,y:-1};
             this.player1.walk({x:0,y:-1});
+            this.keyPress = "Up";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
                 this.pressWalk = true;
-                this.keyPress = "Up";
             }
         }
-
-        // && this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status
 
         if(e.key === 'Space'){
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
@@ -466,6 +464,8 @@ var Map = function(map, item_map)
                         this.pickRegenerateObject();
                     else
                         this.pickObject();
+                    if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
+                        this.pressWalk = true;
                 }
             }
         }
