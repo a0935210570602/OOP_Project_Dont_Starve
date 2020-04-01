@@ -1,101 +1,104 @@
-var SynthesisBar = function() {
+var SynthesisBar = function(backpackList) {
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
     this.backpack.position = {x:0,y:0};
+    this.currentPoint = {x:-1,y:-1};
 
     this.secondColumnRange = [];
     this.thirdColumnRange = [];
     this.firstColumeIndex = -1;
     this.secondColumnIndex = -1;
 
-    this.synthesisBar = [
-        {picture:"工具", position:{x:1, y:4}},
-        {picture:"戰鬥", position:{x:1, y:5}},
-        {picture:"技能", position:{x:1, y:6}},
-        {picture:"生存", position:{x:1, y:7}},
-        {picture:"精煉", position:{x:1, y:8}}
-    ];
+    this.getBackpack;
 
-    this.synthesisBarMaterial = [];
-    this.synthesisBarMaterial.push(
-        [
-            [{item: "樹枝",amount: 2,position:{x:3, y:1}},{item: "燧石",amount: 2,position:{x:3, y:2}}],
-            [{item: "樹枝",amount: 1,position:{x:3, y:2}},{item: "燧石",amount: 1,position:{x:3, y:3}}],
-            [{item: "樹枝",amount: 2,position:{x:3, y:3}},{item: "蜘蛛網",amount: 2,position:{x:3, y:4}}],
-            [{item: "樹枝",amount: 2,position:{x:3, y:4}},{item: "燧石",amount: 2,position:{x:3, y:5}}],
-            [{item: "樹枝",amount: 1,position:{x:3, y:5}},{item: "燧石",amount: 1,position:{x:3, y:6}},{item: "黃金",amount: 1,position:{x:3, y:7}}],
-            [{item: "樹枝",amount: 2,position:{x:3, y:6}},{item: "燧石",amount: 2,position:{x:3, y:7}},{item: "黃金",amount: 1,position:{x:3, y:8}}],
-            [{item: "樹枝",amount: 2,position:{x:3, y:7}},{item: "燧石",amount: 2,position:{x:3, y:8}},{item: "黃金",amount: 1,position:{x:3, y:9}}]
-        ]
-    );
-    this.synthesisBarMaterial.push(
-        [
-            [{item: "豬皮",amount: 1,position:{x:3, y:3}},{item: "繩索",amount: 1,position:{x:3, y:4}}],
-            [{item: "草",amount: 10,position:{x:3, y:4}},{item: "樹枝",amount: 2,position:{x:3, y:5}}],
-            [{item: "木頭",amount: 8,position:{x:3, y:5}},{item: "繩索",amount: 2,position:{x:3, y:6}}],
-            [{item: "樹枝",amount: 2,position:{x:3, y:6}},{item: "燧石",amount: 1,position:{x:3, y:7}},{item: "繩索",amount: 1,position:{x:3, y:8}}],
-            [{item: "草",amount: 1,position:{x:3, y:7}},{item: "樹枝",amount: 1,position:{x:3, y:8}},{item: "蜂刺",amount: 1,position:{x:3, y:9}}]
-        ]
-    );
-    this.synthesisBarMaterial.push(
-        [
-            [{item: "長矛",amount: 1,position:{x:3, y:5}},{item: "漿果叢",amount: 1,position:{x:3, y:6}}],
-            [{item: "新手教學手冊",amount: 1,position:{x:3, y:6}},{item: "火法杖",amount: 1,position:{x:3, y:7}},{item: "冰法杖",amount: 1,position:{x:3, y:8}},{item: "露水",amount: 1,position:{x:3, y:9}}],
-            [{item: "長矛",amount: 2,position:{x:3, y:7}},{item: "火把",amount: 1,position:{x:3, y:8}}],
-            [{item: "長矛",amount: 2,position:{x:3, y:8}},{item: "冰塊",amount: 2,position:{x:3, y:9}}],
-        ]
-    );
-    this.synthesisBarMaterial.push(
-        [
-            [{item: "樹枝",amount: 2,position: {x:3,y:6}},{item: "黃金",amount: 2,position: {x:3,y:7}},{item: "燧石",amount: 1,position: {x:3,y:8}},{item: "繩索",amount: 2,position: {x:3,y:9}}],
-            [{item: "樹枝",amount: 2,position: {x:3,y:7}},{item: "草",amount: 2,position: {x:3,y:8}}],
-            [{item: "蜘蛛網",amount: 6,position: {x:3,y:8}},{item: "繩索",amount: 3,position: {x:3,y:9}},{item: "樹枝",amount: 4,position: {x:3,y:10}}],
-            [{item: "木頭",amount: 2,position: {x:3,y:9}},{item: "草",amount: 2,position: {x:3,y:10}}]
-        ]
-    );
-    this.synthesisBarMaterial.push(
-        [
-            [{item: "草",amount: 3,position: {x:3,y:8}}],
-            [{item: "雪球",amount: 3,position: {x:3,y:9}}]
-        ]
-    );
+    //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
+    //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
+    //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
+    //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:繩索 36:冰塊 37:漿果叢
+
+    this.itemNameArray = [
+        "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
+        "蜂刺", "雪球", "繩索", "露水", "十字鎬", "斧頭", "釣魚竿", "鏟子", "黃金斧頭", "黃金鏟子", 
+        "黃金十字鎬", "頭盔", "草製盔甲", "木製盔甲", "長矛", "吹箭", "國王法杖", "空間法杖", "火法杖", "冰法杖",
+        "黃金提燈", "火把", "帳篷", "篝火", "繩索", "冰塊", "漿果叢"
+    ];
+    this.synthesisBar = [
+        {item:"工具", position:{x:1, y:4}},
+        {item:"戰鬥", position:{x:1, y:5}},
+        {item:"技能", position:{x:1, y:6}},
+        {item:"生存", position:{x:1, y:7}},
+        {item:"精煉", position:{x:1, y:8}}
+    ];
 
     this.synthesisBarDetail = [
         [
-            {picture: "十字鎬", position: {x:2,y:1}},
-            {picture: "斧頭", position: {x:2,y:2}},
-            {picture: "釣魚竿", position: {x:2,y:3}},
-            {picture: "鏟子", position: {x:2,y:4}},
-            {picture: "黃金斧頭", position: {x:2,y:5}},
-            {picture: "黃金鏟子", position: {x:2,y:6}},
-            {picture: "黃金十字鎬", position: {x:2,y:7}}
+            {item: 15, position: {x:2,y:1}},
+            {item: 16, position: {x:2,y:2}},
+            {item: 17, position: {x:2,y:3}},
+            {item: 18, position: {x:2,y:4}},
+            {item: 19, position: {x:2,y:5}},
+            {item: 20, position: {x:2,y:6}},
+            {item: 21, position: {x:2,y:7}}
         ],
         [
-            {picture: "頭盔", position: {x:2,y:3}},
-            {picture: "草製盔甲", position: {x:2,y:4}},
-            {picture: "木製盔甲", position: {x:2,y:5}},
-            {picture: "長矛", position: {x:2,y:6}},
-            {picture: "吹箭", position: {x:2,y:7}}
+            {item: 22, position: {x:2,y:3}},
+            {item: 23, position: {x:2,y:4}},
+            {item: 24, position: {x:2,y:5}},
+            {item: 25, position: {x:2,y:6}},
+            {item: 26, position: {x:2,y:7}}
         ],
         [
-            {picture: "國王法杖", position: {x:2,y:5}},
-            {picture: "空間法杖", position: {x:2,y:6}},
-            {picture: "火法杖", position: {x:2,y:7}},
-            {picture: "冰法杖", position: {x:2,y:8}}
+            {item: 27, position: {x:2,y:5}},
+            {item: 28, position: {x:2,y:6}},
+            {item: 29, position: {x:2,y:7}},
+            {item: 30, position: {x:2,y:8}}
         ],
         [
-            {picture: "黃金提燈", position: {x:2,y:6}},
-            {picture: "火把", position: {x:2,y:7}},
-            {picture: "帳篷", position: {x:2,y:8}},
-            {picture: "篝火", position: {x:2,y:9}}
+            {item: 31, position: {x:2,y:6}},
+            {item: 32, position: {x:2,y:7}},
+            {item: 33, position: {x:2,y:8}},
+            {item: 34, position: {x:2,y:9}}
         ],
         [
-            {picture: "繩索", position: {x:2,y:8}},
-            {picture: "冰塊", position: {x:2,y:9}}
+            {item: 13, position: {x:2,y:8}},
+            {item: 36, position: {x:2,y:9}}
         ]
     ];
 
-    this.currentPoint = {x:-1,y:-1};
+    this.synthesisBarMaterial = [
+        [
+            [{item: 4,amount: 2,position:{x:3, y:1}},{item: 8,amount: 2,position:{x:3, y:2}},{item:"合成",position:{x:3,y:3}}],
+            [{item: 4,amount: 1,position:{x:3, y:2}},{item: 8,amount: 1,position:{x:3, y:3}},{item:"合成",position:{x:3,y:4}}],
+            [{item: 4,amount: 2,position:{x:3, y:3}},{item: 2,amount: 2,position:{x:3, y:4}},{item:"合成",position:{x:3,y:5}}],
+            [{item: 4,amount: 2,position:{x:3, y:4}},{item: 8,amount: 2,position:{x:3, y:5}},{item:"合成",position:{x:3,y:6}}],
+            [{item: 4,amount: 1,position:{x:3, y:5}},{item: 8,amount: 1,position:{x:3, y:6}},{item: 9,amount: 1,position:{x:3, y:7}},{item:"合成",position:{x:3,y:8}}],
+            [{item: 4,amount: 2,position:{x:3, y:6}},{item: 8,amount: 2,position:{x:3, y:7}},{item: 9,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 4,amount: 2,position:{x:3, y:7}},{item: 8,amount: 2,position:{x:3, y:8}},{item: 9,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}]
+        ],
+        [
+            [{item: 10,amount: 1,position:{x:3, y:3}},{item: 13,amount: 1,position:{x:3, y:4}},{item:"合成",position:{x:3,y:5}}],
+            [{item: 6,amount: 10,position:{x:3, y:4}},{item: 4,amount: 2,position:{x:3, y:5}},{item:"合成",position:{x:3,y:6}}],
+            [{item: 7,amount: 8,position:{x:3, y:5}},{item: 13,amount: 2,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
+            [{item: 4,amount: 2,position:{x:3, y:6}},{item: 8,amount: 1,position:{x:3, y:7}},{item: 13,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 6,amount: 1,position:{x:3, y:7}},{item: 4,amount: 1,position:{x:3, y:8}},{item: 11,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}]
+        ],
+        [
+            [{item: 25,amount: 1,position:{x:3, y:5}},{item: 37,amount: 1,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
+            [{item: 5,amount: 1,position:{x:3, y:6}},{item: 29,amount: 1,position:{x:3, y:7}},{item: 30,amount: 1,position:{x:3, y:8}},{item: 14,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
+            [{item: 25,amount: 2,position:{x:3, y:7}},{item: 32,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 25,amount: 2,position:{x:3, y:8}},{item: 36,amount: 2,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
+        ],
+        [
+            [{item: 4,amount: 2,position: {x:3,y:6}},{item: 9,amount: 2,position: {x:3,y:7}},{item: 8,amount: 1,position: {x:3,y:8}},{item: 13,amount: 2,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}],
+            [{item: 4,amount: 2,position: {x:3,y:7}},{item: 6,amount: 2,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 2,amount: 6,position: {x:3,y:8}},{item: 13,amount: 3,position: {x:3,y:9}},{item: 4,amount: 4,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}],
+            [{item: 7,amount: 2,position: {x:3,y:9}},{item: 6,amount: 2,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}]
+        ],
+        [
+            [{item: 6,amount: 3,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 12,amount: 3,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}]
+        ]
+    ];
 
     this.positionChange = function(position){
         return {x:position.x*64,y:position.y*64};
@@ -113,7 +116,7 @@ var SynthesisBar = function() {
             this.backpack.draw(ctx);
             ctx.font = "15px Arial";
             ctx.fillStyle = "black";
-            ctx.fillText(this.synthesisBar[i].picture, this.synthesisBar[i].position.x*64, this.synthesisBar[i].position.y*64);
+            ctx.fillText(this.synthesisBar[i].item, this.synthesisBar[i].position.x*64, this.synthesisBar[i].position.y*64);
         }
 
         //第二層工具列
@@ -123,7 +126,8 @@ var SynthesisBar = function() {
                 this.backpack.draw(ctx);
                 ctx.font = "15px Arial";
                 ctx.fillStyle = "black";
-                ctx.fillText(this.synthesisBarDetail[this.firstColumeIndex][i].picture, this.synthesisBarDetail[this.firstColumeIndex][i].position.x*64, this.synthesisBarDetail[this.firstColumeIndex][i].position.y*64);
+                var index = this.synthesisBarDetail[this.firstColumeIndex][i].item-1;
+                ctx.fillText(this.itemNameArray[index], this.synthesisBarDetail[this.firstColumeIndex][i].position.x*64, this.synthesisBarDetail[this.firstColumeIndex][i].position.y*64);
             }
         }
 
@@ -134,15 +138,15 @@ var SynthesisBar = function() {
                 this.backpack.draw(ctx);
                 ctx.font = "15px Arial";
                 ctx.fillStyle = "black";
-                ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].item, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64-10);
-                ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
+                var index = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].item-1;
                 if(i == this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1){
-                    this.backpack.position.x = (this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x)*64;
-                    this.backpack.position.y = (this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y+1)*64;
-                    this.backpack.draw(ctx);
-                    ctx.font = "15px Arial";
-                    ctx.fillStyle = "black";
-                    ctx.fillText("合成",this.backpack.position.x, this.backpack.position.y);
+                    if(this.checkIfMaterialEnough())
+                        ctx.fillText("合成",this.backpack.position.x, this.backpack.position.y);
+                    else
+                        ctx.fillText("沒材料拉幹",this.backpack.position.x, this.backpack.position.y);
+                }else{
+                    ctx.fillText(this.itemNameArray[index], this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64-10);
+                    ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
                 }
             }
         }
@@ -162,13 +166,11 @@ var SynthesisBar = function() {
             for(var i = 0;i < this.synthesisBarDetail[this.firstColumeIndex].length;i++){
                 this.secondColumnRange.push(this.synthesisBarDetail[this.firstColumeIndex][i].position);
             }
-        }else if(this.currentPoint.x == 2){
-            if(this.checkSecondColumn() != -1){
-                this.secondColumnIndex = this.checkSecondColumn();
-                this.thirdColumnRange = [];
-                for(var i = 0; i < this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length;i++){
-                    this.thirdColumnRange.push(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position);
-                }
+        }else if(this.currentPoint.x == 2 && this.checkSecondColumn() != -1){
+            this.secondColumnIndex = this.checkSecondColumn();
+            this.thirdColumnRange = [];
+            for(var i = 0; i < this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length;i++){
+                this.thirdColumnRange.push(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position);
             }
         }else if(this.currentPoint.x == 3 && this.checkThirdColumn()!=-1){
            
@@ -196,5 +198,33 @@ var SynthesisBar = function() {
                 return i;
         }
         return -1;
+    }
+
+    this.click = function(e){
+        if(this.firstColumeIndex != -1 && this.secondColumnIndex != -1){
+            var position = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1].position;
+            if(this.currentPoint.x == position.x && this.currentPoint.y == position.y){
+                if(this.checkIfMaterialEnough()){
+                    backpackList.addItem(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
+                    backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
+                }
+            }
+        }
+    }
+
+    this.checkIfMaterialEnough = function(){
+        this.getBackpack = backpackList.getItemList();
+        var material = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex];
+        var check = false;
+        for(var i = 0;i < material.length-1;i++){
+            check = false;
+            for(var j = 0;j < this.getBackpack.length;j++){
+                if(this.getBackpack[j].item == material[i].item && this.getBackpack[j].amount >= material[i].amount)
+                    check = true;
+            }
+            if(!check)
+                return false;
+        }
+        return true;
     }
 };

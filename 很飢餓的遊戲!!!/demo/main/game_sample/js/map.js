@@ -77,7 +77,7 @@ var Map = function(map, item_map)
 
         this.backpack = new Backpack();
         this.characterStatus = new CharacterStatus();
-        this.synthesisBar = new SynthesisBar();
+        this.synthesisBar = new SynthesisBar(this.backpack);
     }
 
     this.init = function()
@@ -349,16 +349,16 @@ var Map = function(map, item_map)
 	}	
     this.isCanvasCanDraw = function(x_plot, y_plot){
         //玩家在畫布上的座標
-        console.log("this.player1.position");
-        console.log(this.player1.position);
+        // console.log("this.player1.position");
+        // console.log(this.player1.position);
         //恐龍在遊戲中的座標
-        console.log("x_plot");
-        console.log(x_plot);
-        console.log("y_plot");
-        console.log(y_plot);
+        // console.log("x_plot");
+        // console.log(x_plot);
+        // console.log("y_plot");
+        // console.log(y_plot);
         //玩家在遊戲中的座標
-        console.log("this.playerPositionOnMap");
-        console.log(this.playerPositionOnMap);
+        // console.log("this.playerPositionOnMap");
+        // console.log(this.playerPositionOnMap);
         if(Math.abs(x_plot-this.playerPositionOnMap.x)<=5 && Math.abs(y_plot-this.playerPositionOnMap.y)<=5){
             return true;
         }
@@ -500,7 +500,7 @@ var Map = function(map, item_map)
                         this.pickRegenerateObject();
                     else
                         this.pickObject();
-                    if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
+                    if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
                         this.pressWalk = true;
                 }
             }
@@ -553,13 +553,13 @@ var Map = function(map, item_map)
             {
                 this.player1.walkEnd();
                 this.pressWalk = false;
+                this.keyPress = "";
             };
         }
     }
 
     this.click = function(e){      
-        console.log(e);
-        // this.synthesisBar.click(e);
+        this.synthesisBar.click(e);
     }
 
     this.mousemove = function(e){

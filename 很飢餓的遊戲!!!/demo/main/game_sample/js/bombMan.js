@@ -60,7 +60,9 @@ var BombMan = function(file, options) {
         Framework.Game.goToNextLevel();
     }
 
-    this.walkEnd = function(){    }
+    this.walkEnd = function(){  
+        this.sprite.stop();
+    }
 
     this.update = function(){
         if(this.isWalking){
