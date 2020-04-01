@@ -65,7 +65,7 @@ var Map = function(map, item_map)
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
-        var newMonster = new Monster(define.imagePath + 'monster.png',this, {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
+        var newMonster = new Monster(define.materialPath + 'monster_3.png',this, {down: {from: 0, to: 3}, left: {from:4, to: 7}, right: {from: 8, to: 11}, up: {from: 12, to: 15}});
         
         
         this.player1 = new BombMan(define.imagePath + 'player1.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
@@ -183,7 +183,7 @@ var Map = function(map, item_map)
     }
     this.addMonster = function(monsterPosition)
     {
-        var newMonster = new Monster(define.imagePath + 'monster.png',this, {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
+        var newMonster = new Monster(define.materialPath + 'monster_3.png',this, {down: {from: 0, to: 3}, left: {from:4, to: 7}, right: {from: 8, to: 11}, up: {from: 12, to: 15}});
         newMonster.position = monsterPosition;
         this.monster.push(newMonster);
     }
@@ -222,6 +222,8 @@ var Map = function(map, item_map)
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
                 if(this.keyPress == "Down") {
+                    // console.log("this.playerPositionOnMap");
+                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
                     this.addition.x += 0;
@@ -229,6 +231,8 @@ var Map = function(map, item_map)
                 }
         
                 if(this.keyPress == "Left") {
+                    // console.log("this.playerPositionOnMap");
+                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:-1,y:0});
                     this.playerPositionOnMap.x-=1;
                     this.addition.x += -1;
@@ -236,6 +240,8 @@ var Map = function(map, item_map)
                 }
         
                 if(this.keyPress == "Right") {
+                    // console.log("this.playerPositionOnMap");
+                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:1,y:0});
                     this.playerPositionOnMap.x+=1;
                     this.addition.x += 1;
@@ -243,6 +249,8 @@ var Map = function(map, item_map)
                 }
         
                 if(this.keyPress == "Up") {
+                    // console.log("this.playerPositionOnMap");
+                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
                     this.addition.x += 0;
@@ -274,6 +282,7 @@ var Map = function(map, item_map)
     this.generation_time;
 
 	this.draw = function(ctx) {
+        // console.log("draw")
         // this.boxArray = [];
         // this.bombArray = [];
         // this.exploreArray = [];
@@ -332,8 +341,34 @@ var Map = function(map, item_map)
         this.characterStatus.draw(ctx);
         this.synthesisBar.draw(ctx);
         this.player1.draw(ctx);
+        for(var i=0;i<this.monster.length;i++){
+            if(this.isCanvasCanDraw(this.monster[i].mapPosition.x,this.monster[i].mapPosition.y)){
+                this.CanvasCanDraw(this.monster[i], ctx);
+            }
+        }
 	}	
-
+    this.isCanvasCanDraw = function(x_plot, y_plot){
+        //玩家在畫布上的座標
+        console.log("this.player1.position");
+        console.log(this.player1.position);
+        //恐龍在遊戲中的座標
+        console.log("x_plot");
+        console.log(x_plot);
+        console.log("y_plot");
+        console.log(y_plot);
+        //玩家在遊戲中的座標
+        console.log("this.playerPositionOnMap");
+        console.log(this.playerPositionOnMap);
+        if(Math.abs(x_plot-this.playerPositionOnMap.x)<=5 && Math.abs(y_plot-this.playerPositionOnMap.y)<=5){
+            return true;
+        }
+        return false;
+    }
+    this.CanvasCanDraw = function(monster, ctx){
+        monster.canvas_Position.x = this.player1.position.x + monster.mapPosition.x-this.playerPositionOnMap.x;
+        monster.canvas_Position.y = this.player1.position.y + monster.mapPosition.y-this.playerPositionOnMap.y;
+        monster.draw(ctx);
+    }
     var m_map = this;
     this.bombExploredHandler = function(exploredArray, bomb){
         var index = m_map.bombArray.indexOf(bomb);
@@ -514,7 +549,6 @@ var Map = function(map, item_map)
 
     this.keyup = function(e, list){
         if(e.key === 'Down' || e.key === 'Up' || e.key === 'Left' || e.key === 'Right') {
-
             if(this.keyPress == e.key)
             {
                 this.player1.walkEnd();

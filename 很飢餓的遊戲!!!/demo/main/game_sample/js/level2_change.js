@@ -170,7 +170,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         // this.map.addMonster({x:9, y:4});
         // this.map.addMonster({x:13, y:7});
         // this.map.addMonster({x:17, y:9});
-        // this.map.addMonster({x:15, y:1});
+        this.map.addMonster({x:9, y:5});
     },
 
     update: function() {     
