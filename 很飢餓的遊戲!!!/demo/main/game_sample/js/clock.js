@@ -17,7 +17,6 @@ var Clock = function() {
     this.init = function(){
         this.decrease();
     }
-
     this.decrease = function(){
         console.log("decrease");
         setTimeout(()=>{

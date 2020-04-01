@@ -97,11 +97,7 @@ var Map = function(map, item_map)
         this.clock = new Clock();
         this.clock.scale = 2;
 
-        // this.clock = [];
-        // for(i=0;i<3;i++){
-        //     var clock_child = new Framework.Sprite(define.materialPath + 'clock' + i + '.png'); 
-        //     this.clock.push(clock_child);
-        // }
+      
         this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
         this.item_waikei_homework.scale = 2;
         
@@ -317,8 +313,10 @@ var Map = function(map, item_map)
         {
             for(var i=0;i<this.monster.length;i++)
             {
+                // console.log("this.characterStatus.hungry_point");
+                // console.log(this.characterStatus.hungry_point);
                 this.monster[i].update();
-                if(this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y)
+                if(this.characterStatus.hungry_point || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
                 {
                     this.player1.die();
                     break;
