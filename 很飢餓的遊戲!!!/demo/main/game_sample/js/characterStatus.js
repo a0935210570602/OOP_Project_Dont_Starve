@@ -49,8 +49,6 @@ var CharacterStatus = function() {
     }
 
     this.draw = function(ctx){
-        // console.log("status draw");
-
         ctx.beginPath();
         ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64);
         ctx.fillStyle = "orange";
