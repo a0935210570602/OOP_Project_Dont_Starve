@@ -7,27 +7,65 @@ var Map = function(map, item_map)
 
         this.score = new Score();
         this.score.position = {x:1000,y:0};
-        this.terrain_plain = new Framework.Sprite(define.imagePath + 'terrain_plain.png');
-        this.terrain_plain.scale = 2;
+
+        this.terrain_plain = [];
+        this.terrain_plain.push(new Framework.Sprite(define.imageMorningPath + 'terrain_plain.png')); 
+        this.terrain_plain[0].scale = 2;
+        this.terrain_plain.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_plain.png')); 
+        this.terrain_plain[1].scale = 2;
+        this.terrain_plain.push(new Framework.Sprite(define.imageNightPath + 'terrain_plain.png')); 
+        this.terrain_plain[2].scale = 2;
+
+        this.terrain_water = [];
+        this.terrain_water.push(new Framework.Sprite(define.imageMorningPath + 'terrain_water.png')); 
+        this.terrain_water[0].scale = 2;
+        this.terrain_water.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_water.png')); 
+        this.terrain_water[1].scale = 2;
+        this.terrain_water.push(new Framework.Sprite(define.imageNightPath + 'terrain_water.png')); 
+        this.terrain_water[2].scale = 2;
+
+        this.terrain_mountain = [];
+        this.terrain_mountain.push(new Framework.Sprite(define.imageMorningPath + 'terrain_mountain.png')); 
+        this.terrain_mountain[0].scale = 2;
+        this.terrain_mountain.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_mountain.png')); 
+        this.terrain_mountain[1].scale = 2;
+        this.terrain_mountain.push(new Framework.Sprite(define.imageNightPath + 'terrain_mountain.png')); 
+        this.terrain_mountain[2].scale = 2;
+
+        this.terrain_blood_water = [];
+        this.terrain_blood_water.push(new Framework.Sprite(define.imageMorningPath + 'terrain_blood_water.png')); 
+        this.terrain_blood_water[0].scale = 2;
+        this.terrain_blood_water.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_blood_water.png')); 
+        this.terrain_blood_water[1].scale = 2;
+        this.terrain_blood_water.push(new Framework.Sprite(define.imageNightPath + 'terrain_blood_water.png')); 
+        this.terrain_blood_water[2].scale = 2;
     
-        this.terrain_water = new Framework.Sprite(define.imagePath + 'terrain_water.png');
-        this.terrain_water.scale = 2;
+        this.terrain_forest = [];
+        this.terrain_forest.push(new Framework.Sprite(define.imageMorningPath + 'terrain_forest.png')); 
+        this.terrain_forest[0].scale = 2;
+        this.terrain_forest.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_forest.png')); 
+        this.terrain_forest[1].scale = 2;
+        this.terrain_forest.push(new Framework.Sprite(define.imageNightPath + 'terrain_forest.png')); 
+        this.terrain_forest[2].scale = 2;
     
-        this.terrain_mountain = new Framework.Sprite(define.imagePath + 'terrain_mountain.png');
-        this.terrain_mountain.scale = 2;
-    
-        this.terrain_blood_water = new Framework.Sprite(define.imagePath + 'terrain_blood_water.png');
-        this.terrain_blood_water.scale = 2;
-    
-        this.terrain_forest = new Framework.Sprite(define.imagePath + 'terrain_forest.png');
-        this.terrain_forest.scale = 2;
-    
-        this.terrain_lava = new Framework.Sprite(define.imagePath + 'terrain_lava.png');
-        this.terrain_lava.scale = 2;
-    
-        this.terrain_snow_ground = new Framework.Sprite(define.imagePath + 'terrain_snow_ground.png');
-        this.terrain_snow_ground.scale = 2;
-    
+        this.terrain_lava = [];
+        this.terrain_lava.push(new Framework.Sprite(define.imageMorningPath + 'terrain_lava.png')); 
+        this.terrain_lava[0].scale = 2;
+        this.terrain_lava.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_lava.png')); 
+        this.terrain_lava[1].scale = 2;
+        this.terrain_lava.push(new Framework.Sprite(define.imageNightPath + 'terrain_lava.png')); 
+        this.terrain_lava[2].scale = 2;
+
+        this.terrain_snow_ground = [];
+        this.terrain_snow_ground.push(new Framework.Sprite(define.imageMorningPath + 'terrain_snow_ground.png')); 
+        this.terrain_snow_ground[0].scale = 2;
+        this.terrain_snow_ground.push(new Framework.Sprite(define.imageAfternoonPath + 'terrain_snow_ground.png')); 
+        this.terrain_snow_ground[1].scale = 2;
+        this.terrain_snow_ground.push(new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png')); 
+        this.terrain_snow_ground[2].scale = 2;
+
+        /////////////////////////////////////////////////////////////////////////////////////
+        
         this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
         this.mapFloor.scale = 2;
 
@@ -55,7 +93,15 @@ var Map = function(map, item_map)
         
         this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
         this.item_stone.scale = 2;
-        
+
+        this.clock = new Clock();
+        this.clock.scale = 2;
+
+        // this.clock = [];
+        // for(i=0;i<3;i++){
+        //     var clock_child = new Framework.Sprite(define.materialPath + 'clock' + i + '.png'); 
+        //     this.clock.push(clock_child);
+        // }
         this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
         this.item_waikei_homework.scale = 2;
         
@@ -81,6 +127,7 @@ var Map = function(map, item_map)
 
     this.init = function()
     {
+        this.clock.init();
         this.characterStatus.init();
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
@@ -140,41 +187,41 @@ var Map = function(map, item_map)
             this.itemMap.push(this.itemArray);
         }
 
-        for(var i=0; i<this.mapArray.length; i++){
-            var line = this.mapArray[i];
-            this.tileArray = [];
-            for(var j=0; j<this.mapArray[i].length; j++){
-                var tile = new MapTile();
-                tile.tileType = 0;
-                switch(line[j]){
-                    case 192:
-                        tile.tileType = -4;
-                        break;
-                    case 200:
-                        tile.tileType = -5;
-                        break;
-                    case 137:
-                        tile.tileType = -6;
-                        break;
-                    case 91:
-                        tile.tileType = -7;
-                        break;
-                    case 123:
-                        tile.tileType = -8;
-                        break;
-                    case 196:      
-                        tile.tileType = -9;
-                        break;
-                    case 255:      
-                        tile.tileType = -10;
-                        break;
-                    default:
-                        break;    
-                }
-                this.tileArray.push(tile);
-            }
-            this.tileMap.push(this.tileArray);
-        }
+        // for(var i=0; i<this.mapArray.length; i++){
+        //     var line = this.mapArray[i];
+        //     this.tileArray = [];
+        //     for(var j=0; j<this.mapArray[i].length; j++){
+        //         var tile = new MapTile(2);
+        //         tile.tileType = 0;
+        //         switch(line[j]){
+        //             case 192:
+        //                 tile.tileType = -4;
+        //                 break;
+        //             case 200:
+        //                 tile.tileType = -5;
+        //                 break;
+        //             case 137:
+        //                 tile.tileType = -6;
+        //                 break;
+        //             case 91:
+        //                 tile.tileType = -7;
+        //                 break;
+        //             case 123:
+        //                 tile.tileType = -8;
+        //                 break;
+        //             case 196:      
+        //                 tile.tileType = -9;
+        //                 break;
+        //             case 255:      
+        //                 tile.tileType = -10;
+        //                 break;
+        //             default:
+        //                 break;    
+        //         }
+        //         this.tileArray.push(tile);
+        //     }
+        //     this.tileMap.push(this.tileArray);
+        // }
 	};
 
     this.setPlayerPosition = function(playerPosition){
@@ -281,49 +328,36 @@ var Map = function(map, item_map)
     this.generation_time;
 
 	this.draw = function(ctx) {
-        // console.log("draw")
-        // this.boxArray = [];
-        // this.bombArray = [];
-        // this.exploreArray = [];
-        // this.tileArray = [];
-
-        // for(var i=0; i<11; i++){
-        //     for(var j=0; j<11; j++){
-        //         this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
-        //         this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
-        //     }
-        // }
-
         for(var i=0; i<11; i++){
             for(var j=0; j<11; j++){
                 switch(this.mapArray[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]){
                     case 192:
-                        this.terrain_plain.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_plain.draw(ctx);
+                        this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_plain[this.clock.status].draw(ctx);
                         break;
                     case 200:
-                        this.terrain_water.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_water.draw(ctx);
+                        this.terrain_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_water[this.clock.status].draw(ctx);
                         break;
                     case 137:
-                        this.terrain_mountain.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_mountain.draw(ctx);
+                        this.terrain_mountain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_mountain[this.clock.status].draw(ctx);
                         break;
                     case 91:
-                        this.terrain_blood_water.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_blood_water.draw(ctx);
+                        this.terrain_blood_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_blood_water[this.clock.status].draw(ctx);
                         break;
                     case 123:
-                        this.terrain_forest.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_forest.draw(ctx);
+                        this.terrain_forest[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_forest[this.clock.status].draw(ctx);
                         break;
                     case 196:     
-                        this.terrain_lava.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_lava.draw(ctx);
+                        this.terrain_lava[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_lava[this.clock.status].draw(ctx);
                         break;
                     case 255:      
-                        this.terrain_snow_ground.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_snow_ground.draw(ctx);
+                        this.terrain_snow_ground[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                        this.terrain_snow_ground[this.clock.status].draw(ctx);
                         break;
                 }
             }
@@ -344,19 +378,23 @@ var Map = function(map, item_map)
                 this.CanvasCanDraw(this.monster[i], ctx);
             }
         }
+        // for(i=0;i<3;i++){
+        //     this.clock[i].draw(ctx);
+        // }
+        this.clock.draw(ctx);
 	}	
     this.isCanvasCanDraw = function(x_plot, y_plot){
         //玩家在畫布上的座標
-        console.log("this.player1.position");
-        console.log(this.player1.position);
+        // console.log("this.player1.position");
+        // console.log(this.player1.position);
         //恐龍在遊戲中的座標
-        console.log("x_plot");
-        console.log(x_plot);
-        console.log("y_plot");
-        console.log(y_plot);
+        // console.log("x_plot");
+        // console.log(x_plot);
+        // console.log("y_plot");
+        // console.log(y_plot);
         //玩家在遊戲中的座標
-        console.log("this.playerPositionOnMap");
-        console.log(this.playerPositionOnMap);
+        // console.log("this.playerPositionOnMap");
+        // console.log(this.playerPositionOnMap);
         if(Math.abs(x_plot-this.playerPositionOnMap.x)<=5 && Math.abs(y_plot-this.playerPositionOnMap.y)<=5){
             return true;
         }

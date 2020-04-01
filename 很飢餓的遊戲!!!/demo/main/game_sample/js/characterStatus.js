@@ -1,11 +1,11 @@
 var CharacterStatus = function() {
     this.heart = new Framework.Sprite(define.materialPath + 'heart.png'); 
-    this.heart.position = {x: 21*64, y: 4*64};
+    this.heart.position = {x: 21*64, y: 5*64};
     this.heart.scale = 2;
     
     this.hungry = new Framework.Sprite(define.materialPath + 'hungry.png'); 
     this.hungry.scale = 2;
-    this.hungry.position = {x: 23*64, y: 4*64};
+    this.hungry.position = {x: 23*64, y: 5*64};
 
     this.totalHealth = 200;
     this.currentHealth = 200;
@@ -49,7 +49,7 @@ var CharacterStatus = function() {
     }
 
     this.draw = function(ctx){
-        console.log("status draw");
+        // console.log("status draw");
 
         ctx.beginPath();
         ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64);

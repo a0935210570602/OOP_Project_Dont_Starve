@@ -119,8 +119,8 @@ var Monster = function(file, map, options) {
 
 
     this.draw = function(ctx){
-        console.log("spritePosition");
-        console.log(this.spritePosition);
+        // console.log("spritePosition");
+        // console.log(this.spritePosition);
         if(this.isdead){ return; }
         this.sprite.position = {x: this.canvas_Position.x*64, y: this.canvas_Position.y*64};
         this.sprite.draw(ctx);
