@@ -12,52 +12,30 @@ var Clock = function() {
     this.status = 0;
     this.isRegenerate = true;
     this.currentTime = 192;
-    this.regeneration_time = 300;
+    this.regeneration_time = 200;
 
-    var time_status = this;
     this.init = function(){
         this.decrease();
     }
 
     this.decrease = function(){
-        var timeInterval = setInterval(()=>{
+        console.log("decrease");
+        setTimeout(()=>{
             this.currentTime -= 1;
-            if(this.currentTime == 0)
+            if(this.currentTime <= 0)
             {
-                this.currentTime = 200;
+                this.currentTime = 192;
                 this.status ++;
                 if(this.status >=3){
                     this.status = 0;
                 }
-                this.decrease();
+                //this.decrease();
             }
+            this.decrease();
         }, this.regeneration_time);
     }
 
-    // this.setTime = function(){
-    //     setTimeout(()=>{  
-    //         this.status ++;
-    //         if(this.status>=3)
-    //         this.status = 0;
-    //         this.setTime();
-    //     }, this.regeneration_time);
-    // }    
-        // var setTime_Interval = setTimeout(()=>{
-        //     this.currentTime = this.currentTime - 5;
-        //     time_status.draw(Framework.Game._context);
-        //     if(this.status>=3)
-        //         this.status = 0;
-        //     this.setTime();
-        // }, this.regeneration_time);
-        // if(this.status>=3)
-        //     this.status = 0;
-        // this.setTime();
-
-    
-
     this.update = function(){
-        this.status = false;
-        setTimeout(()=>{  this.status = true}, this.regeneration_time);
     }
 
     this.draw = function(ctx){
@@ -71,11 +49,6 @@ var Clock = function() {
         ctx.fillStyle = "black";
         ctx.fill();
 
-        
-        // ctx.beginPath();
-        // ctx.rect(this.clock[this.status].position.x-32, this.clock[this.status].position.y-32, 64, 64*(1-this.currentHealth/this.totalHealth));
-        // ctx.fillStyle = "black";
-        // ctx.fill();
         this.timelevel.draw(ctx);
         this.clock[this.status].draw(ctx);
     }
