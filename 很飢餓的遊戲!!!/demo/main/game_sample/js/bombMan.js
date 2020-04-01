@@ -62,23 +62,6 @@ var BombMan = function(file, options) {
 
     this.walkEnd = function(){    }
 
-    // var walkSpeed = 8;
-    // this.walkAlittle = function(){
-    //     //console.log("player walk a little " + walkSpeed);
-    //     if(this.playerDirection === this.constants.DirectionEnum.DOWN){
-    //         this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + walkSpeed};
-    //     }
-    //     else if(this.playerDirection === this.constants.DirectionEnum.LEFT){
-    //         this.spritePosition = {x:this.spritePosition.x - walkSpeed, y:this.spritePosition.y};
-    //     }
-    //     else if(this.playerDirection === this.constants.DirectionEnum.RIGHT){
-    //         this.spritePosition = {x:this.spritePosition.x + walkSpeed, y:this.spritePosition.y};
-    //     }
-    //     else if(this.playerDirection === this.constants.DirectionEnum.UP){
-    //         this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - walkSpeed};
-    //     }
-    // }
-
     this.update = function(){
         if(this.isWalking){
             this.isWalking = false;
@@ -93,7 +76,9 @@ var BombMan = function(file, options) {
 
     this.draw = function(ctx){
         // console.log("this.sprite.position");
-        // console.log(this.sprite.position);
+        // console.log(this.spritePosition);
+        // console.log("this.mapPosition");
+        // console.log(this.mapPosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.sprite.update();
         this.sprite.draw(ctx);

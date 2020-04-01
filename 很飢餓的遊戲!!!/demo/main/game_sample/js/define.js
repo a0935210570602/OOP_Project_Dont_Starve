@@ -22,7 +22,7 @@
 			writable: true
 		},
 		'welcomimgPath': {
-			value: mainPath + 'welcoming_page/',
+			value: mainPath + 'welcoming_page_pixel/',
 			writable: true
 		}
 
