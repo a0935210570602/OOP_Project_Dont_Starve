@@ -24,6 +24,18 @@
 		'welcomimgPath': {
 			value: mainPath + 'welcoming_page_pixel/',
 			writable: true
+		},
+		'imageMorningPath': {
+			value: mainPath + 'image_morning/',
+			writable: true
+		},
+		'imageAfternoonPath': {
+			value: mainPath + 'image_afternoon/',
+			writable: true
+		},
+		'imageNightPath': {
+			value: mainPath + 'image_night/',
+			writable: true
 		}
 
 	});
