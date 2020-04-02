@@ -76,6 +76,27 @@ var Map = function(map, item_map)
         this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png');
         this.item_branch.scale = 2;
 
+        this.item_droplet = new Framework.Sprite(define.materialPath + 'item_droplet.png');
+        this.item_droplet.scale = 2;
+
+        this.item_pixilart = new Framework.Sprite(define.materialPath + 'item_pixilart.png');
+        this.item_pixilart.scale = 2;
+
+        this.item_gold_pixilart = new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png');
+        this.item_gold_pixilart.scale = 2;
+
+        this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
+        this.item_gold.scale = 2;
+
+        this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png');
+        this.item_camp.scale = 2;
+
+        this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
+        this.item_wood.scale = 2;
+
+        this.item_firebundle = new Framework.Sprite(define.materialPath + 'item_firebundle.png');
+        this.item_firebundle.scale = 1.5;
+
         this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
         this.item_spider_web.scale = 2;
 
@@ -176,6 +197,27 @@ var Map = function(map, item_map)
                         break;
                     case 6:      
                         this.itemArray.push(new Item_grass());
+                        break;
+                    case 7:      
+                        this.itemArray.push(new Item_wood());
+                        break;
+                    case 9:      
+                        this.itemArray.push(new Item_gold());
+                        break;
+                    case 14:
+                        this.itemArray.push(new Item_droplet());
+                        break;
+                    case 15:
+                        this.itemArray.push(new Item_pixilart());
+                        break;
+                    case 21:
+                        this.itemArray.push(new Item_gold_pixilart());
+                        break;
+                    case 32:
+                        this.itemArray.push(new Item_firebundle());
+                        break;
+                    case 33:
+                        this.itemArray.push(new Item_camp());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());
