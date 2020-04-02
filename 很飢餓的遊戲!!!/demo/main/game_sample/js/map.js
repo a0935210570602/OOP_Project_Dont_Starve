@@ -85,11 +85,23 @@ var Map = function(map, item_map)
         this.item_gold_pixilart = new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png');
         this.item_gold_pixilart.scale = 2;
 
+        this.item_space_wand = new Framework.Sprite(define.materialPath + 'item_space_wand.png');
+        this.item_space_wand.scale = 2;
+        
+        this.item_fire_wand = new Framework.Sprite(define.materialPath + 'item_fire_wand.png');
+        this.item_fire_wand.scale = 2;
+
+        this.item_ice_wand = new Framework.Sprite(define.materialPath + 'item_ice_wand.png');
+        this.item_ice_wand.scale = 2;
+
         this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
         this.item_gold.scale = 2;
 
         this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png');
         this.item_camp.scale = 2;
+
+        this.item_campfire = new Framework.Sprite(define.materialPath + 'item_campfire.png');
+        this.item_campfire.scale = 2;
 
         this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
         this.item_wood.scale = 2;
@@ -213,11 +225,26 @@ var Map = function(map, item_map)
                     case 21:
                         this.itemArray.push(new Item_gold_pixilart());
                         break;
+                    case 28:
+                        this.itemArray.push(new Item_space_wand());
+                        break;
+                    case 28:
+                        this.itemArray.push(new Item_space_wand());
+                        break;
+                    case 29:
+                        this.itemArray.push(new Item_fire_wand());
+                        break;
+                    case 30:
+                        this.itemArray.push(new Item_ice_wand());
+                        break;
                     case 32:
                         this.itemArray.push(new Item_firebundle());
                         break;
                     case 33:
                         this.itemArray.push(new Item_camp());
+                        break;
+                    case 34:
+                        this.itemArray.push(new Item_campfire());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());

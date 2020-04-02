@@ -66,7 +66,11 @@ var loadGameEnd;
         { src: 'game_sample/js/item_pixilart.js', lookFor: 'Item_pixilart' },
         { src: 'game_sample/js/item_gold_pixilart.js', lookFor: 'Item_gold_pixilart' },
         { src: 'game_sample/js/item_gold.js', lookFor: 'Item_gold' },
+        { src: 'game_sample/js/item_space_wand.js', lookFor: 'Item_space_wand' },
+        { src: 'game_sample/js/item_ice_wand.js', lookFor: 'Item_ice_wand' },
+        { src: 'game_sample/js/item_fire_wand.js', lookFor: 'Item_fire_wand' },
         { src: 'game_sample/js/item_wood.js', lookFor: 'Item_wood' },
+        { src: 'game_sample/js/item_campfire.js', lookFor: 'Item_campfire' },
         { src: 'game_sample/js/item_camp.js', lookFor: 'Item_camp' },
         { src: 'game_sample/js/item_firebundle.js', lookFor: 'Item_firebundle' },
 
