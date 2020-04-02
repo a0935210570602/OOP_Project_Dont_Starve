@@ -12,7 +12,6 @@ var CharacterStatus = function() {
 
     this.totalHunger = 150;
     this.currentHunger = 150;
-    this.hungry_point = 0;
 
     var character_status = this;
 
@@ -40,7 +39,6 @@ var CharacterStatus = function() {
                 clearInterval(healthInterval);
                 this.decreaseHunger();
             }else if(this.currentHealth == 0){
-                this.hungry_point = 1;
                 clearInterval(healthInterval);
             }
         }, 500);

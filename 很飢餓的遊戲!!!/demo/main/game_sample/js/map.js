@@ -1,5 +1,6 @@
 var Map = function(map, item_map)
 {
+    this.demo_dead_trigger = 0;
     this.mapArray = map;
     this.item_map_Array = item_map;
     this.addition = {x: 0, y: 0};
@@ -316,7 +317,7 @@ var Map = function(map, item_map)
                 // console.log("this.characterStatus.hungry_point");
                 // console.log(this.characterStatus.hungry_point);
                 this.monster[i].update();
-                if(this.characterStatus.hungry_point || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
+                if((this.demo_dead_trigger == 1 && this.characterStatus.currentHealth == 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
                 {
                     this.player1.die();
                     break;
@@ -489,6 +490,11 @@ var Map = function(map, item_map)
     this.keyPress = "";
     this.keydown = function(e, list){
         var playerPosition = this.player1.position;
+
+        if(e.key === 'F') {
+            this.demo_dead_trigger = 1;
+        }
+
         if(e.key === 'Down') {
             this.player1.walk({x:0,y:1});
             this.playerWalkDirection = {x:0,y:1};
