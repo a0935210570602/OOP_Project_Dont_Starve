@@ -19,10 +19,10 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
 
     load: function() {
         this.menu = new Framework.Sprite(define.imagePath + 'Title.png');
-        this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game.png');
-        this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game.png');
-        this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game.png');
-        this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game.png');
+        this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_untouch.png');
+        this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_untouch.png');
+        this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game_untouch.png');
+        this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game_untouch.png');
 
     },
 
@@ -112,9 +112,50 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         if(e.x<1300 && e.x>1058 && e.y<798 && e.y>699)
             Framework.Game.goToLevel('menu_gameteam');  
 
-    },
+            
+        },
+    mousemove: function(e) {        
+        console.log(e);     
+        if(e.x >= 1060 && e.x<=1296 && e.y<=466 && e.y>=369){
+            this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
+        }else{
+            this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_untouch.png');
+        }  
+        if(e.x >= 1060 && e.x<=1296 && e.y<=687 && e.y>=590){
+            this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game_touch.png');
+        }else{
+            this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game_untouch.png');
+        }
+        if(e.x >= 1060 && e.x<=1296 && e.y<=799 && e.y>=700){
+            this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game_touch.png');
+        }else{
+            this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game_untouch.png');
+        } 
+        if(e.x >= 1060 && e.x<=1296 && e.y<=578 && e.y>=479){
+            this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_touch.png');
+        }else{
+            this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_untouch.png');
+        } 
+        this.botton_start.position = {
+            x: 1050,
+            y: 350
+        };
 
-    mousemove: function(e) {               
+        this.botton_tutorial.position = {
+            x: 1050,
+            y: 460
+        };
+
+        this.botton_team.position = {
+            x: 1050,
+            y: 680
+        };
+
+        this.botton_quit.position = {
+            x: 1050,
+            y: 570
+        };
+        this.draw(Framework.Game._context);
     },
 
     mouseup: function(e) {
