@@ -14,6 +14,25 @@ var Level2_change = Framework.Class(Framework.Level , {
         ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
     },
     load: function() {
+
+        this.audio = new Framework.Audio({
+            kick: {
+                mp3: define.musicPath + 'kick2.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, song1:{
+                mp3: define.musicPath + '遊戲王經典配樂.mp3.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, song2:{
+                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }
+        });
+        //播放時, 需要給name, 其餘參數可參考W3C
+        this.audio.play({name: 'song2', loop: true});
+
         //0 空地  1牆壁  2空木箱  3增加炸彈木箱  4增加威力木箱  -1增加炸彈數  -2增加炸彈power
         //91 異世界洪水  192平原 123森林 137山區 255雪地 196岩漿 200池塘
         this.mapArray = [];
@@ -70,8 +89,8 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.item_map_Array = [];
         //for demo
         //8:燧石 10:豬皮
-        //11:蜂刺 12:雪球 13:繩索 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
-        //22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖
+        //11:蜂刺 12:雪球 17:釣魚竿 18:鏟子 20:黃金鏟子 
+        //22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 
         //31:黃金提燈 35:繩索 36:冰塊 37:漿果叢
 
         //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
@@ -88,7 +107,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,14,9,9,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0]); //2
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,32,34,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //3
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,33,28,29,30,0,2,2,2,2,2,2,2,2,0,0,0,0,0,0]); //4
-        this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //5
+        this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,16,19,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //5
         this.item_map_Array.push([0,0,0,0,0,0,0,0,6,6,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3,0,0,0,0,0,0]); //6
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //7
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,0,0,0,0,0,0]); //8

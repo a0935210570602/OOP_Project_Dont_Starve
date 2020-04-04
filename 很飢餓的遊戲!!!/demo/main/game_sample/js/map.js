@@ -91,11 +91,23 @@ var Map = function(map, item_map)
         this.item_fire_wand = new Framework.Sprite(define.materialPath + 'item_fire_wand.png');
         this.item_fire_wand.scale = 2;
 
+        this.item_king_wand = new Framework.Sprite(define.materialPath + 'item_king_wand.png');
+        this.item_king_wand.scale = 2;
+
         this.item_ice_wand = new Framework.Sprite(define.materialPath + 'item_ice_wand.png');
         this.item_ice_wand.scale = 2;
 
         this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
         this.item_gold.scale = 2;
+
+        this.item_ax = new Framework.Sprite(define.materialPath + 'item_ax.png');
+        this.item_ax.scale = 2;
+
+        this.item_gold_ax = new Framework.Sprite(define.materialPath + 'item_gold_ax.png');
+        this.item_gold_ax.scale = 2;
+
+        this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png');
+        this.item_rope.scale = 2;
 
         this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png');
         this.item_camp.scale = 2;
@@ -216,17 +228,26 @@ var Map = function(map, item_map)
                     case 9:      
                         this.itemArray.push(new Item_gold());
                         break;
+                    case 13:
+                        this.itemArray.push(new Item_rope());
+                        break;
                     case 14:
                         this.itemArray.push(new Item_droplet());
                         break;
                     case 15:
                         this.itemArray.push(new Item_pixilart());
                         break;
+                    case 16:
+                        this.itemArray.push(new Item_ax());
+                        break;
+                    case 19:
+                        this.itemArray.push(new Item_gold_ax());
+                        break;
                     case 21:
                         this.itemArray.push(new Item_gold_pixilart());
                         break;
-                    case 28:
-                        this.itemArray.push(new Item_space_wand());
+                    case 27:
+                        this.itemArray.push(new Item_king_wand());
                         break;
                     case 28:
                         this.itemArray.push(new Item_space_wand());

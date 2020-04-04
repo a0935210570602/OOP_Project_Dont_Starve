@@ -23,6 +23,23 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_untouch.png');
         this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game_untouch.png');
         this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game_untouch.png');
+        
+        // this.audio = new Framework.Audio({
+        //     kick: {
+        //         mp3: define.musicPath + 'kick2.mp3',
+        //         //ogg: define.musicPath + 'kick2.ogg',
+        //         //wav: define.musicPath + 'kick2.wav'
+        //     }, song1:{
+        //         mp3: define.musicPath + '遊戲王經典配樂.mp3',
+        //         //ogg: define.musicPath + 'Hot_Heat.ogg',
+        //         //wav: define.musicPath + 'Hot_Heat.wav'
+        //     }, song2:{
+        //         mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+        //         //ogg: define.musicPath + 'Hot_Heat.ogg',
+        //         //wav: define.musicPath + 'Hot_Heat.wav'
+        //     }
+        // });
+        //播放時, 需要給name, 其餘參數可參考W3C
 
     },
 
@@ -70,6 +87,8 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         };
         this.botton_team.scale = 1;
         this.rootScene.attach(this.botton_team);
+        
+
         // this.botton_rootScene.attach(this.botton_start);
     },
 
@@ -77,7 +96,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         //this.rootScene.update();一定要在第一行
         this.rootScene.update(); 
         // this.botton_rootScene.update(); 
-
+        
         //目前的Framework, 當任何一個GameObject不做attach時, 則必須要自行update
     },
 
@@ -101,18 +120,16 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
     },
 
     click:function(e){      
-        // Framework.Game.goToNextLevel();
-        // console.log(e);
-        if(e.x<1300 && e.x>1058 && e.y<465 && e.y>365)
+
+        if(e.x<1300 && e.x>1058 && e.y<465 && e.y>365){
             Framework.Game.goToLevel('level1');  
+        }
         if(e.x<1300 && e.x>1058 && e.y<577 && e.y>480)
             Framework.Game.goToLevel('menu_tutorial');  
         if(e.x<1300 && e.x>1058 && e.y<686 && e.y>588)
             window.close();   
         if(e.x<1300 && e.x>1058 && e.y<798 && e.y>699)
             Framework.Game.goToLevel('menu_gameteam');  
-
-            
         },
     mousemove: function(e) {        
         console.log(e);     
