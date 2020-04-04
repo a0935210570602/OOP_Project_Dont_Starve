@@ -67,11 +67,11 @@ var Map = function(map, item_map)
 
         /////////////////////////////////////////////////////////////////////////////////////
         
-        this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
-        this.mapFloor.scale = 2;
+        // this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
+        // this.mapFloor.scale = 2;
 
-        this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
-        this.mapWall.scale = 2;
+        // this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
+        // this.mapWall.scale = 2;
 
         this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png');
         this.item_branch.scale = 2;

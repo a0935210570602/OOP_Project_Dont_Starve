@@ -132,7 +132,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
             Framework.Game.goToLevel('menu_gameteam');  
         },
     mousemove: function(e) {        
-        console.log(e);     
+        // console.log(e);     
         if(e.x >= 1060 && e.x<=1296 && e.y<=466 && e.y>=369){
             this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
         }else{
