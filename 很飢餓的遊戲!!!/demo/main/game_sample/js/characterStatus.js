@@ -8,10 +8,10 @@ var CharacterStatus = function() {
     this.hungry.position = {x: 23*64, y: 5*64};
 
     this.totalHealth = 200;
-    this.currentHealth = 200;
+    this.currentHealth = 0;
 
     this.totalHunger = 150;
-    this.currentHunger = 150;
+    this.currentHunger = 5;
 
     var character_status = this;
 

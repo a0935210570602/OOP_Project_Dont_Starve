@@ -495,8 +495,6 @@ var Map = function(map, item_map)
         {
             for(var i=0;i<this.monster.length;i++)
             {
-                // console.log("this.characterStatus.hungry_point");
-                // console.log(this.characterStatus.hungry_point);
                 this.monster[i].update();
                 if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
                 {
