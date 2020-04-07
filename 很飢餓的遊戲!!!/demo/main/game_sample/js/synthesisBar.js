@@ -73,7 +73,7 @@ var SynthesisBar = function(backpackList) {
 
     this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
     this.item_waikei_homework.scale = 2;
-    this.getBackpack;
+    // this.getBackpack;
 
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
@@ -198,16 +198,19 @@ var SynthesisBar = function(backpackList) {
         }
 
         //第三層工具列
-        if(this.secondColumnIndex != -1){
+        if(this.firstColumnIndex != -1 && this.secondColumnIndex != -1){
             for(var i = 0;i < this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length; i++){
                 this.backpack.position = this.positionChange(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position);
                 this.backpack.draw(ctx);
                 ctx.font = "15px Arial";
                 ctx.fillStyle = "black";
-                var index = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].item-1;
+                // var index = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].item-1;
+                var check = backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                 if(i == this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1){
-                    if(this.checkIfMaterialEnough())
+                    if(check == 1)
                         ctx.fillText("合成",this.backpack.position.x, this.backpack.position.y);
+                    else if(check == -1)
+                        ctx.fillText("沒空間拉幹",this.backpack.position.x, this.backpack.position.y);
                     else
                         ctx.fillText("沒材料拉幹",this.backpack.position.x, this.backpack.position.y);
                 }else{
@@ -371,27 +374,11 @@ var SynthesisBar = function(backpackList) {
         if(this.firstColumeIndex != -1 && this.secondColumnIndex != -1){
             var position = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1].position;
             if(this.currentPoint.x == position.x && this.currentPoint.y == position.y){
-                if(this.checkIfMaterialEnough()){
+                if(backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item)){
                     backpackList.addItem(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                     backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
                 }
             }
         }
-    }
-
-    this.checkIfMaterialEnough = function(){
-        this.getBackpack = backpackList.getItemList();
-        var material = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex];
-        var check = false;
-        for(var i = 0;i < material.length-1;i++){
-            check = false;
-            for(var j = 0;j < this.getBackpack.length;j++){
-                if(this.getBackpack[j].item == material[i].item && this.getBackpack[j].amount >= material[i].amount)
-                    check = true;
-            }
-            if(!check)
-                return false;
-        }
-        return true;
     }
 };

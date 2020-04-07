@@ -85,6 +85,53 @@ var Backpack = function() {
         }
     }
 
+    this.checkIfPickAvailable = function(item_num){
+        if(this.itemList.length < 17)
+            return true;
+        else if(this.checkIfExist(item_num) != -1)
+            return true;
+        else 
+            return false;
+    }
+    //1:可合成 -1:材料夠沒空間 0:材料不夠
+    this.checkIfSynthesisAvailable = function(material, item_num){
+        if(this.checkIfMaterialEnough(material)){
+            if(this.itemList.length < 17)
+                return 1;
+            if(this.checkIfSpaceEnoughAfterSynthesis(material))
+                return 1;
+            else
+                return -1;
+        }else{
+            return 0;
+        }
+    }
+
+    this.checkIfSpaceEnoughAfterSynthesis = function(material){
+        var check = false;
+        for(var i = 0;i < material.length-1;i++){
+            for(var j = 0;j < this.itemList.length;j++){
+                if(this.itemList[j].item == material[i].item && this.itemList[j].amount == material[i].amount)
+                    check = true;
+            }
+        }
+        return check;
+    }
+
+    this.checkIfMaterialEnough = function(material){
+        var check = false;
+        for(var i = 0;i < material.length-1;i++){
+            check = false;
+            for(var j = 0;j < this.itemList.length;j++){
+                if(this.itemList[j].item == material[i].item && this.itemList[j].amount >= material[i].amount)
+                    check = true;
+            }
+            if(!check)
+                return false;
+        }
+        return true;
+    }
+
     this.checkIfExist = function(item_num){
         for(var i = 0;i < this.itemList.length; i++){
             if(this.itemList[i].item == item_num)

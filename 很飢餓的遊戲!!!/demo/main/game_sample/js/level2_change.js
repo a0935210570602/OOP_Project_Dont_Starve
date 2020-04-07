@@ -28,10 +28,14 @@ var Level2_change = Framework.Class(Framework.Level , {
                 mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
+            }, song3:{
+                mp3: define.musicPath + 'night.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
         //播放時, 需要給name, 其餘參數可參考W3C
-        this.audio.play({name: 'song2', loop: true});
+        // this.audio.play({name: 'song3', loop: true});
 
         //0 空地  1牆壁  2空木箱  3增加炸彈木箱  4增加威力木箱  -1增加炸彈數  -2增加炸彈power
         //91 異世界洪水  192平原 123森林 137山區 255雪地 196岩漿 200池塘

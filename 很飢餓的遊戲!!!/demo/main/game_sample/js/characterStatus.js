@@ -28,7 +28,7 @@ var CharacterStatus = function() {
                 clearInterval(hungerInterval);
                 this.decreaseHealth();
             }
-        }, 500);
+        }, 1500);
     }
 
     this.decreaseHealth = function(){
@@ -41,7 +41,7 @@ var CharacterStatus = function() {
             }else if(this.currentHealth == 0){
                 clearInterval(healthInterval);
             }
-        }, 500);
+        }, 1500);
     }
 
     this.update = function(){
