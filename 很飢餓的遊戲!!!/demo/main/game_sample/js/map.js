@@ -163,9 +163,9 @@ var Map = function(map, item_map)
         this.stopMonster = false;
         this.stopMonsterCounter =0;
 
-        this.backpack = new Backpack();
+        // this.backpack = new Backpack();
         this.characterStatus = new CharacterStatus();
-        this.synthesisBar = new SynthesisBar(this.backpack);
+        this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
     }
 
     this.init = function()
@@ -460,18 +460,18 @@ var Map = function(map, item_map)
             }
         }
 
-        this.backpack.draw(ctx);
-        this.characterStatus.draw(ctx);
-        this.synthesisBar.draw(ctx);
-        this.player1.draw(ctx);
         for(var i=0;i<this.monster.length;i++){
             if(this.isCanvasCanDraw(this.monster[i].mapPosition.x,this.monster[i].mapPosition.y)){
                 this.CanvasCanDraw(this.monster[i], ctx);
             }
         }
         // for(i=0;i<3;i++){
-        //     this.clock[i].draw(ctx);
-        // }
+            //     this.clock[i].draw(ctx);
+            // }
+        // this.backpack.draw(ctx);
+        this.characterStatus.draw(ctx);
+        this.synthesisBar.draw(ctx);
+        this.player1.draw(ctx);
         this.clock.draw(ctx);
 	}	
     this.isCanvasCanDraw = function(x_plot, y_plot){
@@ -627,8 +627,8 @@ var Map = function(map, item_map)
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
                 if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
                 {
-                    if(this.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
-                        this.backpack.addItem(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
+                    if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
+                        this.player1.backpack.addItem(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
                         if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate)
                             this.pickRegenerateObject();
                         else

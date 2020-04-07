@@ -84,6 +84,7 @@ var loadGameEnd;
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
+        { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },
         { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
         { src: 'game_sample/js/bomb.js', lookFor: 'Bomb' },
         { src: 'game_sample/js/box.js', lookFor: 'Box' },

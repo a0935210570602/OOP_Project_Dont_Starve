@@ -73,7 +73,6 @@ var SynthesisBar = function(backpackList) {
 
     this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
     this.item_waikei_homework.scale = 2;
-    // this.getBackpack;
 
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 

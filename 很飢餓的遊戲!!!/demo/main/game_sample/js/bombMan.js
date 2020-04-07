@@ -12,28 +12,55 @@ var BombMan = function(file, options) {
     this.mapPosition = {x:0, y:0};
     this.spritePosition = {x:0, y:0};
     this.constants = new Constants();
-
     this.StepMovedCallBack = [];
     this.maxBombNum = 1;
     this.bombNum = 0;
     this.bombPower = 1;
     this.pic_count = 0;
-
     this.isWalking = false;
-
     var m_bombMan = this;
-
     this.playerDirection = this.constants.DirectionEnum.DOWN;
+    this.equipmentBar = new EquipmentBar();
+    this.backpack = new Backpack();
+    this.mode = "";
+    this.baseAttack = 10;
+    this.baseDefense = 10;
+    this.headEquipmentDefense = 0;
+    this.bodyEquipmentDefense = 0;
+    this.handEquipmentAttack = 0;
+
+    this.totalDefense = 10;
+
     //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
     //若options.position有值, 則this.sprite.position = options.position
     //原因是在JS中, undefined會被cast成false
     //this.sprite.position = options.position || {x: 0, y: 0};
     //this.sprite.scale = options.scale || 1;
-
     //由於0會被cast成false, 故不能用上面的方法來簡化
     //this.sprite.rotation = (Framework.Util.isUndefined(options.rotation))?0:options.rotation;
+    this.getBackPack = function(){
+        return this.backpack;
+    }
 
+    this.getHeadEquipment = function(){
+        var headEquipment = this.equipmentBar.getHeadEquipment();
+        if(headEquipment != null)
+            this.headEquipmentDefense = 10;
+    }
 
+    this.getBodyEquipment = function(){
+        var bodyEquipment = this.equipmentBar.getBodyEquipment();
+        if(bodyEquipment != null)
+            this.bodyEquipmentDefense = 10;
+    }
+
+    this.getHandEquipment = function(){
+        var handEquipment = this.equipmentBar.getHandEquipment();
+        if(handEquipment != null){
+            this.handEquipmentAttack = 10;
+            this.mode = "light";
+        }
+    }
     //moveStep為位移量  格式範例{x:1,y:0}
     this.walk = function(moveStep){
         //console.log("player walk " + this.spritePosition.x + ", " + this.spritePosition.y);
@@ -73,6 +100,9 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
+        this.getBodyEquipment();
+        this.getHandEquipment();
+        this.getHeadEquipment();
     }
 
 
@@ -84,7 +114,8 @@ var BombMan = function(file, options) {
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.sprite.update();
         this.sprite.draw(ctx);
-      
+        this.equipmentBar.draw(ctx);
+        this.backpack.draw(ctx);
     }
 
     this.increaseBombNum = function(){
