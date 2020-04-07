@@ -22,6 +22,7 @@ var BombMan = function(file, options) {
     this.playerDirection = this.constants.DirectionEnum.DOWN;
     this.equipmentBar = new EquipmentBar();
     this.backpack = new Backpack();
+    this.characterStatus = new CharacterStatus();
     this.mode = "";
     this.baseAttack = 10;
     this.baseDefense = 10;
@@ -38,6 +39,10 @@ var BombMan = function(file, options) {
     //this.sprite.scale = options.scale || 1;
     //由於0會被cast成false, 故不能用上面的方法來簡化
     //this.sprite.rotation = (Framework.Util.isUndefined(options.rotation))?0:options.rotation;
+    this.init = function(){
+        this.characterStatus.init();
+    }
+
     this.getBackPack = function(){
         return this.backpack;
     }
@@ -116,6 +121,7 @@ var BombMan = function(file, options) {
         this.sprite.draw(ctx);
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
+        this.characterStatus.draw(ctx);
     }
 
     this.increaseBombNum = function(){

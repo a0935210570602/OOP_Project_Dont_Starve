@@ -35,11 +35,47 @@ var SynthesisBar = function(backpackList) {
     this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
     this.item_gold.scale = 2;
 
+    this.item_spear = new Framework.Sprite(define.materialPath + 'item_spear.png');
+    this.item_spear.scale = 2;
+
+    this.item_armor = new Framework.Sprite(define.materialPath + 'item_armor.png');
+    this.item_armor.scale = 2;
+
+    this.item_wood_armor = new Framework.Sprite(define.materialPath + 'item_wood_armor.png');
+    this.item_wood_armor.scale = 2;
+
+    this.item_helmat = new Framework.Sprite(define.materialPath + 'item_helmat.png');
+    this.item_helmat.scale = 2;
+
+    this.item_bee_sting = new Framework.Sprite(define.materialPath + 'item_bee_sting.png');
+    this.item_bee_sting.scale = 2;
+
     this.item_ax = new Framework.Sprite(define.materialPath + 'item_ax.png');
     this.item_ax.scale = 2;
 
+    this.item_gold_shovel = new Framework.Sprite(define.materialPath + 'item_gold_shovel.png');
+    this.item_gold_shovel.scale = 2;
+
+    this.item_flint = new Framework.Sprite(define.materialPath + 'item_flint.png');
+    this.item_flint.scale = 2;
+
+    this.item_snow_ball = new Framework.Sprite(define.materialPath + 'item_snow_ball.png');
+    this.item_snow_ball.scale = 2;
+
+    this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
+    this.item_shovel.scale = 2;
+
     this.item_gold_ax = new Framework.Sprite(define.materialPath + 'item_gold_ax.png');
     this.item_gold_ax.scale = 2;
+
+    this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
+    this.item_shovel.scale = 2;
+
+    this.item_pigskin = new Framework.Sprite(define.materialPath + 'item_pigskin.png');
+    this.item_pigskin.scale = 2;
+
+    this.item_fishing_rod = new Framework.Sprite(define.materialPath + 'item_fishing_rod.png');
+    this.item_fishing_rod.scale = 2;
 
     this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png');
     this.item_rope.scale = 2;
@@ -52,6 +88,18 @@ var SynthesisBar = function(backpackList) {
 
     this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
     this.item_wood.scale = 2;
+
+    this.item_lamp = new Framework.Sprite(define.materialPath + 'item_lamp.png');
+    this.item_lamp.scale = 2;
+
+    this.item_bush = new Framework.Sprite(define.materialPath + 'item_bush.png');
+    this.item_bush.scale = 2;
+
+    this.item_arror = new Framework.Sprite(define.materialPath + 'item_arror.png');
+    this.item_arror.scale = 2;
+
+    this.item_ice = new Framework.Sprite(define.materialPath + 'item_ice.png');
+    this.item_ice.scale = 2;
 
     this.item_firebundle = new Framework.Sprite(define.materialPath + 'item_firebundle.png');
     this.item_firebundle.scale = 1.5;
@@ -67,6 +115,9 @@ var SynthesisBar = function(backpackList) {
     
     this.item_flower = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
     this.item_flower.scale = 2;
+
+    this.item_flower_pulled = new Framework.Sprite(define.materialPath + 'item_flower_pulled.png'); 
+    this.item_flower_pulled.scale = 2;
 
     this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
     this.item_stone.scale = 2;
@@ -259,9 +310,25 @@ var SynthesisBar = function(backpackList) {
                 this.item_wood.position = this.positionChange(item_to_draw.position);
                 this.item_wood.draw(ctx);
                 break;
+            case 8:
+                this.item_flint.position = this.positionChange(item_to_draw.position);
+                this.item_flint.draw(ctx);
+                break;
             case 9:
                 this.item_gold.position = this.positionChange(item_to_draw.position);
                 this.item_gold.draw(ctx);
+                break;
+            case 10:
+                this.item_pigskin.position = this.positionChange(item_to_draw.position);
+                this.item_pigskin.draw(ctx);
+                break;
+            case 11:
+                this.item_bee_sting.position = this.positionChange(item_to_draw.position);
+                this.item_bee_sting.draw(ctx);
+                break;
+            case 12:
+                this.item_snow_ball.position = this.positionChange(item_to_draw.position);
+                this.item_snow_ball.draw(ctx);
                 break;
             case 13:
                 this.item_rope.position = this.positionChange(item_to_draw.position);
@@ -279,13 +346,45 @@ var SynthesisBar = function(backpackList) {
                 this.item_ax.position = this.positionChange(item_to_draw.position);
                 this.item_ax.draw(ctx);
                 break;
+            case 17:
+                this.item_fishing_rod.position = this.positionChange(item_to_draw.position);
+                this.item_fishing_rod.draw(ctx);
+                break;
+            case 18:
+                this.item_shovel.position = this.positionChange(item_to_draw.position);
+                this.item_shovel.draw(ctx);
+                break;
             case 19:
                 this.item_gold_ax.position = this.positionChange(item_to_draw.position);
                 this.item_gold_ax.draw(ctx);
                 break;
+            case 20:
+                this.item_gold_shovel.position = this.positionChange(item_to_draw.position);
+                this.item_gold_shovel.draw(ctx);
+                break;
             case 21:
                 this.item_gold_pixilart.position = this.positionChange(item_to_draw.position);
                 this.item_gold_pixilart.draw(ctx);
+                break;
+            case 22:
+                this.item_helmat.position = this.positionChange(item_to_draw.position);
+                this.item_helmat.draw(ctx);
+                break;
+            case 23:
+                this.item_armor.position = this.positionChange(item_to_draw.position);
+                this.item_armor.draw(ctx);
+                break;
+            case 24:
+                this.item_wood_armor.position = this.positionChange(item_to_draw.position);
+                this.item_wood_armor.draw(ctx);
+                break;
+            case 25:
+                this.item_spear.position = this.positionChange(item_to_draw.position);
+                this.item_spear.draw(ctx);
+                break;
+            case 26:
+                this.item_arror.position = this.positionChange(item_to_draw.position);
+                this.item_arror.draw(ctx);
                 break;
             case 27:
                 this.item_king_wand.position = this.positionChange(item_to_draw.position);
@@ -303,6 +402,10 @@ var SynthesisBar = function(backpackList) {
                 this.item_ice_wand.position = this.positionChange(item_to_draw.position);
                 this.item_ice_wand.draw(ctx);
                 break;
+            case 31:
+                this.item_lamp.position = this.positionChange(item_to_draw.position);
+                this.item_lamp.draw(ctx);
+                break;
             case 32:
                 this.item_firebundle.position = this.positionChange(item_to_draw.position);
                 this.item_firebundle.draw(ctx);
@@ -314,6 +417,14 @@ var SynthesisBar = function(backpackList) {
             case 34:
                 this.item_campfire.position = this.positionChange(item_to_draw.position);
                 this.item_campfire.draw(ctx);
+                break;
+            case 35:
+                this.item_ice.position = this.positionChange(item_to_draw.position);
+                this.item_ice.draw(ctx);
+                break;
+            case 36:
+                this.item_bush.position = this.positionChange(item_to_draw.position);
+                this.item_bush.draw(ctx);
                 break;
             default:
                 ctx.font = "20px Arial";

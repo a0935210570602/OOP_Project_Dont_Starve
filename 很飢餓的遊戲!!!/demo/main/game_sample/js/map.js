@@ -211,15 +211,13 @@ var Map = function(map, item_map)
         this.stopMonster = false;
         this.stopMonsterCounter =0;
 
-        // this.backpack = new Backpack();
-        this.characterStatus = new CharacterStatus();
         this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
     }
 
     this.init = function()
     {
+        this.player1.init();
         this.clock.init();
-        this.characterStatus.init();
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
         //this.mapArray = [];
@@ -283,7 +281,7 @@ var Map = function(map, item_map)
                         this.itemArray.push(new Item_pigskin());
                         break;
                     case 11:      
-                    this.itemArray.push(new Item_bee_sting());
+                        this.itemArray.push(new Item_bee_sting());
                         break;
                     case 12:
                         this.itemArray.push(new Item_snow_ball());
@@ -500,7 +498,7 @@ var Map = function(map, item_map)
                 // console.log("this.characterStatus.hungry_point");
                 // console.log(this.characterStatus.hungry_point);
                 this.monster[i].update();
-                if((this.demo_dead_trigger == 1 && this.characterStatus.currentHealth == 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
+                if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
                 {
                     this.player1.die();
                     break;
@@ -562,7 +560,6 @@ var Map = function(map, item_map)
             //     this.clock[i].draw(ctx);
             // }
         // this.backpack.draw(ctx);
-        this.characterStatus.draw(ctx);
         this.synthesisBar.draw(ctx);
         this.player1.draw(ctx);
         this.clock.draw(ctx);
