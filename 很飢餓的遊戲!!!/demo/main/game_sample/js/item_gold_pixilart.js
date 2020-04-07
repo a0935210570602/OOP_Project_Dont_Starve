@@ -4,6 +4,7 @@ var Item_gold_pixilart = function() {
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
+    this.durability = 0;
 
 
     this.update = function(){

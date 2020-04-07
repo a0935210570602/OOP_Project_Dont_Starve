@@ -100,11 +100,47 @@ var Map = function(map, item_map)
         this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
         this.item_gold.scale = 2;
 
+        this.item_spear = new Framework.Sprite(define.materialPath + 'item_spear.png');
+        this.item_spear.scale = 2;
+
+        this.item_armor = new Framework.Sprite(define.materialPath + 'item_armor.png');
+        this.item_armor.scale = 2;
+
+        this.item_wood_armor = new Framework.Sprite(define.materialPath + 'item_wood_armor.png');
+        this.item_wood_armor.scale = 2;
+
+        this.item_helmat = new Framework.Sprite(define.materialPath + 'item_helmat.png');
+        this.item_helmat.scale = 2;
+
+        this.item_bee_sting = new Framework.Sprite(define.materialPath + 'item_bee_sting.png');
+        this.item_bee_sting.scale = 2;
+
         this.item_ax = new Framework.Sprite(define.materialPath + 'item_ax.png');
         this.item_ax.scale = 2;
 
+        this.item_gold_shovel = new Framework.Sprite(define.materialPath + 'item_gold_shovel.png');
+        this.item_gold_shovel.scale = 2;
+
+        this.item_flint = new Framework.Sprite(define.materialPath + 'item_flint.png');
+        this.item_flint.scale = 2;
+
+        this.item_snow_ball = new Framework.Sprite(define.materialPath + 'item_snow_ball.png');
+        this.item_snow_ball.scale = 2;
+
+        this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
+        this.item_shovel.scale = 2;
+
         this.item_gold_ax = new Framework.Sprite(define.materialPath + 'item_gold_ax.png');
         this.item_gold_ax.scale = 2;
+
+        this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
+        this.item_shovel.scale = 2;
+
+        this.item_pigskin = new Framework.Sprite(define.materialPath + 'item_pigskin.png');
+        this.item_pigskin.scale = 2;
+
+        this.item_fishing_rod = new Framework.Sprite(define.materialPath + 'item_fishing_rod.png');
+        this.item_fishing_rod.scale = 2;
 
         this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png');
         this.item_rope.scale = 2;
@@ -117,6 +153,18 @@ var Map = function(map, item_map)
 
         this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
         this.item_wood.scale = 2;
+
+        this.item_lamp = new Framework.Sprite(define.materialPath + 'item_lamp.png');
+        this.item_lamp.scale = 2;
+
+        this.item_bush = new Framework.Sprite(define.materialPath + 'item_bush.png');
+        this.item_bush.scale = 2;
+
+        this.item_arror = new Framework.Sprite(define.materialPath + 'item_arror.png');
+        this.item_arror.scale = 2;
+
+        this.item_ice = new Framework.Sprite(define.materialPath + 'item_ice.png');
+        this.item_ice.scale = 2;
 
         this.item_firebundle = new Framework.Sprite(define.materialPath + 'item_firebundle.png');
         this.item_firebundle.scale = 1.5;
@@ -225,8 +273,20 @@ var Map = function(map, item_map)
                     case 7:      
                         this.itemArray.push(new Item_wood());
                         break;
+                    case 8:      
+                        this.itemArray.push(new Item_flint());
+                        break;
                     case 9:      
                         this.itemArray.push(new Item_gold());
+                        break;
+                    case 10:      
+                        this.itemArray.push(new Item_pigskin());
+                        break;
+                    case 11:      
+                    this.itemArray.push(new Item_bee_sting());
+                        break;
+                    case 12:
+                        this.itemArray.push(new Item_snow_ball());
                         break;
                     case 13:
                         this.itemArray.push(new Item_rope());
@@ -240,11 +300,35 @@ var Map = function(map, item_map)
                     case 16:
                         this.itemArray.push(new Item_ax());
                         break;
+                    case 17:
+                        this.itemArray.push(new Item_fishing_rod());
+                        break;
+                    case 18:
+                        this.itemArray.push(new Item_shovel());
+                        break;
                     case 19:
                         this.itemArray.push(new Item_gold_ax());
                         break;
+                    case 20:
+                        this.itemArray.push(new Item_gold_shovel());
+                        break;
                     case 21:
                         this.itemArray.push(new Item_gold_pixilart());
+                        break;
+                    case 22:
+                        this.itemArray.push(new Item_helmat());
+                        break;
+                    case 23:
+                        this.itemArray.push(new Item_armor());
+                        break;
+                    case 24:
+                        this.itemArray.push(new Item_wood_armor());
+                        break;
+                    case 25:
+                        this.itemArray.push(new Item_spear());
+                        break;
+                    case 26:
+                        this.itemArray.push(new Item_arror());
                         break;
                     case 27:
                         this.itemArray.push(new Item_king_wand());
@@ -258,6 +342,9 @@ var Map = function(map, item_map)
                     case 30:
                         this.itemArray.push(new Item_ice_wand());
                         break;
+                    case 31:
+                        this.itemArray.push(new Item_lamp());
+                        break;
                     case 32:
                         this.itemArray.push(new Item_firebundle());
                         break;
@@ -266,6 +353,12 @@ var Map = function(map, item_map)
                         break;
                     case 34:
                         this.itemArray.push(new Item_campfire());
+                        break;
+                    case 35:
+                        this.itemArray.push(new Item_ice());
+                        break;
+                    case 36:
+                        this.itemArray.push(new Item_bush());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());
