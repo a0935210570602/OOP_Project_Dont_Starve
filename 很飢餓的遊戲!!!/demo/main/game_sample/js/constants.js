@@ -1,4 +1,3 @@
-
 var Constants = function() {
     this.DirectionEnum = {
         DOWN : 0,
