@@ -125,17 +125,17 @@ var SynthesisBar = function(backpackList) {
     this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
     this.item_waikei_homework.scale = 2;
 
+    this.item_flower_picked = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
+    this.item_flower_picked.scale = 2;
+
+    this.item_grass_picked = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
+    this.item_grass_picked.scale = 2;
+
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢
 
-    this.itemNameArray = [
-        "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
-        "蜂刺", "雪球", "繩索", "露水", "十字鎬", "斧頭", "釣魚竿", "鏟子", "黃金斧頭", "黃金鏟子", 
-        "黃金十字鎬", "頭盔", "草製盔甲", "木製盔甲", "長矛", "吹箭", "國王法杖", "空間法杖", "火法杖", "冰法杖",
-        "黃金提燈", "火把", "帳篷", "篝火", "冰塊", "漿果叢"
-    ];
     this.synthesisBar = [
         {item:"工具", position:{x:1, y:4}},
         {item:"戰鬥", position:{x:1, y:5}},
@@ -191,10 +191,10 @@ var SynthesisBar = function(backpackList) {
         ],
         [
             [{item: 10,amount: 1,position:{x:3, y:3}},{item: 13,amount: 1,position:{x:3, y:4}},{item:"合成",position:{x:3,y:5}}],
-            [{item: 6,amount: 10,position:{x:3, y:4}},{item: 4,amount: 2,position:{x:3, y:5}},{item:"合成",position:{x:3,y:6}}],
+            [{item: 38,amount: 10,position:{x:3, y:4}},{item: 4,amount: 2,position:{x:3, y:5}},{item:"合成",position:{x:3,y:6}}],
             [{item: 7,amount: 8,position:{x:3, y:5}},{item: 13,amount: 2,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
             [{item: 4,amount: 2,position:{x:3, y:6}},{item: 8,amount: 1,position:{x:3, y:7}},{item: 13,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
-            [{item: 6,amount: 1,position:{x:3, y:7}},{item: 4,amount: 1,position:{x:3, y:8}},{item: 11,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}]
+            [{item: 38,amount: 1,position:{x:3, y:7}},{item: 4,amount: 1,position:{x:3, y:8}},{item: 11,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}]
         ],
         [
             [{item: 25,amount: 1,position:{x:3, y:5}},{item: 36,amount: 1,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
@@ -204,12 +204,12 @@ var SynthesisBar = function(backpackList) {
         ],
         [
             [{item: 4,amount: 2,position: {x:3,y:6}},{item: 9,amount: 2,position: {x:3,y:7}},{item: 8,amount: 1,position: {x:3,y:8}},{item: 13,amount: 2,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}],
-            [{item: 4,amount: 2,position: {x:3,y:7}},{item: 6,amount: 2,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
-            [{item: 2,amount: 6,position: {x:3,y:8}},{item: 13,amount: 3,position: {x:3,y:9}},{item: 4,amount: 4,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}],
-            [{item: 7,amount: 2,position: {x:3,y:9}},{item: 6,amount: 2,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}]
+            [{item: 4,amount: 2,position: {x:3,y:7}},{item: 38,amount: 2,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 2,amount: 38,position: {x:3,y:8}},{item: 13,amount: 3,position: {x:3,y:9}},{item: 4,amount: 4,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}],
+            [{item: 7,amount: 2,position: {x:3,y:9}},{item: 38,amount: 2,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}]
         ],
         [
-            [{item: 6,amount: 3,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 38,amount: 3,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
             [{item: 12,amount: 3,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}]
         ]
     ];
@@ -426,10 +426,14 @@ var SynthesisBar = function(backpackList) {
                 this.item_bush.position = this.positionChange(item_to_draw.position);
                 this.item_bush.draw(ctx);
                 break;
-            default:
-                ctx.font = "20px Arial";
-                ctx.fillStyle = "black";
-                ctx.fillText(this.itemNameArray[item_to_draw.item-1], this.positionChange(item_to_draw.position).x, this.positionChange(item_to_draw.position).y);
+            case 37:
+                this.item_flower_picked.position = this.positionChange(item_to_draw.position);
+                this.item_flower_picked.draw(ctx);
+                break;
+            case 38:
+                this.item_grass_picked.position = this.positionChange(item_to_draw.position);
+                this.item_grass_picked.draw(ctx);
+                break;
         }
     }
 
@@ -484,8 +488,8 @@ var SynthesisBar = function(backpackList) {
         if(this.firstColumeIndex != -1 && this.secondColumnIndex != -1){
             var position = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1].position;
             if(this.currentPoint.x == position.x && this.currentPoint.y == position.y){
-                if(backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item)){
-                    backpackList.addItem(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
+                if(backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex])){
+                    backpackList.addItemBySynthesis(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                     backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
                 }
             }

@@ -1,10 +1,14 @@
 var Item_spider_web = function() {
     this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
     this.item_spider_web.scale = 2;
-
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
+    this.item_num = 2;
+    //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物
+    this.type = "material";
+    //可疊加物件有amount 不可疊加有durability
+    this.amount = 1;
 
     this.update = function(){
         this.status = false;

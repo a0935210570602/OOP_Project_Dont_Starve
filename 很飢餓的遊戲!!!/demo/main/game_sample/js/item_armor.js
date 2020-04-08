@@ -4,7 +4,14 @@ var Item_armor = function() {
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
-    this.durability = 0;
+    this.durability = 100;
+    this.item_num = 23;
+    //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物
+    this.type = "equipment";
+    //可疊加物件有amount 不可疊加有durability
+    this.durability = 100;
+    this.place = "body";
+
 
 
     this.update = function(){

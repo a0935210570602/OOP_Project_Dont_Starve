@@ -188,13 +188,12 @@ var Map = function(map, item_map)
         this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
         this.item_stone.scale = 2;
 
+        this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
+        this.item_waikei_homework.scale = 2;
+
         this.clock = new Clock();
         this.clock.scale = 2;
 
-      
-        this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
-        this.item_waikei_homework.scale = 2;
-        
         this.item_blank = new Framework.Sprite(define.materialPath + 'item_blank.png');
         this.item_blank.scale = 2;
 
@@ -357,6 +356,12 @@ var Map = function(map, item_map)
                         break;
                     case 36:
                         this.itemArray.push(new Item_bush());
+                        break;
+                    case 37:
+                        this.itemList.push(new Item_flower_picked());
+                        break;
+                    case 38:
+                        this.itemList.push(new Item_bush());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());
@@ -716,13 +721,20 @@ var Map = function(map, item_map)
                 if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
                 {
                     if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
-                        this.player1.backpack.addItem(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
-                        if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate)
+                        if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
+                            this.player1.backpack.addItemByPick(new Item_flower_picked());
                             this.pickRegenerateObject();
-                        else
+                        }
+                        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
+                            this.player1.backpack.addItemByPick(new Item_grass_picked());
+                            this.pickRegenerateObject();
+                        }
+                        else{
+                            this.player1.backpack.addItemByPick(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
                             this.pickObject();
-                        if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
-                            this.pressWalk = true;
+                            if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
+                                this.pressWalk = true;
+                        }
                     }
                 }
             }
@@ -742,7 +754,6 @@ var Map = function(map, item_map)
         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_blank();
         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 0;
         m_map.draw(Framework.Game._context);
-
     }
 
     this.stopAllMonsterWalk = function()
