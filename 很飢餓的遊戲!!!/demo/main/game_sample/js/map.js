@@ -722,15 +722,15 @@ var Map = function(map, item_map)
                 {
                     if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
                         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
-                            this.player1.backpack.addItemByPick(new Item_flower_picked());
+                            this.player1.backpack.addItemByObject(new Item_flower_picked());
                             this.pickRegenerateObject();
                         }
                         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
-                            this.player1.backpack.addItemByPick(new Item_grass_picked());
+                            this.player1.backpack.addItemByObject(new Item_grass_picked());
                             this.pickRegenerateObject();
                         }
                         else{
-                            this.player1.backpack.addItemByPick(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
+                            this.player1.backpack.addItemByObject(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
                             this.pickObject();
                             if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
                                 this.pressWalk = true;
@@ -793,41 +793,13 @@ var Map = function(map, item_map)
 
     this.click = function(e){      
         this.synthesisBar.click(e);
+        this.player1.click(e);
+        m_map.draw(Framework.Game._context);
+
     }
 
     this.mousemove = function(e){
-        var m_position = {x:-1,y:-1};
-
-        if(e.x >= 33 && e.x < 91)
-            m_position.x = 1;
-        if(e.x >= 91 && e.x < 158)
-            m_position.x = 2;
-        if(e.x >= 158 && e.x < 220)
-            m_position.x = 3;
-
-        if(e.y >= 33 && e.y < 93)
-            m_position.y = 1;
-        if(e.y >= 93 && e.y < 156)
-            m_position.y = 2;
-        if(e.y >= 156 && e.y < 222)
-            m_position.y = 3;
-        if(e.y >= 222 && e.y < 287)
-            m_position.y = 4;
-        if(e.y >= 287 && e.y < 347)
-            m_position.y = 5;
-        if(e.y >= 347 && e.y < 410)
-            m_position.y = 6;
-        if(e.y >= 410 && e.y < 476)
-            m_position.y = 7;
-        if(e.y >= 476 && e.y < 540)
-            m_position.y = 8;
-        if(e.y >= 540 && e.y < 606)
-            m_position.y = 9;
-        if(e.y >= 606 && e.y < 665)
-            m_position.y = 10;
-        if(e.y >= 665 && e.y < 727)
-            m_position.y = 11;
-        this.synthesisBar.updateChildBar(m_position);
+        this.synthesisBar.mousemove(e);
         m_map.draw(Framework.Game._context);
     }
 }

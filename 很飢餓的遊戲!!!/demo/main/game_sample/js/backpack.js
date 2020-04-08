@@ -136,7 +136,7 @@ var Backpack = function() {
         }
     }
 
-    this.addItemByPick = function(object){
+    this.addItemByObject = function(object){
         var check = this.checkIfStackableExist(object.item_num);
         if(check != -1)
             this.itemList[check].amount += object.amount;
@@ -213,8 +213,12 @@ var Backpack = function() {
         return -1;
     }
 
-    this.getItemList = function(){
-        return this.itemList;
+    this.getItem = function(index){
+        return this.itemList[index];
+    }
+
+    this.getItemListLength = function(){
+        return this.itemList.length;
     }
 
     this.update = function(material){
@@ -225,6 +229,10 @@ var Backpack = function() {
             }
         }
         this.arrayRemoveEmpty();
+    }
+
+    this.arrayRemoveByIndex = function(i){
+        this.itemList.splice(i, 1);
     }
 
     this.arrayRemoveEmpty = function() {

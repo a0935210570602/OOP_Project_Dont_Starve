@@ -48,19 +48,19 @@ var BombMan = function(file, options) {
     }
 
     this.getHeadEquipment = function(){
-        var headEquipment = this.equipmentBar.getHeadEquipment();
+        var headEquipment = this.equipmentBar.getEquipment(0);
         if(headEquipment != null)
             this.headEquipmentDefense = 10;
     }
 
     this.getBodyEquipment = function(){
-        var bodyEquipment = this.equipmentBar.getBodyEquipment();
+        var bodyEquipment = this.equipmentBar.getEquipment(1);
         if(bodyEquipment != null)
             this.bodyEquipmentDefense = 10;
     }
 
     this.getHandEquipment = function(){
-        var handEquipment = this.equipmentBar.getHandEquipment();
+        var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null){
             this.handEquipmentAttack = 10;
             this.mode = "light";
@@ -145,6 +145,94 @@ var BombMan = function(file, options) {
             return bomb;
         }
         return null;
+    }
+
+    this.equipFromBackpack = function(indexForBackpack, indexForEquipment){
+        var obj = this.backpack.getItem(indexForBackpack);
+        var equipment_obj = this.equipmentBar.getEquipment(indexForEquipment);
+        this.backpack.arrayRemoveByIndex(indexForBackpack);
+        this.equipmentBar.setEquipment(obj, indexForEquipment);
+        if(equipment_obj != null)
+            this.backpack.addItemByObject(equipment_obj);
+    }
+
+    this.clickInBackPack = function(index){
+        var obj = this.backpack.getItem(index);
+        if (obj.type == "equipment"){
+            switch(obj.place){
+                case "head":
+                    this.equipFromBackpack(index, 0);
+                    break;
+                case "body":
+                    this.equipFromBackpack(index, 1);
+                    break;
+                case "hand":
+                    this.equipFromBackpack(index, 2);
+                    break;
+            }
+        }
+    }
+
+    this.removeEquipment = function(index){
+        if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
+            this.backpack.addItemByObject(this.equipmentBar.getEquipment(index));
+            this.equipmentBar.setEquipment(null, index);
+        }
+    }
+
+    this.click = function(e){
+        var index = -1;
+        var equipmentIndex = -1
+        if(e.y >= 800 && e.y <=860){
+            if(e.x >= 290 && e.x < 350)
+                index = 0;
+            else if(e.x >= 350 && e.x < 410)
+                index = 1;
+            else if(e.x >= 410 && e.x < 480)
+                index = 2;
+            else if(e.x >= 480 && e.x < 540)
+                index = 3;
+            else if(e.x >= 540 && e.x < 605)
+                index = 4;
+            else if(e.x >= 605 && e.x < 672)
+                index = 5;
+            else if(e.x >= 672 && e.x < 732)
+                index = 6;
+            else if(e.x >= 732 && e.x < 800)
+                index = 7;
+            else if(e.x >= 800 && e.x < 860)
+                index = 8;
+            else if(e.x >= 860 && e.x < 924)
+                index = 9;
+            else if(e.x >= 924 && e.x < 990)
+                index = 10;
+            else if(e.x >= 990 && e.x < 1053)
+                index = 11;
+            else if(e.x >= 1053 && e.x < 1118)
+                index = 12;
+            else if(e.x >= 1118 && e.x < 1183)
+                index = 13;
+            else if(e.x >= 1183 && e.x < 1247)
+                index = 14;
+            else if(e.x >= 1247 && e.x < 1310)
+                index = 15;
+            else if(e.x >= 1310 && e.x < 1370)
+                index = 16;
+            if(index != -1){
+                this.clickInBackPack(index);
+            }
+        }
+
+        if(e.x >= 1443 && e.x <= 1498){
+            if(e.y >= 547 && e.y <= 606)
+                equipmentIndex = 0;
+            if(e.y >= 606 && e.y <= 667)
+                equipmentIndex = 1;
+            if(e.y >= 667 && e.y <= 733)
+                equipmentIndex = 2;
+            if(equipmentIndex != -1)
+                this.removeEquipment(equipmentIndex);
+        }
     }
 
 };
