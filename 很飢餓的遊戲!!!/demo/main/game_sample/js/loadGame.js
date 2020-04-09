@@ -112,7 +112,7 @@ var loadGameEnd;
         { src: 'game_sample/js/characterStatus.js', lookFor: 'CharacterStatus' },
         { src: 'game_sample/js/mapTile.js', lookFor: 'MapTile' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
-        { src: 'game_sample/js/map.js', lookFor: 'Map' },
+        { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
         { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
         { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },

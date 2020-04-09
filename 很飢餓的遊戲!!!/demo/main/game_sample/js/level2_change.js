@@ -177,7 +177,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //11
         // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //12
 
-        this.map = new Map(this.mapArray, this.item_map_Array);
+        this.map = new World_map(this.mapArray, this.item_map_Array);
         this.map.load();
     },
 
@@ -186,17 +186,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.map.init();
         //for demo
         this.map.setPlayerPosition({x:13,y:7});
-        // this.map.setPlayerPosition({x:this.mapArray[0].length/2,y:this.mapArray.length/2});
-        // for(var i=0; i<5; i++){
-        //     for(var j=0; j<5; j++){
-        //         this.map.addMonster({x:6+i, y:6+j});
-        //     }
-        // }
-        // this.map.addMonster({x:3, y:4});
-        // this.map.addMonster({x:3, y:9});
-        // this.map.addMonster({x:9, y:4});
-        // this.map.addMonster({x:13, y:7});
-        // this.map.addMonster({x:17, y:9});
+
         this.map.addMonster({x:9, y:5});
     },
 

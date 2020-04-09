@@ -1,4 +1,4 @@
-var Map = function(map, item_map)
+var World_map = function(map, item_map)
 {
     this.demo_dead_trigger = 0;
     this.mapArray = map;
