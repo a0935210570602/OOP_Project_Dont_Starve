@@ -118,6 +118,8 @@ var loadGameEnd;
         { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
+        { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
+
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}
     ]

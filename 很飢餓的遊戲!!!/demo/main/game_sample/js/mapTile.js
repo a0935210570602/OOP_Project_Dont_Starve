@@ -36,18 +36,6 @@ var MapTile = function(time_status) {
     this.terrain_snow_ground = new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png');
     this.terrain_snow_ground.scale = 2;
 
-    // this.mapWall = new Framework.Sprite(time_path + 'treeStone.png');
-    // this.mapWall.scale = 2;
-
-    // this.increaseBombNum  = new Framework.Sprite(time_path + 'increaseBombNum.png');
-    // this.increaseBombNum.scale = 1.5;
-
-    // this.increaseBombPower  = new Framework.Sprite(time_path + 'increaseBombPower.png');
-    // this.increaseBombPower.scale = 1.5;
-
-    // this.stopMonster  = new Framework.Sprite(time_path + 'stopMonster.png');
-    // this.stopMonster.scale = 1.5;
-
     this.mapPosition = {x:0, y:0};
     this.spritePosition = {}
     this._tileType = 0;
