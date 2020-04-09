@@ -10,7 +10,7 @@ var Monster = function(file, map, options) {
     var PIXEL_CONST = 64;
     //this.sprite.start({ from: 0, to: 2, loop: true});
     this.mapPosition = {x:0, y:0};
-    this.canvas_Position = {x:0, y:0};
+    this.canvasPosition = {x:0, y:0};
     this.walkTarget = {x:0, y:0};
     this.spritePosition = {x:0, y:0};
     this.constants = new Constants();
@@ -122,7 +122,7 @@ var Monster = function(file, map, options) {
         // console.log("spritePosition");
         // console.log(this.spritePosition);
         if(this.isdead){ return; }
-        this.sprite.position = {x: this.canvas_Position.x*64, y: this.canvas_Position.y*64};
+        this.sprite.position = {x: this.canvasPosition.x*64, y: this.canvasPosition.y*64};
         this.sprite.draw(ctx);
     }
     var walkDir = 0;
@@ -164,7 +164,7 @@ Object.defineProperty(Monster.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.spritePosition = {x:this.canvas_Position.x * 64, y: this.canvas_Position.y * 64};
+        this.spritePosition = {x:this.canvasPosition.x * 64, y: this.canvasPosition.y * 64};
     }
 }); 
 

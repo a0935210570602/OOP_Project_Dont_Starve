@@ -204,7 +204,8 @@ var World_map = function(map, item_map)
         
         
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
-        this.player1.position = {x:1, y:1};
+        this.player1.canvasPosition = {x:13, y:7};
+        this.player1.position = {x:10, y:1};
 
         this.monster = [];
         this.stopMonster = false;
@@ -231,7 +232,7 @@ var World_map = function(map, item_map)
         this.itemMap = [];
         this.initialPosition = {x:5,y:5};
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
-        this.playerPositionOnMap = {x:20,y:10};
+        this.playerPositionOnMap = {x:20,y:20};
         this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x,y:this.playerPositionOnMap.y-this.initialPosition.y};
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
@@ -555,7 +556,7 @@ var World_map = function(map, item_map)
         }
 
         for(var i=0;i<this.monster.length;i++){
-            if(this.isCanvasCanDraw(this.monster[i].mapPosition.x,this.monster[i].mapPosition.y)){
+            if(this.isCanvasCanDraw(i)){
                 this.CanvasCanDraw(this.monster[i], ctx);
             }
         }
@@ -567,26 +568,24 @@ var World_map = function(map, item_map)
         this.player1.draw(ctx);
         this.clock.draw(ctx);
 	}	
-    this.isCanvasCanDraw = function(x_plot, y_plot){
+    this.isCanvasCanDraw = function(i){
         //玩家在畫布上的座標
         // console.log("this.player1.position");
         // console.log(this.player1.position);
-        //恐龍在遊戲中的座標
-        // console.log("x_plot");
-        // console.log(x_plot);
-        // console.log("y_plot");
-        // console.log(y_plot);
+        // console.log("newMonster.mapPosition");
+        // console.log(this.monster[0].mapPosition);
+  
         //玩家在遊戲中的座標
         // console.log("this.playerPositionOnMap");
         // console.log(this.playerPositionOnMap);
-        if(Math.abs(x_plot-this.playerPositionOnMap.x)<=5 && Math.abs(y_plot-this.playerPositionOnMap.y)<=5){
+        if(Math.abs(this.monster[i].mapPosition.x-this.playerPositionOnMap.x)<=5 && Math.abs(this.monster[i].mapPosition.y-this.playerPositionOnMap.y)<=5){
             return true;
         }
         return false;
     }
     this.CanvasCanDraw = function(monster, ctx){
-        monster.canvas_Position.x = this.player1.position.x + monster.mapPosition.x-this.playerPositionOnMap.x;
-        monster.canvas_Position.y = this.player1.position.y + monster.mapPosition.y-this.playerPositionOnMap.y;
+        monster.canvasPosition.x = this.player1.position.x + monster.mapPosition.x-this.playerPositionOnMap.x;
+        monster.canvasPosition.y = this.player1.position.y + monster.mapPosition.y-this.playerPositionOnMap.y;
         monster.draw(ctx);
     }
     var m_map = this;
@@ -672,8 +671,10 @@ var World_map = function(map, item_map)
     this.pressWalk = false;
     this.keyPress = "";
     this.keydown = function(e, list){
-        var playerPosition = this.player1.position;
-
+        console.log("player.position");
+        console.log(this.playerPositionOnMap);
+        console.log("player.canvasPosition");
+        // console.log(this.player1.canvasPosition);
         if(e.key === 'F') {
             this.demo_dead_trigger = 1;
         }

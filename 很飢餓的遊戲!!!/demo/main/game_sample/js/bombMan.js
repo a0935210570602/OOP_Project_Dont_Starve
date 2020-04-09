@@ -9,13 +9,12 @@ var BombMan = function(file, options) {
     this.sprite.index = 1;
     var PIXEL_CONST = 64;
     //this.sprite.start({ from: 0, to: 2, loop: true});
-    this.mapPosition = {x:0, y:0};
+    this.canvasPosition = {x:0, y:0};
     this.spritePosition = {x:0, y:0};
     this.constants = new Constants();
     this.StepMovedCallBack = [];
     this.maxBombNum = 1;
     this.bombNum = 0;
-    this.bombPower = 1;
     this.pic_count = 0;
     this.isWalking = false;
     var m_bombMan = this;
@@ -82,7 +81,7 @@ var BombMan = function(file, options) {
                 this.playerDirection = this.constants.DirectionEnum.UP;
             }
             this.isWalking = true;
-            //this.mapPosition = {x:this.mapPosition.x, y:this.mapPosition.y};
+            //this.canvasPosition = {x:this.canvasPosition.x, y:this.canvasPosition.y};
             this.sprite.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
         }
     }
@@ -114,8 +113,8 @@ var BombMan = function(file, options) {
     this.draw = function(ctx){
         // console.log("this.sprite.position");
         // console.log(this.spritePosition);
-        // console.log("this.mapPosition");
-        // console.log(this.mapPosition);
+        // console.log("this.canvasPosition");
+        // console.log(this.canvasPosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.sprite.update();
         this.sprite.draw(ctx);
@@ -139,7 +138,7 @@ var BombMan = function(file, options) {
     this.placeBomb = function(){
         if(this.bombNum < this.maxBombNum){
             var bomb = new Bomb(this.bombPower);
-            bomb.position = this.mapPosition;
+            bomb.position = this.canvasPosition;
             bomb.ExploredCallBack.push(this.bombExploredHandler);
             this.bombNum += 1;
             return bomb;
@@ -239,10 +238,10 @@ var BombMan = function(file, options) {
 
 Object.defineProperty(BombMan.prototype, 'position', {
     get: function() {
-        return this.mapPosition;
+        return this.canvasPosition;
     },
     set: function(newValue) {
-        this.mapPosition = newValue;
-        this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.canvasPosition = newValue;
+        this.spritePosition = {x:this.canvasPosition.x * 64, y: this.canvasPosition.y * 64};
     }
 });
