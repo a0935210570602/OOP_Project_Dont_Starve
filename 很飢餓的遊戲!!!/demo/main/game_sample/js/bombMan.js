@@ -107,6 +107,10 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
+        this.equipmentBar.update();
+        this.getBodyEquipment();
+        this.getHandEquipment();
+        this.getHeadEquipment();
     }
 
 
@@ -148,11 +152,14 @@ var BombMan = function(file, options) {
 
     this.equipFromBackpack = function(indexForBackpack, indexForEquipment){
         var obj = this.backpack.getItem(indexForBackpack);
+        obj.inEquipmentbar = true;
         var equipment_obj = this.equipmentBar.getEquipment(indexForEquipment);
         this.backpack.arrayRemoveByIndex(indexForBackpack);
         this.equipmentBar.setEquipment(obj, indexForEquipment);
-        if(equipment_obj != null)
+        if(equipment_obj != null){
+            equipment_obj.inEquipmentbar = false;
             this.backpack.addItemByObject(equipment_obj);
+        }
     }
 
     this.clickInBackPack = function(index){
@@ -169,16 +176,16 @@ var BombMan = function(file, options) {
                     this.equipFromBackpack(index, 2);
                     break;
             }
-            this.getBodyEquipment();
-            this.getHandEquipment();
-            this.getHeadEquipment();
         }
     }
 
     this.removeEquipment = function(index){
         if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
+            this.equipmentBar.equipmentList[index].inEquipmentbar = false;
+
             this.backpack.addItemByObject(this.equipmentBar.getEquipment(index));
             this.equipmentBar.setEquipment(null, index);
+
         }
     }
 

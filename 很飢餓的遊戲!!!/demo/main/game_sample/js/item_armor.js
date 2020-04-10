@@ -11,6 +11,7 @@ var Item_armor = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "body";
+    this.inEquipmentbar = false;
 
 
 

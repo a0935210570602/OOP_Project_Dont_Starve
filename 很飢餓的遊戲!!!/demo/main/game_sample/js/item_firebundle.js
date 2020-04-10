@@ -10,10 +10,19 @@ var Item_firebundle = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "hand";
-
+    this.inEquipmentbar = false;
 
     this.update = function(){
-        this.status = false;
+        this.reduceDurability();
+    }
+
+    this.reduceDurability = function(){
+        if(this.inEquipmentbar){
+            this.durability -= 1;
+            setTimeout(()=>{
+                this.reduceDurability();
+            },1000);
+        }
     }
 
     this.draw = function(ctx){

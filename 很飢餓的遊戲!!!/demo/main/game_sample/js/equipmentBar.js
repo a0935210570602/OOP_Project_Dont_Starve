@@ -29,5 +29,15 @@ var EquipmentBar = function(backpackList) {
 
     this.setEquipment = function(obj, index){
         this.equipmentList[index] = obj;
+        if(obj != null)
+            this.equipmentList[index].update();
+    }
+
+    this.update = function(){
+        for(var i = 0;i < 3;i++){
+            if(this.equipmentList[i] != null && this.equipmentList[i].durability <= 0){
+                this.equipmentList[i] = null;
+            }
+        }
     }
 };
