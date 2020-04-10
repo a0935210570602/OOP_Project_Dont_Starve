@@ -63,7 +63,10 @@ var BombMan = function(file, options) {
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null){
             this.handEquipmentAttack = 10;
-            this.mode = "light";
+            if(handEquipment.item_num == 32)
+                this.mode = "light";
+            else
+                this.mode = "";
         }
     }
     //moveStep為位移量  格式範例{x:1,y:0}
@@ -105,9 +108,6 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
-        this.getBodyEquipment();
-        this.getHandEquipment();
-        this.getHeadEquipment();
     }
 
 
@@ -170,6 +170,9 @@ var BombMan = function(file, options) {
                     this.equipFromBackpack(index, 2);
                     break;
             }
+            this.getBodyEquipment();
+            this.getHandEquipment();
+            this.getHeadEquipment();
         }
     }
 
