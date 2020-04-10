@@ -1,4 +1,4 @@
-var Level2_change = Framework.Class(Framework.Level , {
+var Map_1 = Framework.Class(Framework.Level , {
     initializeProgressResource: function() {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
@@ -11,7 +11,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         ctx.font ='90px Arial';
         ctx.textAlign = 'center';
         ctx.fillStyle = 'white';
-        ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
+        //ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
     },
     load: function() {
 
@@ -145,37 +145,6 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //44
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //45
         this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //40
-        // this.item_map_Array.push([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]); //47
-
-      
-        // this.mapArray.push([0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //1
-        // this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1]); //2
-        // this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1]); //3
-        // this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //4
-        // this.mapArray.push([1,0,0,4,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //5
-        // this.mapArray.push([1,0,0,3,4,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,1,1]); //0
-        // this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1]); //7
-        // this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,2,2,1]); //8
-        // this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,2,0,2,2,0,2,0,0,1,1]); //9
-        // this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1]); //10
-        // this.mapArray.push([1,0,0,3,3,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1]); //11
-        // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //12
-
-
-
-
-        // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //1
-        // this.mapArray.push([1,0,0,4,4,0,0,0,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //2
-        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //3
-        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //4
-        // this.mapArray.push([1,6,6,4,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //5
-        // this.mapArray.push([1,6,6,3,4,6,6,6,6,6,6,6,6,6,7,7,7,6,6,6,6,1]); //6
-        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //7
-        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //8
-        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //9
-        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //16
-        // this.mapArray.push([1,6,6,3,3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1]); //11
-        // this.mapArray.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]); //12
 
         this.map = new World_map(this.mapArray, this.item_map_Array);
         this.map.load();

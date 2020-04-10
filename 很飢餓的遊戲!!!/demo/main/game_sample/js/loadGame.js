@@ -112,12 +112,14 @@ var loadGameEnd;
         { src: 'game_sample/js/characterStatus.js', lookFor: 'CharacterStatus' },
         { src: 'game_sample/js/mapTile.js', lookFor: 'MapTile' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
-        { src: 'game_sample/js/map.js', lookFor: 'Map' },
+        { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
         { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
         { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
+        { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
+
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}
     ]
