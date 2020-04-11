@@ -44,6 +44,18 @@ var CharacterStatus = function() {
         }, 1500);
     }
 
+    this.increaseStatusByEat = function(hunger, health){
+        if(this.currentHealth + health >= this.totalHealth)
+            this.currentHealth = this.totalHealth;
+        else
+            this.currentHealth += health;
+
+        if(this.currentHunger + hunger >= this.totalHunger)
+            this.currentHunger = this.totalHunger;
+        else
+            this.currentHunger += hunger;
+    }
+
     this.update = function(){
         
     }

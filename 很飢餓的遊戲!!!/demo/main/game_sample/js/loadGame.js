@@ -99,6 +99,7 @@ var loadGameEnd;
 
         { src: 'game_sample/js/item_flower.js', lookFor: 'Item_flower' },
         { src: 'game_sample/js/item_flower_picked.js', lookFor: 'Item_flower_picked' },
+        { src: 'game_sample/js/item_berry.js', lookFor: 'Item_berry' },
 
         { src: 'game_sample/js/item_waikei_homework.js', lookFor: 'Item_waikei_homework' },
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },

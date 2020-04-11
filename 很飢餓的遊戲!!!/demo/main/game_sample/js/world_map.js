@@ -66,136 +66,15 @@ var World_map = function(map, item_map)
         this.terrain_snow_ground[2].scale = 2;
 
         /////////////////////////////////////////////////////////////////////////////////////
-        
-        // this.mapFloor = new Framework.Sprite(define.imagePath + 'floor2.png');
-        // this.mapFloor.scale = 2;
-
-        // this.mapWall = new Framework.Sprite(define.imagePath + 'treeStone.png');
-        // this.mapWall.scale = 2;
-
-        this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png');
-        this.item_branch.scale = 2;
-
-        this.item_droplet = new Framework.Sprite(define.materialPath + 'item_droplet.png');
-        this.item_droplet.scale = 2;
-
-        this.item_pixilart = new Framework.Sprite(define.materialPath + 'item_pixilart.png');
-        this.item_pixilart.scale = 2;
-
-        this.item_gold_pixilart = new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png');
-        this.item_gold_pixilart.scale = 2;
-
-        this.item_space_wand = new Framework.Sprite(define.materialPath + 'item_space_wand.png');
-        this.item_space_wand.scale = 2;
-        
-        this.item_fire_wand = new Framework.Sprite(define.materialPath + 'item_fire_wand.png');
-        this.item_fire_wand.scale = 2;
-
-        this.item_king_wand = new Framework.Sprite(define.materialPath + 'item_king_wand.png');
-        this.item_king_wand.scale = 2;
-
-        this.item_ice_wand = new Framework.Sprite(define.materialPath + 'item_ice_wand.png');
-        this.item_ice_wand.scale = 2;
-
-        this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
-        this.item_gold.scale = 2;
-
-        this.item_spear = new Framework.Sprite(define.materialPath + 'item_spear.png');
-        this.item_spear.scale = 2;
-
-        this.item_armor = new Framework.Sprite(define.materialPath + 'item_armor.png');
-        this.item_armor.scale = 2;
-
-        this.item_wood_armor = new Framework.Sprite(define.materialPath + 'item_wood_armor.png');
-        this.item_wood_armor.scale = 2;
-
-        this.item_helmat = new Framework.Sprite(define.materialPath + 'item_helmat.png');
-        this.item_helmat.scale = 2;
-
-        this.item_bee_sting = new Framework.Sprite(define.materialPath + 'item_bee_sting.png');
-        this.item_bee_sting.scale = 2;
-
-        this.item_ax = new Framework.Sprite(define.materialPath + 'item_ax.png');
-        this.item_ax.scale = 2;
-
-        this.item_gold_shovel = new Framework.Sprite(define.materialPath + 'item_gold_shovel.png');
-        this.item_gold_shovel.scale = 2;
-
-        this.item_flint = new Framework.Sprite(define.materialPath + 'item_flint.png');
-        this.item_flint.scale = 2;
-
-        this.item_snow_ball = new Framework.Sprite(define.materialPath + 'item_snow_ball.png');
-        this.item_snow_ball.scale = 2;
-
-        this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
-        this.item_shovel.scale = 2;
-
-        this.item_gold_ax = new Framework.Sprite(define.materialPath + 'item_gold_ax.png');
-        this.item_gold_ax.scale = 2;
-
-        this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
-        this.item_shovel.scale = 2;
-
-        this.item_pigskin = new Framework.Sprite(define.materialPath + 'item_pigskin.png');
-        this.item_pigskin.scale = 2;
-
-        this.item_fishing_rod = new Framework.Sprite(define.materialPath + 'item_fishing_rod.png');
-        this.item_fishing_rod.scale = 2;
-
-        this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png');
-        this.item_rope.scale = 2;
-
-        this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png');
-        this.item_camp.scale = 2;
-
-        this.item_campfire = new Framework.Sprite(define.materialPath + 'item_campfire.png');
-        this.item_campfire.scale = 2;
-
-        this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
-        this.item_wood.scale = 2;
-
-        this.item_lamp = new Framework.Sprite(define.materialPath + 'item_lamp.png');
-        this.item_lamp.scale = 2;
-
-        this.item_bush = new Framework.Sprite(define.materialPath + 'item_bush.png');
-        this.item_bush.scale = 2;
-
-        this.item_arror = new Framework.Sprite(define.materialPath + 'item_arror.png');
-        this.item_arror.scale = 2;
-
-        this.item_ice = new Framework.Sprite(define.materialPath + 'item_ice.png');
-        this.item_ice.scale = 2;
-
-        this.item_firebundle = new Framework.Sprite(define.materialPath + 'item_firebundle.png');
-        this.item_firebundle.scale = 1.5;
-
-        this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
-        this.item_spider_web.scale = 2;
-
-        this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
-        this.item_grass.scale = 2;
-
-        this.item_grass_mowed = new Framework.Sprite(define.materialPath + 'item_grass_mowed.png'); 
-        this.item_grass_mowed.scale = 2;
-        
-        this.item_flower = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
-        this.item_flower.scale = 2;
-
-        this.item_flower_pulled = new Framework.Sprite(define.materialPath + 'item_flower_pulled.png'); 
-        this.item_flower_pulled.scale = 2;
-
-        
-        this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png');
-        this.item_stone.scale = 2;
-
-        this.item_waikei_homework = new Framework.Sprite(define.materialPath + 'item_waikei_homework.png');
-        this.item_waikei_homework.scale = 2;
 
         this.clock = new Clock();
         this.clock.scale = 2;
 
         this.item_blank = new Framework.Sprite(define.materialPath + 'item_blank.png');
         this.item_blank.scale = 2;
+
+        this.item_berry = new Framework.Sprite(define.materialPath + 'item_berry.png'); 
+        this.item_berry.scale = 2;
 
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
@@ -728,6 +607,12 @@ var World_map = function(map, item_map)
                         }
                         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
                             this.player1.backpack.addItemByObject(new Item_grass_picked());
+                            this.pickRegenerateObject();
+                        }
+                        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 36){
+                            // var berry = new Item_berry();
+                            // berry.init();
+                            this.player1.backpack.addItemByObject( new Item_berry());
                             this.pickRegenerateObject();
                         }
                         else{

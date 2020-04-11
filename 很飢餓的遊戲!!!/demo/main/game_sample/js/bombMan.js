@@ -177,6 +177,10 @@ var BombMan = function(file, options) {
                     break;
             }
         }
+        if (obj.type == "food"){
+            this.characterStatus.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
+            this.backpack.updateByEat(index);
+        }
     }
 
     this.removeEquipment = function(index){
