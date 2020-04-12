@@ -76,6 +76,14 @@ var World_map = function(map, item_map)
         this.item_berry = new Framework.Sprite(define.materialPath + 'item_berry.png'); 
         this.item_berry.scale = 2;
 
+        this.map_item_tree = new Framework.Sprite(define.materialPath + 'map_item_tree.png'); 
+        this.map_item_tree_growed = new Framework.Sprite(define.materialPath + 'map_item_tree_growed.png'); 
+        this.map_item_tree_cutted = new Framework.Sprite(define.materialPath + 'map_item_tree_cutted.png'); 
+
+        this.map_item_tree.scale = 2;
+        this.map_item_tree_growed.scale = 2;
+        this.map_item_tree_cutted.scale = 2;
+
         var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
         var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
@@ -238,10 +246,13 @@ var World_map = function(map, item_map)
                         this.itemArray.push(new Item_bush());
                         break;
                     case 37:
-                        this.itemList.push(new Item_flower_picked());
+                        this.itemArray.push(new Item_flower_picked());
                         break;
                     case 38:
-                        this.itemList.push(new Item_bush());
+                        this.itemArray.push(new Item_bush());
+                        break;
+                    case -1:
+                        this.itemArray.push(new Map_item_tree());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());
@@ -614,6 +625,43 @@ var World_map = function(map, item_map)
                             // berry.init();
                             this.player1.backpack.addItemByObject( new Item_berry());
                             this.pickRegenerateObject();
+                        }
+                        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 
+                                && this.player1.equipmentBar.equipmentList[2].item_num == 16){
+                            // var berry = new Item_berry();
+                            // berry.init();
+                            var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
+                            var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
+                            var count = false;
+                            console.log("preform");
+                            console.log("out", this.itemMap[x][y].false_count);
+                            if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 6)
+                                console.log("in", this.itemMap[x][y].false_count);
+                                console.log("grow");
+                                for(var i=-1;i<2;i++){
+                                    for(var j=-1;j<2;j++){
+                                        if(this.mapArray[x+i][y+j] != 91 &&
+                                            this.mapArray[x+i][y+j] != 196 &&
+                                            this.mapArray[x+i][y+j] != 200 &&
+                                            this.item_map_Array[x+i][y+j] ==0 
+                                            ){
+                                            if(((y+j) != this.playerPositionOnMap.x) &&
+                                            ((x+i) != this.playerPositionOnMap.y)){
+                                                console.log("position = ",y+j,x+i);
+                                                console.log("playerPositionOnMap = ",this.playerPositionOnMap);
+                                                this.item_map_Array[x+i][y+j] = 7;
+                                                count = true;
+                                                this.itemMap[x+i].splice(y+j,1,new Item_wood());
+        
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if(count)
+                                        break;
+                                }
+                            this.pickRegenerateObject();
+                            // this.player1.backpack.addItemByObject( new Item_wood());
                         }
                         else{
                             this.player1.backpack.addItemByObject(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);

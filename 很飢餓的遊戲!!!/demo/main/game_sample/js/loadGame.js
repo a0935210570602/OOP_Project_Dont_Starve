@@ -60,9 +60,11 @@ var loadGameEnd;
         { src: 'game_sample/js/score.js', lookFor: 'Score' },
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },
         { src: 'game_sample/js/monster.js', lookFor: 'Monster' },
+
+        { src: 'game_sample/js/map_item_tree.js', lookFor: 'Map_item_tree' },
+
         { src: 'game_sample/js/item_grass.js', lookFor: 'Item_grass' },
         { src: 'game_sample/js/item_grass_picked.js', lookFor: 'Item_grass_picked' },
-
         { src: 'game_sample/js/item_rope.js', lookFor: 'Item_rope' },
         { src: 'game_sample/js/item_stone.js', lookFor: 'Item_stone' },
         { src: 'game_sample/js/item_droplet.js', lookFor: 'Item_droplet' },
@@ -75,12 +77,10 @@ var loadGameEnd;
         { src: 'game_sample/js/item_gold.js', lookFor: 'Item_gold' },
         { src: 'game_sample/js/item_bush.js', lookFor: 'Item_bush' },
         { src: 'game_sample/js/item_ice.js', lookFor: 'Item_ice' },
-        
         { src: 'game_sample/js/item_arror.js', lookFor: 'Item_arror' },
         { src: 'game_sample/js/item_shovel.js', lookFor: 'Item_shovel' },
         { src: 'game_sample/js/item_armor.js', lookFor: 'Item_armor' },
         { src: 'game_sample/js/item_spear.js', lookFor: 'Item_spear' },
-
         { src: 'game_sample/js/item_wood_armor.js', lookFor: 'Item_wood_armor' },
         { src: 'game_sample/js/item_helmat.js', lookFor: 'Item_helmat' },
         { src: 'game_sample/js/item_flint.js', lookFor: 'Item_flint' },
@@ -96,15 +96,15 @@ var loadGameEnd;
         { src: 'game_sample/js/item_campfire.js', lookFor: 'Item_campfire' },
         { src: 'game_sample/js/item_camp.js', lookFor: 'Item_camp' },
         { src: 'game_sample/js/item_firebundle.js', lookFor: 'Item_firebundle' },
-
         { src: 'game_sample/js/item_flower.js', lookFor: 'Item_flower' },
         { src: 'game_sample/js/item_flower_picked.js', lookFor: 'Item_flower_picked' },
         { src: 'game_sample/js/item_berry.js', lookFor: 'Item_berry' },
-
         { src: 'game_sample/js/item_waikei_homework.js', lookFor: 'Item_waikei_homework' },
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
+        { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
+
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
         { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },
         { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
@@ -114,7 +114,6 @@ var loadGameEnd;
         { src: 'game_sample/js/mapTile.js', lookFor: 'MapTile' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
         { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
-        { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
         { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
