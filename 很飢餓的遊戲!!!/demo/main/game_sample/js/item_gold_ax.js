@@ -21,6 +21,10 @@ var Item_gold_ax = function() {
         this.item_gold_ax.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 5;
+    }
+
 };
 
 Object.defineProperty(Item_gold_ax.prototype, 'position', {

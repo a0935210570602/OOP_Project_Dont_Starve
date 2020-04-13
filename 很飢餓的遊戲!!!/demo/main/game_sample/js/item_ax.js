@@ -20,6 +20,10 @@ var Item_ax = function() {
         this.item_as.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 10;
+    }
+
 };
 
 Object.defineProperty(Item_ax.prototype, 'position', {

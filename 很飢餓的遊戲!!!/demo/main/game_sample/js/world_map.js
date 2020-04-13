@@ -627,15 +627,17 @@ var World_map = function(map, item_map)
                             this.pickRegenerateObject();
                         }
                         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 
-                                && this.player1.equipmentBar.equipmentList[2].item_num == 16){
+                                && (this.player1.mode == "cut_tree") ){
                             // var berry = new Item_berry();
                             // berry.init();
                             var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
                             var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
                             var count = false;
                             this.itemMap[x][y].update();
+                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
                             // console.log("preform");
                             // console.log("out", this.itemMap[x][y].false_count);
+
                             if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 5){
                                 // console.log("in", this.itemMap[x][y].false_count);
                                 // console.log("grow");
@@ -731,6 +733,7 @@ var World_map = function(map, item_map)
 
     this.click = function(e){      
         this.synthesisBar.click(e);
+        console.log(e);
         this.player1.click(e);
         m_map.draw(Framework.Game._context);
 

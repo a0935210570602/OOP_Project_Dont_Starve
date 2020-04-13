@@ -64,6 +64,8 @@ var BombMan = function(file, options) {
             this.handEquipmentAttack = 10;
             if(handEquipment.item_num == 32)
                 this.mode = "light";
+            else if(handEquipment.item_num == 16 || handEquipment.item_num == 19)
+                this.mode = "cut_tree";
             else
                 this.mode = "";
         }
