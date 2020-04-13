@@ -486,8 +486,9 @@ var SynthesisBar = function(backpackList) {
 
     this.click = function(e){
         if(this.firstColumeIndex != -1 && this.secondColumnIndex != -1){
+            var check = backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
             var position = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1].position;
-            if(this.currentPoint.x == position.x && this.currentPoint.y == position.y){
+            if(this.currentPoint.x == position.x && this.currentPoint.y == position.y && check == 1){
                 if(backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex])){
                     backpackList.addItemBySynthesis(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                     backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);

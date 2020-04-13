@@ -23,7 +23,7 @@ var Map_item_tree = function() {
     }
 
     this.reset_growed = function(){
-        setTimeout(()=>{  this.false_count = 0}, this.regeneration_time);
+        setTimeout(()=>{  this.false_count = 1}, this.regeneration_time);
     }
 
     this.update = function(){

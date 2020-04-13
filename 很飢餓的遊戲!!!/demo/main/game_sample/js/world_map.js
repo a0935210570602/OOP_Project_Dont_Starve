@@ -561,9 +561,9 @@ var World_map = function(map, item_map)
     this.pressWalk = false;
     this.keyPress = "";
     this.keydown = function(e, list){
-        console.log("player.position");
-        console.log(this.playerPositionOnMap);
-        console.log("player.canvasPosition");
+        // console.log("player.position");
+        // console.log(this.playerPositionOnMap);
+        // console.log("player.canvasPosition");
         // console.log(this.player1.canvasPosition);
         if(e.key === 'F') {
             this.demo_dead_trigger = 1;
@@ -633,25 +633,29 @@ var World_map = function(map, item_map)
                             var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
                             var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
                             var count = false;
-                            console.log("preform");
-                            console.log("out", this.itemMap[x][y].false_count);
-                            if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 6)
-                                console.log("in", this.itemMap[x][y].false_count);
-                                console.log("grow");
+                            this.itemMap[x][y].update();
+                            // console.log("preform");
+                            // console.log("out", this.itemMap[x][y].false_count);
+                            if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 5){
+                                // console.log("in", this.itemMap[x][y].false_count);
+                                // console.log("grow");
                                 for(var i=-1;i<2;i++){
                                     for(var j=-1;j<2;j++){
+                                        // console.log("this.item_map_Array[x+i][y+j]",this.item_map_Array[x+i][y+j]);
                                         if(this.mapArray[x+i][y+j] != 91 &&
                                             this.mapArray[x+i][y+j] != 196 &&
                                             this.mapArray[x+i][y+j] != 200 &&
-                                            this.item_map_Array[x+i][y+j] ==0 
+                                            this.item_map_Array[x+i][y+j] == 0 
                                             ){
-                                            if(((y+j) != this.playerPositionOnMap.x) &&
+                                            console.log("p = ",y+j,x+i);
+                                            if(((y+j) != this.playerPositionOnMap.x) ||
                                             ((x+i) != this.playerPositionOnMap.y)){
-                                                console.log("position = ",y+j,x+i);
-                                                console.log("playerPositionOnMap = ",this.playerPositionOnMap);
+                                                // console.log("position = ",y+j,x+i);
+                                                // console.log("playerPositionOnMap = ",this.playerPositionOnMap);
                                                 this.item_map_Array[x+i][y+j] = 7;
                                                 count = true;
-                                                this.itemMap[x+i].splice(y+j,1,new Item_wood());
+                                                this.itemMap[x+i][y+j] = new Item_wood();
+                                                // this.itemMap[x+i].splice(y+j,1,new Item_wood());
         
                                                 break;
                                             }
@@ -660,7 +664,7 @@ var World_map = function(map, item_map)
                                     if(count)
                                         break;
                                 }
-                            this.pickRegenerateObject();
+                            }
                             // this.player1.backpack.addItemByObject( new Item_wood());
                         }
                         else{
