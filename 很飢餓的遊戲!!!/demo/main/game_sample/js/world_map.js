@@ -344,10 +344,6 @@ var World_map = function(map, item_map)
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
                 if(this.keyPress == "Down") {
-                    // console.log("this.playerPositionOnMap");
-                    // console.log(this.playerPositionOnMap);
-                    
-                    this.walkaLittle();
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
                     this.addition.x += 0;
@@ -356,37 +352,33 @@ var World_map = function(map, item_map)
                 }
         
                 if(this.keyPress == "Left") {
-                    // console.log("this.playerPositionOnMap");
-                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:-1,y:0});
                     this.playerPositionOnMap.x-=1;
                     this.addition.x += -1;
                     this.addition.y += 0;
-                    this.walkaLittle();
                     this.terrainMapCreate();
                 }
         
                 if(this.keyPress == "Right") {
-                    // console.log("this.playerPositionOnMap");
-                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:1,y:0});
                     this.playerPositionOnMap.x+=1;
                     this.addition.x += 1;
                     this.addition.y += 0;
-                    this.walkaLittle();
                     this.terrainMapCreate();
                 }
         
                 if(this.keyPress == "Up") {
-                    // console.log("this.playerPositionOnMap");
-                    // console.log(this.playerPositionOnMap);
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
                     this.addition.x += 0;
                     this.addition.y += -1;
-                    this.walkaLittle();
                     this.terrainMapCreate();
-
+                }
+                this.walkaLittle();
+                if(this.keyPress != ""){
+                    setTimeout(()=>{
+                        this.characterWalk();
+                    },800)
                 }
             }
         }
@@ -426,15 +418,11 @@ var World_map = function(map, item_map)
             }
         }
     }
+    this.mapDraw = function(ctx) {
+
+    }
 	this.draw = function(ctx) {
 
-        
-        if(this.keyPress != ""){
-            this.characterWalk();
-        }
-        // console.log("draw");
-        
-        
         for(var i=0;i<121;i++){
         // console.log("draw");
             this.terrainArray[i].draw(ctx);
@@ -452,10 +440,7 @@ var World_map = function(map, item_map)
                 this.CanvasCanDraw(this.monster[i], ctx);
             }
         }
-        // for(i=0;i<3;i++){
-            //     this.clock[i].draw(ctx);
-            // }
-        // this.backpack.draw(ctx);
+   
         this.synthesisBar.draw(ctx);
         this.player1.draw(ctx);
         this.clock.draw(ctx);
@@ -580,6 +565,7 @@ var World_map = function(map, item_map)
                 // console.log("x2= ",playerPosition.x);
                 // console.log("y2= ",playerPosition.y);
                 this.pressWalk = true;
+                this.characterWalk();
             }
         }
 
@@ -590,6 +576,7 @@ var World_map = function(map, item_map)
             this.keyPress = "Left";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
+                this.characterWalk();
             }
         }
 
@@ -600,6 +587,7 @@ var World_map = function(map, item_map)
             this.keyPress = "Right";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
+                this.characterWalk();
             }
         }
 
@@ -610,6 +598,7 @@ var World_map = function(map, item_map)
             this.keyPress = "Up";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
                 this.pressWalk = true;
+                this.characterWalk();
             }
         }
 
@@ -688,12 +677,21 @@ var World_map = function(map, item_map)
     }
 
     this.smoothlyMoveMap = function(move){
-        for(var i = 1;i <= 64;i++){
-            // this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*63 + move.x,y:this.tilePosition[j][i].y*63 + move.y};
+        for(var i=0;i<121;i++){
+            this.terrainArray[i].position.x += move.x*64;
+            this.terrainArray[i].position.y += move.y*64;
+        }
+        for(var j=1;j<9;j++){
+            for(var i=0;i<121;i++){
+                this.terrainArray[i].position.x -= move.x*8;
+                this.terrainArray[i].position.y -= move.y*8;
+                m_map.draw(Framework.Game._context);
+            }
         }
     }
 
     this.walkaLittle = function(){
+        console.log("sss",this.keyPress);
         switch(this.keyPress){
             //x,y pixel
             case "Down":
@@ -709,7 +707,7 @@ var World_map = function(map, item_map)
                 this.smoothlyMoveMap({x:0,y:-1});
                 break;
             default:
-                console.log("fuc k");
+                m_map.draw(Framework.Game._context);
         }
     }
 
