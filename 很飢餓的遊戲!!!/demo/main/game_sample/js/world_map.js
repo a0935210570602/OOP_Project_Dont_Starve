@@ -84,11 +84,10 @@ var World_map = function(map, item_map)
         this.map_item_tree_growed.scale = 2;
         this.map_item_tree_cutted.scale = 2;
 
-        var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
-        var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
-        var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
-        var newMonster = new Monster(define.materialPath + 'monster_3.png',this, {down: {from: 0, to: 3}, left: {from:4, to: 7}, right: {from: 8, to: 11}, up: {from: 12, to: 15}});
-        
+        // var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
+        // var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
+        // var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
+        // var newMonster = new Monster(define.materialPath + 'monster_3.png',this, {down: {from: 0, to: 3}, left: {from:4, to: 7}, right: {from: 8, to: 11}, up: {from: 12, to: 15}});
         
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
@@ -110,6 +109,7 @@ var World_map = function(map, item_map)
         //this.mapArray = [];
         this.boxArray = [];
         this.bombArray = [];
+        this.terrainArray = [];
         this.exploreArray = [];
         this.tileArray = [];
         this.tileMap = [];
@@ -118,9 +118,10 @@ var World_map = function(map, item_map)
         this.itemArray = [];
         this.itemMap = [];
         this.initialPosition = {x:5,y:5};
+        // this.movePixel;
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:20,y:20};
-        this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x,y:this.playerPositionOnMap.y-this.initialPosition.y};
+        this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x, y: this.playerPositionOnMap.y-this.initialPosition.y};
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
             for(var j = 0; j < 11; j++){
@@ -130,6 +131,7 @@ var World_map = function(map, item_map)
         }
 
 
+        
         for(var i=0; i<this.item_map_Array.length; i++){
             var line = this.item_map_Array[i];
             this.itemArray = [];
@@ -262,41 +264,41 @@ var World_map = function(map, item_map)
             this.itemMap.push(this.itemArray);
         }
 
-        // for(var i=0; i<this.mapArray.length; i++){
-        //     var line = this.mapArray[i];
-        //     this.tileArray = [];
-        //     for(var j=0; j<this.mapArray[i].length; j++){
-        //         var tile = new MapTile(2);
-        //         tile.tileType = 0;
-        //         switch(line[j]){
-        //             case 192:
-        //                 tile.tileType = -4;
-        //                 break;
-        //             case 200:
-        //                 tile.tileType = -5;
-        //                 break;
-        //             case 137:
-        //                 tile.tileType = -6;
-        //                 break;
-        //             case 91:
-        //                 tile.tileType = -7;
-        //                 break;
-        //             case 123:
-        //                 tile.tileType = -8;
-        //                 break;
-        //             case 196:      
-        //                 tile.tileType = -9;
-        //                 break;
-        //             case 255:      
-        //                 tile.tileType = -10;
-        //                 break;
-        //             default:
-        //                 break;    
-        //         }
-        //         this.tileArray.push(tile);
-        //     }
-        //     this.tileMap.push(this.tileArray);
-        // }
+
+        for(var i=0; i<this.mapArray.length; i++){
+            var line = this.mapArray[i];
+            this.tileArray = [];
+            for(var j=0; j<this.mapArray[i].length; j++){
+                switch(line[j]){
+                    case 192:
+                        this.tileArray.push(new Terrain_plain());
+                        break;
+                    case 200:
+                        this.tileArray.push(new Terrain_water());
+                        break;
+                    case 137:
+                        this.tileArray.push(new Terrain_mountain());
+                        break;
+                    case 91:
+                        this.tileArray.push(new Terrain_blood_water());
+                        break;
+                    case 123:
+                        this.tileArray.push(new Terrain_forest());
+                        break;
+                    case 196:      
+                        this.tileArray.push(new Terrain_lava());
+                        break;
+                    case 255:      
+                        this.tileArray.push(new Terrain_snow_ground());
+                        break;
+                    default:
+                        break;    
+                }
+            }
+            this.tileMap.push(this.tileArray);
+        }
+
+        this.terrainMapCreate();
 	};
 
     this.setPlayerPosition = function(playerPosition){
@@ -336,8 +338,7 @@ var World_map = function(map, item_map)
         m_map.draw(Framework.Game._context);
     }
 
-	this.update = function()
-	{
+    this.characterWalk = function(){
         if(this.pressWalk === true)
         {
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
@@ -345,10 +346,13 @@ var World_map = function(map, item_map)
                 if(this.keyPress == "Down") {
                     // console.log("this.playerPositionOnMap");
                     // console.log(this.playerPositionOnMap);
+                    
+                    this.walkaLittle();
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
                     this.addition.x += 0;
                     this.addition.y += 1;
+                    this.terrainMapCreate();
                 }
         
                 if(this.keyPress == "Left") {
@@ -358,6 +362,8 @@ var World_map = function(map, item_map)
                     this.playerPositionOnMap.x-=1;
                     this.addition.x += -1;
                     this.addition.y += 0;
+                    this.walkaLittle();
+                    this.terrainMapCreate();
                 }
         
                 if(this.keyPress == "Right") {
@@ -367,6 +373,8 @@ var World_map = function(map, item_map)
                     this.playerPositionOnMap.x+=1;
                     this.addition.x += 1;
                     this.addition.y += 0;
+                    this.walkaLittle();
+                    this.terrainMapCreate();
                 }
         
                 if(this.keyPress == "Up") {
@@ -376,9 +384,16 @@ var World_map = function(map, item_map)
                     this.playerPositionOnMap.y-=1;
                     this.addition.x += 0;
                     this.addition.y += -1;
+                    this.walkaLittle();
+                    this.terrainMapCreate();
+
                 }
             }
         }
+    }
+    
+	this.update = function()
+	{
         this.player1.update();
         if(this.stopMonster === true)
         {
@@ -401,41 +416,28 @@ var World_map = function(map, item_map)
         }
     }
     this.generation_time;
-
-	this.draw = function(ctx) {
+    this.terrainMapCreate = function(){
+        this.terrainArray = [];
         for(var i=0; i<11; i++){
             for(var j=0; j<11; j++){
-                switch(this.mapArray[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]){
-                    case 192:
-                        this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_plain[this.clock.status].draw(ctx);
-                        break;
-                    case 200:
-                        this.terrain_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_water[this.clock.status].draw(ctx);
-                        break;
-                    case 137:
-                        this.terrain_mountain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_mountain[this.clock.status].draw(ctx);
-                        break;
-                    case 91:
-                        this.terrain_blood_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_blood_water[this.clock.status].draw(ctx);
-                        break;
-                    case 123:
-                        this.terrain_forest[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_forest[this.clock.status].draw(ctx);
-                        break;
-                    case 196:     
-                        this.terrain_lava[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_lava[this.clock.status].draw(ctx);
-                        break;
-                    case 255:      
-                        this.terrain_snow_ground[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_snow_ground[this.clock.status].draw(ctx);
-                        break;
-                }
+                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].timeStatus = this.clock.status;
+                this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                this.terrainArray.push(this.tileMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]);
             }
+        }
+    }
+	this.draw = function(ctx) {
+
+        
+        if(this.keyPress != ""){
+            this.characterWalk();
+        }
+        // console.log("draw");
+        
+        
+        for(var i=0;i<121;i++){
+        // console.log("draw");
+            this.terrainArray[i].draw(ctx);
         }
 
         for(var i=0; i<11; i++){
@@ -572,6 +574,7 @@ var World_map = function(map, item_map)
         if(e.key === 'Down') {
             this.player1.walk({x:0,y:1});
             this.playerWalkDirection = {x:0,y:1};
+            // this.movePixel = this.playerWalkDirection;
             this.keyPress = "Down";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
                 // console.log("x2= ",playerPosition.x);
@@ -583,6 +586,7 @@ var World_map = function(map, item_map)
         if(e.key === 'Left') {
             this.playerWalkDirection = {x:-1,y:0};
             this.player1.walk({x:-1,y:0});
+            // this.movePixel = this.playerWalkDirection;
             this.keyPress = "Left";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
@@ -592,6 +596,7 @@ var World_map = function(map, item_map)
         if(e.key === 'Right') {
             this.playerWalkDirection = {x:1,y:0};
             this.player1.walk({x:1,y:0});
+            // this.movePixel = this.playerWalkDirection;
             this.keyPress = "Right";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
                 this.pressWalk = true;
@@ -601,6 +606,7 @@ var World_map = function(map, item_map)
         if(e.key === 'Up') {
             this.playerWalkDirection = {x:0,y:-1};
             this.player1.walk({x:0,y:-1});
+            // this.movePixel = this.playerWalkDirection;
             this.keyPress = "Up";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
                 this.pressWalk = true;
@@ -678,6 +684,32 @@ var World_map = function(map, item_map)
                     }
                 }
             }
+        }
+    }
+
+    this.smoothlyMoveMap = function(move){
+        for(var i = 1;i <= 64;i++){
+            // this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*63 + move.x,y:this.tilePosition[j][i].y*63 + move.y};
+        }
+    }
+
+    this.walkaLittle = function(){
+        switch(this.keyPress){
+            //x,y pixel
+            case "Down":
+                this.smoothlyMoveMap({x:0,y:-1});
+                break;
+            case "Left":
+                this.smoothlyMoveMap({x:1,y:0});
+                break;
+            case "Right":
+                this.smoothlyMoveMap({x:-1,y:0});
+                break;
+            case "Up":
+                this.smoothlyMoveMap({x:0,y:-1});
+                break;
+            default:
+                console.log("fuc k");
         }
     }
 

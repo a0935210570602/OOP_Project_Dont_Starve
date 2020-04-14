@@ -11,7 +11,7 @@ var MapTile = function(time_status) {
     else{
         time_path = define.imageNightPath;
     }
-    console.log(time_path);
+    // console.log(time_path);
     // this.mapFloor = new Framework.Sprite(time_path + 'floor2.png');
     // this.mapFloor.scale = 2;
 

@@ -119,6 +119,14 @@ var loadGameEnd;
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
         { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
+        
+        { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
+        { src: 'game_sample/js/terrain_forest.js', lookFor: 'Terrain_forest' },
+        { src: 'game_sample/js/terrain_lava.js', lookFor: 'Terrain_lava' },
+        { src: 'game_sample/js/terrain_mountain.js', lookFor: 'Terrain_mountain' },
+        { src: 'game_sample/js/terrain_plain.js', lookFor: 'Terrain_plain' },
+        { src: 'game_sample/js/terrain_snow_ground.js', lookFor: 'Terrain_snow_ground' },
+        { src: 'game_sample/js/terrain_water.js', lookFor: 'Terrain_water' },
 
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}
