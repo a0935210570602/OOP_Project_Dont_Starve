@@ -112,7 +112,7 @@ var Character_description = function(backpackList) {
         ctx.font = "bold 24px serif";
         ctx.fillStyle = "black";
         ctx.lineWidth = 2.5;
-        ctx.fillText("能力值點數: "+this.capabilityt_point, 1135, 2*64-5);
+        ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
         if(this.capabilityt_point!=0){
             for(var i=2;i<9;i++){
                 this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
