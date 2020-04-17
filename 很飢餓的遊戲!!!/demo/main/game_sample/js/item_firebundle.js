@@ -11,7 +11,7 @@ var Item_firebundle = function() {
     this.durability = 100;
     this.place = "hand";
     this.inEquipmentbar = false;
-
+    this.item_can_be_picked = true;
     this.update = function(){
         this.reduceDurability();
     }

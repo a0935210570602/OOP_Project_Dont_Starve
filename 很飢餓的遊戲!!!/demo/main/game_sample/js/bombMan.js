@@ -29,6 +29,10 @@ var BombMan = function(file, options) {
     this.bodyEquipmentDefense = 0;
     this.handEquipmentAttack = 0;
 
+    this.experience = 0;
+    this.levelup_experience = 4;
+    this.level = 1
+
     this.totalDefense = 10;
 
     //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
@@ -41,7 +45,14 @@ var BombMan = function(file, options) {
     this.init = function(){
         this.characterStatus.init();
     }
-
+    this.getExperience= function(experience){
+        this.experience += experience;
+        if(this.experience >=this.levelup_experience){
+            this.experience -= this.levelup_experience
+            this.levelup_experience *= 2;
+            this.level ++;
+        }
+    }
     this.getBackPack = function(){
         return this.backpack;
     }
@@ -68,6 +79,8 @@ var BombMan = function(file, options) {
                 this.mode = "cut_tree";
             else
                 this.mode = "";
+        }else{
+            this.mode = "";
         }
     }
     //moveStep為位移量  格式範例{x:1,y:0}

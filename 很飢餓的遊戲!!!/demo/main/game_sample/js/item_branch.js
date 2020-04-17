@@ -4,6 +4,7 @@ var Item_branch = function() {
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
+    this.item_can_be_picked = true;
     this.item_num = 4;
     //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物
     this.type = "material";

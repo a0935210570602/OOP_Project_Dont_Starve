@@ -9,7 +9,7 @@ var Item_flower_picked = function() {
     this.type = "food";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
-
+    this.item_can_be_picked = true;
     this.draw = function(ctx){
         this.item_flower_picked.draw(ctx);
     }

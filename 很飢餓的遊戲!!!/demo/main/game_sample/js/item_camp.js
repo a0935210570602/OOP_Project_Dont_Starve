@@ -9,7 +9,8 @@ var Item_camp = function() {
     this.type = "tool";
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
-
+    this.item_can_be_picked = true;
+    
     this.update = function(){
         this.status = false;
     }
