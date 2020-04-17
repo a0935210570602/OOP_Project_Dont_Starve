@@ -31,7 +31,10 @@ var BombMan = function(file, options) {
 
     this.experience = 0;
     this.levelup_experience = 4;
-    this.level = 1
+    this.level = 1;
+    this.is_levelup = false;
+    this.capabilityt_point = 0;
+
 
     this.totalDefense = 10;
 
@@ -51,6 +54,13 @@ var BombMan = function(file, options) {
             this.experience -= this.levelup_experience
             this.levelup_experience *= 2;
             this.level ++;
+            this.capabilityt_point ++;
+            this.is_levelup = true;
+        }
+        if(this.is_levelup){
+            this.is_levelup = false;
+            
+            return true;
         }
     }
     this.getBackPack = function(){

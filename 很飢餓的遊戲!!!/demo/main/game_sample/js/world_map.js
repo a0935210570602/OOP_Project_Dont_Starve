@@ -99,6 +99,18 @@ var World_map = function(map, item_map)
         this.stopMonsterCounter =0;
 
         this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
+
+        this.audio = new Framework.Audio({
+            kick: {
+                mp3: define.musicPath + 'levelup.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, song1:{
+                mp3: define.musicPath + 'easy.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }
+        });
     }
 
     this.init = function()
@@ -633,7 +645,9 @@ var World_map = function(map, item_map)
                                 }
                             }
                             if(this.itemMap[x][y].false_count == 5){
-                                this.player1.getExperience(2);
+                                if(this.player1.getExperience(2)){
+                                    this.audio.play({name: 'kick', loop: false});
+                                }
                             }
                             // this.player1.backpack.addItemByObject( new Item_wood());
                         }

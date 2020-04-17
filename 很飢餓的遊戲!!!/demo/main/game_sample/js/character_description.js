@@ -9,10 +9,11 @@ var Character_description = function(backpackList) {
     this.character_descruption[2] = new Framework.Sprite(define.characterDescriptionPath + 'physical_attack.png'); 
     this.character_descruption[3] = new Framework.Sprite(define.characterDescriptionPath + 'magic_attack.png'); 
     this.character_descruption[4] = new Framework.Sprite(define.characterDescriptionPath + 'arrow_attack.png'); 
-    this.character_descruption[5] = new Framework.Sprite(define.characterDescriptionPath + 'intelligence.png'); 
-    this.character_descruption[6] = new Framework.Sprite(define.characterDescriptionPath + 'power.png'); 
+    this.character_descruption[5] = new Framework.Sprite(define.characterDescriptionPath + 'power.png'); 
+    this.character_descruption[6] = new Framework.Sprite(define.characterDescriptionPath + 'intelligence.png'); 
     this.character_descruption[7] = new Framework.Sprite(define.characterDescriptionPath + 'defense.png'); 
     this.character_descruption[8] = new Framework.Sprite(define.characterDescriptionPath + 'skill.png'); 
+    this.push_button = new Framework.Sprite(define.characterDescriptionPath + 'push_button.png'); 
     
     this.character_descruption_point = [];
     this.character_descruption_point[0] = 1;
@@ -31,16 +32,18 @@ var Character_description = function(backpackList) {
     this.character_descruption_text[2] = "物功";
     this.character_descruption_text[3] = "魔攻";
     this.character_descruption_text[4] = "弓攻";
-    this.character_descruption_text[5] = "智力";
-    this.character_descruption_text[6] = "力量";
+    this.character_descruption_text[5] = "力量";
+    this.character_descruption_text[6] = "智力";
     this.character_descruption_text[7] = "防禦";
     this.character_descruption_text[8] = "技巧";
     // for(var i=0;i<9;i++){
     //     this.character_descruption_point[i] = 6;
     // }
+    this.push_button.scale = 0.5;
     this.back_ground_picture.scale = 3;
     this.character_image.scale = 0.75;
     this.experience_chart.scale = 4;
+    this.capabilityt_point = 0;
     this.experience_chart.position = {x: 14*64, y: 2*64};  
     this.back_ground_picture.position = {x: 13*64, y: 7*64};    
     this.character_image.position = {x:11*64, y:4*64};
@@ -106,11 +109,48 @@ var Character_description = function(backpackList) {
         ctx.fillStyle = "black";
         ctx.lineWidth = 2.5;
         ctx.fillText("( " + this.experience+" / "+ this.character_levelup_experience +")", 1135, 2*64-5);
+        ctx.font = "bold 24px serif";
+        ctx.fillStyle = "black";
+        ctx.lineWidth = 2.5;
+        ctx.fillText("能力值點數: "+this.capabilityt_point, 1135, 2*64-5);
+        if(this.capabilityt_point!=0){
+            for(var i=2;i<9;i++){
+                this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
+                this.push_button.draw(ctx);
+            }
+        }
     }
 
     this.update = function(player){
         this.experience = player.experience;
         this.character_level = player.level;
         this.character_levelup_experience = player.levelup_experience;
+        this.capabilityt_point = player.capabilityt_point;
+    }
+    this.isChangeCapability = function(which_capability){
+        if(this.capabilityt_point!=0){
+
+        }
+    }
+    this.click = function(e){
+        // if(e.x >= 470 && e.x <=510){
+        //     if(e.y >=540 && e.y<= 560){
+        //         this.isChangeCapability(3);
+        //     }else if(e.y >=622 && e.y<= 642){
+        //         this.isChangeCapability(4);
+        //     }else if(e.y >=700 && e.y<= 720){
+        //         this.isChangeCapability(5);
+        //     }
+        // }else if(e.x >= 822 && e.x <=859){
+        //     if(e.y >=382 && e.y<= 402){
+        //         this.isChangeCapability(6);
+        //     }else if(e.y >=461 && e.y<= 481){
+        //         this.isChangeCapability(7);
+        //     }else if(e.y >=622 && e.y<= 642){
+        //         this.isChangeCapability(8);
+        //     }else if(e.y >=700 && e.y<= 720){
+        //         this.isChangeCapability(9);
+        //     }
+        // }
     }
 };
