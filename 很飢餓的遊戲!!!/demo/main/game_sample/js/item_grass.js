@@ -11,7 +11,7 @@ var Item_grass = function() {
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
-
+    this.item_can_be_picked = true;
     this.regeneration_time = 3000;
 
     this.reset = function(){

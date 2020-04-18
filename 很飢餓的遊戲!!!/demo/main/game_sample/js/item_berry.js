@@ -9,6 +9,7 @@ var Item_berry = function() {
     this.type = "food";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 3;
+    this.item_can_be_picked = true;
 
     this.hungerAddition = 20;
     this.healthAddition = 20;

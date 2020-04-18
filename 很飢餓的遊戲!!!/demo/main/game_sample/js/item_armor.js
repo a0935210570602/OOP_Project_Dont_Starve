@@ -6,6 +6,7 @@ var Item_armor = function() {
     this.isRegenerate = false;
     this.durability = 100;
     this.item_num = 23;
+    this.item_can_be_picked = true;
     //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物
     this.type = "equipment";
     //可疊加物件有amount 不可疊加有durability

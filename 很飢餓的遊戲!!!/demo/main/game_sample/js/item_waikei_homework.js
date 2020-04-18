@@ -9,7 +9,7 @@ var Item_waikei_homework = function() {
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
-
+    this.item_can_be_picked = true;
     this.update = function(){
         this.status = false;
     }

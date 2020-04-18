@@ -36,6 +36,10 @@
 		'imageNightPath': {
 			value: mainPath + 'image_night/',
 			writable: true
+		},
+		'characterDescriptionPath': {
+			value: mainPath + 'character_description/',
+			writable: true
 		}
 
 	});

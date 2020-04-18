@@ -105,6 +105,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
 
+        { src: 'game_sample/js/character_description.js', lookFor: 'Character_description' },
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
         { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },
         { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
