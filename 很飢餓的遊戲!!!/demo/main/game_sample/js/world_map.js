@@ -606,6 +606,35 @@ var World_map = function(map, item_map)
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
                 if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
                 {
+                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 3 ||
+                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -3){
+                        if(this.player1.mode == "rock_dig"){
+                            var y = this.playerPositionOnMap.y+this.playerWalkDirection.y;
+                            var x =this.playerPositionOnMap.x+this.playerWalkDirection.x;
+                            if(this.item_map_Array[y][x] == 3){
+                                this.itemMap[y][x].update();
+                                if(this.itemMap[y][x].count == 5){
+                                    this.item_map_Array[y][x] = 8;
+                                    this.item_map_Array[y][x + 1] = 9;
+                                    this.itemMap[y][x] = new Item_flint();
+                                    this.itemMap[y][x + 1] = new Item_gold();
+                                }
+                            }
+                            else{
+                                this.itemMap[y][x - 1].update();
+                                if(this.itemMap[y][x - 1].count == 5){
+                                    this.item_map_Array[y][x] = 8;
+                                    this.item_map_Array[y][x - 1] = 9;
+                                    this.itemMap[y][x] = new Item_flint();
+                                    this.itemMap[y][x - 1] = new Item_gold();
+                                }
+                            }
+
+                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+
+                        }
+                    }
+
                     if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
                         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
                             this.player1.backpack.addItemByObject(new Item_flower_picked());

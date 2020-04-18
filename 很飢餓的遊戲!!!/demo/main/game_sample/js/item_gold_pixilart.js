@@ -17,6 +17,10 @@ var Item_gold_pixilart = function() {
         this.status = false;
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 5;
+    }
+
     this.draw = function(ctx){
         this.item_gold_pixilart.draw(ctx);
     }

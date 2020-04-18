@@ -205,7 +205,7 @@ var SynthesisBar = function(backpackList) {
         [
             [{item: 4,amount: 2,position: {x:3,y:6}},{item: 9,amount: 2,position: {x:3,y:7}},{item: 8,amount: 1,position: {x:3,y:8}},{item: 13,amount: 2,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}],
             [{item: 4,amount: 2,position: {x:3,y:7}},{item: 38,amount: 2,position: {x:3,y:8}},{item:"合成",position:{x:3,y:9}}],
-            [{item: 2,amount: 38,position: {x:3,y:8}},{item: 13,amount: 3,position: {x:3,y:9}},{item: 4,amount: 4,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}],
+            [{item: 2,amount: 6,position: {x:3,y:8}},{item: 13,amount: 3,position: {x:3,y:9}},{item: 4,amount: 4,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}],
             [{item: 7,amount: 2,position: {x:3,y:9}},{item: 38,amount: 2,position: {x:3,y:10}},{item:"合成",position:{x:3,y:11}}]
         ],
         [

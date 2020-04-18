@@ -1,7 +1,10 @@
 
 var Item_stone = function() {
     this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png'); 
-    this.item_stone.scale = 2;
+    this.item_stone_dig = new Framework.Sprite(define.materialPath + 'item_stone_dig.png'); 
+    this.item_stone.scale = 3;
+    this.item_stone_dig.scale = 3;
+
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
@@ -10,14 +13,17 @@ var Item_stone = function() {
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
+    this.count = 0;
 
     this.update = function(){
-        this.status = false;
+        this.count += 1;
     }
 
     this.draw = function(ctx){
-        if(this.status)
+        if(this.count < 4)
             this.item_stone.draw(ctx);
+        else
+            this.item_stone_dig.draw(ctx);
     }
 
 };
@@ -28,6 +34,7 @@ Object.defineProperty(Item_stone.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_stone.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_stone.position = {x: this.mapPosition.x * 64 + 30, y: this.mapPosition.y * 64};
+        this.item_stone_dig.position = {x: this.mapPosition.x * 64 + 30, y: this.mapPosition.y * 64};
     }
 }); 
