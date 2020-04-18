@@ -619,7 +619,54 @@ var World_map = function(map, item_map)
 
                 else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
                 {
-                    
+                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 
+                        && (this.player1.mode == "cut_tree") ){
+                        // var berry = new Item_berry();
+                        // berry.init();
+                        var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
+                        var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
+                        var count = false;
+                        this.itemMap[x][y].update();
+                        this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                        // console.log("preform");
+                        // console.log("out", this.itemMap[x][y].false_count);
+
+                        if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 5){
+                            // console.log("in", this.itemMap[x][y].false_count);
+                            // console.log("grow");
+                            for(var i=-1;i<2;i++){
+                                for(var j=-1;j<2;j++){
+                                    // console.log("this.item_map_Array[x+i][y+j]",this.item_map_Array[x+i][y+j]);
+                                    if(this.mapArray[x+i][y+j] != 91 &&
+                                        this.mapArray[x+i][y+j] != 196 &&
+                                        this.mapArray[x+i][y+j] != 200 &&
+                                        this.item_map_Array[x+i][y+j] == 0 
+                                        ){
+                                        console.log("p = ",y+j,x+i);
+                                        if(((y+j) != this.playerPositionOnMap.x) ||
+                                        ((x+i) != this.playerPositionOnMap.y)){
+                                            // console.log("position = ",y+j,x+i);
+                                            // console.log("playerPositionOnMap = ",this.playerPositionOnMap);
+                                            this.item_map_Array[x+i][y+j] = 7;
+                                            count = true;
+                                            this.itemMap[x+i][y+j] = new Item_wood();
+                                            // this.itemMap[x+i].splice(y+j,1,new Item_wood());
+
+                                            break;
+                                        }
+                                    }
+                                }
+                                if(count)
+                                    break;
+                            }
+                    }
+                    if(this.itemMap[x][y].false_count == 5){
+                        if(this.player1.getExperience(2)){
+                            this.audio.play({name: 'kick', loop: false});
+                        }
+                    }
+                    // this.player1.backpack.addItemByObject( new Item_wood());
+                    }
                     if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
                         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
                             this.player1.backpack.addItemByObject(new Item_flower_picked());
@@ -635,54 +682,7 @@ var World_map = function(map, item_map)
                             this.player1.backpack.addItemByObject( new Item_berry());
                             this.pickRegenerateObject();
                         }
-                        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 
-                                && (this.player1.mode == "cut_tree") ){
-                            // var berry = new Item_berry();
-                            // berry.init();
-                            var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
-                            var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
-                            var count = false;
-                            this.itemMap[x][y].update();
-                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
-                            // console.log("preform");
-                            // console.log("out", this.itemMap[x][y].false_count);
-
-                            if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 5){
-                                // console.log("in", this.itemMap[x][y].false_count);
-                                // console.log("grow");
-                                for(var i=-1;i<2;i++){
-                                    for(var j=-1;j<2;j++){
-                                        // console.log("this.item_map_Array[x+i][y+j]",this.item_map_Array[x+i][y+j]);
-                                        if(this.mapArray[x+i][y+j] != 91 &&
-                                            this.mapArray[x+i][y+j] != 196 &&
-                                            this.mapArray[x+i][y+j] != 200 &&
-                                            this.item_map_Array[x+i][y+j] == 0 
-                                            ){
-                                            console.log("p = ",y+j,x+i);
-                                            if(((y+j) != this.playerPositionOnMap.x) ||
-                                            ((x+i) != this.playerPositionOnMap.y)){
-                                                // console.log("position = ",y+j,x+i);
-                                                // console.log("playerPositionOnMap = ",this.playerPositionOnMap);
-                                                this.item_map_Array[x+i][y+j] = 7;
-                                                count = true;
-                                                this.itemMap[x+i][y+j] = new Item_wood();
-                                                // this.itemMap[x+i].splice(y+j,1,new Item_wood());
-        
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if(count)
-                                        break;
-                                }
-                            }
-                            if(this.itemMap[x][y].false_count == 5){
-                                if(this.player1.getExperience(2)){
-                                    this.audio.play({name: 'kick', loop: false});
-                                }
-                            }
-                            // this.player1.backpack.addItemByObject( new Item_wood());
-                        }
+                        
                         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] >= 0){
                             console.log("pick");
                             this.player1.backpack.addItemByObject(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
