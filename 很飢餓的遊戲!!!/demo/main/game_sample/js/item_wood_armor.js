@@ -11,6 +11,7 @@ var Item_wood_armor = function() {
     this.durability = 100;
     this.place = "body";
     this.inEquipmentbar = false;
+    this.deffense_point = 3;
     this.item_can_be_picked = true;
 
     this.update = function(){

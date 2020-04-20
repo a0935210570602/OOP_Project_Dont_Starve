@@ -12,6 +12,8 @@ var Item_helmat = function() {
     this.place = "head";
     this.inEquipmentbar = false;
 
+    this.deffense_point = 2;
+
     this.item_can_be_picked = true;
     this.update = function(){
         this.status = false;

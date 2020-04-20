@@ -13,7 +13,7 @@ var Item_armor = function() {
     this.durability = 100;
     this.place = "body";
     this.inEquipmentbar = false;
-
+    this.deffense_point = 2;
 
 
     this.update = function(){

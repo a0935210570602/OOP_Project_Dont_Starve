@@ -12,7 +12,7 @@ var Item_arror = function() {
     this.place = "hand";
     this.inEquipmentbar = false;
     this.item_can_be_picked = true;
-
+    this.attack = 3;
 
     this.update = function(){
         this.status = false;

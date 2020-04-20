@@ -11,6 +11,7 @@ var Item_space_wand = function() {
     this.durability = 100;
     this.place = "hand";
     this.inEquipmentbar = false;
+    this.attack_point = 3;
     this.item_can_be_picked = true;
 
     this.update = function(){
