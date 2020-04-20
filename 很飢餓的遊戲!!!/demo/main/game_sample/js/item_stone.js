@@ -2,8 +2,8 @@
 var Item_stone = function() {
     this.item_stone = new Framework.Sprite(define.materialPath + 'item_stone.png'); 
     this.item_stone_dig = new Framework.Sprite(define.materialPath + 'item_stone_dig.png'); 
-    this.item_stone.scale = 2.5;
-    this.item_stone_dig.scale = 2.5;
+    this.item_stone.scale = 2;
+    this.item_stone_dig.scale = 2;
 
     this.mapPosition = {x:0, y:0};
     this.status = false;
