@@ -4,7 +4,7 @@ var Item_tree_dig = function() {
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
-    this.item_num = 41;
+    this.item_num = 42;
     //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物 plant: 可堆疊植物
     this.type = "plant";
     //可疊加物件有amount 不可疊加有durability

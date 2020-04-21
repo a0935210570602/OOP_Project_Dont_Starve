@@ -37,7 +37,7 @@ var BombMan = function(file, options) {
 
 
     this.totalDefense = 10;
-
+    this.plantIndex = -1;
     //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
     //若options.position有值, 則this.sprite.position = options.position
     //原因是在JS中, undefined會被cast成false
@@ -196,6 +196,7 @@ var BombMan = function(file, options) {
     }
 
     this.clickInBackPack = function(index){
+        this.plantIndex = -1;
         var obj = this.backpack.getItem(index);
         if (obj.type == "equipment"){
             switch(obj.place){
@@ -214,6 +215,8 @@ var BombMan = function(file, options) {
             this.characterStatus.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
             this.backpack.updateByEat(index);
         }
+        if(obj.type == "plant")
+            this.plantIndex = index;
     }
 
     this.removeEquipment = function(index){
