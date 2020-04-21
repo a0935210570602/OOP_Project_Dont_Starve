@@ -103,8 +103,11 @@ var loadGameEnd;
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
+        
+        { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },
+        { src: 'game_sample/js/item_grass_dig.js', lookFor: 'Item_grass_dig' },
+        { src: 'game_sample/js/item_flower_dig.js', lookFor: 'Item_flower_dig' },
         { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
-
         { src: 'game_sample/js/character_description.js', lookFor: 'Character_description' },
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
         { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },

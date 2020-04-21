@@ -76,6 +76,9 @@ var World_map = function(map, item_map)
         this.item_berry = new Framework.Sprite(define.materialPath + 'item_berry.png'); 
         this.item_berry.scale = 2;
 
+        this.item_flower_picked = new Framework.Sprite(define.materialPath + 'item_flower_picked.png'); 
+        this.item_flower_picked.scale = 2;
+
         this.map_item_tree = new Framework.Sprite(define.materialPath + 'map_item_tree.png'); 
         this.map_item_tree_growed = new Framework.Sprite(define.materialPath + 'map_item_tree_growed.png'); 
         this.map_item_tree_cutted = new Framework.Sprite(define.materialPath + 'map_item_tree_cutted.png'); 
@@ -620,111 +623,125 @@ var World_map = function(map, item_map)
         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 3 ||
                 this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -3){
-                if(this.player1.mode == "rock_dig"){
-                    var y = this.playerPositionOnMap.y+this.playerWalkDirection.y;
-                    var x =this.playerPositionOnMap.x+this.playerWalkDirection.x;
-                    if(this.item_map_Array[y][x] == 3){
-                        this.itemMap[y][x].update();
-                        if(this.itemMap[y][x].count == 5){
-                            this.item_map_Array[y][x] = 8;
-                            this.item_map_Array[y][x + 1] = 9;
-                            this.itemMap[y][x] = new Item_flint();
-                            this.itemMap[y][x].amount = Math.floor(Math.random()*3) + 1;
-                            this.itemMap[y][x + 1] = new Item_gold();
-                            this.itemMap[y][x + 1].amount = Math.floor(Math.random()*3) + 1;
-                        }
-                    }
-                    else{
-                        this.itemMap[y][x - 1].update();
-                        if(this.itemMap[y][x - 1].count == 5){
-                            this.item_map_Array[y][x] = 8;
-                            this.item_map_Array[y][x - 1] = 9;
-                            this.itemMap[y][x] = new Item_flint();
-                            this.itemMap[y][x].amount = Math.floor(Math.random()*3) + 1;
-                            this.itemMap[y][x - 1] = new Item_gold();
-                            this.itemMap[y][x - 1].amount = Math.floor(Math.random()*3) + 1;
-                        }
-                    }
-                    this.player1.equipmentBar.equipmentList[2].reduceDurability();
-                }
+                if(this.player1.mode == "rock_dig")
+                    this.handleRockDig();
             }
-
+            else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate && this.player1.mode == "plant_dig"){
+                this.handlePlantDig();
+            }
             else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
             {
                 if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 
-                    && (this.player1.mode == "cut_tree") ){
-                    // var berry = new Item_berry();
-                    // berry.init();
-                    var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
-                    var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
-                    var count = false;
-                    this.itemMap[x][y].update();
-                    this.player1.equipmentBar.equipmentList[2].reduceDurability();
-                    // console.log("preform");
-                    // console.log("out", this.itemMap[x][y].false_count);
-
-                    if(this.itemMap[x][y].false_count == 3 || this.itemMap[x][y].false_count == 5){
-                        // console.log("in", this.itemMap[x][y].false_count);
-                        // console.log("grow");
-                        for(var i=-1;i<2;i++){
-                            for(var j=-1;j<2;j++){
-                                // console.log("this.item_map_Array[x+i][y+j]",this.item_map_Array[x+i][y+j]);
-                                if(this.mapArray[x+i][y+j] != 91 &&
-                                    this.mapArray[x+i][y+j] != 196 &&
-                                    this.mapArray[x+i][y+j] != 200 &&
-                                    this.item_map_Array[x+i][y+j] == 0 
-                                    ){
-                                    console.log("p = ",y+j,x+i);
-                                    if(((y+j) != this.playerPositionOnMap.x) ||
-                                    ((x+i) != this.playerPositionOnMap.y)){
-                                        // console.log("position = ",y+j,x+i);
-                                        // console.log("playerPositionOnMap = ",this.playerPositionOnMap);
-                                        this.item_map_Array[x+i][y+j] = 7;
-                                        count = true;
-                                        this.itemMap[x+i][y+j] = new Item_wood();
-                                        // this.itemMap[x+i].splice(y+j,1,new Item_wood());
-
-                                        break;
-                                    }
-                                }
-                            }
-                            if(count)
-                                break;
-                        }
-                }
-                if(this.itemMap[x][y].false_count == 5){
-                    if(this.player1.getExperience(2)){
-                        this.audio.play({name: 'kick', loop: false});
-                    }
-                }
-                // this.player1.backpack.addItemByObject( new Item_wood());
-                }
+                    && (this.player1.mode == "cut_tree") )
+                    this.handleCutTree();
                 if(this.player1.backpack.checkIfPickAvailable(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x])){
-                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
-                        this.player1.backpack.addItemByObject(new Item_flower_picked());
-                        this.pickRegenerateObject();
-                    }
-                    else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
-                        this.player1.backpack.addItemByObject(new Item_grass_picked());
-                        this.pickRegenerateObject();
-                    }
-                    else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 36){
-                        // var berry = new Item_berry();
-                        // berry.init();
-                        this.player1.backpack.addItemByObject( new Item_berry());
-                        this.pickRegenerateObject();
-                    }
-                    
-                    else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] >= 0){
-                        console.log("pick");
-                        this.player1.backpack.addItemByObject(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
-                        this.pickObject();
-                        if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
-                            this.pressWalk = true;
-                    }
+                    this.handlePick();
                 }
             }
         }
+    }
+
+    this.handlePlantDig = function(){
+        if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
+            this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 41;
+            this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_flower_dig();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 36){
+            this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 40;
+            this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_bush_dig();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1){
+            this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 42;
+            this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_tree_dig();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        }
+    }
+
+    this.handlePick = function(){
+        if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 1){
+            this.player1.backpack.addItemByObject(new Item_flower_picked());
+            this.pickRegenerateObject();
+        }
+        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
+            this.player1.backpack.addItemByObject(new Item_grass_picked());
+            this.pickRegenerateObject();
+        }
+        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 36){
+            this.player1.backpack.addItemByObject( new Item_berry());
+            this.pickRegenerateObject();
+        }
+        
+        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] >= 0){
+            this.player1.backpack.addItemByObject(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]);
+            this.pickObject();
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y) && this.keyPress != "")
+                this.pressWalk = true;
+        }
+    }
+
+    this.handleCutTree = function(){           
+            var x = this.playerPositionOnMap.y+this.playerWalkDirection.y;
+            var y =this.playerPositionOnMap.x+this.playerWalkDirection.x;
+            var count = false;
+            this.itemMap[x][y].update();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+
+            if(this.itemMap[x][y].dropWood){
+                for(var i=-1;i<2;i++){
+                    for(var j=-1;j<2;j++){
+                        if(this.mapArray[x+i][y+j] != 91 &&
+                            this.mapArray[x+i][y+j] != 196 &&
+                            this.mapArray[x+i][y+j] != 200 &&
+                            this.item_map_Array[x+i][y+j] == 0 
+                            ){
+                            console.log("p = ",y+j,x+i);
+                            if(((y+j) != this.playerPositionOnMap.x) ||
+                            ((x+i) != this.playerPositionOnMap.y)){
+                                this.item_map_Array[x+i][y+j] = 7;
+                                count = true;
+                                this.itemMap[x+i][y+j] = new Item_wood();
+
+                                break;
+                            }
+                        }
+                    }
+                    if(count)
+                        break;
+                }
+        }
+        if(this.itemMap[x][y].treeStatus == 2){
+            if(this.player1.getExperience(2)){
+                this.audio.play({name: 'kick', loop: false});
+            }
+        }
+    }
+
+    this.handleRockDig = function(){
+        var y = this.playerPositionOnMap.y+this.playerWalkDirection.y;
+        var x =this.playerPositionOnMap.x+this.playerWalkDirection.x;
+        if(this.item_map_Array[y][x] == 3){
+            this.itemMap[y][x].update();
+            if(this.itemMap[y][x].count == 5){
+                this.item_map_Array[y][x] = 8;
+                this.item_map_Array[y][x + 1] = 9;
+                this.itemMap[y][x] = new Item_flint();
+                this.itemMap[y][x].amount = Math.floor(Math.random()*3) + 1;
+                this.itemMap[y][x + 1] = new Item_gold();
+                this.itemMap[y][x + 1].amount = Math.floor(Math.random()*3) + 1;
+            }
+        }
+        else{
+            this.itemMap[y][x - 1].update();
+            if(this.itemMap[y][x - 1].count == 5){
+                this.item_map_Array[y][x] = 8;
+                this.item_map_Array[y][x - 1] = 9;
+                this.itemMap[y][x] = new Item_flint();
+                this.itemMap[y][x].amount = Math.floor(Math.random()*3) + 1;
+                this.itemMap[y][x - 1] = new Item_gold();
+                this.itemMap[y][x - 1].amount = Math.floor(Math.random()*3) + 1;
+            }
+        }
+        this.player1.equipmentBar.equipmentList[2].reduceDurability();
     }
 
     this.pickRegenerateObject = function(){

@@ -89,6 +89,8 @@ var BombMan = function(file, options) {
                 this.mode = "cut_tree";
             else if(handEquipment.item_num == 15 || handEquipment.item_num == 21)
                 this.mode = "rock_dig";
+            else if(handEquipment.item_num == 18 || handEquipment.item_num == 20)
+                this.mode = "plant_dig";
             else
                 this.mode = "";
         }else{

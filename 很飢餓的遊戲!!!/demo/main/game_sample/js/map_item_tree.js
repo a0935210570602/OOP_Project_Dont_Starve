@@ -8,61 +8,68 @@ var Map_item_tree = function() {
 
     this.mapPosition = {x:0, y:0};
     this.status = true;
-    this.isRegenerate = false;
+    this.isRegenerate = true;
     this.item_num = -1;
     //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物 plant: 可堆疊植物
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     //計算被按了幾次空白
-    this.false_count = 1;
-    this.regeneration_time = 3000;
-    this.tree_is_be_cut = false;
-    this.reset_cutted = function(){
-        setTimeout(()=>{  this.false_count = 3,this.update();}, this.regeneration_time);
+    this.false_count = 0;
+    this.treeStatus = 0;
+    this.dropWood = false;
+    this.regeneration_time = 5000;
+    this.growing = false;
+
+    this.grow = function(){
+        setTimeout(()=>{
+            if(this.treeStatus != 0){
+                this.treeStatus -= 1;
+                this.status = true;
+                this.growing = false;
+            }
+        }, this.regeneration_time);
     }
 
-    this.reset_growed = function(){
-        setTimeout(()=>{  this.false_count = 1}, this.regeneration_time);
+    this.tryGrow = function(){
+        var interval = setInterval(()=>{
+            if(!this.growing){
+                this.grow();
+                this.growing = true;
+                clearInterval(interval);
+            }
+        },1000);
     }
 
     this.update = function(){
-        this.status = false;
-        // console.log("this.false_count",this.false_count);
-        if(this.tree_is_be_cut && this.false_count >= 5){
-            this.reset_cutted();
-            
-        }else if(this.tree_is_be_cut && this.false_count == 3){
-            this.reset_growed();
-            this.tree_is_be_cut = false;
+        this.false_count += 1;
+        if(this.false_count == 2){
+            this.treeStatus += 1;
+            this.false_count = 0;
+            this.dropWood = true;
+            this.tryGrow();
+            if(this.treeStatus == 2)
+                this.status = false;
         }else{
-            if(!this.status){
-                if(this.false_count != 5)
-                    this.false_count += 1;;
-                // console.log("this.false_count",this.false_count);
-                this.status = true;
-            }
+            this.dropWood = false;
         }
     }
 
     this.draw = function(ctx){
-        // console.log("this.false_count",this.false_count);
-        if(this.false_count >= 5){
-            this.map_item_tree_cutted.draw(ctx);
-            if(this.false_count >= 5){
-                this.tree_is_be_cut = true;
-                // console.log("draw");
-                this.update();
-            }
-        }
-        if(this.false_count > 2 &&　this.false_count < 5){
-            this.map_item_tree_growed.draw(ctx);
-        }
-        if(this.false_count > -1 && this.false_count <= 2){
-            this.map_item_tree.draw(ctx);
+        switch(this.treeStatus){
+            case 0:
+                this.map_item_tree.draw(ctx);
+                break;
+            case 1:
+                this.map_item_tree_growed.draw(ctx);
+                break;
+            case 2:
+                this.map_item_tree_cutted.draw(ctx);
+                break;
+            default:
+                break;
         }
     }
-
 };
 
 Object.defineProperty(Map_item_tree.prototype, 'position', {
