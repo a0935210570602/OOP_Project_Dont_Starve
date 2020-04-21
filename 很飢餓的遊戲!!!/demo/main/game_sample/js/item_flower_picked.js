@@ -10,6 +10,9 @@ var Item_flower_picked = function() {
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = true;
+    this.hungerAddition = 20;
+    this.healthAddition = 20;
+
     this.draw = function(ctx){
         this.item_flower_picked.draw(ctx);
     }
