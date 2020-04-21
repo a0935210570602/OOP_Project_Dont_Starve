@@ -179,12 +179,16 @@ var BombMan = function(file, options) {
 
     this.equipFromBackpack = function(indexForBackpack, indexForEquipment){
         var obj = this.backpack.getItem(indexForBackpack);
-        obj.inEquipmentbar = true;
+        if(obj.item_num == 32){
+            obj.inEquipmentbar = true;
+            obj.reduceDurability();
+        }
         var equipment_obj = this.equipmentBar.getEquipment(indexForEquipment);
         this.backpack.arrayRemoveByIndex(indexForBackpack);
         this.equipmentBar.setEquipment(obj, indexForEquipment);
         if(equipment_obj != null){
-            equipment_obj.inEquipmentbar = false;
+            if(equipment_obj.item_num == 32)
+                equipment_obj.inEquipmentbar = false;
             this.backpack.addItemByObject(equipment_obj);
         }
     }
@@ -212,17 +216,33 @@ var BombMan = function(file, options) {
 
     this.removeEquipment = function(index){
         if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
-            this.equipmentBar.equipmentList[index].inEquipmentbar = false;
-
+            if(this.equipmentBar.getEquipment(index).item_num == 32)
+                this.equipmentBar.getEquipment(index).inEquipmentbar = false;
             this.backpack.addItemByObject(this.equipmentBar.getEquipment(index));
             this.equipmentBar.setEquipment(null, index);
-
         }
     }
 
+    this.mousemove = function(e){
+        var index = this.getBackPackIndex(e);
+        var equipmentIndex = this.getEquipmentIndex(e);
+        this.backpack.selectedIndex = index;
+        this.equipmentBar.selectedIndex = equipmentIndex;
+    }
+
     this.click = function(e){
+        var index = this.getBackPackIndex(e);
+        var equipmentIndex = this.getEquipmentIndex(e);
+        
+        if(index != -1)
+            this.clickInBackPack(index);
+        
+        if(equipmentIndex != -1)
+            this.removeEquipment(equipmentIndex);
+    }
+
+    this.getBackPackIndex = function(e){
         var index = -1;
-        var equipmentIndex = -1
         if(e.y >= 800 && e.y <=860){
             if(e.x >= 290 && e.x < 350)
                 index = 0;
@@ -258,11 +278,13 @@ var BombMan = function(file, options) {
                 index = 15;
             else if(e.x >= 1310 && e.x < 1370)
                 index = 16;
-            if(index != -1){
-                this.clickInBackPack(index);
-            }
         }
 
+        return index;
+    }
+
+    this.getEquipmentIndex = function(e){
+        var equipmentIndex = -1;
         if(e.x >= 1443 && e.x <= 1498){
             if(e.y >= 547 && e.y <= 606)
                 equipmentIndex = 0;
@@ -270,9 +292,9 @@ var BombMan = function(file, options) {
                 equipmentIndex = 1;
             if(e.y >= 667 && e.y <= 733)
                 equipmentIndex = 2;
-            if(equipmentIndex != -1)
-                this.removeEquipment(equipmentIndex);
         }
+
+        return equipmentIndex;
     }
 
 };

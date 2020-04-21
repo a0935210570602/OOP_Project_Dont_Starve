@@ -7,11 +7,22 @@ var Backpack = function() {
     this.itemList = [];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39];
     
+    this.selectedIndex = -1;
+
     for(var j = 0; j < 17; j++){
         this.backpackPosition.push({x: (j+5)*64, y: 13*64});
         this.objectPosition.push({x: (j+5), y: 13});
     }
     
+    this.getSelectedItem= function(){
+        return this.itemList[this.selectedIndex];
+    }
+
+    this.dropSelectedItem = function(){
+        if(this.selectedIndex != -1)
+            this.arrayRemoveByIndex(this.selectedIndex);
+    }
+
     this.addItemBySynthesis = function(item_num){
         var check = this.checkIfStackableExist(item_num);
         if(check == -1){
@@ -164,6 +175,7 @@ var Backpack = function() {
 
         return false;
     }
+
     //1:可合成 -1:材料夠沒空間 0:材料不夠
     this.checkIfSynthesisAvailable = function(material){
         if(this.checkIfMaterialEnough(material)){

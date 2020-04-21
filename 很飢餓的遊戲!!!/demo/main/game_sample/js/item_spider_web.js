@@ -5,7 +5,7 @@ var Item_spider_web = function() {
     this.status = true;
     this.isRegenerate = false;
     this.item_num = 2;
-    //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物
+    //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物 plant: 可堆疊植物
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;

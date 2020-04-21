@@ -3,6 +3,7 @@ var EquipmentBar = function(backpackList) {
     this.backpack.scale = 2;
     this.backpack.position = {x: 23*64, y: 8*64};    
     this.equipmentList = [null,null,null];
+    this.selectedIndex = -1;
 
     this.draw = function(ctx){
         this.backpack.position = {x: 23*64, y: 8*64};    
@@ -20,6 +21,18 @@ var EquipmentBar = function(backpackList) {
                 ctx.strokeText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+20);
             }
         }
+    }
+
+    this.getSelectedEquipment = function(){
+        if(this.equipmentList[this.selectedIndex].item_num == 32)
+            this.equipmentList[this.selectedIndex].inEquipmentbar = false;
+        return this.equipmentList[this.selectedIndex];
+    }
+
+
+    this.dropSelectedEquipment = function(){
+        if(this.selectedIndex != -1)
+            this.equipmentList[this.selectedIndex] = null;
     }
 
     //0:head 1:body 2:hand
