@@ -19,12 +19,12 @@ var Character_description = function(backpackList) {
     this.character_descruption_point[0] = 1;
     this.character_descruption_point[1] = 5;
     this.character_descruption_point[2] = 4;
-    this.character_descruption_point[3] = 5;
+    this.character_descruption_point[3] = 8;
     this.character_descruption_point[4] = 2;
-    this.character_descruption_point[5] = 2;
-    this.character_descruption_point[6] = 3;
+    this.character_descruption_point[5] = 6;
+    this.character_descruption_point[6] = 13;
     this.character_descruption_point[7] = 6;
-    this.character_descruption_point[8] = 8;
+    this.character_descruption_point[8] = 14;
 
     this.character_descruption_text = [];
     this.character_descruption_text[0] = "生命";
@@ -71,10 +71,10 @@ var Character_description = function(backpackList) {
 
             for(var j=0;j<this.character_descruption_point[i];j++){
                 ctx.beginPath();
-                ctx.rect(this.character_descruption[i].position.x+95 + j*25, this.character_descruption[i].position.y-10, 20, 15);
-                if(this.character_descruption_point[i]<4){
+                ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
+                if(this.character_descruption_point[i]<6){
                     ctx.fillStyle = "Red";
-                }else if(this.character_descruption_point[i]<6){
+                }else if(this.character_descruption_point[i]<11){
                     ctx.fillStyle = "yellow";
                 }else{
                     ctx.fillStyle = "Green";

@@ -11,7 +11,7 @@ var Item_arror = function() {
     this.durability = 100;
     this.place = "hand";
     this.item_can_be_picked = true;
-
+    this.attack = 3;
 
     this.update = function(){
         this.status = false;
