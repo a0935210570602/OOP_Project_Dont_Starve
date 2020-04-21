@@ -1,6 +1,6 @@
-var Item_grass_dig = function() {
-    this.item_grass_dig = new Framework.Sprite(define.materialPath + 'item_grass_dig.png'); 
-    this.item_grass_dig.scale = 2;
+var Item_bush_dig = function() {
+    this.item_bush_dig = new Framework.Sprite(define.materialPath + 'item_bush_dig.png'); 
+    this.item_bush_dig.scale = 2;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
@@ -15,17 +15,17 @@ var Item_grass_dig = function() {
     }
 
     this.draw = function(ctx){
-        this.item_grass_dig.draw(ctx);
+        this.item_bush_dig.draw(ctx);
     }
 
 };
 
-Object.defineProperty(Item_grass_dig.prototype, 'position', {
+Object.defineProperty(Item_bush_dig.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_grass_dig.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_bush_dig.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 

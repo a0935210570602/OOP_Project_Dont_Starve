@@ -17,6 +17,10 @@ var Item_gold_shovel = function() {
         this.status = false;
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 5;
+    }
+
     this.draw = function(ctx){
         this.item_gold_shovel.draw(ctx);
     }

@@ -17,6 +17,10 @@ var Item_shovel = function() {
         this.status = false;
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 10;
+    }
+
     this.draw = function(ctx){
         this.item_shovel.draw(ctx);
     }
