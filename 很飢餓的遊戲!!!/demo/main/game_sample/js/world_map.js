@@ -105,6 +105,8 @@ var World_map = function(map, item_map)
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
+        this.monster_cute_little_eye = new Monster_cute_little_eye(this);
+        this.monster_cute_little_eye.position = {x: 15, y: 20};
 
         this.monster = [];
         this.stopMonster = false;
@@ -325,7 +327,9 @@ var World_map = function(map, item_map)
     }
 
 	this.update = function()
-	{
+	{   
+        this.DieEvent();
+        this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
             if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
@@ -363,6 +367,7 @@ var World_map = function(map, item_map)
         this.player1.update();
         if(this.stopMonster === true)
         {
+            console.log("stopMonster");
             this.stopMonsterCounter++;
             if(this.stopMonsterCounter > 1000)
             {
@@ -370,6 +375,7 @@ var World_map = function(map, item_map)
             }
         }else
         {
+            console.log("stopMonster");
             for(var i=0;i<this.monster.length;i++)
             {
                 this.monster[i].update();
@@ -382,10 +388,10 @@ var World_map = function(map, item_map)
         }
     }
     this.generation_time;
-
 	this.draw = function(ctx) {
         for(var i=0; i<11; i++){
             for(var j=0; j<11; j++){
+                // console.log(j+ this.addition.y+this.mapDisplacement.y,i+ this.addition.x+this.mapDisplacement.x);
                 switch(this.mapArray[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]){
                     case 192:
                         this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
@@ -438,6 +444,7 @@ var World_map = function(map, item_map)
         if(this.is_character_description_open){
             this.character_description.draw(ctx);
         }
+        this.monster_cute_little_eye.draw(ctx);
 	}	
     this.isCanvasCanDraw = function(i){
         //玩家在畫布上的座標
@@ -460,52 +467,11 @@ var World_map = function(map, item_map)
         monster.draw(ctx);
     }
     var m_map = this;
-    this.bombExploredHandler = function(exploredArray, bomb){
-        var index = m_map.bombArray.indexOf(bomb);
-        m_map.bombArray.splice(index,1);
-        m_map.mapArray[bomb.position.y][bomb.position.x] = 0;
-        looptop:
-        for(var i=0; i<exploredArray.length; i++){
-            for(var j=0;j<exploredArray[i].length;j++)
-            {
-                var explorePos = exploredArray[i][j];
-                var hasExploreBox = false;
-                if(explorePos.x>0 && explorePos.y>0 && explorePos.y<m_map.mapArray.length && explorePos.x<m_map.mapArray[0].length){
-                    if(m_map.mapArray[explorePos.y][explorePos.x]<0){
-                        //item
-                    }else if(m_map.mapArray[explorePos.y][explorePos.x] == 1)
-                    {
-                        //wall
-                        break;
-                    }else if(m_map.mapArray[explorePos.y][explorePos.x] >= 2){
-                        //box
-                        m_map.checkBoxExplore(explorePos);
-                        hasExploreBox = true;
-                    }
-
-                    if(m_map.mapArray[explorePos.y][explorePos.x] != 1){
-                        var explore = new Explore();
-                        explore.position = explorePos;
-                        explore.ExploredEndCallBack.push(m_map.exploreEndHandler);
-                        m_map.exploreArray.push(explore);
-                        if(hasExploreBox)
-                        {
-                            break;
-                        }
-                    }
-                    if(explorePos.x === m_map.player1.position.x && explorePos.y === m_map.player1.position.y){
-                        m_map.player1.die();
-                        break looptop;
-                    }
-                    for(var k=0;k<m_map.monster.length;k++)
-                    {
-                        if(explorePos.x === m_map.monster[k].position.x && explorePos.y === m_map.monster[k].position.y){
-                            m_map.monster[k].die();
-                            m_map.score.addScore(500);
-                        }
-                    }
-                }
-            }
+    this.DieEvent = function(){
+        if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
+            this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y){
+            console.log("you die");
+            m_map.player1.die();
         }
     }
 
@@ -603,6 +569,8 @@ var World_map = function(map, item_map)
             default:
                 break;
         }
+        // console.log("playerPositionOnMap");
+        // console.log(this.playerPositionOnMap);
     }
 
     this.handleDrop = function(){

@@ -89,12 +89,6 @@ var Monster = function(file, map, options) {
     this.update = function(){
         if(this.isdead ){ return; }
         this.sprite.update();
-        // console.log("this.walkTarget.x");
-        // console.log(this.walkTarget.x);
-        // console.log("this.walkTarget.y");
-        // console.log(this.walkTarget.y);
-        // console.log("this.isWalking");
-        // console.log(this.isWalking);
         if(this.isWalking){
             if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
                 this.isWalking = false;
