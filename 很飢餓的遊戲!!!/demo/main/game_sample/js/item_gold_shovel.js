@@ -11,7 +11,10 @@ var Item_gold_shovel = function() {
     this.durability = 100;
     this.place = "hand";
     this.item_can_be_picked = true;
+    
     this.attack_point = 2;
+    this.magic_attack_point = 0;
+    this.arror_attack_point = 0;
 
     this.update = function(){
         this.status = false;

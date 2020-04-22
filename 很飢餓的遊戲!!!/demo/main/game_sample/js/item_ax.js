@@ -12,6 +12,9 @@ var Item_ax = function() {
     this.place = "hand";
 
     this.attack_point = 1;
+    this.magic_attack_point = 0;
+    this.arror_attack_point = 0;
+    
     this.item_can_be_picked = true;
 
     this.update = function(){

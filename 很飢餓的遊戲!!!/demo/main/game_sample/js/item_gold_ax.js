@@ -10,7 +10,11 @@ var Item_gold_ax = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "hand";
+    
     this.attack_point = 2;
+    this.magic_attack_point = 0;
+    this.arror_attack_point = 0;
+    
     this.item_can_be_picked = true;
 
     this.update = function(){

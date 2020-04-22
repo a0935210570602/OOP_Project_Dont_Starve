@@ -16,15 +16,15 @@ var Character_description = function(backpackList) {
     this.push_button = new Framework.Sprite(define.characterDescriptionPath + 'push_button.png'); 
     
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 1;
-    this.character_descruption_point[1] = 5;
-    this.character_descruption_point[2] = 4;
-    this.character_descruption_point[3] = 8;
-    this.character_descruption_point[4] = 2;
-    this.character_descruption_point[5] = 6;
-    this.character_descruption_point[6] = 13;
-    this.character_descruption_point[7] = 6;
-    this.character_descruption_point[8] = 14;
+    this.character_descruption_point[0] = 0;
+    this.character_descruption_point[1] = 0;
+    this.character_descruption_point[2] = 0;
+    this.character_descruption_point[3] = 0;
+    this.character_descruption_point[4] = 0;
+    this.character_descruption_point[5] = 0;
+    this.character_descruption_point[6] = 0;
+    this.character_descruption_point[7] = 0;
+    this.character_descruption_point[8] = 0;
 
     this.character_descruption_text = [];
     this.character_descruption_text[0] = "生命";
@@ -115,6 +115,9 @@ var Character_description = function(backpackList) {
         ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
         if(this.capabilityt_point!=0){
             for(var i=2;i<9;i++){
+                if(i==7){
+                    continue;
+                }
                 this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
                 this.push_button.draw(ctx);
             }
@@ -126,31 +129,27 @@ var Character_description = function(backpackList) {
         this.character_level = player.level;
         this.character_levelup_experience = player.levelup_experience;
         this.capabilityt_point = player.capabilityt_point;
+        this.character_descruption_point[0] = player.character_descruption_total_point[0];
+        this.character_descruption_point[1] = player.character_descruption_total_point[1];
+        this.character_descruption_point[2] = player.character_descruption_total_point[2];
+        this.character_descruption_point[3] = player.character_descruption_total_point[3];
+        this.character_descruption_point[4] = player.character_descruption_total_point[4];
+        this.character_descruption_point[5] = player.character_descruption_total_point[5];
+        this.character_descruption_point[6] = player.character_descruption_total_point[6];
+        this.character_descruption_point[7] = player.character_descruption_total_point[7];
+        this.character_descruption_point[8] = player.character_descruption_total_point[8];
     }
-    this.isChangeCapability = function(which_capability){
-        if(this.capabilityt_point!=0){
 
-        }
-    }
     this.click = function(e){
-        // if(e.x >= 470 && e.x <=510){
-        //     if(e.y >=540 && e.y<= 560){
-        //         this.isChangeCapability(3);
-        //     }else if(e.y >=622 && e.y<= 642){
-        //         this.isChangeCapability(4);
-        //     }else if(e.y >=700 && e.y<= 720){
-        //         this.isChangeCapability(5);
-        //     }
-        // }else if(e.x >= 822 && e.x <=859){
-        //     if(e.y >=382 && e.y<= 402){
-        //         this.isChangeCapability(6);
-        //     }else if(e.y >=461 && e.y<= 481){
-        //         this.isChangeCapability(7);
-        //     }else if(e.y >=622 && e.y<= 642){
-        //         this.isChangeCapability(8);
-        //     }else if(e.y >=700 && e.y<= 720){
-        //         this.isChangeCapability(9);
-        //     }
-        // }
+        
     }
 };
+this.character_descruption_text[0] = "生命";
+this.character_descruption_text[1] = "魔力";
+this.character_descruption_text[2] = "物功";
+this.character_descruption_text[3] = "魔攻";
+this.character_descruption_text[4] = "弓攻";
+this.character_descruption_text[5] = "力量";
+this.character_descruption_text[6] = "智力";
+this.character_descruption_text[7] = "防禦";
+this.character_descruption_text[8] = "技巧";

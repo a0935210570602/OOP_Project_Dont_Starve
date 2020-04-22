@@ -25,9 +25,38 @@ var BombMan = function(file, options) {
     this.mode = "";
     this.baseAttack = 10;
     this.baseDefense = 10;
-    this.headEquipmentDefense = 0;
-    this.bodyEquipmentDefense = 0;
-    this.handEquipmentAttack = 0;
+
+    // this.character_descruption_text[0] = "生命";
+    // this.character_descruption_text[1] = "魔力";
+    // this.character_descruption_text[2] = "物功";
+    // this.character_descruption_text[3] = "魔攻";
+    // this.character_descruption_text[4] = "弓攻";
+    // this.character_descruption_text[5] = "力量";
+    // this.character_descruption_text[6] = "智力";
+    // this.character_descruption_text[7] = "防禦";
+    // this.character_descruption_text[8] = "技巧";
+    
+    this.character_descruption_point = [];
+    this.character_descruption_point[0] = 1;
+    this.character_descruption_point[1] = 5;
+    this.character_descruption_point[2] = 4;
+    this.character_descruption_point[3] = 8;
+    this.character_descruption_point[4] = 2;
+    this.character_descruption_point[5] = 6;
+    this.character_descruption_point[6] = 13;
+    this.character_descruption_point[7] = 6;
+    this.character_descruption_point[8] = 14;
+
+    this.character_descruption_total_point = [];
+    this.character_descruption_total_point[0] = 0;
+    this.character_descruption_total_point[1] = 0;
+    this.character_descruption_total_point[2] = 0;
+    this.character_descruption_total_point[3] = 0;
+    this.character_descruption_total_point[4] = 0;
+    this.character_descruption_total_point[5] = 0;
+    this.character_descruption_total_point[6] = 0;
+    this.character_descruption_total_point[7] = 0;
+    this.character_descruption_total_point[8] = 0;
 
     this.experience = 0;
     this.levelup_experience = 4;
@@ -67,22 +96,49 @@ var BombMan = function(file, options) {
         return this.backpack;
     }
 
-    this.getHeadEquipment = function(){
-        var headEquipment = this.equipmentBar.getEquipment(0);
-        if(headEquipment != null)
-            this.headEquipmentDefense = 10;
+    this.getHeadDeffensePointEquipment = function(){
+        var bodyEquipment = this.equipmentBar.getEquipment(0);
+        if(bodyEquipment != null)
+            return this.equipmentBar.getEquipment(0).deffense_point;
+        else
+            return 0;
     }
 
-    this.getBodyEquipment = function(){
+    this.getBodyDeffensePointEquipment = function(){
         var bodyEquipment = this.equipmentBar.getEquipment(1);
         if(bodyEquipment != null)
-            this.bodyEquipmentDefense = 10;
+            return this.equipmentBar.getEquipment(1).deffense_point;
+        else
+            return 0;
+    }
+
+    this.getHandAttackPointEquipment = function(){
+        var handEquipment = this.equipmentBar.getEquipment(2);
+        if(handEquipment != null)
+            return this.equipmentBar.getEquipment(2).attack_point;
+        else
+            return 0;
+    }
+
+    this.getHandMagicAttackPointEquipment = function(){
+        var handEquipment = this.equipmentBar.getEquipment(2);
+        if(handEquipment != null)
+            return this.equipmentBar.getEquipment(2).magic_attack_point;
+        else
+            return 0;
+    }
+
+    this.getHandArrorAttackPointEquipment = function(){
+        var handEquipment = this.equipmentBar.getEquipment(2);
+        if(handEquipment != null)
+            return this.equipmentBar.getEquipment(2).arror_attack_point;
+        else
+            return 0;
     }
 
     this.getHandEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null){
-            this.handEquipmentAttack = 10;
             if(handEquipment.item_num == 32)
                 this.mode = "light";
             else if(handEquipment.item_num == 16 || handEquipment.item_num == 19)
@@ -127,7 +183,17 @@ var BombMan = function(file, options) {
         this.sprite.stop();
     }
 
+    this.capibility = function(){
+        for(var i=0;i<8;i++)
+            this.character_descruption_total_point[i] = this.character_descruption_point[i];
+        this.character_descruption_total_point[2] += this.getHandAttackPointEquipment();
+        this.character_descruption_total_point[3] += this.getHandMagicAttackPointEquipment();
+        this.character_descruption_total_point[4] += this.getHandArrorAttackPointEquipment();
+        this.character_descruption_total_point[7] += this.getBodyDeffensePointEquipment()+this.getHeadDeffensePointEquipment();
+    }
+
     this.update = function(){
+        this.capibility();
         if(this.isWalking){
             this.isWalking = false;
             this.sprite.index = this.playerDirection * 3 + 1;
@@ -136,10 +202,9 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
+        
         this.equipmentBar.update();
-        this.getBodyEquipment();
         this.getHandEquipment();
-        this.getHeadEquipment();
     }
 
 
@@ -235,6 +300,30 @@ var BombMan = function(file, options) {
         this.equipmentBar.selectedIndex = equipmentIndex;
     }
 
+    this.isChangeCapability = function(which_capability){
+            this.character_descruption_point[which_capability]++;
+            this.capabilityt_point--;
+    }
+
+    this.charaerAbilityClick = function(e){
+        if(e.x >= 470 && e.x <=510){
+            if(e.y >=540 && e.y<= 560){
+                this.isChangeCapability(2);
+            }else if(e.y >=622 && e.y<= 642){
+                this.isChangeCapability(3);
+            }else if(e.y >=700 && e.y<= 720){
+                this.isChangeCapability(4);
+            }
+        }else if(e.x >= 822 && e.x <=861){
+            if(e.y >=382 && e.y<= 415){
+                this.isChangeCapability(5);
+            }else if(e.y >=461 && e.y<= 502){
+                this.isChangeCapability(6);
+            }else if(e.y >=622 && e.y<= 661){
+                this.isChangeCapability(9);
+            }
+        }   
+    }
     this.click = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);

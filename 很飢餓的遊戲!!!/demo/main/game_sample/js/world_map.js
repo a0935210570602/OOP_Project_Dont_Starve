@@ -744,7 +744,7 @@ var World_map = function(map, item_map)
                 }
         }
         if(this.itemMap[x][y].treeStatus == 2){
-            if(this.player1.getExperience(2)){
+            if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
             }
         }
@@ -882,7 +882,12 @@ var World_map = function(map, item_map)
         }
     }
 
-    this.click = function(e){      
+    this.click = function(e){   
+        if(this.is_character_description_open){
+            if(this.player1.capabilityt_point !=0){
+                this.player1.charaerAbilityClick(e);
+            }
+        }
         this.synthesisBar.click(e);
         console.log(e);
         this.player1.click(e);
