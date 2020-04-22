@@ -104,8 +104,12 @@ var loadGameEnd;
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         
-        { src: 'game_sample/js/item_bush_dig.js', lookFor: 'Item_bush_dig' },
+        { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
+        { src: 'game_sample/js/item_grass_growed_dig.js', lookFor: 'Item_grass_growed_dig' },
+        { src: 'game_sample/js/item_bush_growed_dig.js', lookFor: 'Item_bush_growed_dig' },
+
         { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },
+        { src: 'game_sample/js/item_bush_dig.js', lookFor: 'Item_bush_dig' },
         { src: 'game_sample/js/item_grass_dig.js', lookFor: 'Item_grass_dig' },
         { src: 'game_sample/js/item_flower_dig.js', lookFor: 'Item_flower_dig' },
         { src: 'game_sample/js/item_branch.js', lookFor: 'Item_branch' },
