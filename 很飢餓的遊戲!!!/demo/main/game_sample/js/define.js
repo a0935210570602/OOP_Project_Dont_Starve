@@ -37,6 +37,10 @@
 			value: mainPath + 'image_night/',
 			writable: true
 		},
+		'skillAnimationPath': {
+			value: mainPath + 'skill_animation/',
+			writable: true
+		},
 		'characterDescriptionPath': {
 			value: mainPath + 'character_description/',
 			writable: true

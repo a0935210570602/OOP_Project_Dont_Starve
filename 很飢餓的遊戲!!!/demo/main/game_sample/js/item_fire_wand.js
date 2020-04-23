@@ -14,6 +14,7 @@ var Item_fire_wand = function() {
     this.attack_point = 2;
     this.magic_attack_point = 0;
     this.arror_attack_point = 0;
+    
     this.update = function(){
         this.status = false;
     }

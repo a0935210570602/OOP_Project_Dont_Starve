@@ -129,6 +129,7 @@ var loadGameEnd;
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
         { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
+        { src: 'game_sample/js/skill_handler.js', lookFor: 'Skill_handler' },
         
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
         { src: 'game_sample/js/terrain_forest.js', lookFor: 'Terrain_forest' },

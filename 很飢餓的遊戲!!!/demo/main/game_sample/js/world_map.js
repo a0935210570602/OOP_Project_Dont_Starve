@@ -8,6 +8,7 @@ var World_map = function(map, item_map)
 
         this.score = new Score();
         this.score.position = {x:1000,y:0};
+        this.skill_handler = new Skill_handler();
 
         this.terrain_plain = [];
         this.terrain_plain.push(new Framework.Sprite(define.imageMorningPath + 'terrain_plain.png')); 
@@ -148,6 +149,7 @@ var World_map = function(map, item_map)
         this.initialPosition = {x:5,y:5};
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:20,y:20};
+        this.skill_handler.init(this.playerPositionOnMap);
         this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x,y:this.playerPositionOnMap.y-this.initialPosition.y};
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
@@ -328,7 +330,10 @@ var World_map = function(map, item_map)
 
 	this.update = function()
 	{   
+        // console.log("keyPress");
+        // console.log(this.keyPress);
         this.DieEvent();
+        this.skill_handler.update(this.playerPositionOnMap);
         this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
@@ -375,7 +380,7 @@ var World_map = function(map, item_map)
             }
         }else
         {
-            console.log("stopMonster");
+            // console.log("stopMonster");
             for(var i=0;i<this.monster.length;i++)
             {
                 this.monster[i].update();
@@ -445,7 +450,25 @@ var World_map = function(map, item_map)
             this.character_description.draw(ctx);
         }
         this.monster_cute_little_eye.draw(ctx);
-	}	
+        console.log(this.capture_key.length);
+        for(var i=0;i<this.capture_key.length;i++){
+            console.log(this.capture_key[i].key);
+        }
+        console.log(this.capture_key.indexOf('S'));
+        if(this.checkSKeyIsPress('S')){
+            console.log("drawskill_handler");
+            this.skill_handler.draw(ctx);
+        }
+    }	
+    this.checkSKeyIsPress  = function(key){
+        for(var i=0;i<this.capture_key.length;i++){
+            if(this.capture_key[i].key == key){
+                return true;
+            }
+        }
+        return false;
+    }
+
     this.isCanvasCanDraw = function(i){
         //玩家在畫布上的座標
         // console.log("this.player1.position");
@@ -507,18 +530,43 @@ var World_map = function(map, item_map)
     this.playerWalkDirection = {x:0,y:0};
     this.pressWalk = false;
     this.keyPress = "";
+    this.key_is_press = false;
+    this.skill_number = -99;
+    this.skillOutbreak = function(){
+        this.skill_handler.start();
+    }
+    this.skillTimer = function(){
+        this.skillOutbreak();
+        var time_count = setInterval(()=>{
+            this.skillOutbreak();
+            if(this.keyPress != "S"){
+                clearInterval(time_count);
+            }
+
+        }, 6000);
+    }
+    this.capture_key = [];
     this.keydown = function(e, list){
-        // console.log("player.position");
-        // console.log(this.playerPositionOnMap);
-        // console.log("player.canvasPosition");
-        // console.log(this.player1.canvasPosition);
+        // console.log("keydown");
+        // console.log(e.key);
+
+        this.capture_key.push(e);
+        // for(var i=0;i<this.capture_key.length;i++){
+        //     console.log(this.capture_key[i].key);
+        // }
         switch(e.key){
+            case 'S':
+                this.keyPress = "S";
+                this.skillTimer();
+
+                break;
             case 'D':
                 this.handleDrop();
                 break;
             case 'F':
                 this.demo_dead_trigger = 1;
                 break;
+            
             case 'E':
                 if(e.key === 'E') {
                     if(this.is_character_description_open){
@@ -569,8 +617,67 @@ var World_map = function(map, item_map)
             default:
                 break;
         }
-        // console.log("playerPositionOnMap");
-        // console.log(this.playerPositionOnMap);
+        // if(this.key('Down')){
+        //     this.player1.walk({x:0,y:1});
+        //     this.playerWalkDirection = {x:0,y:1};
+        //     this.keyPress = "Down";
+        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
+        //         // console.log("x2= ",playerPosition.x);
+        //         // console.log("y2= ",playerPosition.y);
+        //         this.pressWalk = true;
+        //     }
+        // }
+        // if(this.key('Left')){
+        //     this.playerWalkDirection = {x:-1,y:0};
+        //     this.player1.walk({x:-1,y:0});
+        //     this.keyPress = "Left";
+        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
+        //         this.pressWalk = true;
+        //     }
+        // }
+        // if(this.key('Right')){
+        //     this.playerWalkDirection = {x:1,y:0};
+        //     this.player1.walk({x:1,y:0});
+        //     this.keyPress = "Right";
+        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
+        //         this.pressWalk = true;
+        //     }
+        // }
+        // if(this.key('Up')){
+        //     this.playerWalkDirection = {x:1,y:0};
+        //     this.player1.walk({x:1,y:0});
+        //     this.keyPress = "Right";
+        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
+        //         this.pressWalk = true;
+        //     }
+        // }
+    }
+    this.keyup = function(e, list){
+        // console.log("keyup");
+        // console.log(e.key);
+        // console.log("keyupresult");
+        for(var i=0;i<this.capture_key.length;i++){
+            if( this.capture_key[i].key == e.key){
+                this.capture_key.splice(i, 1);
+                break;
+            }
+        }
+        for(var i=0;i<this.capture_key.length;i++){
+            console.log(this.capture_key[i].key);
+        }
+
+
+        if(e.key === 'S'){
+            this.keyPress = "";
+        }
+        if(e.key === 'Down' || e.key === 'Up' || e.key === 'Left' || e.key === 'Right') {
+            if(this.keyPress == e.key)
+            {
+                this.player1.walkEnd();
+                this.pressWalk = false;
+                this.keyPress = "";
+            };
+        }
     }
 
     this.handleDrop = function(){
@@ -839,17 +946,7 @@ var World_map = function(map, item_map)
         }
     }
 
-    this.keyup = function(e, list){
-        if(e.key === 'Down' || e.key === 'Up' || e.key === 'Left' || e.key === 'Right') {
-            if(this.keyPress == e.key)
-            {
-                this.player1.walkEnd();
-                this.pressWalk = false;
-                this.keyPress = "";
-            };
-        }
-    }
-
+    
     this.click = function(e){   
         if(this.is_character_description_open){
             if(this.player1.capabilityt_point !=0){
