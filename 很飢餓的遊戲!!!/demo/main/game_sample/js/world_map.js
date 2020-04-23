@@ -469,6 +469,17 @@ var World_map = function(map, item_map)
         return false;
     }
 
+    this.whatIsTheLastKeyMove  = function(){
+        for(var i=this.capture_key.length-1;i>=0;i--){
+            if(this.capture_key[i].key == 'Down' || this.capture_key[i].key == 'Up' ||
+                this.capture_key[i].key == 'Left' || this.capture_key[i].key == 'Right'){
+                return this.capture_key[i].key;
+                break;
+            }
+        }
+        return "No";
+    }
+
     this.isCanvasCanDraw = function(i){
         //玩家在畫布上的座標
         // console.log("this.player1.position");
@@ -617,45 +628,39 @@ var World_map = function(map, item_map)
             default:
                 break;
         }
-        // if(this.key('Down')){
-        //     this.player1.walk({x:0,y:1});
-        //     this.playerWalkDirection = {x:0,y:1};
-        //     this.keyPress = "Down";
-        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
-        //         // console.log("x2= ",playerPosition.x);
-        //         // console.log("y2= ",playerPosition.y);
-        //         this.pressWalk = true;
-        //     }
-        // }
-        // if(this.key('Left')){
-        //     this.playerWalkDirection = {x:-1,y:0};
-        //     this.player1.walk({x:-1,y:0});
-        //     this.keyPress = "Left";
-        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
-        //         this.pressWalk = true;
-        //     }
-        // }
-        // if(this.key('Right')){
-        //     this.playerWalkDirection = {x:1,y:0};
-        //     this.player1.walk({x:1,y:0});
-        //     this.keyPress = "Right";
-        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
-        //         this.pressWalk = true;
-        //     }
-        // }
-        // if(this.key('Up')){
-        //     this.playerWalkDirection = {x:1,y:0};
-        //     this.player1.walk({x:1,y:0});
-        //     this.keyPress = "Right";
-        //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
-        //         this.pressWalk = true;
-        //     }
-        // }
+        if(this.whatIsTheLastKeyMove() == 'Down'){
+            this.player1.walk({x:0,y:1});
+            this.playerWalkDirection = {x:0,y:1};
+            this.keyPress = "Down";
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
+                // console.log("x2= ",playerPosition.x);
+                // console.log("y2= ",playerPosition.y);
+                this.pressWalk = true;
+            }
+        }else if(this.whatIsTheLastKeyMove() == 'Left'){
+            this.playerWalkDirection = {x:-1,y:0};
+            this.player1.walk({x:-1,y:0});
+            this.keyPress = "Left";
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
+                this.pressWalk = true;
+            }
+        }else if(this.whatIsTheLastKeyMove() == 'Right'){
+            this.playerWalkDirection = {x:1,y:0};
+            this.player1.walk({x:1,y:0});
+            this.keyPress = "Right";
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
+                this.pressWalk = true;
+            }
+        }else if(this.whatIsTheLastKeyMove() == 'Up'){
+            this.playerWalkDirection = {x:0,y:-1};
+            this.player1.walk({x:0,y:-1});
+            this.keyPress = "Up";
+            if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
+                this.pressWalk = true;
+            }
+        }
     }
     this.keyup = function(e, list){
-        // console.log("keyup");
-        // console.log(e.key);
-        // console.log("keyupresult");
         for(var i=0;i<this.capture_key.length;i++){
             if( this.capture_key[i].key == e.key){
                 this.capture_key.splice(i, 1);
