@@ -1,10 +1,5 @@
 var Skill_handler = function() {
     this.url = define.skillAnimationPath + 'fire_wand_level1.png';
-
-    this.callBackAnimation = function(){
-        console.log("callBackAnimation");
-        this.trigger = false;
-    }
     this.fire_wand_level1 = new Framework.AnimationSprite({url:this.url, col:5 , row:3 , loop:false , speed:12}); 
     this.fire_wand_level1.scale = 1.25;
     this.fire_wand_level1.index = 0;
@@ -25,7 +20,6 @@ var Skill_handler = function() {
     }
 
     this.start = function(playerWalkDirection){
-        this.trigger = true;
         this.fire_wand_level1.position = {x: (13+playerWalkDirection.x*3)*64, y: (7+playerWalkDirection.y*3)*64};
         this.fire_wand_level1.start({ from: 0, to: 14, loop: false});
     }
