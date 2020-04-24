@@ -28,7 +28,6 @@ var Clock = function() {
                 if(this.status >=3){
                     this.status = 0;
                 }
-                //this.decrease();
             }
             this.decrease();
         }, this.regeneration_time);

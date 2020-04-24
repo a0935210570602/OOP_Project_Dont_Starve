@@ -3,7 +3,6 @@ var World_map = function(map, item_map)
     this.demo_dead_trigger = 0;
     this.mapArray = map;
     this.item_map_Array = item_map;
-    this.addition = {x: 0, y: 0};
     this.load = function(){
 
         this.score = new Score();
@@ -130,10 +129,15 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
+<<<<<<< HEAD
         this.skillTimer = new Skill_timer();
+=======
+        // Framework.Game._context
+>>>>>>> 38530eb17e32c7c27493eabe184d37a7f498512f
         this.character_description = new Character_description();
         this.player1.init();
         this.clock.init();
+        this.clockDraw(Framework.Game._context);
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
         this.is_character_description_open = false;
@@ -147,11 +151,9 @@ var World_map = function(map, item_map)
         this.tilePosition = [];
         this.itemArray = [];
         this.itemMap = [];
-        this.initialPosition = {x:5,y:5};
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:20,y:20};
         this.skill_handler.init(this.playerPositionOnMap);
-        this.mapDisplacement = {x:this.playerPositionOnMap.x-this.initialPosition.x,y:this.playerPositionOnMap.y-this.initialPosition.y};
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
             for(var j = 0; j < 11; j++){
@@ -343,29 +345,21 @@ var World_map = function(map, item_map)
                 if(this.keyPress == "Down") {
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
-                    this.addition.x += 0;
-                    this.addition.y += 1;
                 }
         
                 if(this.keyPress == "Left") {
                     this.player1.walk({x:-1,y:0});
                     this.playerPositionOnMap.x-=1;
-                    this.addition.x += -1;
-                    this.addition.y += 0;
                 }
         
                 if(this.keyPress == "Right") {
                     this.player1.walk({x:1,y:0});
                     this.playerPositionOnMap.x+=1;
-                    this.addition.x += 1;
-                    this.addition.y += 0;
                 }
         
                 if(this.keyPress == "Up") {
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
-                    this.addition.x += 0;
-                    this.addition.y += -1;
                 }
             }
         }
@@ -394,11 +388,28 @@ var World_map = function(map, item_map)
         }
     }
     this.generation_time;
+    this.walk = function(moveStep){
+        if(this.isWalking === false){
+            if(moveStep.x > 0){
+                this.playerDirection = this.constants.DirectionEnum.RIGHT;
+            }else if(moveStep.x <0){
+                this.playerDirection = this.constants.DirectionEnum.LEFT;
+            }
+
+            if(moveStep.y > 0){
+                this.playerDirection = this.constants.DirectionEnum.DOWN;
+            }else if(moveStep.y < 0){
+                this.playerDirection = this.constants.DirectionEnum.UP;
+            }
+            this.isWalking = true;
+            this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
+            this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
+        }
+    }
 	this.draw = function(ctx) {
-        for(var i=0; i<11; i++){
-            for(var j=0; j<11; j++){
-                // console.log(j+ this.addition.y+this.mapDisplacement.y,i+ this.addition.x+this.mapDisplacement.x);
-                switch(this.mapArray[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x]){
+        for(var i=0,ii=-5; i<11; i++,ii++){
+            for(var j=0,jj=-5; j<11; j++,jj++){
+                switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
                     case 192:
                         this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
                         this.terrain_plain[this.clock.status].draw(ctx);
@@ -431,10 +442,10 @@ var World_map = function(map, item_map)
             }
         }
 
-        for(var i=0; i<11; i++){
-            for(var j=0; j<11; j++){
-                this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].position = this.tilePosition[j][i];
-                this.itemMap[j+ this.addition.y+this.mapDisplacement.y][i+ this.addition.x+this.mapDisplacement.x].draw(ctx);
+        for(var i=-5,ii=0; i<6; i++,ii++){
+            for(var j=-5,jj=0; j<6; j++,jj++){
+                this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].position = this.tilePosition[jj][ii];
+                this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].draw(ctx);
             }
         }
 
@@ -449,7 +460,6 @@ var World_map = function(map, item_map)
             this.skillTimer.draw(ctx);
         this.player1.draw(ctx);
         this.clock.draw(ctx);
-        // console.log(this.capture_key.indexOf('S'));
 
         if(this.is_character_description_open){
             this.character_description.draw(ctx);
@@ -466,6 +476,12 @@ var World_map = function(map, item_map)
             this.skill_handler.skillDraw(ctx);
         }
     }	
+
+    this.clockDraw = function(ctx){
+        setInterval(() => {
+            this.clock.draw(ctx);
+        }, 500);
+    }
     this.checkKeyIsPress  = function(key){
         for(var i=0;i<this.capture_key.length;i++){
             if(this.capture_key[i].key == key){
