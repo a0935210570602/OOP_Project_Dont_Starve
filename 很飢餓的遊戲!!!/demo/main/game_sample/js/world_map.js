@@ -129,11 +129,8 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
-<<<<<<< HEAD
+        this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
-=======
-        // Framework.Game._context
->>>>>>> 38530eb17e32c7c27493eabe184d37a7f498512f
         this.character_description = new Character_description();
         this.player1.init();
         this.clock.init();
@@ -153,7 +150,6 @@ var World_map = function(map, item_map)
         this.itemMap = [];
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:20,y:20};
-        this.skill_handler.init(this.playerPositionOnMap);
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
             for(var j = 0; j < 11; j++){
@@ -335,6 +331,9 @@ var World_map = function(map, item_map)
 	{   
         // console.log("keyPress");
         // console.log(this.keyPress);
+        if(this.skillTimer.isEnergyFull){
+            this.skill_handler.start(this.playerWalkDirection);
+        }
         this.DieEvent();
         this.skill_handler.update(this.playerPositionOnMap);
         this.monster_cute_little_eye.update();
@@ -388,100 +387,106 @@ var World_map = function(map, item_map)
         }
     }
     this.generation_time;
-    this.walk = function(moveStep){
-        if(this.isWalking === false){
-            if(moveStep.x > 0){
-                this.playerDirection = this.constants.DirectionEnum.RIGHT;
-            }else if(moveStep.x <0){
-                this.playerDirection = this.constants.DirectionEnum.LEFT;
-            }
+    // this.walk = function(moveStep){
+    //     if(this.isWalking === false){
+    //         if(moveStep.x > 0){
+    //             this.playerDirection = this.constants.DirectionEnum.RIGHT;
+    //         }else if(moveStep.x <0){
+    //             this.playerDirection = this.constants.DirectionEnum.LEFT;
+    //         }
 
-            if(moveStep.y > 0){
-                this.playerDirection = this.constants.DirectionEnum.DOWN;
-            }else if(moveStep.y < 0){
-                this.playerDirection = this.constants.DirectionEnum.UP;
-            }
-            this.isWalking = true;
-            this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
-            this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
-        }
-    }
+    //         if(moveStep.y > 0){
+    //             this.playerDirection = this.constants.DirectionEnum.DOWN;
+    //         }else if(moveStep.y < 0){
+    //             this.playerDirection = this.constants.DirectionEnum.UP;
+    //         }
+    //         this.isWalking = true;
+    //         this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
+    //         this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
+    //     }
+    // }
 	this.draw = function(ctx) {
-        for(var i=0,ii=-5; i<11; i++,ii++){
-            for(var j=0,jj=-5; j<11; j++,jj++){
-                switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
-                    case 192:
-                        this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_plain[this.clock.status].draw(ctx);
-                        break;
-                    case 200:
-                        this.terrain_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_water[this.clock.status].draw(ctx);
-                        break;
-                    case 137:
-                        this.terrain_mountain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_mountain[this.clock.status].draw(ctx);
-                        break;
-                    case 91:
-                        this.terrain_blood_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_blood_water[this.clock.status].draw(ctx);
-                        break;
-                    case 123:
-                        this.terrain_forest[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_forest[this.clock.status].draw(ctx);
-                        break;
-                    case 196:     
-                        this.terrain_lava[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_lava[this.clock.status].draw(ctx);
-                        break;
-                    case 255:      
-                        this.terrain_snow_ground[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
-                        this.terrain_snow_ground[this.clock.status].draw(ctx);
-                        break;
+        if(this.player1.character_descruption_total_point[0] != 0){
+            for(var i=0,ii=-5; i<11; i++,ii++){
+                for(var j=0,jj=-5; j<11; j++,jj++){
+                    switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
+                        case 192:
+                            this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_plain[this.clock.status].draw(ctx);
+                            break;
+                        case 200:
+                            this.terrain_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_water[this.clock.status].draw(ctx);
+                            break;
+                        case 137:
+                            this.terrain_mountain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_mountain[this.clock.status].draw(ctx);
+                            break;
+                        case 91:
+                            this.terrain_blood_water[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_blood_water[this.clock.status].draw(ctx);
+                            break;
+                        case 123:
+                            this.terrain_forest[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_forest[this.clock.status].draw(ctx);
+                            break;
+                        case 196:     
+                            this.terrain_lava[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_lava[this.clock.status].draw(ctx);
+                            break;
+                        case 255:      
+                            this.terrain_snow_ground[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.terrain_snow_ground[this.clock.status].draw(ctx);
+                            break;
+                    }
                 }
             }
-        }
-
-        for(var i=-5,ii=0; i<6; i++,ii++){
-            for(var j=-5,jj=0; j<6; j++,jj++){
-                this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].position = this.tilePosition[jj][ii];
-                this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].draw(ctx);
+    
+            for(var i=-5,ii=0; i<6; i++,ii++){
+                for(var j=-5,jj=0; j<6; j++,jj++){
+                    this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].position = this.tilePosition[jj][ii];
+                    this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].draw(ctx);
+                }
             }
-        }
-
-        for(var i=0;i<this.monster.length;i++){
-            if(this.isCanvasCanDraw(i)){
-                this.CanvasCanDraw(this.monster[i], ctx);
+    
+            for(var i=0;i<this.monster.length;i++){
+                if(this.isCanvasCanDraw(i)){
+                    this.CanvasCanDraw(this.monster[i], ctx);
+                }
             }
-        }
-
-        this.synthesisBar.draw(ctx);
-        if(this.skillTimer.buttonPress)
-            this.skillTimer.draw(ctx);
-        this.player1.draw(ctx);
-        this.clock.draw(ctx);
-
-        if(this.is_character_description_open){
-            this.character_description.draw(ctx);
-        }
-
-        if(this.monster_cute_little_eye.is_start)
-            this.monster_cute_little_eye.draw(ctx);
-        
-        if(this.checkKeyIsPress('S')){
-            // this.skill_handler.draw(ctx);
-        }
-
-        if(this.skill_handler.fire_wand_level1._start){
-            this.skill_handler.skillDraw(ctx);
+    
+            this.synthesisBar.draw(ctx);
+            if(this.skillTimer.buttonPress)
+                this.skillTimer.draw(ctx);
+            this.player1.draw(ctx);
+            this.clock.draw(ctx);
+    
+            if(this.is_character_description_open){
+                this.character_description.draw(ctx);
+                this.skill_handler.update();
+            }
+    
+            if(this.monster_cute_little_eye.is_start)
+                this.monster_cute_little_eye.draw(ctx);
+            
+            if(this.skill_handler._start && (!this.skillTimer.buttonPress))
+                this.skill_handler.draw();
+    
+            if(this.skill_handler.fire_wand_level1._start){
+                this.skill_handler.draw(ctx);
+            }
         }
     }	
-
+    
     this.clockDraw = function(ctx){
-        setInterval(() => {
+        var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
+            if(this.player1.character_descruption_total_point[0] == 0){
+                clearInterval(clockInterval);
+            }
         }, 500);
     }
+
     this.checkKeyIsPress  = function(key){
         for(var i=0;i<this.capture_key.length;i++){
             if(this.capture_key[i].key == key){
@@ -530,6 +535,7 @@ var World_map = function(map, item_map)
             this.skillTimer.clear();
             this.capture_key = [];
             this.player1.character_descruption_point[0] = 0;
+           
             m_map.player1.die();
         }
     }
@@ -563,7 +569,6 @@ var World_map = function(map, item_map)
         return count;
     }
 
-    this.playerWalkDirection = {x:0,y:0};
     this.pressWalk = false;
     this.keyPress = "";
     this.key_is_press = false;

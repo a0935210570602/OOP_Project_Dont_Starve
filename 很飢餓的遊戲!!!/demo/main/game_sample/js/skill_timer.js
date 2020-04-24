@@ -12,9 +12,9 @@ var Skill_timer = function() {
         this.buttonPress = true;
         var interval = setInterval(()=>{
             if(this.buttonPress){
-                if(this.currentMagicEnergy != 175)
+                if(this.currentMagicEnergy < 175)
                     this.currentMagicEnergy += 2.5;
-                else
+                if(this.currentMagicEnergy >= 175)
                     this.isEnergyFull = true;
             }
             else
