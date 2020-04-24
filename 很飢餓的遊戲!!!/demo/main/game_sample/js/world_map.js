@@ -130,6 +130,7 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
+        this.skillTimer = new Skill_timer();
         this.character_description = new Character_description();
         this.player1.init();
         this.clock.init();
@@ -444,6 +445,8 @@ var World_map = function(map, item_map)
         }
 
         this.synthesisBar.draw(ctx);
+        if(this.skillTimer.buttonPress)
+            this.skillTimer.draw(ctx);
         this.player1.draw(ctx);
         this.clock.draw(ctx);
         // console.log(this.capture_key.indexOf('S'));
@@ -452,19 +455,18 @@ var World_map = function(map, item_map)
             this.character_description.draw(ctx);
         }
 
-
         if(this.monster_cute_little_eye.is_start)
             this.monster_cute_little_eye.draw(ctx);
         
-        if(this.checkSKeyIsPress('S')){
-            this.skill_handler.draw(ctx);
+        if(this.checkKeyIsPress('S')){
+            // this.skill_handler.draw(ctx);
         }
 
         if(this.skill_handler.fire_wand_level1._start){
             this.skill_handler.skillDraw(ctx);
         }
     }	
-    this.checkSKeyIsPress  = function(key){
+    this.checkKeyIsPress  = function(key){
         for(var i=0;i<this.capture_key.length;i++){
             if(this.capture_key[i].key == key){
                 return true;
@@ -509,6 +511,9 @@ var World_map = function(map, item_map)
         if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
             this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y){
             console.log("you die");
+            this.skillTimer.clear();
+            this.capture_key = [];
+            this.player1.character_descruption_point[0] = 0;
             m_map.player1.die();
         }
     }
@@ -550,23 +555,23 @@ var World_map = function(map, item_map)
     this.skillOutbreak = function(){
         this.skill_handler.start(this.playerWalkDirection);
     }
-    this.skillTimer = function(){
-        this.skillOutbreak();
-    }
+    // this.skillTimer = function(){
+    //     this.skillOutbreak();
+    // }
     this.capture_key = [];
     this.keydown = function(e, list){
         // console.log("keydown");
         // console.log(e.key);
 
         this.capture_key.push(e);
-        for(var i=0;i<this.capture_key.length;i++){
-            console.log(this.capture_key[i].key);
-        }
+        // for(var i=0;i<this.capture_key.length;i++){
+        //     console.log(this.capture_key[i].key);
+        // }
         switch(e.key){
             case 'S':
                 this.keyPress = "S";
-                this.skillTimer();
-
+                this.skillTimer.startAccumulateEnergy();
+                this.drawSkillTimer(Framework.Game._context);
                 break;
             case 'D':
                 this.handleDrop();
@@ -624,23 +629,25 @@ var World_map = function(map, item_map)
         }
     }
     this.keyup = function(e, list){
+        if(e.key == 'S')
+            this.skillTimer.stopAccumulateEnergy();
+
         for(var i=0;i<this.capture_key.length;i++){
             if( this.capture_key[i].key == e.key){
                 this.capture_key.splice(i, 1);
                 break;
             }
         }
-        for(var i=0;i<this.capture_key.length;i++){
-            console.log(this.capture_key[i].key);
-        }
-        if( !(this.checkSKeyIsPress('Down') || this.checkSKeyIsPress('Up') || 
-            this.checkSKeyIsPress('Left') || this.checkSKeyIsPress('Right')) ) {
+    
+        if( !(this.checkKeyIsPress('Down') || this.checkKeyIsPress('Up') || 
+            this.checkKeyIsPress('Left') || this.checkKeyIsPress('Right')) ) {
             {
                 this.player1.walkEnd();
                 this.pressWalk = false;
                 this.keyPress = "";
             };
         }
+        m_map.draw(Framework.Game._context);
     }
 
     this.handleDrop = function(){
@@ -891,6 +898,15 @@ var World_map = function(map, item_map)
         {
             this.monster[i].stopWalk();
         }
+    }
+
+    this.drawSkillTimer = function(ctx){
+        var interval = setInterval(()=>{
+            if(this.skillTimer.buttonPress)
+                this.skillTimer.draw(ctx);
+            else
+                clearInterval(interval);
+        },100);
     }
 
     this.checkIsWalkAble = function(x,y){  //檢查人物是否超過地圖大小

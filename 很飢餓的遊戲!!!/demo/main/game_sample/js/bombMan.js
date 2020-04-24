@@ -218,7 +218,10 @@ var BombMan = function(file, options) {
         this.sprite.draw(ctx);
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        this.characterStatus.draw(ctx);
+        if(this.character_descruption_point[0] != 0){
+            console.log("drawdie");
+            this.characterStatus.draw(ctx);
+        }
     }
 
     this.increaseBombNum = function(){

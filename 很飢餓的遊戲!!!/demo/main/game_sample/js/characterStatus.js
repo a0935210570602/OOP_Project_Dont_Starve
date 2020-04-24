@@ -22,7 +22,6 @@ var CharacterStatus = function() {
     this.decreaseHunger = function(){
         var hungerInterval = setInterval(()=>{
             this.currentHunger = this.currentHunger - 5;
-            character_status.draw(Framework.Game._context);
             if(this.currentHunger <= 0)
             {
                 clearInterval(hungerInterval);
@@ -34,7 +33,6 @@ var CharacterStatus = function() {
     this.decreaseHealth = function(){
         var healthInterval = setInterval(()=>{
             this.currentHealth = this.currentHealth - 5;
-            character_status.draw(Framework.Game._context);
             if(this.currentHunger > 0){
                 clearInterval(healthInterval);
                 this.decreaseHunger();

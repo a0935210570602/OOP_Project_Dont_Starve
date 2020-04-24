@@ -231,6 +231,7 @@ var Level2_change = Framework.Class(Framework.Level , {
     },
 
     click: function (e) {  
+        console.log(e);
         this.map.click(e);
     },
 
