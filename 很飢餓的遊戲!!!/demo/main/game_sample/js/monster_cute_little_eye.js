@@ -133,9 +133,6 @@ var Monster_cute_little_eye = function(map, options) {
             walkDir = 0;
             return;
         }
-        // this.walk(walkStep);
-        // console.log(this.mapPosition.x,this.mapPosition.y );
-        // console.log(this.map.playerPositionOnMap);
 
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
@@ -147,15 +144,6 @@ var Monster_cute_little_eye = function(map, options) {
         }else{
             this.is_start = false;
         }
-    }
-
-    this.isWalkable  = function(is_start){
-        console.log(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y);
-        // if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
-        // {
-        //     this.walk(walkStep);
-        // }
-        // this.is_start = is_start;
     }
 
 };

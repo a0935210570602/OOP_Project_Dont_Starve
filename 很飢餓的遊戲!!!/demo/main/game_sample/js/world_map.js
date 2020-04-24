@@ -446,18 +446,23 @@ var World_map = function(map, item_map)
         this.synthesisBar.draw(ctx);
         this.player1.draw(ctx);
         this.clock.draw(ctx);
+        // console.log(this.capture_key.indexOf('S'));
+
         if(this.is_character_description_open){
             this.character_description.draw(ctx);
         }
-        this.monster_cute_little_eye.draw(ctx);
-        console.log(this.capture_key.length);
-        for(var i=0;i<this.capture_key.length;i++){
-            console.log(this.capture_key[i].key);
-        }
-        console.log(this.capture_key.indexOf('S'));
+
+
+        if(this.monster_cute_little_eye.is_start)
+            this.monster_cute_little_eye.draw(ctx);
+        
         if(this.checkSKeyIsPress('S')){
             console.log("drawskill_handler");
             this.skill_handler.draw(ctx);
+        }
+
+        if(this.skill_handler.fire_wand_level1._start){
+            // this.skillOutbreak.triggerSetFalse();
         }
     }	
     this.checkSKeyIsPress  = function(key){
@@ -544,17 +549,10 @@ var World_map = function(map, item_map)
     this.key_is_press = false;
     this.skill_number = -99;
     this.skillOutbreak = function(){
-        this.skill_handler.start();
+        this.skill_handler.start(this.playerWalkDirection);
     }
     this.skillTimer = function(){
         this.skillOutbreak();
-        var time_count = setInterval(()=>{
-            this.skillOutbreak();
-            if(this.keyPress != "S"){
-                clearInterval(time_count);
-            }
-
-        }, 6000);
     }
     this.capture_key = [];
     this.keydown = function(e, list){
@@ -562,9 +560,9 @@ var World_map = function(map, item_map)
         // console.log(e.key);
 
         this.capture_key.push(e);
-        // for(var i=0;i<this.capture_key.length;i++){
-        //     console.log(this.capture_key[i].key);
-        // }
+        for(var i=0;i<this.capture_key.length;i++){
+            console.log(this.capture_key[i].key);
+        }
         switch(e.key){
             case 'S':
                 this.keyPress = "S";
@@ -587,41 +585,7 @@ var World_map = function(map, item_map)
                     }
                 }
                 break;
-            // case 'Down':
-            //     this.player1.walk({x:0,y:1});
-            //     this.playerWalkDirection = {x:0,y:1};
-            //     this.keyPress = "Down";
-            //     if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
-            //         // console.log("x2= ",playerPosition.x);
-            //         // console.log("y2= ",playerPosition.y);
-            //         this.pressWalk = true;
-            //     }
-            //     break;
-            // case 'Left':
-            //     this.playerWalkDirection = {x:-1,y:0};
-            //     this.player1.walk({x:-1,y:0});
-            //     this.keyPress = "Left";
-            //     if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
-            //         this.pressWalk = true;
-            //     }
-            //     break;
-        
-            // case 'Right':
-            //     this.playerWalkDirection = {x:1,y:0};
-            //     this.player1.walk({x:1,y:0});
-            //     this.keyPress = "Right";
-            //     if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
-            //         this.pressWalk = true;
-            //     }
-            //     break;
-            // case 'Up':
-            //     this.playerWalkDirection = {x:0,y:-1};
-            //     this.player1.walk({x:0,y:-1});
-            //     this.keyPress = "Up";
-            //     if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
-            //         this.pressWalk = true;
-            //     }
-            //     break;
+
             case 'Space':
                 this.handleSpace();
                 break;
