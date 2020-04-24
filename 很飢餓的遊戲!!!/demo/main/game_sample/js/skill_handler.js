@@ -5,7 +5,7 @@ var Skill_handler = function() {
         console.log("callBackAnimation");
         this.trigger = false;
     }
-    this.fire_wand_level1 = new Framework.AnimationSprite({url:this.url, col:5 , row:3 , loop:false , speed:8}); 
+    this.fire_wand_level1 = new Framework.AnimationSprite({url:this.url, col:5 , row:3 , loop:false , speed:12}); 
     this.fire_wand_level1.scale = 1.25;
     this.fire_wand_level1.index = 0;
     this.fire_wand_level1.position = {x:13*64-64*3, y:7*64};

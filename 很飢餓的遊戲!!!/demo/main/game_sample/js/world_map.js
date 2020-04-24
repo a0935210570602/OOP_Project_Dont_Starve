@@ -457,12 +457,11 @@ var World_map = function(map, item_map)
             this.monster_cute_little_eye.draw(ctx);
         
         if(this.checkSKeyIsPress('S')){
-            console.log("drawskill_handler");
             this.skill_handler.draw(ctx);
         }
 
         if(this.skill_handler.fire_wand_level1._start){
-            // this.skillOutbreak.triggerSetFalse();
+            this.skill_handler.skillDraw(ctx);
         }
     }	
     this.checkSKeyIsPress  = function(key){
