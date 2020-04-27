@@ -24,6 +24,9 @@ var Item_space_wand = function() {
         this.item_space_wand.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 20;
+    }
 };
 
 Object.defineProperty(Item_space_wand.prototype, 'position', {

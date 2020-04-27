@@ -24,6 +24,10 @@ var Item_king_wand = function() {
         this.item_king_wand.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 20;
+    }
+
 };
 
 Object.defineProperty(Item_king_wand.prototype, 'position', {

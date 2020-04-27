@@ -147,6 +147,8 @@ var BombMan = function(file, options) {
                 this.mode = "rock_dig";
             else if(handEquipment.item_num == 18 || handEquipment.item_num == 20)
                 this.mode = "plant_dig";
+            else if(handEquipment.item_num == 27 || handEquipment.item_num == 28 || handEquipment.item_num == 29 || handEquipment.item_num == 30)
+                this.mode = "magic";
             else
                 this.mode = "";
         }else{
@@ -219,7 +221,6 @@ var BombMan = function(file, options) {
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
         if(this.character_descruption_point[0] != 0){
-            console.log("drawdie");
             this.characterStatus.draw(ctx);
         }
     }

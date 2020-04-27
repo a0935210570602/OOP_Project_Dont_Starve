@@ -23,6 +23,9 @@ var Item_fire_wand = function() {
         this.item_fire_wand.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 20;
+    }
 };
 
 Object.defineProperty(Item_fire_wand.prototype, 'position', {

@@ -24,6 +24,9 @@ var Item_ice_wand = function() {
         this.item_ice_wand.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 20;
+    }
 };
 
 Object.defineProperty(Item_ice_wand.prototype, 'position', {

@@ -88,6 +88,9 @@ var World_map = function(map, item_map)
         this.item_bush_dig = new Framework.Sprite(define.materialPath + 'item_bush_dig.png'); 
         this.item_bush_dig.scale = 2;
 
+        this.item_grass_dig = new Framework.Sprite(define.materialPath + 'item_grass_dig.png'); 
+        this.item_grass_dig.scale = 2;
+
         this.map_item_tree = new Framework.Sprite(define.materialPath + 'map_item_tree.png'); 
         this.map_item_tree_growed = new Framework.Sprite(define.materialPath + 'map_item_tree_growed.png'); 
         this.map_item_tree_cutted = new Framework.Sprite(define.materialPath + 'map_item_tree_cutted.png'); 
@@ -331,11 +334,12 @@ var World_map = function(map, item_map)
 	{   
         // console.log("keyPress");
         // console.log(this.keyPress);
-        if(this.skillTimer.isEnergyFull){
-            this.skill_handler.start(this.playerWalkDirection);
+        if(this.skillTimer.isEnergyFull && !this.skill_handler.isStart){
+            this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
         }
         this.DieEvent();
-        this.skill_handler.update(this.playerPositionOnMap);
+        this.skill_handler.update();
         this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
@@ -463,18 +467,23 @@ var World_map = function(map, item_map)
     
             if(this.is_character_description_open){
                 this.character_description.draw(ctx);
-                this.skill_handler.update();
             }
     
             if(this.monster_cute_little_eye.is_start)
                 this.monster_cute_little_eye.draw(ctx);
             
-            if(this.skill_handler._start && (!this.skillTimer.buttonPress))
-                this.skill_handler.draw();
-    
             if(this.skill_handler.fire_wand_level1._start){
-                this.skill_handler.draw(ctx);
+                console.log(this.skill_handler.fire_wand_level1.mapPosition);
+                for(var i=-5,ii=0; i<6; i++,ii++){
+                    for(var j=-5,jj=0; j<6; j++,jj++){
+                        if(this.skill_handler.fire_wand_level1.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.fire_wand_level1.mapPosition.y == j+ this.playerPositionOnMap.y){
+                            this.skill_handler.fire_wand_level1.position = {x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y};
+                            this.skill_handler.draw(ctx);
+                        }
+                    }
+                }
             }
+     
         }
     }	
     
@@ -573,12 +582,7 @@ var World_map = function(map, item_map)
     this.keyPress = "";
     this.key_is_press = false;
     this.skill_number = -99;
-    this.skillOutbreak = function(){
-        this.skill_handler.start(this.playerWalkDirection);
-    }
-    // this.skillTimer = function(){
-    //     this.skillOutbreak();
-    // }
+  
     this.capture_key = [];
     this.keydown = function(e, list){
         // console.log("keydown");
@@ -591,8 +595,10 @@ var World_map = function(map, item_map)
         switch(e.key){
             case 'S':
                 this.keyPress = "S";
-                this.skillTimer.startAccumulateEnergy();
-                this.drawSkillTimer(Framework.Game._context);
+                if(this.player1.mode == "magic"){
+                    this.skillTimer.startAccumulateEnergy();
+                    this.drawSkillTimer(Framework.Game._context);
+                }
                 break;
             case 'D':
                 this.handleDrop();
@@ -672,26 +678,28 @@ var World_map = function(map, item_map)
     }
 
     this.handleDrop = function(){
-        if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 91 &&
-            this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 200){
-            if(this.player1.equipmentBar.selectedIndex != -1){
-                if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
-                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.equipmentBar.getSelectedEquipment();
-                    this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
-                    this.player1.equipmentBar.dropSelectedEquipment();
-                }
-            }else if(this.player1.backpack.selectedIndex != -1){
-                if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
-                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.backpack.getSelectedItem();
-                    this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
-                    this.player1.backpack.dropSelectedItem();
-                }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == this.player1.backpack.getSelectedItem().item_num){
-                    if(this.player1.backpack.getSelectedItem().type == "material" ||
-                    this.player1.backpack.getSelectedItem().type == "food" ||
-                    this.player1.backpack.getSelectedItem().type == "plant"){
-                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].amount += this.player1.backpack.getSelectedItem().amount;
+        if(this.player1.backpack.getSelectedItem() != null){
+            if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 91 &&
+                this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 200){
+                if(this.player1.equipmentBar.selectedIndex != -1){
+                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
+                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.equipmentBar.getSelectedEquipment();
+                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
+                        this.player1.equipmentBar.dropSelectedEquipment();
+                    }
+                }else if(this.player1.backpack.selectedIndex != -1){
+                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
+                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.backpack.getSelectedItem();
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
                         this.player1.backpack.dropSelectedItem();
+                    }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == this.player1.backpack.getSelectedItem().item_num){
+                        if(this.player1.backpack.getSelectedItem().type == "material" ||
+                        this.player1.backpack.getSelectedItem().type == "food" ||
+                        this.player1.backpack.getSelectedItem().type == "plant"){
+                            this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].amount += this.player1.backpack.getSelectedItem().amount;
+                            this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
+                            this.player1.backpack.dropSelectedItem();
+                        }
                     }
                 }
             }

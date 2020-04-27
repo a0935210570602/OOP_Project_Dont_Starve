@@ -39,7 +39,6 @@ var Skill_timer = function() {
         ctx.rect(746, 400, this.currentMagicEnergy, 17);
         ctx.fillStyle = "orange";
         ctx.fill();
-        console.log("grawTime")
         this.magic_time_counter.draw(ctx);
     }
 
