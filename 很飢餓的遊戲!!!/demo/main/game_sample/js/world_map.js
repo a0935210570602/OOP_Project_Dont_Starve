@@ -334,9 +334,8 @@ var World_map = function(map, item_map)
 	{   
         // console.log("keyPress");
         // console.log(this.keyPress);
-        if(this.skillTimer.isEnergyFull && !this.skill_handler.isStart){
+        if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
         }
         this.DieEvent();
         this.skill_handler.update();
@@ -656,8 +655,11 @@ var World_map = function(map, item_map)
         }
     }
     this.keyup = function(e, list){
-        if(e.key == 'S')
+        if(e.key == 'S'){
+            if(this.skillTimer.isEnergyFull)
+                this.player1.equipmentBar.equipmentList[2].reduceDurability();
             this.skillTimer.stopAccumulateEnergy();
+        }
 
         for(var i=0;i<this.capture_key.length;i++){
             if( this.capture_key[i].key == e.key){
