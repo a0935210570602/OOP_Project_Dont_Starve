@@ -3,6 +3,9 @@
 //只要是this.XXX皆會是Public的property
 var BombMan = function(file, options) {
     this.url = file;      
+
+    this.sprite_dead = new Framework.AnimationSprite({url:define.materialPath + 'Actor_dead.png', col:3 , row:1 , loop:false , speed:4}); 
+    this.sprite_dead.scale = 1;
     //AnimationSprite當圖片是一整張圖片(連續圖), 而非Array時一定要給col, row三個(url是一定要的)   
     this.sprite = new Framework.AnimationSprite({url:this.url, col:3 , row:4 , loop:true , speed:12}); 
     this.sprite.scale = 1.4;
@@ -21,31 +24,23 @@ var BombMan = function(file, options) {
     this.playerDirection = this.constants.DirectionEnum.DOWN;
     this.equipmentBar = new EquipmentBar();
     this.backpack = new Backpack();
-    this.characterStatus = new CharacterStatus();
-    this.mode = "";
-    this.baseAttack = 10;
-    this.baseDefense = 10;
-
-    // this.character_descruption_text[0] = "生命";
-    // this.character_descruption_text[1] = "魔力";
-    // this.character_descruption_text[2] = "物功";
-    // this.character_descruption_text[3] = "魔攻";
-    // this.character_descruption_text[4] = "弓攻";
-    // this.character_descruption_text[5] = "力量";
-    // this.character_descruption_text[6] = "智力";
-    // this.character_descruption_text[7] = "防禦";
-    // this.character_descruption_text[8] = "技巧";
     
+    this.mode = "";
+
+    //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 1;
-    this.character_descruption_point[1] = 5;
-    this.character_descruption_point[2] = 4;
-    this.character_descruption_point[3] = 8;
-    this.character_descruption_point[4] = 2;
-    this.character_descruption_point[5] = 6;
-    this.character_descruption_point[6] = 13;
-    this.character_descruption_point[7] = 6;
-    this.character_descruption_point[8] = 14;
+    this.character_descruption_point[0] = 6;   //"生命";
+    this.character_descruption_point[1] = 5;   //"魔力";
+    this.character_descruption_point[2] = 4;   //"物功";
+    this.character_descruption_point[3] = 8;   //"魔攻";
+    this.character_descruption_point[4] = 2;   //"弓攻";
+    this.character_descruption_point[5] = 6;   //"力量";
+    this.character_descruption_point[6] = 13;  //"智力";
+    this.character_descruption_point[7] = 6;   //"防禦";
+    this.character_descruption_point[8] = 14;  //"技巧";
+
+    //角色格子轉成數值
+    this.characterStatus = new CharacterStatus(this.character_descruption_point[5]*20, this.character_descruption_point[0]*20);
 
     this.character_descruption_total_point = [];
     this.character_descruption_total_point[0] = 0;
@@ -155,6 +150,10 @@ var BombMan = function(file, options) {
             this.mode = "";
         }
     }
+    this.dieAnimation = function(position){
+        this.sprite_dead.position = {x: position.x*64, y: position.y*64};
+        this.sprite_dead.start({ from: 0 , to: 3, loop: false});
+    }
     //moveStep為位移量  格式範例{x:1,y:0}
     this.walk = function(moveStep){
         //console.log("player walk " + this.spritePosition.x + ", " + this.spritePosition.y);
@@ -195,6 +194,11 @@ var BombMan = function(file, options) {
     }
 
     this.update = function(){
+        //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
+        console.log("this.character_descruption_point[0]");
+        console.log(this.character_descruption_point[0]);
+        this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
+
         this.capibility();
         if(this.isWalking){
             this.isWalking = false;
@@ -204,7 +208,7 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
-        
+        this.sprite_dead.update();
         this.equipmentBar.update();
         this.getHandEquipment();
     }
@@ -217,11 +221,13 @@ var BombMan = function(file, options) {
         // console.log(this.canvasPosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.sprite.update();
-        this.sprite.draw(ctx);
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        if(this.character_descruption_point[0] != 0){
+        if(this.character_descruption_point[0] > 0){
+            this.sprite.draw(ctx);
             this.characterStatus.draw(ctx);
+        }else{
+            this.sprite_dead.draw(ctx);
         }
     }
 

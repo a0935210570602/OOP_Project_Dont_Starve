@@ -137,6 +137,7 @@ var World_map = function(map, item_map)
         this.character_description = new Character_description();
         this.player1.init();
         this.clock.init();
+        //畫
         this.clockDraw(Framework.Game._context);
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
@@ -348,17 +349,17 @@ var World_map = function(map, item_map)
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
                 }
-        
+                
                 if(this.keyPress == "Left") {
                     this.player1.walk({x:-1,y:0});
                     this.playerPositionOnMap.x-=1;
                 }
-        
+                
                 if(this.keyPress == "Right") {
                     this.player1.walk({x:1,y:0});
                     this.playerPositionOnMap.x+=1;
                 }
-        
+                
                 if(this.keyPress == "Up") {
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
@@ -367,6 +368,8 @@ var World_map = function(map, item_map)
         }
         this.character_description.update(this.player1);
         this.player1.update();
+        
+        this.DieEvent();
         if(this.stopMonster === true)
         {
             console.log("stopMonster");
@@ -409,7 +412,9 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
-        if(this.player1.character_descruption_total_point[0] != 0){
+        console.log("draw");
+        this.player1.characterStatus.draw(ctx);
+        if(this.player1.character_descruption_total_point[0] >= 0){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
                     switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
@@ -463,13 +468,13 @@ var World_map = function(map, item_map)
                 this.skillTimer.draw(ctx);
             this.player1.draw(ctx);
             this.clock.draw(ctx);
+            if(this.monster_cute_little_eye.is_start)
+                this.monster_cute_little_eye.draw(ctx);
     
             if(this.is_character_description_open){
                 this.character_description.draw(ctx);
             }
     
-            if(this.monster_cute_little_eye.is_start)
-                this.monster_cute_little_eye.draw(ctx);
             
             if(this.skill_handler.fire_wand_level1._start){
                 console.log(this.skill_handler.fire_wand_level1.mapPosition);
@@ -489,7 +494,8 @@ var World_map = function(map, item_map)
     this.clockDraw = function(ctx){
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
-            if(this.player1.character_descruption_total_point[0] == 0){
+            this.player1.characterStatus.draw(ctx);
+            if(this.player1.character_descruption_total_point[0] <= 0){
                 clearInterval(clockInterval);
             }
         }, 500);
@@ -536,15 +542,43 @@ var World_map = function(map, item_map)
         monster.draw(ctx);
     }
     var m_map = this;
+    this.deadClear = function(){
+        this.skillTimer.clear();
+        this.capture_key = [];
+        this.player1.characterStatus.currentHealth = 0;
+        this.player1.character_descruption_point[0] = -1;
+        this.player1.update();
+    }
     this.DieEvent = function(){
+        console.log("DieEvent");
+        // console.log(this.player1.sprite_dead._start);
+        if(this.player1.character_descruption_point[0] == 0  ){
+            this.player1.dieAnimation({x: 13, y: 7});
+            console.log("this.character_descruption_point[0]");
+
+            console.log(this.character_descruption_point[0]);
+            
+            setTimeout(()=>{
+                this.deadClear();
+                m_map.player1.die();
+
+            },1500);
+        }
+
         if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
-            this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y){
-            console.log("you die");
-            this.skillTimer.clear();
-            this.capture_key = [];
+            this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
             this.player1.character_descruption_point[0] = 0;
-           
-            m_map.player1.die();
+            this.player1.dieAnimation({x: 13, y: 7});
+
+            console.log("this.player1.character_descruption_point[0]");
+
+            console.log(this.player1.character_descruption_point[0]);
+
+            setTimeout(()=>{
+                this.deadClear();
+                m_map.player1.die();
+
+            },1500);
         }
     }
 

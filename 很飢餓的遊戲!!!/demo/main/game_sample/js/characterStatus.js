@@ -1,4 +1,4 @@
-var CharacterStatus = function() {
+var CharacterStatus = function(totalHealth, currentHealth) {
     this.heart = new Framework.Sprite(define.materialPath + 'heart.png'); 
     this.heart.position = {x: 21*64, y: 5*64};
     this.heart.scale = 2;
@@ -7,13 +7,11 @@ var CharacterStatus = function() {
     this.hungry.scale = 2;
     this.hungry.position = {x: 23*64, y: 5*64};
 
-    this.totalHealth = 200;
-    this.currentHealth = 50;
+    this.totalHealth = totalHealth;
+    this.currentHealth = currentHealth;
 
-    this.totalHunger = 150;
+    this.totalHunger = 160;
     this.currentHunger = 50;
-
-    var character_status = this;
 
     this.init = function(){
         this.decreaseHunger();
