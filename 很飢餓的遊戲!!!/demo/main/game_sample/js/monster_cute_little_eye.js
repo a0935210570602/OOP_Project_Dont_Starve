@@ -105,11 +105,26 @@ var Monster_cute_little_eye = function(map, options) {
         var yy = 7 + this.mapPosition.y - this.map.playerPositionOnMap.y;
 
         this.monster_cute_little_eye.position = {x: xx*64, y: yy*64};
+        // console.log("this.map.playerPositionOnMap");
+        // console.log(this.map.playerPositionOnMap);
+        // console.log(this.mapPosition);
+        // console.log(this.is_start);
+        this.checkIsMonsterOutCanvus();
         if(this.is_start){
             this.monster_cute_little_eye.draw(ctx);
         }
     }
     var walkDir = 0;
+    this.checkIsMonsterOutCanvus = function(){
+        if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
+            this.is_start = true;
+        }else{
+
+            this.is_start = false;
+        }
+    }
+
+
     this.randomWalk = function()
     {
         //var randNum = Math.floor(Math.random() * 100);

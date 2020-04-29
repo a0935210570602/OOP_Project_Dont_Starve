@@ -337,7 +337,7 @@ var World_map = function(map, item_map)
 
 	this.update = function()
 	{   
-        console.log("update");        
+        // console.log("update");        
         // console.log(this.keyPress);
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
@@ -348,9 +348,12 @@ var World_map = function(map, item_map)
         }
         
         this.skill_handler.update();
-        this.monster_cute_little_eye.update();
+        // this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
+            // console.log(this.playerPositionOnMap);
+            // this.monster_cute_little_eye.checkIsMonsterOutCanvus();
+            // m_map.draw(Framework.Game._context);
             if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
                 if(this.keyPress == "Down") {
@@ -372,11 +375,13 @@ var World_map = function(map, item_map)
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
                 }
+                // this.update();
+                // m_map.draw(Framework.Game._context);
             }
         }
         this.player1.update();
         this.character_description.update(this.player1);
-        
+        this.monster_cute_little_eye.update();
         // this.DieEvent();
         if(this.stopMonster === true)
         {
@@ -420,7 +425,7 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
-        console.log("draw");
+        // console.log("draw");
         this.player1.characterStatus.draw(ctx);
         if(this.player1.character_descruption_total_point[0] >= 0){
             for(var i=0,ii=-5; i<11; i++,ii++){
@@ -476,8 +481,8 @@ var World_map = function(map, item_map)
                 this.skillTimer.draw(ctx);
             this.player1.draw(ctx);
             this.clock.draw(ctx);
-            if(this.monster_cute_little_eye.is_start)
-                this.monster_cute_little_eye.draw(ctx);
+            // if(this.monster_cute_little_eye.is_start)
+            this.monster_cute_little_eye.draw(ctx);
     
             if(this.is_character_description_open){
                 this.character_description.draw(ctx);
@@ -559,14 +564,14 @@ var World_map = function(map, item_map)
     }
     this.cheakIsDie = function(){
         // console.log("DieEvent");
-        // console.log(this.player1.sprite_dead._start);
+        // console.log(this.player1.character_descruption_point[0]);
         if(this.player1.character_descruption_point[0] == 0  ){
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             // console.log("this.character_descruption_point[0]");
-
+            this.update();
             // console.log(this.character_descruption_point[0]);
-        
+            m_map.draw(Framework.Game._context);
             
             setTimeout(()=>{
                 this.deadClear();

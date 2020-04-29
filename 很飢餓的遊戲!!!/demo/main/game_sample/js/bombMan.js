@@ -183,7 +183,7 @@ var BombMan = function(file, options) {
     }
 
     this.die = function(){
-        console.log('player die');
+        // console.log('player die');
         Framework.Game.goToLevel('gameOver');
     }
 
@@ -206,10 +206,10 @@ var BombMan = function(file, options) {
         // console.log(this.character_descruption_point[0]);
         this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
         this.capibility();
-        if(this.character_descruption_total_point[0]<=0){
-            this.player_state = "dead";
+        // if(this.character_descruption_total_point[0]<=0){
+        //     this.player_state = "dead";
             // this.sprite_dead.update();
-        }
+        // }
 
 
         if(this.isWalking){
