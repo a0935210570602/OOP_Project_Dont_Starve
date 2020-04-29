@@ -126,6 +126,10 @@ var World_map = function(map, item_map)
                 mp3: define.musicPath + 'easy.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
+            }, die_scream:{
+                mp3: define.musicPath + '女慘叫.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
     }
@@ -333,12 +337,16 @@ var World_map = function(map, item_map)
 
 	this.update = function()
 	{   
-        // console.log("keyPress");
+        console.log("update");        
         // console.log(this.keyPress);
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
         }
-        this.DieEvent();
+
+        if(this.player1.player_state == "alive"){
+            this.cheakIsDie();
+        }
+        
         this.skill_handler.update();
         this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
@@ -366,13 +374,13 @@ var World_map = function(map, item_map)
                 }
             }
         }
-        this.character_description.update(this.player1);
         this.player1.update();
+        this.character_description.update(this.player1);
         
-        this.DieEvent();
+        // this.DieEvent();
         if(this.stopMonster === true)
         {
-            console.log("stopMonster");
+            // console.log("stopMonster");
             this.stopMonsterCounter++;
             if(this.stopMonsterCounter > 1000)
             {
@@ -477,7 +485,7 @@ var World_map = function(map, item_map)
     
             
             if(this.skill_handler.fire_wand_level1._start){
-                console.log(this.skill_handler.fire_wand_level1.mapPosition);
+                // console.log(this.skill_handler.fire_wand_level1.mapPosition);
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
                         if(this.skill_handler.fire_wand_level1.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.fire_wand_level1.mapPosition.y == j+ this.playerPositionOnMap.y){
@@ -549,14 +557,16 @@ var World_map = function(map, item_map)
         this.player1.character_descruption_point[0] = -1;
         this.player1.update();
     }
-    this.DieEvent = function(){
-        console.log("DieEvent");
+    this.cheakIsDie = function(){
+        // console.log("DieEvent");
         // console.log(this.player1.sprite_dead._start);
         if(this.player1.character_descruption_point[0] == 0  ){
-            this.player1.dieAnimation({x: 13, y: 7});
-            console.log("this.character_descruption_point[0]");
+            this.player1.dieEvent({x: 13, y: 7});
+            this.audio.play({name: 'die_scream', loop: false});
+            // console.log("this.character_descruption_point[0]");
 
-            console.log(this.character_descruption_point[0]);
+            // console.log(this.character_descruption_point[0]);
+        
             
             setTimeout(()=>{
                 this.deadClear();
@@ -567,18 +577,22 @@ var World_map = function(map, item_map)
 
         if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
             this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
-            this.player1.character_descruption_point[0] = 0;
-            this.player1.dieAnimation({x: 13, y: 7});
 
-            console.log("this.player1.character_descruption_point[0]");
+            this.player1.dieEvent({x: 13, y: 7});
+            this.audio.play({name: 'die_scream', loop: false});
+            this.update();
+            // this.player1.dieAnimation({x: 13, y: 7});
+            // console.log("this.player1.die");
+            m_map.draw(Framework.Game._context);
+            // console.log("this.player1.character_descruption_point[0]");
 
-            console.log(this.player1.character_descruption_point[0]);
+            // console.log(this.player1.character_descruption_point[0]);
 
             setTimeout(()=>{
                 this.deadClear();
                 m_map.player1.die();
 
-            },1500);
+            },3000);
         }
     }
 
@@ -620,8 +634,9 @@ var World_map = function(map, item_map)
     this.keydown = function(e, list){
         // console.log("keydown");
         // console.log(e.key);
-
-        this.capture_key.push(e);
+        if(this.player1.player_state == "alive"){
+            this.capture_key.push(e);
+        }
         // for(var i=0;i<this.capture_key.length;i++){
         //     console.log(this.capture_key[i].key);
         // }
@@ -656,13 +671,12 @@ var World_map = function(map, item_map)
             default:
                 break;
         }
+        
         if(this.whatIsTheLastKeyMove() == 'Down'){
             this.player1.walk({x:0,y:1});
             this.playerWalkDirection = {x:0,y:1};
             this.keyPress = "Down";
             if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
-                // console.log("x2= ",playerPosition.x);
-                // console.log("y2= ",playerPosition.y);
                 this.pressWalk = true;
             }
         }else if(this.whatIsTheLastKeyMove() == 'Left'){
@@ -751,7 +765,7 @@ var World_map = function(map, item_map)
             }
             else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate && this.player1.mode == "plant_dig"){
                 this.handlePlantDig();
-                console.log("dig");
+                // console.log("dig");
             }
             else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
             {
@@ -838,7 +852,7 @@ var World_map = function(map, item_map)
                             this.mapArray[x+i][y+j] != 200 &&
                             this.item_map_Array[x+i][y+j] == 0 
                             ){
-                            console.log("p = ",y+j,x+i);
+                            // console.log("p = ",y+j,x+i);
                             if(((y+j) != this.playerPositionOnMap.x) ||
                             ((x+i) != this.playerPositionOnMap.y)){
                                 this.item_map_Array[x+i][y+j] = 7;
@@ -998,7 +1012,7 @@ var World_map = function(map, item_map)
             }
         }
         this.synthesisBar.click(e);
-        console.log(e);
+        // console.log(e);
         this.player1.click(e);
         if(this.player1.plantIndex != -1){
             this.handlePlant();

@@ -5,7 +5,9 @@ var BombMan = function(file, options) {
     this.url = file;      
 
     this.sprite_dead = new Framework.AnimationSprite({url:define.materialPath + 'Actor_dead.png', col:3 , row:1 , loop:false , speed:4}); 
-    this.sprite_dead.scale = 1;
+    this.sprite_dead.scale = 1.4;
+
+    this.player_state = "";
     //AnimationSprite當圖片是一整張圖片(連續圖), 而非Array時一定要給col, row三個(url是一定要的)   
     this.sprite = new Framework.AnimationSprite({url:this.url, col:3 , row:4 , loop:true , speed:12}); 
     this.sprite.scale = 1.4;
@@ -71,6 +73,7 @@ var BombMan = function(file, options) {
     //this.sprite.rotation = (Framework.Util.isUndefined(options.rotation))?0:options.rotation;
     this.init = function(){
         this.characterStatus.init();
+        this.player_state = "alive";
     }
     this.getExperience= function(experience){
         this.experience += experience;
@@ -150,9 +153,13 @@ var BombMan = function(file, options) {
             this.mode = "";
         }
     }
-    this.dieAnimation = function(position){
+    this.dieEvent = function(position){
+        this.player_state = "dead";
+        this.character_descruption_point[0] = 0;
+        this.characterStatus.currentHealth = 0;
+        // this.update();
         this.sprite_dead.position = {x: position.x*64, y: position.y*64};
-        this.sprite_dead.start({ from: 0 , to: 3, loop: false});
+        this.sprite_dead.start({ from: 0 , to: 2, loop: true});
     }
     //moveStep為位移量  格式範例{x:1,y:0}
     this.walk = function(moveStep){
@@ -177,7 +184,7 @@ var BombMan = function(file, options) {
 
     this.die = function(){
         console.log('player die');
-        Framework.Game.goToNextLevel();
+        Framework.Game.goToLevel('gameOver');
     }
 
     this.walkEnd = function(){  
@@ -195,11 +202,16 @@ var BombMan = function(file, options) {
 
     this.update = function(){
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
-        console.log("this.character_descruption_point[0]");
-        console.log(this.character_descruption_point[0]);
+        // console.log("this.character_descruption_point[0]");
+        // console.log(this.character_descruption_point[0]);
         this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
-
         this.capibility();
+        if(this.character_descruption_total_point[0]<=0){
+            this.player_state = "dead";
+            // this.sprite_dead.update();
+        }
+
+
         if(this.isWalking){
             this.isWalking = false;
             this.sprite.index = this.playerDirection * 3 + 1;
@@ -208,7 +220,6 @@ var BombMan = function(file, options) {
                 this.StepMovedCallBack[i];
             }
         }
-        this.sprite_dead.update();
         this.equipmentBar.update();
         this.getHandEquipment();
     }
@@ -220,13 +231,14 @@ var BombMan = function(file, options) {
         // console.log("this.canvasPosition");
         // console.log(this.canvasPosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
-        this.sprite.update();
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        if(this.character_descruption_point[0] > 0){
+        this.characterStatus.draw(ctx);
+        if(this.player_state == "alive"){
+            this.sprite.update();
             this.sprite.draw(ctx);
-            this.characterStatus.draw(ctx);
-        }else{
+        }else if(this.player_state == "dead"){
+            this.sprite_dead.update();
             this.sprite_dead.draw(ctx);
         }
     }

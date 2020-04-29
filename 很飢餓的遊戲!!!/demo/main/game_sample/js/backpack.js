@@ -263,6 +263,10 @@ var Backpack = function() {
             }
         }
     }
+    this.mousemove = function(e){
+        // this.mousePosition = e;
+       　console.log("ee");
+    }
 
     this.itemNameArray = [
         "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
@@ -276,6 +280,9 @@ var Backpack = function() {
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢
     this.draw = function(ctx){
+        // if(this.selectedIndex != -1){
+            // ctx.fillRect(x, y, width, height)
+        // }
         for(var j = 0; j < 17; j++){
             this.backpack.position = this.backpackPosition[j];
             this.backpack.draw(ctx);

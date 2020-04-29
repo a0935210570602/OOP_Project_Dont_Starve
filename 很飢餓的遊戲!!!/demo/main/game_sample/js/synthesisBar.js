@@ -3,6 +3,7 @@ var SynthesisBar = function(backpackList) {
     this.backpack.scale = 2;
     this.backpack.position = {x:0,y:0};
     this.currentPoint = {x:-1,y:-1};
+    this.mousePosition;
 
     this.secondColumnRange = [];
     this.thirdColumnRange = [];
@@ -246,7 +247,6 @@ var SynthesisBar = function(backpackList) {
                 
             }
         }
-
         //第三層工具列
         if(this.firstColumnIndex != -1 && this.secondColumnIndex != -1){
             for(var i = 0;i < this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length; i++){
@@ -457,16 +457,18 @@ var SynthesisBar = function(backpackList) {
                 this.thirdColumnRange.push(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position);
             }
         }else if(this.currentPoint.x == 3 && this.checkThirdColumn()!=-1){
-           
+            this.mouseHover();
         }else{
             this.firstColumeIndex = -1;
             this.secondColumnIndex = -1;
             this.secondColumnRange = [];
             this.thirdColumnRange = [];
         }
-
     }
 
+    this.mouseHover = function(){
+        console.log("mouseHover");
+    }
 
     this.checkSecondColumn = function(){
         for(var i = 0;i < this.secondColumnRange.length;i++){
@@ -498,6 +500,7 @@ var SynthesisBar = function(backpackList) {
     }
 
     this.mousemove = function(e){
+        this.mousePosition = e;
         var m_position = {x:-1,y:-1};
         if(e.x >= 33 && e.x < 91)
             m_position.x = 1;
