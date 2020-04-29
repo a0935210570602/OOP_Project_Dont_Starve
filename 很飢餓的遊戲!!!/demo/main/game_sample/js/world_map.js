@@ -351,7 +351,7 @@ var World_map = function(map, item_map)
         this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
-            if(this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
+            if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
                 if(this.keyPress == "Down") {
                     this.player1.walk({x:0,y:1});
@@ -634,9 +634,8 @@ var World_map = function(map, item_map)
     this.keydown = function(e, list){
         // console.log("keydown");
         // console.log(e.key);
-        if(this.player1.player_state == "alive"){
-            this.capture_key.push(e);
-        }
+        this.capture_key.push(e);
+       
         // for(var i=0;i<this.capture_key.length;i++){
         //     console.log(this.capture_key[i].key);
         // }
@@ -672,34 +671,38 @@ var World_map = function(map, item_map)
                 break;
         }
         
-        if(this.whatIsTheLastKeyMove() == 'Down'){
-            this.player1.walk({x:0,y:1});
-            this.playerWalkDirection = {x:0,y:1};
-            this.keyPress = "Down";
-            if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
-                this.pressWalk = true;
+        if(this.player1.player_state == "alive"){
+
+            if(this.whatIsTheLastKeyMove() == 'Down'){
+                this.player1.walk({x:0,y:1});
+                this.playerWalkDirection = {x:0,y:1};
+                this.keyPress = "Down";
+                if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y+1)){
+                    this.pressWalk = true;
+                }
+            }else if(this.whatIsTheLastKeyMove() == 'Left'){
+                this.playerWalkDirection = {x:-1,y:0};
+                this.player1.walk({x:-1,y:0});
+                this.keyPress = "Left";
+                if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
+                    this.pressWalk = true;
+                }
+            }else if(this.whatIsTheLastKeyMove() == 'Right'){
+                this.playerWalkDirection = {x:1,y:0};
+                this.player1.walk({x:1,y:0});
+                this.keyPress = "Right";
+                if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
+                    this.pressWalk = true;
+                }
+            }else if(this.whatIsTheLastKeyMove() == 'Up'){
+                this.playerWalkDirection = {x:0,y:-1};
+                this.player1.walk({x:0,y:-1});
+                this.keyPress = "Up";
+                if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
+                    this.pressWalk = true;
+                }
             }
-        }else if(this.whatIsTheLastKeyMove() == 'Left'){
-            this.playerWalkDirection = {x:-1,y:0};
-            this.player1.walk({x:-1,y:0});
-            this.keyPress = "Left";
-            if(this.checkIsWalkAble(this.playerPositionOnMap.x-1,this.playerPositionOnMap.y)){
-                this.pressWalk = true;
-            }
-        }else if(this.whatIsTheLastKeyMove() == 'Right'){
-            this.playerWalkDirection = {x:1,y:0};
-            this.player1.walk({x:1,y:0});
-            this.keyPress = "Right";
-            if(this.checkIsWalkAble(this.playerPositionOnMap.x+1,this.playerPositionOnMap.y)){
-                this.pressWalk = true;
-            }
-        }else if(this.whatIsTheLastKeyMove() == 'Up'){
-            this.playerWalkDirection = {x:0,y:-1};
-            this.player1.walk({x:0,y:-1});
-            this.keyPress = "Up";
-            if(this.checkIsWalkAble(this.playerPositionOnMap.x,this.playerPositionOnMap.y-1)){
-                this.pressWalk = true;
-            }
+
         }
     }
     this.keyup = function(e, list){
