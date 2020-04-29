@@ -431,10 +431,8 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
-        
-        // console.log("draw");
-        this.game_object_detail.draw(ctx);
         this.player1.characterStatus.draw(ctx);
+        // console.log("draw");
         if(this.player1.character_descruption_total_point[0] >= 0){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
@@ -483,8 +481,6 @@ var World_map = function(map, item_map)
                     this.CanvasCanDraw(this.monster[i], ctx);
                 }
             }
-    
-            this.synthesisBar.draw(ctx);
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.player1.draw(ctx);
@@ -510,8 +506,9 @@ var World_map = function(map, item_map)
             }
      
         }
-        // this.game_object_detail.draw(ctx);
-        // this.player1.characterStatus.draw(ctx);
+        
+        this.game_object_detail.draw(ctx);
+        this.synthesisBar.draw(ctx);
     }	
     
     this.clockDraw = function(ctx){

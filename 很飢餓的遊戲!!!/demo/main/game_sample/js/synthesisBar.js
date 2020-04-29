@@ -221,7 +221,7 @@ var SynthesisBar = function(backpackList) {
 
     this.draw = function(ctx){
         ctx.beginPath();
-        ctx.rect(12, 23, 316-12, 777-23);
+        ctx.rect(5, 23, 316-12, 577-23);
         ctx.fillStyle = "#BEBEBE";
         ctx.fill();
 
