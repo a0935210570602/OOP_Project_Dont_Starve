@@ -133,6 +133,7 @@ var loadGameEnd;
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
         
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
+        { src: 'game_sample/js/game_object_detail.js', lookFor: 'Game_object_detail' },
         { src: 'game_sample/js/terrain_forest.js', lookFor: 'Terrain_forest' },
         { src: 'game_sample/js/terrain_lava.js', lookFor: 'Terrain_lava' },
         { src: 'game_sample/js/terrain_mountain.js', lookFor: 'Terrain_mountain' },

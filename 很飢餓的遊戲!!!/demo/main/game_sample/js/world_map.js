@@ -64,14 +64,20 @@ var World_map = function(map, item_map)
         this.terrain_snow_ground[1].scale = 2;
         this.terrain_snow_ground.push(new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png')); 
         this.terrain_snow_ground[2].scale = 2;
+        
 
         /////////////////////////////////////////////////////////////////////////////////////
 
         this.clock = new Clock();
         this.clock.scale = 2;
 
+        this.game_object_detail = new Game_object_detail();
+
         this.item_blank = new Framework.Sprite(define.materialPath + 'item_blank.png');
         this.item_blank.scale = 2;
+
+        this.Floral = new Framework.Sprite(define.materialPath + 'Floral.png');
+        this.Floral.scale = 2;
 
         this.item_grass_growed_dig = new Framework.Sprite(define.materialPath + 'item_grass_growed_dig.png'); 
         this.item_grass_growed_dig.scale = 2;
@@ -425,7 +431,9 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
+        
         // console.log("draw");
+        this.game_object_detail.draw(ctx);
         this.player1.characterStatus.draw(ctx);
         if(this.player1.character_descruption_total_point[0] >= 0){
             for(var i=0,ii=-5; i<11; i++,ii++){
@@ -502,6 +510,8 @@ var World_map = function(map, item_map)
             }
      
         }
+        // this.game_object_detail.draw(ctx);
+        // this.player1.characterStatus.draw(ctx);
     }	
     
     this.clockDraw = function(ctx){

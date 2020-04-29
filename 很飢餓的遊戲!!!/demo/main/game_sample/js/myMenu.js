@@ -23,7 +23,10 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_untouch.png');
         this.botton_quit = new Framework.Sprite(define.welcomimgPath + 'quit_game_untouch.png');
         this.botton_team = new Framework.Sprite(define.welcomimgPath + 'team_game_untouch.png');
-        
+        this.tutorial_game_touch = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_touch.png');
+        this.start_game_touch = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
+        this.team_game_touch = new Framework.Sprite(define.welcomimgPath + 'team_game_touch.png');
+        this.quit_game_touch = new Framework.Sprite(define.welcomimgPath + 'quit_game_touch.png');
         // this.audio = new Framework.Audio({
         //     kick: {
         //         mp3: define.musicPath + 'kick2.mp3',
@@ -65,28 +68,28 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
             y: 350
         };
         this.botton_start.scale = 1;
-        this.rootScene.attach(this.botton_start);
+        // this.rootScene.attach(this.botton_start);
 
         this.botton_tutorial.position = {
             x: 1050,
             y: 460
         };
         this.botton_tutorial.scale = 1;
-        this.rootScene.attach(this.botton_tutorial);
+        // this.rootScene.attach(this.botton_tutorial);
         
         this.botton_quit.position = {
             x: 1050,
             y: 570
         };
         this.botton_quit.scale = 1;
-        this.rootScene.attach(this.botton_quit);
+        // this.rootScene.attach(this.botton_quit);
         
         this.botton_team.position = {
             x: 1050,
             y: 680
         };
         this.botton_team.scale = 1;
-        this.rootScene.attach(this.botton_team);
+        // this.rootScene.attach(this.botton_team);
         
 
         // this.botton_rootScene.attach(this.botton_start);
@@ -94,7 +97,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
 
     update:function(){     
         //this.rootScene.update();一定要在第一行
-        this.rootScene.update(); 
+        // this.rootScene.update(); 
         // this.botton_rootScene.update(); 
         
         //目前的Framework, 當任何一個GameObject不做attach時, 則必須要自行update
@@ -102,7 +105,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
 
     draw: function(parentCtx) { 
         //this.rootScene.draw();一定要在第一行
-        this.rootScene.draw(parentCtx);
+        // this.rootScene.draw(parentCtx);
         this.menu.draw(parentCtx);
         this.botton_start.draw(parentCtx);
         this.botton_tutorial.draw(parentCtx);

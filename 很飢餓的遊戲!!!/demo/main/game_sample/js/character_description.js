@@ -144,12 +144,3 @@ var Character_description = function(backpackList) {
         
     }
 };
-this.character_descruption_text[0] = "生命";
-this.character_descruption_text[1] = "魔力";
-this.character_descruption_text[2] = "物功";
-this.character_descruption_text[3] = "魔攻";
-this.character_descruption_text[4] = "弓攻";
-this.character_descruption_text[5] = "力量";
-this.character_descruption_text[6] = "智力";
-this.character_descruption_text[7] = "防禦";
-this.character_descruption_text[8] = "技巧";

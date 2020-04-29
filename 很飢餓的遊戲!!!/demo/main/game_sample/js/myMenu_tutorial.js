@@ -19,6 +19,7 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
 
     load: function() {
         this.go_back_menu = new Framework.Sprite(define.welcomimgPath + 'go_back_menu.png');
+
     },
 
     initialize: function() {
