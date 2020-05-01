@@ -316,12 +316,13 @@ var BombMan = function(file, options) {
             this.equipmentBar.setEquipment(null, index);
         }
     }
-
+    this.get_back_number;
     this.mousemove = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);
         this.backpack.selectedIndex = index;
         this.equipmentBar.selectedIndex = equipmentIndex;
+        this.get_back_number = this.backpack.mousemove(e);
     }
 
     this.isChangeCapability = function(which_capability){

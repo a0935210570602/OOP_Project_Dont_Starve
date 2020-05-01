@@ -47,7 +47,7 @@ var Character_description = function(backpackList) {
     this.experience_chart.position = {x: 14*64, y: 2*64};  
     this.back_ground_picture.position = {x: 13*64, y: 7*64};    
     this.character_image.position = {x:11*64, y:4*64};
-
+    this.is_character_description_open = false;
     this.character_current_experience = 0;
     this.character_levelup_experience = 10;
     for(var i=0;i<9;i++){
@@ -60,68 +60,79 @@ var Character_description = function(backpackList) {
     }
 
     this.draw = function(ctx){
-        this.back_ground_picture.draw(ctx);
-        this.character_image.draw(ctx);
-        for(var i=0;i<9;i++){
-            this.character_descruption[i].draw(ctx);
-            ctx.font = "bold 24px serif";
+        if(this.is_character_description_open){
+                this.back_ground_picture.draw(ctx);
+            this.character_image.draw(ctx);
+            for(var i=0;i<9;i++){
+                this.character_descruption[i].draw(ctx);
+                ctx.font = "bold 24px serif";
+                ctx.fillStyle = "black";
+                ctx.lineWidth = 2.5;
+                ctx.fillText(this.character_descruption_text[i], this.character_descruption[i].position.x+55,  this.character_descruption[i].position.y+5);
+
+                for(var j=0;j<this.character_descruption_point[i];j++){
+                    ctx.beginPath();
+                    ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
+                    if(this.character_descruption_point[i]<6){
+                        ctx.fillStyle = "Red";
+                    }else if(this.character_descruption_point[i]<11){
+                        ctx.fillStyle = "yellow";
+                    }else{
+                        ctx.fillStyle = "Green";
+                    }
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+            ctx.font = "bold 48px serif";
             ctx.fillStyle = "black";
             ctx.lineWidth = 2.5;
-            ctx.fillText(this.character_descruption_text[i], this.character_descruption[i].position.x+55,  this.character_descruption[i].position.y+5);
+            ctx.fillText("Lv " + this.character_level, 10*64+20, 2*64);
+            var experience_scale;
+            if(this.experience == 0){
+                experience_scale = -1;
+            }else{
+                experience_scale = 15/(this.character_levelup_experience/this.experience);
+            }
+            // console.log("experience = ",this.experience);
+            // console.log("character_level = ",this.character_level);
+            // console.log("character_levelup_experience = ",this.character_levelup_experience);
 
-            for(var j=0;j<this.character_descruption_point[i];j++){
+            for(var i=0;i<=experience_scale;i++){
                 ctx.beginPath();
-                ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
-                if(this.character_descruption_point[i]<6){
-                    ctx.fillStyle = "Red";
-                }else if(this.character_descruption_point[i]<11){
-                    ctx.fillStyle = "yellow";
-                }else{
-                    ctx.fillStyle = "Green";
-                }
+                ctx.rect(729+i*23, 98, 20, 30);
+                ctx.fillStyle = "blue";
                 ctx.fill();
                 ctx.closePath();
             }
-        }
-        ctx.font = "bold 48px serif";
-        ctx.fillStyle = "black";
-        ctx.lineWidth = 2.5;
-        ctx.fillText("Lv " + this.character_level, 10*64+20, 2*64);
-        var experience_scale;
-        if(this.experience == 0){
-            experience_scale = -1;
-        }else{
-            experience_scale = 15/(this.character_levelup_experience/this.experience);
-        }
-        // console.log("experience = ",this.experience);
-        // console.log("character_level = ",this.character_level);
-        // console.log("character_levelup_experience = ",this.character_levelup_experience);
-
-        for(var i=0;i<=experience_scale;i++){
-            ctx.beginPath();
-            ctx.rect(729+i*23, 98, 20, 30);
-            ctx.fillStyle = "blue";
-            ctx.fill();
-            ctx.closePath();
-        }
-        this.experience_chart.draw(ctx);
-        ctx.font = "bold 24px serif";
-        ctx.fillStyle = "black";
-        ctx.lineWidth = 2.5;
-        ctx.fillText("( " + this.experience+" / "+ this.character_levelup_experience +")", 1135, 2*64-5);
-        ctx.font = "bold 24px serif";
-        ctx.fillStyle = "black";
-        ctx.lineWidth = 2.5;
-        ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
-        if(this.capabilityt_point!=0){
-            for(var i=2;i<9;i++){
-                if(i==7){
-                    continue;
+            this.experience_chart.draw(ctx);
+            ctx.font = "bold 24px serif";
+            ctx.fillStyle = "black";
+            ctx.lineWidth = 2.5;
+            ctx.fillText("( " + this.experience+" / "+ this.character_levelup_experience +")", 1135, 2*64-5);
+            ctx.font = "bold 24px serif";
+            ctx.fillStyle = "black";
+            ctx.lineWidth = 2.5;
+            ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
+            if(this.capabilityt_point!=0){
+                for(var i=2;i<9;i++){
+                    if(i==7){
+                        continue;
+                    }
+                    this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
+                    this.push_button.draw(ctx);
                 }
-                this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
-                this.push_button.draw(ctx);
             }
+        }else{
+            ctx.beginPath();
+            ctx.rect(449, 31, 30, 768);
+            ctx.rect(1183, 31, 30, 768);
+            ctx.rect(477, 32, 710, 65);
+
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
         }
+        
     }
 
     this.update = function(player){

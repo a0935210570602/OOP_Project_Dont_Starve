@@ -131,6 +131,7 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
+        this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
         this.character_description = new Character_description();
@@ -334,8 +335,8 @@ var World_map = function(map, item_map)
 
 	this.update = function()
 	{   
-        // console.log("update");        
-        // console.log(this.keyPress);
+        // console.log(this.player1.get_back_number);   
+
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
         }
@@ -478,10 +479,7 @@ var World_map = function(map, item_map)
             for(var i=0;i<this.monster.length;i++)
                 this.monster[i].draw(ctx);
 
-            if(this.is_character_description_open){
-                this.character_description.draw(ctx);
-            }
-    
+            this.character_description.draw(ctx);
             
             if(this.skill_handler.fire_wand_level1._start){
                 for(var i=-5,ii=0; i<6; i++,ii++){
@@ -677,13 +675,12 @@ var World_map = function(map, item_map)
                 break;
             
             case 'E':
-                if(e.key === 'E') {
-                    if(this.is_character_description_open){
-                        this.is_character_description_open = false;
-                    }else{
-                        this.is_character_description_open = true;
-                    }
+                if(this.character_description.is_character_description_open){
+                    this.character_description.is_character_description_open = false;
+                }else{
+                    this.character_description.is_character_description_open = true;
                 }
+
                 break;
 
             case 'Space':
@@ -1056,6 +1053,13 @@ var World_map = function(map, item_map)
     this.mousemove = function(e){
         this.synthesisBar.mousemove(e);
         this.player1.mousemove(e);
+        console.log("this.player1.backpack.getSelectedItem()");
+
+        console.log(this.player1.backpack.getSelectedItem());
+        if(this.player1.backpack.getSelectedItem() != null)
+            this.game_object_detail.showUpdate(this.player1.backpack.getSelectedItem().item_num); 
+        else
+            this.game_object_detail.showUpdate(null); 
         m_map.draw(Framework.Game._context);
     }
 }

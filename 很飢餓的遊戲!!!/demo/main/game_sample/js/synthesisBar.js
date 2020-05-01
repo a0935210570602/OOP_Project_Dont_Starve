@@ -224,7 +224,7 @@ var SynthesisBar = function(backpackList) {
         ctx.rect(5, 23, 316-12, 577-23);
         ctx.fillStyle = "#BEBEBE";
         ctx.fill();
-
+        ctx.textAlign = 'center';
         // 第一層工具列
         for(var i = 0;i < this.synthesisBar.length; i++){
             this.backpack.position = this.positionChange(this.synthesisBar[i].position);

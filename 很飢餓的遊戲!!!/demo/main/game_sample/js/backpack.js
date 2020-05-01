@@ -15,7 +15,10 @@ var Backpack = function() {
     }
     
     this.getSelectedItem= function(){
-        return this.itemList[this.selectedIndex];
+        if( this.itemList[this.selectedIndex] != null)
+            return this.itemList[this.selectedIndex];
+        else
+            return null;
     }
 
     this.dropSelectedItem = function(){
@@ -265,7 +268,43 @@ var Backpack = function() {
     }
     this.mousemove = function(e){
         // this.mousePosition = e;
-       　console.log("ee");
+
+        // if(e.x<=290+64 && e.x>= 290 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[0].item_num;
+        // }else if(e.x<=290+64*2 && e.x>= 290+64*1 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[1].item_num;
+        // }else if(e.x<=290+64*3 && e.x>= 290+64*2 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[2].item_num;
+        // }else if(e.x<=290+64*4 && e.x>= 290+64*3 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[3].item_num;
+        // }else if(e.x<=290+64*5 && e.x>= 290+64*4 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[4].item_num;
+        // }else if(e.x<=290+64*6 && e.x>= 290+64*5 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[5].item_num;
+        // }else if(e.x<=290+64*7 && e.x>= 290+64*6 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[6].item_num;
+        // }else if(e.x<=290+64*8 && e.x>= 290+64*7 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[7].item_num;
+        // }else if(e.x<=290+64*9 && e.x>= 290+64*8 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[8].item_num;
+        // }else if(e.x<=290+64*10 && e.x>= 290+64*9 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[9].item_num;
+        // }else if(e.x<=290+64*11 && e.x>= 290+64*10 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[10].item_num;
+        // }else if(e.x<=290+64*12 && e.x>= 290+64*11 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[11].item_num;
+        // }else if(e.x<=290+64*13 && e.x>= 290+64*12 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[12].item_num;
+        // }else if(e.x<=290+64*14 && e.x>= 290+64*13 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[13].item_num;
+        // }else if(e.x<=290+64*15 && e.x>= 290+64*14 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[14].item_num;
+        // }else if(e.x<=290+64*16 && e.x>= 290+64*15 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[15].item_num;
+        // }else if(e.x<=290+64*17 && e.x>= 290+64*16 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[16].item_num;
+        // }
+        // return null;
     }
 
     this.itemNameArray = [
@@ -294,6 +333,7 @@ var Backpack = function() {
             ctx.font = "25px Arial";
             ctx.fillStyle = "white";
             ctx.strokeStyle = 'blue';
+            ctx.textAlign = 'center';
             ctx.lineWidth = 2.5;
             if(this.stackableList.indexOf(this.itemList[i].item_num) != -1){
                 ctx.fillText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+20);
