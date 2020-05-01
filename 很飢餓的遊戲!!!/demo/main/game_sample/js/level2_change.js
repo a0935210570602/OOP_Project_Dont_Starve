@@ -193,12 +193,6 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.map.keyup(e, list);
     },
 
-    touchstart: function (e) {
-        //為了要讓Mouse和Touch都有一樣的事件
-        //又要減少Duplicated code, 故在Touch事件被觸發時, 去Trigger Mouse事件
-        this.click(e[0]);
-    },
-
     click: function (e) {  
         console.log(e);
         this.map.click(e);

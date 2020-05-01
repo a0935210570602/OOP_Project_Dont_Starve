@@ -133,6 +133,7 @@ var loadGameEnd;
         { src: 'game_sample/js/spear_handler.js', lookFor: 'Spear_handler' },
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
         { src: 'game_sample/js/monster_damage_handler.js', lookFor: 'Monster_damage_handler' },
+        { src: 'game_sample/js/flying_arror.js', lookFor: 'Flying_arror' },
         
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
         { src: 'game_sample/js/game_object_detail.js', lookFor: 'Game_object_detail' },
