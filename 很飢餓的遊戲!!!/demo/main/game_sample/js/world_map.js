@@ -4,9 +4,6 @@ var World_map = function(map, item_map)
     this.mapArray = map;
     this.item_map_Array = item_map;
     this.load = function(){
-
-        this.score = new Score();
-        this.score.position = {x:1000,y:0};
         this.skill_handler = new Skill_handler();
 
         this.terrain_plain = [];
@@ -104,12 +101,6 @@ var World_map = function(map, item_map)
         this.map_item_tree.scale = 2;
         this.map_item_tree_growed.scale = 2;
         this.map_item_tree_cutted.scale = 2;
-
-        var mapBoxPic = new Framework.Sprite(define.imagePath + 'box.png');
-        var bombPic  = new Framework.Sprite(define.imagePath + 'bomb.png');
-        var bombPic  = new Framework.Sprite(define.imagePath + 'explore.png');
-        var newMonster = new Monster(define.materialPath + 'monster_3.png',this, {down: {from: 0, to: 3}, left: {from:4, to: 7}, right: {from: 8, to: 11}, up: {from: 12, to: 15}});
-        
         
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
@@ -118,7 +109,6 @@ var World_map = function(map, item_map)
         this.monster = [];
         this.stopMonster = false;
         this.stopMonsterCounter =0;
-
         this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
 
         this.audio = new Framework.Audio({
@@ -145,6 +135,8 @@ var World_map = function(map, item_map)
         this.character_description = new Character_description();
         this.player1.init();
         this.clock.init();
+        this.monster_damage_handler = new Monster_damage_handler(this.player1, this.monster);
+
         //畫
         this.clockDraw(Framework.Game._context);
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
@@ -492,7 +484,7 @@ var World_map = function(map, item_map)
                 // console.log(this.skill_handler.fire_wand_level1.mapPosition);
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
-                        if(this.skill_handler.fire_wand_level1.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.fire_wand_level1.mapPosition.y == j+ this.playerPositionOnMap.y){
+                        if(this.skill_handler.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.mapPosition.y == j+ this.playerPositionOnMap.y){
                             this.skill_handler.fire_wand_level1.position = {x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y};
                             this.skill_handler.draw(ctx);
                         }
@@ -723,9 +715,13 @@ var World_map = function(map, item_map)
     }
     this.keyup = function(e, list){
         if(e.key == 'S'){
-            if(this.skillTimer.isEnergyFull)
-                this.player1.equipmentBar.equipmentList[2].reduceDurability();
-            this.skillTimer.stopAccumulateEnergy();
+            if(this.player1.mode == "magic"){
+                if(this.skillTimer.isEnergyFull){
+                    this.monster_damage_handler.handle_magic_damage(this.skill_handler.mapPosition);
+                    this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                }
+                this.skillTimer.stopAccumulateEnergy();
+            }
         }
 
         for(var i=0;i<this.capture_key.length;i++){

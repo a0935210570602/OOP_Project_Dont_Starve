@@ -13,7 +13,7 @@ var Skill_handler = function() {
     }
 
     this.start = function(playerWalkDirection,playerPositionOnMap){  
-        this.fire_wand_level1.mapPosition = {x: playerPositionOnMap.x+playerWalkDirection.x*3, y: playerPositionOnMap.y+playerWalkDirection.y*3};
+        this.mapPosition = {x: playerPositionOnMap.x+playerWalkDirection.x*3, y: playerPositionOnMap.y+playerWalkDirection.y*3};
         this.fire_wand_level1.start({ from: 0, to: 14, loop: false});
     }
 

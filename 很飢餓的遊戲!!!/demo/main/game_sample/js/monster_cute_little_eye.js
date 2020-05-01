@@ -22,6 +22,8 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.isWalking = false;
 
+    this.health = 10;
+
     var m_monster = this;
 
     this.monsterDirection = this.constants.DirectionEnum.DOWN;
