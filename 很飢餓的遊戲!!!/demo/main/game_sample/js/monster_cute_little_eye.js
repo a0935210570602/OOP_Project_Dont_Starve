@@ -76,28 +76,28 @@ var Monster_cute_little_eye = function(map, options) {
     }
 
     this.update = function(){
-        // if(this.isdead ){ return; }
-        // this.monster_cute_little_eye.update();
-        // if(this.isWalking){
-        //     if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
-        //         this.isWalking = false;
-        //         this.monster_cute_little_eye.stop();
-        //         this.monster_cute_little_eye.index = this.playerDirection * 3 + 1;
-        //         this.mapPosition = this.walkTarget;
-        //         //callback
-        //         // for(var i=0; i<this.StepMovedCallBack.length; i++){
-        //         //     this.StepMovedCallBack[i](this);
-        //         // }
-        //     }else{
-        //         this.walkAlittle();
-        //     }
-        // }else
-        // {
-        //     if(this.canWalking)
-        //     {
-        //         this.randomWalk();
-        //     }
-        // }
+        if(this.isdead ){ return; }
+        this.monster_cute_little_eye.update();
+        if(this.isWalking){
+            if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
+                this.isWalking = false;
+                this.monster_cute_little_eye.stop();
+                this.monster_cute_little_eye.index = this.playerDirection * 3 + 1;
+                this.mapPosition = this.walkTarget;
+                //callback
+                // for(var i=0; i<this.StepMovedCallBack.length; i++){
+                //     this.StepMovedCallBack[i](this);
+                // }
+            }else{
+                this.walkAlittle();
+            }
+        }else
+        {
+            if(this.canWalking)
+            {
+                this.randomWalk();
+            }
+        }
     }
 
 
@@ -110,7 +110,6 @@ var Monster_cute_little_eye = function(map, options) {
         // console.log("this.map.playerPositionOnMap");
         // console.log(this.map.playerPositionOnMap);
         // console.log(this.mapPosition);
-        // console.log(this.is_start);
         this.checkIsMonsterOutCanvus();
         if(this.is_start){
             this.monster_cute_little_eye.draw(ctx);
@@ -130,26 +129,41 @@ var Monster_cute_little_eye = function(map, options) {
     this.randomWalk = function()
     {
         //var randNum = Math.floor(Math.random() * 100);
+        var vertical,horizontal = {x:0,y:0},vertical_point,horizontal_point;
+        vertical_point = Math.abs(this.map.playerPositionOnMap.x - this.mapPosition.x);
+        horizontal_point = Math.abs(this.map.playerPositionOnMap.y - this.mapPosition.y);
+        console.log();
+        // if(this.map.playerPositionOnMap.x - this.mapPosition.x>0){
+        //     horizontal.x = 1;
+        // }else{
+        //     horizontal.x = -1;
+        // }
+
+        // if(this.map.playerPositionOnMap.y - this.mapPosition.y>0){
+        //     vertical.y = 1;
+        // }else{
+        //     vertical.y = -1;
+        // }
+        
         var randNum = Framework.Game._currentLevel.cycleCount % 553;
         walkDir++;
-        var walkStep = {x:0,y:0}
-        if(randNum % 117 == 0)
-        {
-            walkStep.x = 1
-        }else if(randNum % 79 == 0)
-        {
-            walkStep.x = -1
-        }else if(randNum % 133 == 0)
-        {
-            walkStep.y = 1
-        }else if(randNum % 157 == 0)
-        {
-            walkStep.y = -1
-        }else
-        {
-            walkDir = 0;
-            return;
-        }
+        var walkStep = {x:0,y:0};
+        // if(vertical_point != 0 &&　horizontal_point　!= 0){
+        //     if(randNum % 117 == 0)
+        //     {
+        //         walkStep.x = horizontal.x;
+        //     }else if(randNum % 79 == 0)
+        //     {
+        //         walkStep.y = vertical.y;
+        //     }
+        // }else if(vertical_point == 0 &&　horizontal_point　!= 0){
+        //     walkStep.x = horizontal.x;
+        // }else if(vertical_point != 0 &&　horizontal_point　== 0){
+        //     walkStep.y = vertical.y;
+        // }else{
+        //     walkDir = 0;
+        //     return;
+        // }
 
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
