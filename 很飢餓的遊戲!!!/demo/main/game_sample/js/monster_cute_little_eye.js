@@ -128,11 +128,11 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.randomWalk = function()
     {
-        //var randNum = Math.floor(Math.random() * 100);
-        var vertical,horizontal = {x:0,y:0},vertical_point,horizontal_point;
-        vertical_point = Math.abs(this.map.playerPositionOnMap.x - this.mapPosition.x);
-        horizontal_point = Math.abs(this.map.playerPositionOnMap.y - this.mapPosition.y);
-        console.log();
+        // var randNum = Math.floor(Math.random() * 100);
+        // var vertical,horizontal = {x:0,y:0},vertical_point,horizontal_point;
+        // vertical_point = Math.abs(this.map.playerPositionOnMap.x - this.mapPosition.x);
+        // horizontal_point = Math.abs(this.map.playerPositionOnMap.y - this.mapPosition.y);
+        // console.log();
         // if(this.map.playerPositionOnMap.x - this.mapPosition.x>0){
         //     horizontal.x = 1;
         // }else{
@@ -164,7 +164,23 @@ var Monster_cute_little_eye = function(map, options) {
         //     walkDir = 0;
         //     return;
         // }
-
+        if(randNum % 117 == 0)
+        {
+            walkStep.x = 1
+        }else if(randNum % 79 == 0)
+        {
+            walkStep.x = -1
+        }else if(randNum % 133 == 0)
+        {
+            walkStep.y = 1
+        }else if(randNum % 157 == 0)
+        {
+            walkStep.y = -1
+        }else
+        {
+            walkDir = 0;
+            return;
+        }
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
             {
