@@ -103,10 +103,10 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.draw = function(ctx){
         if(this.isdead){ return; }
-        var xx = 13 + this.mapPosition.x - this.map.playerPositionOnMap.x;
-        var yy = 7 + this.mapPosition.y - this.map.playerPositionOnMap.y;
+        var xx = 13*64 + this.spritePosition.x - this.map.playerPositionOnMap.x*64;
+        var yy = 7*64 + this.spritePosition.y - this.map.playerPositionOnMap.y*64;
 
-        this.monster_cute_little_eye.position = {x: xx*64, y: yy*64};
+        this.monster_cute_little_eye.position = {x: xx, y: yy};
         // console.log("this.map.playerPositionOnMap");
         // console.log(this.map.playerPositionOnMap);
         // console.log(this.mapPosition);

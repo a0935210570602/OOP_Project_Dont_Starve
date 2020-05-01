@@ -24,6 +24,9 @@ var Item_arror = function() {
         this.item_arror.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 10;
+    }
 };
 
 Object.defineProperty(Item_arror.prototype, 'position', {

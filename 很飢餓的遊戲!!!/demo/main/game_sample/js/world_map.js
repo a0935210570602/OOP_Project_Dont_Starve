@@ -327,15 +327,12 @@ var World_map = function(map, item_map)
         }
     }
 
-    this.exploreEndHandler = function(explore){
-        var index = m_map.exploreArray.indexOf(explore);
-        m_map.exploreArray.splice(index,1);
-        m_map.draw(Framework.Game._context);
-    }
-
 	this.update = function()
 	{   
-        // console.log(this.player1.get_back_number);   
+        // console.log("update");        
+        // console.log(this.keyPress);
+        if(this.monster_damage_handler.arrorHandle!=null)
+            m_map.draw(Framework.Game._context);
 
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
@@ -347,6 +344,7 @@ var World_map = function(map, item_map)
         
         this.skill_handler.update();
         this.spear_handler.update();
+        this.monster_damage_handler.update();
 
         if(this.pressWalk === true)
         {
@@ -476,8 +474,11 @@ var World_map = function(map, item_map)
             this.player1.draw(ctx);
             this.clock.draw(ctx);
     
-            for(var i=0;i<this.monster.length;i++)
+            for(var i=0;i<this.monster.length;i++){
                 this.monster[i].draw(ctx);
+            }
+            console.log("drawmmm")
+            this.monster_damage_handler.draw(ctx);
 
             this.character_description.draw(ctx);
             
@@ -579,18 +580,18 @@ var World_map = function(map, item_map)
         this.player1.update();
     }
     this.checkIsDie = function(){
-        if(this.player1.character_descruption_point[0] == 0  ){
-            this.player1.dieEvent({x: 13, y: 7});
-            this.audio.play({name: 'die_scream', loop: false});
-            this.update();
-            m_map.draw(Framework.Game._context);
+        // if(this.player1.character_descruption_point[0] == 0  ){
+        //     this.player1.dieEvent({x: 13, y: 7});
+        //     this.audio.play({name: 'die_scream', loop: false});
+        //     this.update();
+        //     m_map.draw(Framework.Game._context);
             
-            setTimeout(()=>{
-                this.deadClear();
-                m_map.player1.die();
+        //     setTimeout(()=>{
+        //         this.deadClear();
+        //         m_map.player1.die();
 
-            },1500);
-        }
+        //     },1500);
+        // }
 
         // if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
         //     this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
@@ -727,15 +728,16 @@ var World_map = function(map, item_map)
     this.keyup = function(e, list){
         if(e.key == 'S'){
             if(this.player1.mode == "magic"){
-                if(this.skillTimer.isEnergyFull){
+                if(this.skillTimer.isEnergyFull)
                     this.monster_damage_handler.handle_magic_damage(this.skill_handler.mapPosition);
-                    this.player1.equipmentBar.equipmentList[2].reduceDurability();
-                }
                 this.skillTimer.stopAccumulateEnergy();
             }
-            if(this.player1.mode == "spear"){
+            else if(this.player1.mode == "spear"){
                 this.monster_damage_handler.handle_spear_damage(this.playerWalkDirection, this.playerPositionOnMap);
                 this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+            }
+            else if(this.player1.mode == "arror"){
+                this.monster_damage_handler.handle_arror_damage(this.playerWalkDirection, this.playerPositionOnMap);
             }
         }
 

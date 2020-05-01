@@ -149,6 +149,8 @@ var BombMan = function(file, options) {
                 this.mode = "magic";
             else if(handEquipment.item_num == 25)
                 this.mode = "spear";
+            else if(handEquipment.item_num == 26)
+                this.mode = "arror";
             else
                 this.mode = "";
         }else{

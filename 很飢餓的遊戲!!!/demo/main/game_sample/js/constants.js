@@ -6,6 +6,13 @@ var Constants = function() {
         UP : 3
     };
 
+    this.Direction = {
+        DOWN : {x:0, y:1},
+        LEFT : {x:-1,y:0},
+        RIGHT : {x:1,y:0},
+        UP : {x:0,y:-1}
+    };
+
     this.ItemEnum = {
         NONE : 0,
         INCREASE_BOMB : -1,
