@@ -4,8 +4,6 @@ var World_map = function(map, item_map)
     this.mapArray = map;
     this.item_map_Array = item_map;
     this.load = function(){
-        this.skill_handler = new Skill_handler();
-
         this.terrain_plain = [];
         this.terrain_plain.push(new Framework.Sprite(define.imageMorningPath + 'terrain_plain.png')); 
         this.terrain_plain[0].scale = 2;
@@ -110,6 +108,9 @@ var World_map = function(map, item_map)
         this.stopMonster = false;
         this.stopMonsterCounter =0;
         this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
+
+        this.skill_handler = new Skill_handler();
+        this.spear_handler = new Spear_handler();
 
         this.audio = new Framework.Audio({
             kick: {
@@ -344,6 +345,8 @@ var World_map = function(map, item_map)
         }
         
         this.skill_handler.update();
+        this.spear_handler.update();
+
         if(this.pressWalk === true)
         {
             if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
@@ -481,12 +484,20 @@ var World_map = function(map, item_map)
     
             
             if(this.skill_handler.fire_wand_level1._start){
-                // console.log(this.skill_handler.fire_wand_level1.mapPosition);
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
                         if(this.skill_handler.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.mapPosition.y == j+ this.playerPositionOnMap.y){
                             this.skill_handler.fire_wand_level1.position = {x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y};
                             this.skill_handler.draw(ctx);
+                        }
+                    }
+                }
+            }else if(this.spear_handler.spear._start){
+                for(var i=-5,ii=0; i<6; i++,ii++){
+                    for(var j=-5,jj=0; j<6; j++,jj++){
+                        if(this.spear_handler.mapPosition.x == i + this.playerPositionOnMap.x && this.spear_handler.mapPosition.y == j+ this.playerPositionOnMap.y){
+                            this.spear_handler.spear.position = {x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y};
+                            this.spear_handler.draw(ctx);
                         }
                     }
                 }
@@ -654,6 +665,9 @@ var World_map = function(map, item_map)
                     this.skillTimer.startAccumulateEnergy();
                     this.drawSkillTimer(Framework.Game._context);
                 }
+                else if(this.player1.mode == "spear"){
+
+                }
                 break;
             case 'D':
                 this.handleDrop();
@@ -721,6 +735,10 @@ var World_map = function(map, item_map)
                     this.player1.equipmentBar.equipmentList[2].reduceDurability();
                 }
                 this.skillTimer.stopAccumulateEnergy();
+            }
+            if(this.player1.mode == "spear"){
+                this.monster_damage_handler.handle_spear_damage(this.playerWalkDirection, this.playerPositionOnMap);
+                this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
             }
         }
 

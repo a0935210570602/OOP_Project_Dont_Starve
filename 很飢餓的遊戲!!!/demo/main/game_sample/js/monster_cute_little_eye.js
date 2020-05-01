@@ -18,7 +18,7 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.canWalking = true;
 
-    this.StepMovedCallBack = [];
+    // this.StepMovedCallBack = [];
 
     this.isWalking = false;
 
@@ -76,28 +76,28 @@ var Monster_cute_little_eye = function(map, options) {
     }
 
     this.update = function(){
-        if(this.isdead ){ return; }
-        this.monster_cute_little_eye.update();
-        if(this.isWalking){
-            if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
-                this.isWalking = false;
-                this.monster_cute_little_eye.stop();
-                this.monster_cute_little_eye.index = this.playerDirection * 3 + 1;
-                this.mapPosition = this.walkTarget;
-                //callback
-                for(var i=0; i<this.StepMovedCallBack.length; i++){
-                    this.StepMovedCallBack[i](this);
-                }
-            }else{
-                this.walkAlittle();
-            }
-        }else
-        {
-            if(this.canWalking)
-            {
-                this.randomWalk();
-            }
-        }
+        // if(this.isdead ){ return; }
+        // this.monster_cute_little_eye.update();
+        // if(this.isWalking){
+        //     if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
+        //         this.isWalking = false;
+        //         this.monster_cute_little_eye.stop();
+        //         this.monster_cute_little_eye.index = this.playerDirection * 3 + 1;
+        //         this.mapPosition = this.walkTarget;
+        //         //callback
+        //         // for(var i=0; i<this.StepMovedCallBack.length; i++){
+        //         //     this.StepMovedCallBack[i](this);
+        //         // }
+        //     }else{
+        //         this.walkAlittle();
+        //     }
+        // }else
+        // {
+        //     if(this.canWalking)
+        //     {
+        //         this.randomWalk();
+        //     }
+        // }
     }
 
 

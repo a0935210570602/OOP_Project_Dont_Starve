@@ -21,6 +21,38 @@ var Monster_damage_handler = function(player, monster) {
             this.removeDeadMonster();
     }
 
+    this.handle_spear_damage = function(playerWalkDirection, playerPositionOnMap){
+        this.attackSuccess = false;
+        for(var i = 0;i < this.monster.length;i++){
+            if(this.monster[i].is_start){
+                if(playerPositionOnMap.x + playerWalkDirection.x == this.monster[i].mapPosition.x && playerPositionOnMap.y + playerWalkDirection.y == this.monster[i].mapPosition.y){
+                    this.monster[i].health -= this.player.character_descruption_total_point[2];
+                    this.attackSuccess = true;
+                }
+            }
+        }
+        if(this.attackSuccess){
+            this.removeDeadMonster();
+            this.player.equipmentBar.equipmentList[2].reduceDurability();
+        }
+    }
+
+    this.handle_arror_damage = function(playerWalkDirection, playerPositionOnMap){
+        this.attackSuccess = false;
+        for(var i = 0;i < this.monster.length;i++){
+            if(this.monster[i].is_start){
+                if(playerPositionOnMap.x + playerWalkDirection.x == this.monster[i].mapPosition.x && playerPositionOnMap.y + playerWalkDirection.y == this.monster[i].mapPosition.y){
+                    this.monster[i].health -= this.player.character_descruption_total_point[2];
+                    this.attackSuccess = true;
+                }
+            }
+        }
+        if(this.attackSuccess){
+            this.removeDeadMonster();
+            this.player.equipmentBar.equipmentList[2].reduceDurability();
+        }
+    }
+
     this.removeDeadMonster = function() {
         var i = 0;
         while(i < this.monster.length) {

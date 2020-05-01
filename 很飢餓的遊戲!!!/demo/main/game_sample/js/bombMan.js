@@ -147,6 +147,8 @@ var BombMan = function(file, options) {
                 this.mode = "plant_dig";
             else if(handEquipment.item_num == 27 || handEquipment.item_num == 28 || handEquipment.item_num == 29 || handEquipment.item_num == 30)
                 this.mode = "magic";
+            else if(handEquipment.item_num == 25)
+                this.mode = "spear";
             else
                 this.mode = "";
         }else{

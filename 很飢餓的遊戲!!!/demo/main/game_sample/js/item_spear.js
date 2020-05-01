@@ -24,6 +24,9 @@ var Item_spear = function() {
         this.item_spear.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 5;
+    }
 };
 
 Object.defineProperty(Item_spear.prototype, 'position', {

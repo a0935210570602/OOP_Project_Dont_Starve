@@ -130,6 +130,7 @@ var loadGameEnd;
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
         { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
         { src: 'game_sample/js/skill_handler.js', lookFor: 'Skill_handler' },
+        { src: 'game_sample/js/spear_handler.js', lookFor: 'Spear_handler' },
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
         { src: 'game_sample/js/monster_damage_handler.js', lookFor: 'Monster_damage_handler' },
         
