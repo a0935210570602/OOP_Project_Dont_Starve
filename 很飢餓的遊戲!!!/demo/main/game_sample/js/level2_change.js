@@ -187,8 +187,7 @@ var Level2_change = Framework.Class(Framework.Level , {
         this.map.init();
         //for demo
         this.map.setPlayerPosition({x:13,y:7});
-
-        // this.map.addMonster({x:9, y:5});
+        this.map.addMonsterRandom(3);
     },
 
     update: function() {     

@@ -114,8 +114,6 @@ var World_map = function(map, item_map)
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
-        this.monster_cute_little_eye = new Monster_cute_little_eye(this);
-        this.monster_cute_little_eye.position = {x: 15, y: 20};
 
         this.monster = [];
         this.stopMonster = false;
@@ -350,16 +348,12 @@ var World_map = function(map, item_map)
         }
 
         if(this.player1.player_state == "alive"){
-            this.cheakIsDie();
+            this.checkIsDie();
         }
         
         this.skill_handler.update();
-        // this.monster_cute_little_eye.update();
         if(this.pressWalk === true)
         {
-            // console.log(this.playerPositionOnMap);
-            // this.monster_cute_little_eye.checkIsMonsterOutCanvus();
-            // m_map.draw(Framework.Game._context);
             if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerPositionOnMap.x+this.playerWalkDirection.x,this.playerPositionOnMap.y+this.playerWalkDirection.y))
             {
                 if(this.keyPress == "Down") {
@@ -381,37 +375,36 @@ var World_map = function(map, item_map)
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
                 }
-                // this.update();
-                // m_map.draw(Framework.Game._context);
             }
         }
         this.player1.update();
         this.character_description.update(this.player1);
-        this.monster_cute_little_eye.update();
-        // this.DieEvent();
-        if(this.stopMonster === true)
-        {
-            // console.log("stopMonster");
-            this.stopMonsterCounter++;
-            if(this.stopMonsterCounter > 1000)
-            {
-                this.stopMonster = false;
-            }
-        }else
-        {
-            // console.log("stopMonster");
-            for(var i=0;i<this.monster.length;i++)
-            {
-                this.monster[i].update();
-                if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
-                {
-                    this.player1.die();
-                    break;
-                }
-            }
-        }
+        for(var i=0;i<this.monster.length;i++)
+            this.monster[i].update();
+
+        // if(this.stopMonster === true)
+        // {
+        //     // console.log("stopMonster");
+        //     this.stopMonsterCounter++;
+        //     if(this.stopMonsterCounter > 1000)
+        //     {
+        //         this.stopMonster = false;
+        //     }
+        // }else
+        // {
+        //     // console.log("stopMonster");
+        //     for(var i=0;i<this.monster.length;i++)
+        //     {
+        //         this.monster[i].update();
+        //         if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
+        //         {
+        //             this.player1.die();
+        //             break;
+        //         }
+        //     }
+        // }
     }
-    this.generation_time;
+    
     // this.walk = function(moveStep){
     //     if(this.isWalking === false){
     //         if(moveStep.x > 0){
@@ -476,18 +469,20 @@ var World_map = function(map, item_map)
                 }
             }
     
-            for(var i=0;i<this.monster.length;i++){
-                if(this.isCanvasCanDraw(i)){
-                    this.CanvasCanDraw(this.monster[i], ctx);
-                }
-            }
+            // for(var i=0;i<this.monster.length;i++){
+            //     if(this.isCanvasCanDraw(i)){
+            //         this.CanvasCanDraw(this.monster[i], ctx);
+            //     }
+            // }
+
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.player1.draw(ctx);
             this.clock.draw(ctx);
-            // if(this.monster_cute_little_eye.is_start)
-            this.monster_cute_little_eye.draw(ctx);
     
+            for(var i=0;i<this.monster.length;i++)
+                this.monster[i].draw(ctx);
+
             if(this.is_character_description_open){
                 this.character_description.draw(ctx);
             }
@@ -541,26 +536,39 @@ var World_map = function(map, item_map)
         return "No";
     }
 
-    this.isCanvasCanDraw = function(i){
-        //玩家在畫布上的座標
-        // console.log("this.player1.position");
-        // console.log(this.player1.position);
-        // console.log("newMonster.mapPosition");
-        // console.log(this.monster[0].mapPosition);
-  
-        //玩家在遊戲中的座標
-        // console.log("this.playerPositionOnMap");
-        // console.log(this.playerPositionOnMap);
-        if(Math.abs(this.monster[i].mapPosition.x-this.playerPositionOnMap.x)<=5 && Math.abs(this.monster[i].mapPosition.y-this.playerPositionOnMap.y)<=5){
-            return true;
+    this.addMonsterRandom = function(amount){
+        var count = 0;
+        var m_position;
+        while(this.monster.length != amount){
+            m_position = {x: Math.floor(Math.random()*this.mapArray[0].length),y: Math.floor(Math.random()*this.mapArray.length)};
+            if(this.mapArray[m_position.y][m_position.x] != 91 && this.mapArray[m_position.y][m_position.x] != 200 && this.item_map_Array[m_position.y][m_position.x] == 0){
+                var newMonster =  new Monster_cute_little_eye(this);
+                newMonster.position = m_position;
+                this.monster.push(newMonster);
+            }
         }
-        return false;
     }
-    this.CanvasCanDraw = function(monster, ctx){
-        monster.canvasPosition.x = this.player1.position.x + monster.mapPosition.x-this.playerPositionOnMap.x;
-        monster.canvasPosition.y = this.player1.position.y + monster.mapPosition.y-this.playerPositionOnMap.y;
-        monster.draw(ctx);
-    }
+
+    // this.isCanvasCanDraw = function(i){
+    //     //玩家在畫布上的座標
+    //     // console.log("this.player1.position");
+    //     // console.log(this.player1.position);
+    //     // console.log("newMonster.mapPosition");
+    //     // console.log(this.monster[0].mapPosition);
+  
+    //     //玩家在遊戲中的座標
+    //     // console.log("this.playerPositionOnMap");
+    //     // console.log(this.playerPositionOnMap);
+    //     if(Math.abs(this.monster[i].mapPosition.x-this.playerPositionOnMap.x)<=5 && Math.abs(this.monster[i].mapPosition.y-this.playerPositionOnMap.y)<=5){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+    // this.CanvasCanDraw = function(monster, ctx){
+    //     monster.canvasPosition.x = this.player1.position.x + monster.mapPosition.x-this.playerPositionOnMap.x;
+    //     monster.canvasPosition.y = this.player1.position.y + monster.mapPosition.y-this.playerPositionOnMap.y;
+    //     monster.draw(ctx);
+    // }
     var m_map = this;
     this.deadClear = function(){
         this.skillTimer.clear();
@@ -569,15 +577,11 @@ var World_map = function(map, item_map)
         this.player1.character_descruption_point[0] = -1;
         this.player1.update();
     }
-    this.cheakIsDie = function(){
-        // console.log("DieEvent");
-        // console.log(this.player1.character_descruption_point[0]);
+    this.checkIsDie = function(){
         if(this.player1.character_descruption_point[0] == 0  ){
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
-            // console.log("this.character_descruption_point[0]");
             this.update();
-            // console.log(this.character_descruption_point[0]);
             m_map.draw(Framework.Game._context);
             
             setTimeout(()=>{
@@ -587,25 +591,25 @@ var World_map = function(map, item_map)
             },1500);
         }
 
-        if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
-            this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
+        // if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
+        //     this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
 
-            this.player1.dieEvent({x: 13, y: 7});
-            this.audio.play({name: 'die_scream', loop: false});
-            this.update();
-            // this.player1.dieAnimation({x: 13, y: 7});
-            // console.log("this.player1.die");
-            m_map.draw(Framework.Game._context);
-            // console.log("this.player1.character_descruption_point[0]");
+        //     this.player1.dieEvent({x: 13, y: 7});
+        //     this.audio.play({name: 'die_scream', loop: false});
+        //     this.update();
+        //     // this.player1.dieAnimation({x: 13, y: 7});
+        //     // console.log("this.player1.die");
+        //     m_map.draw(Framework.Game._context);
+        //     // console.log("this.player1.character_descruption_point[0]");
 
-            // console.log(this.player1.character_descruption_point[0]);
+        //     // console.log(this.player1.character_descruption_point[0]);
 
-            setTimeout(()=>{
-                this.deadClear();
-                m_map.player1.die();
+        //     setTimeout(()=>{
+        //         this.deadClear();
+        //         m_map.player1.die();
 
-            },3000);
-        }
+        //     },3000);
+        // }
     }
 
     this.checkBoxExplore = function(explorePos)
