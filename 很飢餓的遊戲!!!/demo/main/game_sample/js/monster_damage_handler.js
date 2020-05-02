@@ -41,7 +41,7 @@ var Monster_damage_handler = function(player, monster) {
 
     this.handle_arror_damage = function(playerWalkDirection, playerPositionOnMap){
         this.attackSuccess = false;
-        this.arrorHandle.push(new Flying_arror(playerWalkDirection, playerPositionOnMap, this.monster));
+        this.arrorHandle.push(new Flying_arror(playerWalkDirection, playerPositionOnMap, this.monster, this.player.character_descruption_total_point[4]));
         this.player.equipmentBar.equipmentList[2].reduceDurability();
     }
 

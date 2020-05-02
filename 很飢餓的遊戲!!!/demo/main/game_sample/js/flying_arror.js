@@ -1,4 +1,4 @@
-var Flying_arror = function(Direction,Position,Monster) {
+var Flying_arror = function(Direction,Position,Monster,Attack) {
     this.flying_arror1 = new Framework.Sprite(define.materialPath + 'item_snow_ball.png'); 
     this.flying_arror1.scale = 2;
 
@@ -22,7 +22,7 @@ var Flying_arror = function(Direction,Position,Monster) {
         for(var i = 0;i < Monster.length;i++){
             if(Monster[i].is_start){
                 if(this.mapPosition.x == Monster[i].mapPosition.x && this.mapPosition.y == Monster[i].mapPosition.y){
-                    Monster[i].health -= 10;
+                    Monster[i].health -= Attack;
                     this.attackEnd = true;
                     break;
                 }
