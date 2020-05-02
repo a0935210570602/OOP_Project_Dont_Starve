@@ -1,12 +1,22 @@
 var Flying_arror = function(Direction,Position,Monster,Attack) {
-    this.flying_arror1 = new Framework.Sprite(define.materialPath + 'item_snow_ball.png'); 
-    this.flying_arror1.scale = 2;
+    this.flying_arror_left = new Framework.Sprite(define.materialPath + 'arror_left.png'); 
+    this.flying_arror_left.scale = 2;
 
-    this.url = define.skillAnimationPath + 'Cure4.png';
-    this.flying_arror = new Framework.AnimationSprite({url:this.url, col:5 , row:3 , loop:true , speed:32}); 
+    this.flying_arror_right = new Framework.Sprite(define.materialPath + 'arror_right.png'); 
+    this.flying_arror_right.scale = 2;
+
+    this.flying_arror_up = new Framework.Sprite(define.materialPath + 'arror_up.png'); 
+    this.flying_arror_up.scale = 2;
+
+    this.flying_arror_down = new Framework.Sprite(define.materialPath + 'arror_down.png'); 
+    this.flying_arror_down.scale = 2;
+
+    this.url = define.skillAnimationPath + 'Recovery4.png';
+    this.flying_arror = new Framework.AnimationSprite({url:this.url, col:5 , row:4 , loop:true , speed:16}); 
     this.flying_arror.scale = 0.5;
-    this.flying_arror.start({ from: 0, to: 15, loop: false});
+    this.flying_arror.start({ from: 0, to: 8, loop: false});
 
+    this.directionNum;
 
     this.constants = new Constants();
     this.mapPosition = Position;
@@ -17,8 +27,22 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
     this.attackEnd = false;
     this.is_start = false;
 
-    this.fly = function(){
+    this.init = function(){
+        if(this.direction.x == this.constants.Direction.DOWN.x && this.direction.y == this.constants.Direction.DOWN.y){
+            this.directionNum = 0;
+        }
+        else if(this.direction.x == this.constants.Direction.LEFT.x && this.direction.y == this.constants.Direction.LEFT.y){
+            this.directionNum = 1;
+        }
+        else if(this.direction.x == this.constants.Direction.RIGHT.x && this.direction.y == this.constants.Direction.RIGHT.y){
+            this.directionNum = 2;
+        }
+        else{
+            this.directionNum = 3;
+        }
+    }
 
+    this.fly = function(){
         for(var i = 0;i < Monster.length;i++){
             if(Monster[i].is_start){
                 if(this.mapPosition.x == Monster[i].mapPosition.x && this.mapPosition.y == Monster[i].mapPosition.y){
@@ -35,13 +59,13 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
     var flySpeed = 16;
     this.flyAlittle = function(){
 
-        if(this.direction.x == this.constants.Direction.DOWN.x && this.direction.y == this.constants.Direction.DOWN.y){
+        if(this.directionNum == 0){
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + flySpeed};
         }
-        else if(this.direction.x == this.constants.Direction.LEFT.x && this.direction.y == this.constants.Direction.LEFT.y){
+        else if(this.directionNum == 1){
             this.spritePosition = {x:this.spritePosition.x - flySpeed, y:this.spritePosition.y};
         }
-        else if(this.direction.x == this.constants.Direction.RIGHT.x && this.direction.y == this.constants.Direction.RIGHT.y){
+        else if(this.directionNum == 2){
             this.spritePosition = {x:this.spritePosition.x + flySpeed, y:this.spritePosition.y};
         }
         else{
@@ -78,9 +102,23 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
             var xx = 13*64 + this.spritePosition.x - Position.x*64;
             var yy = 7*64 + this.spritePosition.y - Position.y*64;
             this.flying_arror.position = {x: xx, y: yy};
-            this.flying_arror1.position = {x: xx, y: yy};
             this.flying_arror.draw(ctx);
-            this.flying_arror1.draw(ctx);
+            if(this.directionNum == 0){
+                this.flying_arror_down.position = {x: xx, y: yy};
+                this.flying_arror_down.draw(ctx);
+            }
+            else if(this.directionNum == 1){
+                this.flying_arror_left.position = {x: xx, y: yy};
+                this.flying_arror_left.draw(ctx);
+            }
+            else if(this.directionNum == 2){
+                this.flying_arror_right.position = {x: xx, y: yy};
+                this.flying_arror_right.draw(ctx);
+            }
+            else{
+                this.flying_arror_up.position = {x: xx, y: yy};
+                this.flying_arror_up.draw(ctx);
+            }
         }
     }
 

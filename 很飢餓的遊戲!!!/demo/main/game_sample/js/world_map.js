@@ -99,7 +99,22 @@ var World_map = function(map, item_map)
         this.map_item_tree.scale = 2;
         this.map_item_tree_growed.scale = 2;
         this.map_item_tree_cutted.scale = 2;
-        
+
+        this.url = define.skillAnimationPath + 'Recovery4.png';
+        this.flying_arror = new Framework.AnimationSprite({url:this.url, col:5 , row:4 , loop:true , speed:16}); 
+    
+        this.flying_arror_left = new Framework.Sprite(define.materialPath + 'arror_left.png'); 
+        this.flying_arror_left.scale = 2;
+    
+        this.flying_arror_right = new Framework.Sprite(define.materialPath + 'arror_right.png'); 
+        this.flying_arror_right.scale = 2;
+    
+        this.flying_arror_up = new Framework.Sprite(define.materialPath + 'arror_up.png'); 
+        this.flying_arror_up.scale = 2;
+    
+        this.flying_arror_down = new Framework.Sprite(define.materialPath + 'arror_down.png'); 
+        this.flying_arror_down.scale = 2;
+
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
@@ -669,6 +684,7 @@ var World_map = function(map, item_map)
                 break;
             case 'D':
                 this.handleDrop();
+                this.handleHoverBackpack();
                 break;
             case 'F':
                 this.demo_dead_trigger = 1;
@@ -1048,17 +1064,23 @@ var World_map = function(map, item_map)
         if(this.player1.plantIndex != -1){
             this.handlePlant();
         }
+        this.handleHoverBackpack();
+
         m_map.draw(Framework.Game._context);
     }
 
     this.mousemove = function(e){
         this.synthesisBar.mousemove(e);
         this.player1.mousemove(e);
+        this.handleHoverBackpack();
 
+        m_map.draw(Framework.Game._context);
+    }
+
+    this.handleHoverBackpack = function(){
         if(this.player1.backpack.getSelectedItem() != null)
             this.game_object_detail.showUpdate(this.player1.backpack.getSelectedItem().item_num); 
         else
             this.game_object_detail.showUpdate(null); 
-        m_map.draw(Framework.Game._context);
     }
 }
