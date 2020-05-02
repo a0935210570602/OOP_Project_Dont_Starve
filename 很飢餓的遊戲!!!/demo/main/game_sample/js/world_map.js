@@ -331,8 +331,6 @@ var World_map = function(map, item_map)
 	{   
         // console.log("update");        
         // console.log(this.keyPress);
-        if(this.monster_damage_handler.arrorHandle!=null)
-            m_map.draw(Framework.Game._context);
 
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
@@ -471,14 +469,15 @@ var World_map = function(map, item_map)
 
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
+
+            this.monster_damage_handler.draw(ctx);
             this.player1.draw(ctx);
             this.clock.draw(ctx);
     
             for(var i=0;i<this.monster.length;i++){
                 this.monster[i].draw(ctx);
             }
-            console.log("drawmmm")
-            this.monster_damage_handler.draw(ctx);
+
 
             this.character_description.draw(ctx);
             
@@ -1055,9 +1054,7 @@ var World_map = function(map, item_map)
     this.mousemove = function(e){
         this.synthesisBar.mousemove(e);
         this.player1.mousemove(e);
-        console.log("this.player1.backpack.getSelectedItem()");
 
-        console.log(this.player1.backpack.getSelectedItem());
         if(this.player1.backpack.getSelectedItem() != null)
             this.game_object_detail.showUpdate(this.player1.backpack.getSelectedItem().item_num); 
         else

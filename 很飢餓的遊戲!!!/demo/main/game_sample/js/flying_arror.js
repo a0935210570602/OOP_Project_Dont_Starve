@@ -1,6 +1,13 @@
 var Flying_arror = function(Direction,Position,Monster) {
-    this.flying_arror = new Framework.Sprite(define.materialPath + 'item_snow_ball.png'); 
-    this.flying_arror.scale = 2;
+    this.flying_arror1 = new Framework.Sprite(define.materialPath + 'item_snow_ball.png'); 
+    this.flying_arror1.scale = 2;
+
+    this.url = define.skillAnimationPath + 'Cure4.png';
+    this.flying_arror = new Framework.AnimationSprite({url:this.url, col:5 , row:3 , loop:true , speed:32}); 
+    this.flying_arror.scale = 0.5;
+    this.flying_arror.start({ from: 0, to: 15, loop: false});
+
+
     this.constants = new Constants();
     this.mapPosition = Position;
     this.flyTarget = Position;
@@ -25,16 +32,10 @@ var Flying_arror = function(Direction,Position,Monster) {
             this.attackEnd = true;
     }
 
-    var flySpeed = 32;
+    var flySpeed = 16;
     this.flyAlittle = function(){
-        console.log("flyalittle");
-        console.log(this.direction);
 
         if(this.direction.x == this.constants.Direction.DOWN.x && this.direction.y == this.constants.Direction.DOWN.y){
-            console.log("flyalittleDown");
-            console.log(this.spritePosition);
-            
-
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + flySpeed};
         }
         else if(this.direction.x == this.constants.Direction.LEFT.x && this.direction.y == this.constants.Direction.LEFT.y){
@@ -49,11 +50,12 @@ var Flying_arror = function(Direction,Position,Monster) {
     }
 
     this.update = function(){
+        this.flying_arror.update();
         if(this.flyTarget.x * 64 === this.spritePosition.x && this.flyTarget.y * 64 === this.spritePosition.y){
             this.mapPosition = this.flyTarget;
             this.flyTarget = {x:this.flyTarget.x+this.direction.x, y:this.flyTarget.y+this.direction.y};
             this.flyAlittle();
-            this.fly()
+            this.fly();
         }else{
             this.flyAlittle();
             this.fly();
@@ -61,7 +63,7 @@ var Flying_arror = function(Direction,Position,Monster) {
     }
 
     this.check = function(){
-        if( Math.abs((this.mapPosition.x-Position.x)) <6 &&　Math.abs((this.mapPosition.y-Position.y)) <6){
+        if( Math.abs((this.spritePosition.x - Position.x*64)) <6*64 &&　Math.abs((this.spritePosition.y - Position.y*64)) <64*6){
             this.is_start = true;
         }else{
             this.is_start = false;
@@ -69,12 +71,16 @@ var Flying_arror = function(Direction,Position,Monster) {
     }
 
     this.draw = function(ctx){
+        this.is_start = false;
+
         this.check();
         if(this.is_start){
             var xx = 13*64 + this.spritePosition.x - Position.x*64;
             var yy = 7*64 + this.spritePosition.y - Position.y*64;
             this.flying_arror.position = {x: xx, y: yy};
+            this.flying_arror1.position = {x: xx, y: yy};
             this.flying_arror.draw(ctx);
+            this.flying_arror1.draw(ctx);
         }
     }
 
