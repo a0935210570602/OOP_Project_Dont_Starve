@@ -93,9 +93,9 @@ var Monster_cute_little_eye = function(map, options) {
             }
         }else
         {
-            if(this.canWalking)
+            if(this.canWalking && this.is_start)
             {
-                this.randomWalk();
+                this.rushToYou();
             }
         }
     }
@@ -125,29 +125,95 @@ var Monster_cute_little_eye = function(map, options) {
         }
     }
 
+    this.howToWalk = function(restriction, thirdDirection){
+        var directionArray = [{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
+        var thirdDirection = directionArray[thirdDirection];
+        console.log( directionArray);
+        console.log( 'directionArray.indexOf(thirdDirection)');
+        directionArray.splice( restriction, 1 );
+        console.log( directionArray);
 
-    this.randomWalk = function()
+        // console.log( 'directionArray.indexOf(thirdDirection)');
+        for(var i=0;i<directionArray.length;i++){
+            if(directionArray[i].x == thirdDirection.x && directionArray[i].y == thirdDirection.y){
+                directionArray.splice( i, 1 );
+                break;
+            }
+        }
+        var randNum = Framework.Game._currentLevel.cycleCount % 553;
+        var randum_number = Math.floor(Math.random()*2) ;
+        if(this.map.checkIsWalkAble(this.mapPosition.x +directionArray[randum_number].x,this.mapPosition.y + directionArray[randum_number].y))
+        {
+            return directionArray[randum_number];
+        }else
+        {
+            directionArray.splice( randum_number, 1 );
+            if(this.map.checkIsWalkAble(this.mapPosition.x +directionArray[0].x,this.mapPosition.y + directionArray[0].y))
+            {
+                return directionArray[0];
+            }else{
+                if(this.map.checkIsWalkAble(this.mapPosition.x +thirdDirection.x,this.mapPosition.y +thirdDirection.y))
+                {
+                    return thirdDirection;
+                }else{
+                    return {x:0, y:0};
+                }
+            }
+
+        }
+
+        console.log( directionArray);
+        // directionArray = directionArray.indexOf(thirdDirection)
+
+        return {x:1,y:0};
+
+    }
+
+    this.rushToYou = function()
     {
-        // var randNum = Math.floor(Math.random() * 100);
-        // var vertical,horizontal = {x:0,y:0},vertical_point,horizontal_point;
-        // vertical_point = Math.abs(this.map.playerPositionOnMap.x - this.mapPosition.x);
-        // horizontal_point = Math.abs(this.map.playerPositionOnMap.y - this.mapPosition.y);
-        // console.log();
-        // if(this.map.playerPositionOnMap.x - this.mapPosition.x>0){
-        //     horizontal.x = 1;
-        // }else{
-        //     horizontal.x = -1;
-        // }
-
-        // if(this.map.playerPositionOnMap.y - this.mapPosition.y>0){
-        //     vertical.y = 1;
-        // }else{
-        //     vertical.y = -1;
-        // }
-        
         var randNum = Framework.Game._currentLevel.cycleCount % 553;
         walkDir++;
         var walkStep = {x:0,y:0};
+        var walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
+        var walkDirection;
+        if(walkVector.x == 0){
+            walkStep = walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};
+        }else if(walkVector.y == 0){
+            walkStep = walkVector.x > 0 ? {x:-1,y:0} : {x:1,y:0};
+        }else if( Math.abs(walkVector.x) >= Math.abs(walkVector.y)){
+            if(walkVector.x < 0){
+                //{x:-1,y:0}
+                if(walkVector.y>0)
+                    walkStep = this.howToWalk(0,2);
+                else
+                    walkStep = this.howToWalk(0,3);
+            }else{
+                // {x:1,y:0}
+                if(walkVector.y>0)
+                    walkStep = this.howToWalk(1,3);  //[{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
+                else
+                    walkStep = this.howToWalk(1,2);
+            }
+        }else if(Math.abs(walkVector.x) < Math.abs(walkVector.y)){
+            if(walkVector.y < 0){
+                // {x:0,y:-1}
+                if(walkVector.x>0)
+                    walkStep = this.howToWalk(2,1);
+                else
+                    walkStep = this.howToWalk(2,0);
+
+            }else{
+                // {x:0,y:1}
+                if(walkVector.x>0)
+                    walkStep = this.howToWalk(3,1);
+                else
+                    walkStep = this.howToWalk(3,0);
+            }
+        }else{
+            walkDir = 0;
+            return;
+        }
+        
         // if(vertical_point != 0 &&　horizontal_point　!= 0){
         //     if(randNum % 117 == 0)
         //     {
@@ -164,6 +230,24 @@ var Monster_cute_little_eye = function(map, options) {
         //     walkDir = 0;
         //     return;
         // }
+        if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
+            if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
+            {
+                this.walk(walkStep);
+                this.is_start = true;
+            }
+        }else{
+            this.is_start = false;
+        }
+    }
+
+    this.randomWalk = function()
+    {
+
+        var randNum = Framework.Game._currentLevel.cycleCount % 553;
+        walkDir++;
+        var walkStep = {x:0,y:0};
+
         if(randNum % 117 == 0)
         {
             walkStep.x = 1
@@ -184,7 +268,6 @@ var Monster_cute_little_eye = function(map, options) {
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
             {
-                // console.log("checkIsWalkAble");
                 this.walk(walkStep);
                 this.is_start = true;
             }
@@ -192,7 +275,6 @@ var Monster_cute_little_eye = function(map, options) {
             this.is_start = false;
         }
     }
-
 };
 
 Object.defineProperty(Monster_cute_little_eye.prototype, 'position', {
