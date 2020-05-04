@@ -678,9 +678,6 @@ var World_map = function(map, item_map)
                     this.skillTimer.startAccumulateEnergy();
                     this.drawSkillTimer(Framework.Game._context);
                 }
-                else if(this.player1.mode == "spear"){
-
-                }
                 break;
             case 'D':
                 this.handleDrop();

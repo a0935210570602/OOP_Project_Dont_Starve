@@ -27,6 +27,7 @@ var Map_item_tree = function() {
                 this.treeStatus -= 1;
                 this.status = true;
                 this.growing = false;
+                this.draw(Framework.Game._context);
             }
         }, this.regeneration_time);
     }
