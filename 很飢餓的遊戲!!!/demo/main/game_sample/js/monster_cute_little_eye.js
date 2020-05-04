@@ -140,7 +140,6 @@ var Monster_cute_little_eye = function(map, options) {
                 break;
             }
         }
-        var randNum = Framework.Game._currentLevel.cycleCount % 553;
         var randum_number = Math.floor(Math.random()*2) ;
         if(this.map.checkIsWalkAble(this.mapPosition.x +directionArray[randum_number].x,this.mapPosition.y + directionArray[randum_number].y))
         {
@@ -161,12 +160,6 @@ var Monster_cute_little_eye = function(map, options) {
             }
 
         }
-
-        console.log( directionArray);
-        // directionArray = directionArray.indexOf(thirdDirection)
-
-        return {x:1,y:0};
-
     }
 
     this.rushToYou = function()
@@ -184,9 +177,9 @@ var Monster_cute_little_eye = function(map, options) {
             if(walkVector.x < 0){
                 //{x:-1,y:0}
                 if(walkVector.y>0)
-                    walkStep = this.howToWalk(0,2);
-                else
                     walkStep = this.howToWalk(0,3);
+                else
+                    walkStep = this.howToWalk(0,2);
             }else{
                 // {x:1,y:0}
                 if(walkVector.y>0)
