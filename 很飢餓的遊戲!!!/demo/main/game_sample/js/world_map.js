@@ -594,18 +594,18 @@ var World_map = function(map, item_map)
         this.player1.update();
     }
     this.checkIsDie = function(){
-        // if(this.player1.character_descruption_point[0] == 0  ){
-        //     this.player1.dieEvent({x: 13, y: 7});
-        //     this.audio.play({name: 'die_scream', loop: false});
-        //     this.update();
-        //     m_map.draw(Framework.Game._context);
+        if(this.player1.character_descruption_point[0] == 0  ){
+            this.player1.dieEvent({x: 13, y: 7});
+            this.audio.play({name: 'die_scream', loop: false});
+            this.update();
+            m_map.draw(Framework.Game._context);
             
-        //     setTimeout(()=>{
-        //         this.deadClear();
-        //         m_map.player1.die();
+            setTimeout(()=>{
+                this.deadClear();
+                m_map.player1.die();
 
-        //     },1500);
-        // }
+            },1500);
+        }
 
         // if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
         //     this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
