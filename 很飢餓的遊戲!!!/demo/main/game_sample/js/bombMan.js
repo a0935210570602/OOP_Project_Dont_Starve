@@ -196,7 +196,7 @@ var BombMan = function(file, options) {
     }
 
     this.capibility = function(){
-        for(var i=0;i<8;i++)
+        for(var i=0;i<9;i++)
             this.character_descruption_total_point[i] = this.character_descruption_point[i];
         this.character_descruption_total_point[2] += this.getHandAttackPointEquipment();
         this.character_descruption_total_point[3] += this.getHandMagicAttackPointEquipment();

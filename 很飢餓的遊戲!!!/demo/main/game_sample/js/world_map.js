@@ -1050,7 +1050,13 @@ var World_map = function(map, item_map)
 
     
     this.click = function(e){   
-        if(this.is_character_description_open){
+        console.log("this.is_character_description_open");
+        console.log(this.character_description.is_character_description_open);
+
+        if(this.character_description.is_character_description_open){
+            console.log("is_character_description_open");
+            console.log(this.player1.capabilityt_point);
+
             if(this.player1.capabilityt_point !=0){
                 this.player1.charaerAbilityClick(e);
             }
