@@ -89,6 +89,9 @@ var World_map = function(map, item_map)
         this.item_bush_dig = new Framework.Sprite(define.materialPath + 'item_bush_dig.png'); 
         this.item_bush_dig.scale = 2;
 
+        this.monster_cute_litter_eye_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
+        this.monster_cute_litter_eye_tocan.scale = 2;
+
         this.item_grass_dig = new Framework.Sprite(define.materialPath + 'item_grass_dig.png'); 
         this.item_grass_dig.scale = 2;
 
@@ -126,7 +129,7 @@ var World_map = function(map, item_map)
 
         this.skill_handler = new Skill_handler();
         this.spear_handler = new Spear_handler();
-
+        this.creation_blood_status = new Creation_blood_status();
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -346,7 +349,6 @@ var World_map = function(map, item_map)
 	{   
         // console.log("update");        
         // console.log(this.keyPress);
-
         if(this.skillTimer.isEnergyFull){
             this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
         }
@@ -388,6 +390,8 @@ var World_map = function(map, item_map)
         this.character_description.update(this.player1);
         for(var i=0;i<this.monster.length;i++)
             this.monster[i].update();
+            
+        this.creation_blood_status.update(this.monster);
 
         // if(this.stopMonster === true)
         // {
@@ -431,6 +435,9 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
+        // for(var i=0;i<this.monster.length;i++){
+        //     console.log("monster",i," = ",this.monster[i].is_start);
+        // }
         this.player1.characterStatus.draw(ctx);
         // console.log("draw");
         if(this.player1.character_descruption_total_point[0] >= 0){
@@ -520,6 +527,8 @@ var World_map = function(map, item_map)
         
         this.game_object_detail.draw(ctx);
         this.synthesisBar.draw(ctx);
+        this.creation_blood_status.draw(ctx);
+
     }	
     
     this.clockDraw = function(ctx){
@@ -1051,7 +1060,13 @@ var World_map = function(map, item_map)
 
     
     this.click = function(e){   
-        if(this.is_character_description_open){
+        console.log("this.is_character_description_open");
+        console.log(this.character_description.is_character_description_open);
+
+        if(this.character_description.is_character_description_open){
+            console.log("is_character_description_open");
+            console.log(this.player1.capabilityt_point);
+
             if(this.player1.capabilityt_point !=0){
                 this.player1.charaerAbilityClick(e);
             }

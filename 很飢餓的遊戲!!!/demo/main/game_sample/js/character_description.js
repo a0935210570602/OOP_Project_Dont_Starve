@@ -69,7 +69,8 @@ var Character_description = function(backpackList) {
                 ctx.fillStyle = "black";
                 ctx.lineWidth = 2.5;
                 ctx.fillText(this.character_descruption_text[i], this.character_descruption[i].position.x+55,  this.character_descruption[i].position.y+5);
-
+                console.log("character_descruption_point = ");
+                console.log(this.character_descruption_point[i]);
                 for(var j=0;j<this.character_descruption_point[i];j++){
                     ctx.beginPath();
                     ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
