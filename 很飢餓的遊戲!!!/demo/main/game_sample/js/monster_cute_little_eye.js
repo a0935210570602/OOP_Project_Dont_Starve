@@ -4,6 +4,8 @@ var Monster_cute_little_eye = function(map, options) {
     this.monster_cute_little_eye.scale = 1.5;
     this.monster_cute_little_eye.index = 1;
     var PIXEL_CONST = 64;
+    //怪獸的名字
+    this.name = "大眼仔仔";
 
     this.mapPosition = {x:0, y:0};
     this.walkTarget = {x:0, y:0};
