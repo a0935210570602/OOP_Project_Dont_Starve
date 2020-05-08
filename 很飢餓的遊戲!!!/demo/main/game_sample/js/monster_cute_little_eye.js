@@ -209,22 +209,6 @@ var Monster_cute_little_eye = function(map, options) {
             return;
         }
         
-        // if(vertical_point != 0 &&　horizontal_point　!= 0){
-        //     if(randNum % 117 == 0)
-        //     {
-        //         walkStep.x = horizontal.x;
-        //     }else if(randNum % 79 == 0)
-        //     {
-        //         walkStep.y = vertical.y;
-        //     }
-        // }else if(vertical_point == 0 &&　horizontal_point　!= 0){
-        //     walkStep.x = horizontal.x;
-        // }else if(vertical_point != 0 &&　horizontal_point　== 0){
-        //     walkStep.y = vertical.y;
-        // }else{
-        //     walkDir = 0;
-        //     return;
-        // }
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             if(this.map.checkIsWalkAble(this.mapPosition.x + walkStep.x,this.mapPosition.y + walkStep.y))
             {

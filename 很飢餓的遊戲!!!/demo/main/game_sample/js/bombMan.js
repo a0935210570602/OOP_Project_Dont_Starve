@@ -226,6 +226,8 @@ var BombMan = function(file, options) {
         }
         this.equipmentBar.update();
         this.getHandEquipment();
+        this.sprite_dead.update();
+        this.sprite.update();
     }
 
 
@@ -239,10 +241,8 @@ var BombMan = function(file, options) {
         this.backpack.draw(ctx);
         this.characterStatus.draw(ctx);
         if(this.player_state == "alive"){
-            this.sprite.update();
             this.sprite.draw(ctx);
         }else if(this.player_state == "dead"){
-            this.sprite_dead.update();
             this.sprite_dead.draw(ctx);
         }
     }

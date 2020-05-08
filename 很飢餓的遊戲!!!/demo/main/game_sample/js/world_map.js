@@ -391,7 +391,8 @@ var World_map = function(map, item_map)
         for(var i=0;i<this.monster.length;i++)
             this.monster[i].update();
             
-        this.creation_blood_status.update(this.monster);
+        this.creation_blood_status.playerUpdate(this.player1);
+        this.creation_blood_status.monsterUpdate(this.monster);
 
         // if(this.stopMonster === true)
         // {
@@ -1050,6 +1051,8 @@ var World_map = function(map, item_map)
         // if(this.mapArray[y][x] > 0){ return false; }
         // else{ return true;}
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.item_map_Array[y][x]!=0){
+            return false;
+        }else if(x == this.playerPositionOnMap.x &&　y == this.playerPositionOnMap.y){
             return false;
         }
         else{ 
