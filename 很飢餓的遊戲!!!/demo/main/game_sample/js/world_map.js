@@ -709,6 +709,7 @@ var World_map = function(map, item_map)
 
             case 'Space':
                 this.handleSpace();
+                this.handleHoverBackpack();
                 break;
             default:
                 break;
