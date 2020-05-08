@@ -124,16 +124,7 @@ var Character_description = function(backpackList) {
                     this.push_button.draw(ctx);
                 }
             }
-        }else{
-            ctx.beginPath();
-            ctx.rect(449, 31, 30, 768);
-            ctx.rect(1183, 31, 30, 768);
-            ctx.rect(477, 32, 710, 65);
-
-            ctx.fillStyle = "#BEBEBE";
-            ctx.fill();
         }
-        
     }
 
     this.update = function(player){

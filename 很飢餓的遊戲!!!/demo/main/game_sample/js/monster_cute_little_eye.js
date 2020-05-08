@@ -109,9 +109,6 @@ var Monster_cute_little_eye = function(map, options) {
         var yy = 7*64 + this.spritePosition.y - this.map.playerPositionOnMap.y*64;
 
         this.monster_cute_little_eye.position = {x: xx, y: yy};
-        // console.log("this.map.playerPositionOnMap");
-        // console.log(this.map.playerPositionOnMap);
-        // console.log(this.mapPosition);
         this.checkIsMonsterOutCanvus();
         if(this.is_start){
             this.monster_cute_little_eye.draw(ctx);
@@ -130,12 +127,7 @@ var Monster_cute_little_eye = function(map, options) {
     this.howToWalk = function(restriction, thirdDirection){
         var directionArray = [{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
         var thirdDirection = directionArray[thirdDirection];
-        console.log( directionArray);
-        console.log( 'directionArray.indexOf(thirdDirection)');
         directionArray.splice( restriction, 1 );
-        console.log( directionArray);
-
-        // console.log( 'directionArray.indexOf(thirdDirection)');
         for(var i=0;i<directionArray.length;i++){
             if(directionArray[i].x == thirdDirection.x && directionArray[i].y == thirdDirection.y){
                 directionArray.splice( i, 1 );

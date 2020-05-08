@@ -38,7 +38,7 @@ Object.defineProperty(Item_grass.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_grass.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        this.item_grass_mowed.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_grass.position = {x: this.mapPosition.x, y: this.mapPosition.y };
+        this.item_grass_mowed.position = {x: this.mapPosition.x, y: this.mapPosition.y };
     }
 }); 

@@ -7,9 +7,11 @@ var Skill_timer = function() {
     this.currentMagicEnergy = 0;
     this.buttonPress = false;
     this.isEnergyFull = false;
-
+    this.end = false;
     this.startAccumulateEnergy = function(){
         this.buttonPress = true;
+        this.end = false;
+
         var interval = setInterval(()=>{
             if(this.buttonPress){
                 if(this.currentMagicEnergy < 175)
@@ -23,6 +25,7 @@ var Skill_timer = function() {
     }
 
     this.stopAccumulateEnergy = function(){
+        this.end = true;
         this.buttonPress = false;
         this.isEnergyFull = false;
         this.currentMagicEnergy = 0;
@@ -30,8 +33,8 @@ var Skill_timer = function() {
 
     this.clear = function(){
         this.buttonPress = false;
-        this.currentMagicEnergy = false;
         this.isEnergyFull = false;
+        this.currentMagicEnergy = 0;
     }
     
     this.draw = function(ctx){

@@ -30,11 +30,9 @@ var Creation_blood_status = function() {
     }
 
     this.update = function(monsterarray){
-        console.log("monsterarray update");
 
         for(var i=0,j=0;i<monsterarray.length;i++){
             if(monsterarray[i].is_start){
-                console.log("is_start", i);
                 this.monster_cute_litter_eye_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
                 this.monster_cute_litter_eye_tocan.position = {x:65*4, y:65*(4+j)};
                 this.blood_point.push(monsterarray[i].health);

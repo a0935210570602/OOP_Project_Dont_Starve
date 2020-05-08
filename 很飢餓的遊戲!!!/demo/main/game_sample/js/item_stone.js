@@ -35,7 +35,7 @@ Object.defineProperty(Item_stone.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_stone.position = {x: this.mapPosition.x * 64 + 30, y: this.mapPosition.y * 64};
-        this.item_stone_dig.position = {x: this.mapPosition.x * 64 + 30, y: this.mapPosition.y * 64};
+        this.item_stone.position = {x: this.mapPosition.x + 30, y: this.mapPosition.y};
+        this.item_stone_dig.position = {x: this.mapPosition.x + 30, y: this.mapPosition.y};
     }
 }); 

@@ -129,6 +129,6 @@ Object.defineProperty(Flying_arror.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.flying_arror.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.flying_arror.position = {x: this.mapPosition.x, y: this.mapPosition.y };
     }
 }); 

@@ -4,16 +4,21 @@ var Skill_handler = function() {
     this.fire_wand_level1.scale = 1.25;
     this.fire_wand_level1.index = 0;
     this.fire_wand_level1.position = {x:13*64-64*3, y:7*64};
+    this.mapPosition = {x: 0, y: 0};
 
     this.init = function(){
     }
     
     this.update = function(){
-        this.fire_wand_level1.update();
+        if(this.fire_wand_level1._start)
+            this.fire_wand_level1.update();
     }
 
-    this.start = function(playerWalkDirection,playerPositionOnMap){  
+    this.updatePosition = function(playerWalkDirection,playerPositionOnMap){
         this.mapPosition = {x: playerPositionOnMap.x+playerWalkDirection.x*3, y: playerPositionOnMap.y+playerWalkDirection.y*3};
+    }
+
+    this.start = function(){  
         this.fire_wand_level1.start({ from: 0, to: 14, loop: false});
     }
 

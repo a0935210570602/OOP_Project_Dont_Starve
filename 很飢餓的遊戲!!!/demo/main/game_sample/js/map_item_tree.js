@@ -79,9 +79,9 @@ Object.defineProperty(Map_item_tree.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.map_item_tree.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        this.map_item_tree_growed.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        this.map_item_tree_cutted.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.map_item_tree.position = {x: this.mapPosition.x, y: this.mapPosition.y };
+        this.map_item_tree_growed.position = {x: this.mapPosition.x, y: this.mapPosition.y };
+        this.map_item_tree_cutted.position = {x: this.mapPosition.x, y: this.mapPosition.y };
         
     }
 }); 

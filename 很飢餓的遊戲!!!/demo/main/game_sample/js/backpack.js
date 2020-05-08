@@ -11,7 +11,7 @@ var Backpack = function() {
 
     for(var j = 0; j < 17; j++){
         this.backpackPosition.push({x: (j+5)*64, y: 13*64});
-        this.objectPosition.push({x: (j+5), y: 13});
+        this.objectPosition.push({x: (j+5)*64, y: 13*64});
     }
     
     this.getSelectedItem= function(){

@@ -26,6 +26,6 @@ Object.defineProperty(Item_rope.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_rope.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_rope.position = {x: this.mapPosition.x, y: this.mapPosition.y }
     }
 }); 

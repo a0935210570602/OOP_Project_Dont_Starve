@@ -36,6 +36,6 @@ Object.defineProperty(Item_king_wand.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_king_wand.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_king_wand.position = {x: this.mapPosition.x, y: this.mapPosition.y };
     }
 }); 

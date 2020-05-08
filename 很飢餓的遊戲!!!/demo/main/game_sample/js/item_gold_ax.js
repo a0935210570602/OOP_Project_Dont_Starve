@@ -37,6 +37,6 @@ Object.defineProperty(Item_gold_ax.prototype, 'position', {
     },
     set: function(newValue) {
         this.mapPosition = newValue;
-        this.item_gold_ax.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        this.item_gold_ax.position = {x: this.mapPosition.x, y: this.mapPosition.y };
     }
 }); 

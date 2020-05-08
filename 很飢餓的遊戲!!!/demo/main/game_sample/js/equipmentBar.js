@@ -11,14 +11,14 @@ var EquipmentBar = function(backpackList) {
             this.backpack.position.y += 64;
             this.backpack.draw(ctx);
             if(this.equipmentList[i] != null){
-                this.equipmentList[i].position = {x: 23, y: 9+i};
+                this.equipmentList[i].position = {x: 23*64, y: (9+i)*64};
                 this.equipmentList[i].draw(ctx);
                 ctx.font = "25px Arial";
                 ctx.fillStyle = "white";
                 ctx.strokeStyle = 'blue';
                 ctx.lineWidth = 2.5;
-                ctx.fillText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+20);
-                ctx.strokeText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+20);
+                ctx.fillText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x, this.equipmentList[i].position.y+20);
+                ctx.strokeText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x, this.equipmentList[i].position.y+20);
             }
         }
     }
