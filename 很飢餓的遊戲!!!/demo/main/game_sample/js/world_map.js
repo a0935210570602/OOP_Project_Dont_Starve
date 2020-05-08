@@ -391,7 +391,8 @@ var World_map = function(map, item_map)
         for(var i=0;i<this.monster.length;i++)
             this.monster[i].update();
             
-        this.creation_blood_status.playerUpdate(this.player1);
+        this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
+        this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
 
         // if(this.stopMonster === true)

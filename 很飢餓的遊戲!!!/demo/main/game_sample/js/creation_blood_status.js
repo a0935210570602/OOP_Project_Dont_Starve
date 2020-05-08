@@ -1,15 +1,15 @@
 var Creation_blood_status = function() {
     this.monsterarray = [];
     this.character_tocan = new Framework.Sprite(define.materialPath + 'character_tocan.png'); 
-    this.character_tocan.scale = 0.5;
-    this.character_tocan.position = {x: 64*3, y:64*3};
+    this.character_tocan.scale = 0.35;
+    this.character_tocan.position = {x: 64*3+64, y:64*3};
 
     this.character_blood_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
-    this.character_blood_chart.scale = 2;
-    this.character_blood_chart.position = {x: 64*6-32, y: 64*3}
+    this.character_blood_chart.scale = 1.75;
+    this.character_blood_chart.position = {x: 64*6, y: 64*3}
     this.character_magic_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
-    this.character_magic_chart.scale = 2;
-    this.character_magic_chart.position = {x: 64*6-32, y: 64*3+25}
+    this.character_magic_chart.scale = 1.75;
+    this.character_magic_chart.position = {x: 64*6, y: 64*3+25}
     this.character_blood_ratio = 1;
     this.character_magic_ratio = 1;
 
@@ -21,13 +21,13 @@ var Creation_blood_status = function() {
     this.draw = function(ctx){
         this.character_tocan.draw(ctx);
         ctx.beginPath();
-        ctx.rect(64*4+10, 64*3-16, 175*this.character_blood_ratio, 15);
+        ctx.rect(64*5-10, 64*3-12, 150*this.character_blood_ratio, 13);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.closePath();
         this.character_blood_chart.draw(ctx);
         ctx.beginPath();
-        ctx.rect(64*4+10, 64*3+27-16, 175*this.character_magic_ratio, 15);
+        ctx.rect(64*5-10, 64*3+27-15, 150*this.character_magic_ratio, 13);
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.closePath();
@@ -54,14 +54,15 @@ var Creation_blood_status = function() {
             this.blood_point = [];
         }
     }
-    this.playerUpdate = function(player){
-        // console.log("monsterarray update");
-        this.character_blood_ratio = player.character_descruption_point[0] / player.character_descruption_point[5];
+
+    this.characterMagicUpdate = function(player){
         this.character_magic_ratio = player.character_descruption_point[1] / player.character_descruption_point[6];
     }
-    this.monsterUpdate = function(monsterarray){
-        // console.log("monsterarray update");
 
+    this.characterBloodUpdate = function(characterStatus){
+        this.character_blood_ratio = characterStatus.currentHealth / characterStatus.totalHealth;
+    }
+    this.monsterUpdate = function(monsterarray){
         for(var i=0,j=0;i<monsterarray.length;i++){
             if(monsterarray[i].is_start){
                 console.log("is_start", i);
