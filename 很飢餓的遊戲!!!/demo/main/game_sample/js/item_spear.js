@@ -1,6 +1,6 @@
 var Item_spear = function() {
     this.item_spear = new Framework.Sprite(define.materialPath + 'item_spear.png'); 
-    this.item_spear.scale = 2;
+    this.item_spear.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
@@ -10,6 +10,7 @@ var Item_spear = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "hand";
+    this.amount = 1;
     
     this.attack_point = 3;
     this.magic_attack_point = 0;

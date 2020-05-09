@@ -1,6 +1,6 @@
 var Item_gold = function() {
     this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png'); 
-    this.item_gold.scale = 2;
+    this.item_gold.scale = 0.7;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

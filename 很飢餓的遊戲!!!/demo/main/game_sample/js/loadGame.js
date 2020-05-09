@@ -106,8 +106,11 @@ var loadGameEnd;
         { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
         
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
+        { src: 'game_sample/js/item_sapling.js', lookFor: 'Item_sapling' },
         { src: 'game_sample/js/item_grass_growed_dig.js', lookFor: 'Item_grass_growed_dig' },
         { src: 'game_sample/js/item_bush_growed_dig.js', lookFor: 'Item_bush_growed_dig' },
+        { src: 'game_sample/js/item_sapling_growed_dig.js', lookFor: 'Item_sapling_growed_dig' },
+        { src: 'game_sample/js/item_sapling_dig.js', lookFor: 'Item_sapling_dig' },
 
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },

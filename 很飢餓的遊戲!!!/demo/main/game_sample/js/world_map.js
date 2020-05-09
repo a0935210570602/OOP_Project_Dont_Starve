@@ -118,6 +118,12 @@ var World_map = function(map, item_map)
         this.flying_arror_down = new Framework.Sprite(define.materialPath + 'arror_down.png'); 
         this.flying_arror_down.scale = 2;
 
+        this.item_sapling_growed_dig = new Framework.Sprite(define.materialPath + 'item_sapling_growed_dig.png'); 
+        this.item_sapling_growed_dig.scale = 0.45;
+
+        this.item_sapling_dig = new Framework.Sprite(define.materialPath + 'item_sapling_dig.png'); 
+        this.item_sapling_dig.scale = 0.4;
+
         this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
@@ -304,6 +310,9 @@ var World_map = function(map, item_map)
                         break;
                     case -1:
                         this.itemArray.push(new Map_item_tree());
+                        break;
+                    case -4:
+                        this.itemArray.push(new Item_sapling());
                         break;
                     default:
                         this.itemArray.push(new Item_blank());
@@ -862,7 +871,17 @@ var World_map = function(map, item_map)
                 this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_grass_dig();
             }
             this.player1.equipmentBar.equipmentList[2].reduceDurability();
-        }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 &&
+        }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -4){
+            if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status){
+                this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 48;
+                this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_sapling_growed_dig();
+            }else{
+                this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 47;
+                this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_sapling_dig();
+            }
+            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        }
+        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -1 &&
             this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].treeStatus == 2){
             this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 42;
             this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_tree_dig();
@@ -877,6 +896,10 @@ var World_map = function(map, item_map)
         }
         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 6){
             this.player1.backpack.addItemByObject(new Item_grass_picked());
+            this.pickRegenerateObject();
+        }
+        else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -4){
+            this.player1.backpack.addItemByObject(new Item_branch());
             this.pickRegenerateObject();
         }
         else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 36){
@@ -1000,6 +1023,16 @@ var World_map = function(map, item_map)
                     case 46:
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 6;
                         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_grass();
+                        break;
+                    case 47:
+                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = -4;
+                        var sapling = new Item_sapling();
+                        sapling.update();
+                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = sapling;
+                        break;
+                    case 48:
+                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = -4;
+                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = new Item_sapling();
                         break;
                     default:
                         break;

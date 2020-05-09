@@ -1,6 +1,6 @@
 var Item_space_wand = function() {
     this.item_space_wand = new Framework.Sprite(define.materialPath + 'item_space_wand.png'); 
-    this.item_space_wand.scale = 2;
+    this.item_space_wand.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

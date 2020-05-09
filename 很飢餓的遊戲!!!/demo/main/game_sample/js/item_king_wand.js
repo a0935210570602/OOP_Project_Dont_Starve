@@ -1,6 +1,6 @@
 var Item_king_wand = function() {
     this.item_king_wand = new Framework.Sprite(define.materialPath + 'item_king_wand.png'); 
-    this.item_king_wand.scale = 2;
+    this.item_king_wand.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

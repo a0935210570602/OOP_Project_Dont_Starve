@@ -1,6 +1,6 @@
 var Item_ice = function() {
     this.item_ice = new Framework.Sprite(define.materialPath + 'item_ice.png'); 
-    this.item_ice.scale = 2;
+    this.item_ice.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

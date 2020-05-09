@@ -1,6 +1,6 @@
 var Item_flint = function() {
     this.item_flint = new Framework.Sprite(define.materialPath + 'item_flint.png'); 
-    this.item_flint.scale = 2;
+    this.item_flint.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

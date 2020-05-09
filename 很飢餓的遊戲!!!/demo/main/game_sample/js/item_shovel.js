@@ -1,6 +1,6 @@
 var Item_shovel = function() {
     this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png'); 
-    this.item_shovel.scale = 2;
+    this.item_shovel.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

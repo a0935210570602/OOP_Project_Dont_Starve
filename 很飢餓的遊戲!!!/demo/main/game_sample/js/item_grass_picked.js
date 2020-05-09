@@ -1,6 +1,6 @@
 var Item_grass_picked = function() {
-    this.item_grass_picked = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
-    this.item_grass_picked.scale = 2;
+    this.item_grass_picked = new Framework.Sprite(define.materialPath + 'item_grass_picked.png'); 
+    this.item_grass_picked.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

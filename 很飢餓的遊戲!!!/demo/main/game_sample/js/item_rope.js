@@ -1,6 +1,6 @@
 var Item_rope = function() {
     this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png'); 
-    this.item_rope.scale = 2;
+    this.item_rope.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

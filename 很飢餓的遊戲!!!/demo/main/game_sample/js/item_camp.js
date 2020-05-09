@@ -1,6 +1,6 @@
 var Item_camp = function() {
     this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png'); 
-    this.item_camp.scale = 2;
+    this.item_camp.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;
