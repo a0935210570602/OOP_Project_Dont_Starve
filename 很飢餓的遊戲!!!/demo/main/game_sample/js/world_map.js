@@ -149,6 +149,7 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
+        this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
@@ -356,7 +357,7 @@ var World_map = function(map, item_map)
         if(this.player1.player_state == "alive"){
             this.checkIsDie();
         }
-        
+        this.level_up_animation.update();
         this.skill_handler.update();
         this.spear_handler.update();
         this.monster_damage_handler.update();
@@ -441,8 +442,9 @@ var World_map = function(map, item_map)
         //     console.log("monster",i," = ",this.monster[i].is_start);
         // }
         this.player1.characterStatus.draw(ctx);
-        // console.log("draw");
-        if(this.player1.character_descruption_total_point[0] >= 0){
+        console.log("draw");
+        console.log(this.player1.character_descruption_total_point[0]);
+        if(this.player1.character_descruption_total_point[0] >= -1){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
                     switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
@@ -504,6 +506,10 @@ var World_map = function(map, item_map)
 
 
             this.character_description.draw(ctx);
+            if(this.level_up_animation.level_up_animation._start){
+                console.log("drawdraw");
+                this.level_up_animation.draw(ctx);
+            }
             
             if(this.skill_handler.fire_wand_level1._start){
                 for(var i=-5,ii=0; i<6; i++,ii++){
@@ -601,22 +607,22 @@ var World_map = function(map, item_map)
         this.skillTimer.clear();
         this.capture_key = [];
         this.player1.characterStatus.currentHealth = 0;
-        this.player1.character_descruption_point[0] = -1;
+        this.player1.character_descruption_point[0] = 0;
         this.player1.update();
     }
     this.checkIsDie = function(){
-        // if(this.player1.character_descruption_point[0] == 0){
-        //     this.player1.dieEvent({x: 13, y: 7});
-        //     this.audio.play({name: 'die_scream', loop: false});
-        //     this.update();
-        //     m_map.draw(Framework.Game._context);
+        if(this.player1.character_descruption_point[0] == 0){
+            this.player1.dieEvent({x: 13, y: 7});
+            this.audio.play({name: 'die_scream', loop: false});
+            this.update();
+            m_map.draw(Framework.Game._context);
             
-        //     setTimeout(()=>{
-        //         this.deadClear();
-        //         m_map.player1.die();
+            setTimeout(()=>{
+                this.deadClear();
+                m_map.player1.die();
 
-        //     },1500);
-        // }
+            },4000);
+        }
 
         // if(this.playerPositionOnMap.x == this.monster_cute_little_eye.mapPosition.x &&
         //     this.playerPositionOnMap.y == this.monster_cute_little_eye.mapPosition.y ){
@@ -926,6 +932,7 @@ var World_map = function(map, item_map)
         if(this.itemMap[x][y].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
+                this.level_up_animation.start();
             }
         }
     }

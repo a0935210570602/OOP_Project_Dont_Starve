@@ -142,6 +142,7 @@ var loadGameEnd;
         { src: 'game_sample/js/terrain_lava.js', lookFor: 'Terrain_lava' },
         { src: 'game_sample/js/terrain_mountain.js', lookFor: 'Terrain_mountain' },
         { src: 'game_sample/js/terrain_plain.js', lookFor: 'Terrain_plain' },
+        { src: 'game_sample/js/level_up_animation.js', lookFor: 'Level_up_animation' },
         { src: 'game_sample/js/terrain_snow_ground.js', lookFor: 'Terrain_snow_ground' },
         { src: 'game_sample/js/terrain_water.js', lookFor: 'Terrain_water' },
 
