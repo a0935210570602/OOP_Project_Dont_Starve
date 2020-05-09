@@ -130,10 +130,10 @@ var Monster_cute_little_eye = function(map, options) {
     this.howToWalk = function(restriction, thirdDirection){
         var directionArray = [{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
         var thirdDirection = directionArray[thirdDirection];
-        console.log( directionArray);
-        console.log( 'directionArray.indexOf(thirdDirection)');
+        // console.log( directionArray);
+        // console.log( 'directionArray.indexOf(thirdDirection)');
         directionArray.splice( restriction, 1 );
-        console.log( directionArray);
+        // console.log( directionArray);
 
         // console.log( 'directionArray.indexOf(thirdDirection)');
         for(var i=0;i<directionArray.length;i++){

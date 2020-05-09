@@ -31,7 +31,7 @@ var BombMan = function(file, options) {
 
     //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 6;   //"生命";
+    this.character_descruption_point[0] = 2;   //"生命";
     this.character_descruption_point[1] = 5;   //"魔力";
     this.character_descruption_point[2] = 4;   //"物功";
     this.character_descruption_point[3] = 8;   //"魔攻";
@@ -160,6 +160,7 @@ var BombMan = function(file, options) {
     this.dieEvent = function(position){
         this.player_state = "dead";
         this.character_descruption_point[0] = 0;
+        this.character_descruption_total_point[0] = 0;
         this.characterStatus.currentHealth = 0;
         // this.update();
         this.sprite_dead.position = {x: position.x*64, y: position.y*64};
