@@ -1,6 +1,6 @@
 var Level_up_animation = function() {
     this.url = define.materialPath + 'levelup.png';
-    this.level_up_animation = new Framework.AnimationSprite({url:this.url, col:5 , row:2 , loop:false , speed:15}); 
+    this.level_up_animation = new Framework.AnimationSprite({url:this.url, col:5 , row:2 , loop:false , speed:5}); 
     this.level_up_animation.scale = 1;
     this.level_up_animation.position = {x:12*64, y:5.5*64};
 

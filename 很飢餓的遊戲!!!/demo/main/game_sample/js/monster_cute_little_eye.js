@@ -29,20 +29,26 @@ var Monster_cute_little_eye = function(map, options) {
 
     var m_monster = this;
 
-    this.monsterDirection = this.constants.DirectionEnum.DOWN;
-
+    // this.monsterDirection = this.constants.DirectionEnum.DOWN;
+    this.monsterDirection = {x:0, y:0};
     this.walk = function(moveStep){
         if(this.isWalking === false){
             if(moveStep.x > 0){
                 this.playerDirection = this.constants.DirectionEnum.RIGHT;
+                this.monsterDirection = this.constants.Direction.RIGHT;
             }else if(moveStep.x <0){
                 this.playerDirection = this.constants.DirectionEnum.LEFT;
+                this.monsterDirection = this.constants.Direction.LEFT;
             }
 
             if(moveStep.y > 0){
                 this.playerDirection = this.constants.DirectionEnum.DOWN;
+                this.monsterDirection = this.constants.Direction.DOWN;
+
             }else if(moveStep.y < 0){
                 this.playerDirection = this.constants.DirectionEnum.UP;
+                this.monsterDirection = this.constants.Direction.UP;
+
             }
             this.isWalking = true;
             this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
@@ -166,11 +172,16 @@ var Monster_cute_little_eye = function(map, options) {
     }
     this.walkVector = {x:0, y:0};
     this.isAttack = function(){
-        if((Math.abs(this.walkVector.x) == 1 && this.walkVector.y ==0 )|| (Math.abs(this.walkVector.y) == 1  && this.walkVector.x ==0)){
-            if(this.map.playerPositionOnMap = {x:this.mapPosition.x - this.walkVector.x, y:this.mapPosition.y - this.walkVector.y}){
+        // console.log(this.monsterDirection);
+        if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y){
                 return true;
-            }
         }
+        
+        // if((Math.abs(this.walkVector.x) == 1 && this.walkVector.y ==0 )|| (Math.abs(this.walkVector.y) == 1  && this.walkVector.x ==0)){
+        //     if(this.map.playerPositionOnMap = {x:this.mapPosition.x - this.walkVector.x, y:this.mapPosition.y - this.walkVector.y}){
+        //         return true;
+        //     }
+        // }
         return false;
     }
 
@@ -180,7 +191,7 @@ var Monster_cute_little_eye = function(map, options) {
         walkDir++;
         var walkStep = {x:0,y:0};
         this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
-        this.isAttack();
+        // this.isAttack();
         // console.log(this.isAttack());
         // console.log(this.walkVector);
         var walkDirection;
