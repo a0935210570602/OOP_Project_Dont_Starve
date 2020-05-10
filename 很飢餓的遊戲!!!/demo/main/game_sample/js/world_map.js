@@ -143,7 +143,11 @@ var World_map = function(map, item_map)
                 mp3: define.musicPath + '女慘叫.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
-            }
+            }, monster_attack:{
+                mp3: define.musicPath + 'monster_attack.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+        }
         });
     }
 
@@ -389,9 +393,19 @@ var World_map = function(map, item_map)
         }
         this.player1.update();
         this.character_description.update(this.player1);
-        for(var i=0;i<this.monster.length;i++)
+        var hurt_point=0;
+        for(var i=0;i<this.monster.length;i++){
             this.monster[i].update();
-            
+            if(this.monster[i].isAttack()){
+                hurt_point += this.monster[i].attack;
+            }
+        }
+        console.log(hurt_point);
+        // setTimeout(()=>{ 
+        //     console.log("gethurt");
+        //     this.player1.gethurt(hurt_point);
+        //         // this.audio.play({name: 'monster_attack', loop: false});
+        // },2000);
         this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
@@ -442,8 +456,8 @@ var World_map = function(map, item_map)
         //     console.log("monster",i," = ",this.monster[i].is_start);
         // }
         this.player1.characterStatus.draw(ctx);
-        console.log("draw");
-        console.log(this.player1.character_descruption_total_point[0]);
+        // console.log("draw");
+        // console.log(this.player1.character_descruption_total_point[0]);
         if(this.player1.character_descruption_total_point[0] >= -1){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){

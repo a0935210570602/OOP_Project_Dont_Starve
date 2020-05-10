@@ -11,7 +11,7 @@ var CharacterStatus = function(totalHealth, currentHealth) {
     this.currentHealth = currentHealth;
 
     this.totalHunger = 160;
-    this.currentHunger = 10;
+    this.currentHunger = 100;
 
     this.init = function(){
         this.decreaseHunger();

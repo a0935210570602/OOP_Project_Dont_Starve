@@ -31,7 +31,7 @@ var BombMan = function(file, options) {
 
     //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 2;   //"生命";
+    this.character_descruption_point[0] = 6;   //"生命";
     this.character_descruption_point[1] = 5;   //"魔力";
     this.character_descruption_point[2] = 4;   //"物功";
     this.character_descruption_point[3] = 8;   //"魔攻";
@@ -89,6 +89,12 @@ var BombMan = function(file, options) {
             
             return true;
         }
+    }
+    this.gethurt = function(attack_point){
+        this.characterStatus.currentHealth -= attack_point;
+        this.character_descruption_point[0] -= attack_point/20;
+        if(this.character_descruption_point[0]<0)
+            this.character_descruption_point[0] = 0;
     }
     this.getBackPack = function(){
         return this.backpack;
