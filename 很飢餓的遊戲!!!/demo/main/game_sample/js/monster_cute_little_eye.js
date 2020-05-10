@@ -172,16 +172,10 @@ var Monster_cute_little_eye = function(map, options) {
     }
     this.walkVector = {x:0, y:0};
     this.isAttack = function(){
-        // console.log(this.monsterDirection);
         if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y){
                 return true;
         }
         
-        // if((Math.abs(this.walkVector.x) == 1 && this.walkVector.y ==0 )|| (Math.abs(this.walkVector.y) == 1  && this.walkVector.x ==0)){
-        //     if(this.map.playerPositionOnMap = {x:this.mapPosition.x - this.walkVector.x, y:this.mapPosition.y - this.walkVector.y}){
-        //         return true;
-        //     }
-        // }
         return false;
     }
 
@@ -191,9 +185,6 @@ var Monster_cute_little_eye = function(map, options) {
         walkDir++;
         var walkStep = {x:0,y:0};
         this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
-        // this.isAttack();
-        // console.log(this.isAttack());
-        // console.log(this.walkVector);
         var walkDirection;
         if(this.walkVector.x == 0){
             walkStep = this.walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};

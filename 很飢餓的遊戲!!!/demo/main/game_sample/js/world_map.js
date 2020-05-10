@@ -159,7 +159,7 @@ var World_map = function(map, item_map)
 
     this.init = function()
     {
-        this.level_up_animation = new Level_up_animation();
+        // this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
@@ -358,7 +358,8 @@ var World_map = function(map, item_map)
             m_map.score.addScore(200);
         }
     }
-
+    //怪物攻擊的速度
+    this.monster_kill_timer = 0;
 	this.update = function()
 	{   
         // console.log("update");        
@@ -370,7 +371,7 @@ var World_map = function(map, item_map)
         if(this.player1.player_state == "alive"){
             this.checkIsDie();
         }
-        this.level_up_animation.update();
+        // this.level_up_animation.update();
         this.skill_handler.update();
         this.spear_handler.update();
         this.monster_damage_handler.update();
@@ -409,39 +410,25 @@ var World_map = function(map, item_map)
                 hurt_point += this.monster[i].attack;
             }
         }
-        console.log(hurt_point);
-        // setTimeout(()=>{ 
-        //     console.log("gethurt");
-        //     this.player1.gethurt(hurt_point);
-        //         // this.audio.play({name: 'monster_attack', loop: false});
-        // },2000);
+        if(hurt_point != 0)
+            this.player1GotHurt(hurt_point);
+        // console.log(hurt_point);
         this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
-
-        // if(this.stopMonster === true)
-        // {
-        //     // console.log("stopMonster");
-        //     this.stopMonsterCounter++;
-        //     if(this.stopMonsterCounter > 1000)
-        //     {
-        //         this.stopMonster = false;
-        //     }
-        // }else
-        // {
-        //     // console.log("stopMonster");
-        //     for(var i=0;i<this.monster.length;i++)
-        //     {
-        //         this.monster[i].update();
-        //         if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
-        //         {
-        //             this.player1.die();
-        //             break;
-        //         }
-        //     }
-        // }
     }
     
+    this.player1GotHurt = function(hurt_point) {
+        this.monster_kill_timer ++;
+        // console.log("this.monster_kill_timer ");
+        // console.log(this.monster_kill_timer );
+        if(this.monster_kill_timer == 15){
+            console.log("gethurt");
+            this.player1.gethurt(hurt_point);
+            this.monster_kill_timer = 0;
+            this.audio.play({name: 'monster_attack', loop: false});
+        }
+    }
     // this.walk = function(moveStep){
     //     if(this.isWalking === false){
     //         if(moveStep.x > 0){
@@ -529,10 +516,10 @@ var World_map = function(map, item_map)
 
 
             this.character_description.draw(ctx);
-            if(this.level_up_animation.level_up_animation._start){
-                console.log("drawdraw");
-                this.level_up_animation.draw(ctx);
-            }
+            // if(this.level_up_animation.level_up_animation._start){
+            //     console.log("drawdraw");
+            //     this.level_up_animation.draw(ctx);
+            // }
             
             if(this.skill_handler.fire_wand_level1._start){
                 for(var i=-5,ii=0; i<6; i++,ii++){
@@ -969,7 +956,7 @@ var World_map = function(map, item_map)
         if(this.itemMap[x][y].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
-                this.level_up_animation.start();
+                // this.level_up_animation.start();
             }
         }
     }
