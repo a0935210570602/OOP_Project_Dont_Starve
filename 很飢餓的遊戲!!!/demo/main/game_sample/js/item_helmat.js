@@ -1,6 +1,6 @@
 var Item_helmat = function() {
     this.item_helmat = new Framework.Sprite(define.materialPath + 'item_helmat.png'); 
-    this.item_helmat.scale = 2;
+    this.item_helmat.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

@@ -1,6 +1,6 @@
 var Item_spider_web = function() {
     this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
-    this.item_spider_web.scale = 2;
+    this.item_spider_web.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

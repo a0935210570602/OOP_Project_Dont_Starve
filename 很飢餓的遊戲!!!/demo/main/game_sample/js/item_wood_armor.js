@@ -1,6 +1,6 @@
 var Item_wood_armor = function() {
     this.item_wood_armor = new Framework.Sprite(define.materialPath + 'item_wood_armor.png'); 
-    this.item_wood_armor.scale = 2;
+    this.item_wood_armor.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

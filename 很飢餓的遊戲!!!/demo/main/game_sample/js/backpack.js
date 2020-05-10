@@ -5,7 +5,7 @@ var Backpack = function() {
     this.backpackPosition = [];
     this.objectPosition = [];
     this.itemList = [];
-    this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46];
+    this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48];
     
     this.selectedIndex = -1;
 

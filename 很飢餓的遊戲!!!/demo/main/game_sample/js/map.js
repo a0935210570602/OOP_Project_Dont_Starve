@@ -76,7 +76,7 @@ var Map = function(map, item_map)
         this.item_branch.scale = 2;
 
         this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
-        this.item_spider_web.scale = 2;
+        this.item_spider_web.scale = 0.8;
 
         this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
         this.item_grass.scale = 2;

@@ -1,6 +1,6 @@
 var Item_bee_sting = function() {
     this.item_bee_sting = new Framework.Sprite(define.materialPath + 'item_bee_sting.png'); 
-    this.item_bee_sting.scale = 2;
+    this.item_bee_sting.scale = 0.8;
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = false;

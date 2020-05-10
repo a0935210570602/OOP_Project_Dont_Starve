@@ -10,85 +10,85 @@ var SynthesisBar = function(backpackList) {
     this.firstColumeIndex = -1;
     this.secondColumnIndex = -1;
     this.item_branch = new Framework.Sprite(define.materialPath + 'item_branch.png');
-    this.item_branch.scale = 2;
+    this.item_branch.scale = 0.8;
+
+    this.item_bush_growed_dig = new Framework.Sprite(define.materialPath + 'item_bush_growed_dig.png'); 
+    this.item_bush_growed_dig.scale = 2;
 
     this.item_droplet = new Framework.Sprite(define.materialPath + 'item_droplet.png');
     this.item_droplet.scale = 2;
 
     this.item_pixilart = new Framework.Sprite(define.materialPath + 'item_pixilart.png');
-    this.item_pixilart.scale = 2;
+    this.item_pixilart.scale = 0.8;
 
     this.item_gold_pixilart = new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png');
-    this.item_gold_pixilart.scale = 2;
+    this.item_gold_pixilart.scale = 0.8;
 
     this.item_space_wand = new Framework.Sprite(define.materialPath + 'item_space_wand.png');
-    this.item_space_wand.scale = 2;
+    this.item_space_wand.scale = 0.8;
     
     this.item_fire_wand = new Framework.Sprite(define.materialPath + 'item_fire_wand.png');
-    this.item_fire_wand.scale = 2;
+    this.item_fire_wand.scale = 0.8;
 
     this.item_king_wand = new Framework.Sprite(define.materialPath + 'item_king_wand.png');
-    this.item_king_wand.scale = 2;
+    this.item_king_wand.scale = 0.8;
 
     this.item_ice_wand = new Framework.Sprite(define.materialPath + 'item_ice_wand.png');
-    this.item_ice_wand.scale = 2;
+    this.item_ice_wand.scale = 0.8;
 
     this.item_gold = new Framework.Sprite(define.materialPath + 'item_gold.png');
-    this.item_gold.scale = 2;
+    this.item_gold.scale = 0.7;
 
     this.item_spear = new Framework.Sprite(define.materialPath + 'item_spear.png');
-    this.item_spear.scale = 2;
+    this.item_spear.scale = 0.8;
 
     this.item_armor = new Framework.Sprite(define.materialPath + 'item_armor.png');
-    this.item_armor.scale = 2;
+    this.item_armor.scale = 0.8;
 
     this.item_wood_armor = new Framework.Sprite(define.materialPath + 'item_wood_armor.png');
-    this.item_wood_armor.scale = 2;
+    this.item_wood_armor.scale = 0.8;
 
     this.item_helmat = new Framework.Sprite(define.materialPath + 'item_helmat.png');
-    this.item_helmat.scale = 2;
+    this.item_helmat.scale = 0.8;
 
     this.item_bee_sting = new Framework.Sprite(define.materialPath + 'item_bee_sting.png');
-    this.item_bee_sting.scale = 2;
+    this.item_bee_sting.scale = 0.8;
 
     this.item_ax = new Framework.Sprite(define.materialPath + 'item_ax.png');
-    this.item_ax.scale = 2;
+    this.item_ax.scale = 0.8;
 
     this.item_gold_shovel = new Framework.Sprite(define.materialPath + 'item_gold_shovel.png');
-    this.item_gold_shovel.scale = 2;
+    this.item_gold_shovel.scale = 0.8;
 
     this.item_flint = new Framework.Sprite(define.materialPath + 'item_flint.png');
-    this.item_flint.scale = 2;
+    this.item_flint.scale = 0.8;
 
     this.item_snow_ball = new Framework.Sprite(define.materialPath + 'item_snow_ball.png');
     this.item_snow_ball.scale = 2;
 
     this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
-    this.item_shovel.scale = 2;
+    this.item_shovel.scale = 0.8;
 
     this.item_gold_ax = new Framework.Sprite(define.materialPath + 'item_gold_ax.png');
-    this.item_gold_ax.scale = 2;
-
-    this.item_shovel = new Framework.Sprite(define.materialPath + 'item_shovel.png');
-    this.item_shovel.scale = 2;
+    this.item_gold_ax.scale = 0.8;
 
     this.item_pigskin = new Framework.Sprite(define.materialPath + 'item_pigskin.png');
-    this.item_pigskin.scale = 2;
+    this.item_pigskin.scale = 0.8;
 
     this.item_fishing_rod = new Framework.Sprite(define.materialPath + 'item_fishing_rod.png');
-    this.item_fishing_rod.scale = 2;
+    this.item_fishing_rod.scale = 0.8;
 
     this.item_rope = new Framework.Sprite(define.materialPath + 'item_rope.png');
-    this.item_rope.scale = 2;
+    this.item_rope.scale = 0.8;
 
     this.item_camp = new Framework.Sprite(define.materialPath + 'item_camp.png');
-    this.item_camp.scale = 2;
+    this.item_camp.scale = 0.8;
 
     this.item_campfire = new Framework.Sprite(define.materialPath + 'item_campfire.png');
     this.item_campfire.scale = 2;
 
     this.item_wood = new Framework.Sprite(define.materialPath + 'item_wood.png');
-    this.item_wood.scale = 2;
+    this.item_wood.scale = 0.8;
 
     this.item_lamp = new Framework.Sprite(define.materialPath + 'item_lamp.png');
     this.item_lamp.scale = 2;
@@ -100,13 +100,13 @@ var SynthesisBar = function(backpackList) {
     this.item_arror.scale = 2;
 
     this.item_ice = new Framework.Sprite(define.materialPath + 'item_ice.png');
-    this.item_ice.scale = 2;
+    this.item_ice.scale = 0.8;
 
     this.item_firebundle = new Framework.Sprite(define.materialPath + 'item_firebundle.png');
     this.item_firebundle.scale = 1.5;
 
     this.item_spider_web = new Framework.Sprite(define.materialPath + 'item_spider_web.png'); 
-    this.item_spider_web.scale = 2;
+    this.item_spider_web.scale = 0.8;
 
     this.item_grass = new Framework.Sprite(define.materialPath + 'item_grass.png');
     this.item_grass.scale = 2;
@@ -129,8 +129,8 @@ var SynthesisBar = function(backpackList) {
     this.item_flower_picked = new Framework.Sprite(define.materialPath + 'item_flower.png'); 
     this.item_flower_picked.scale = 2;
 
-    this.item_grass_picked = new Framework.Sprite(define.materialPath + 'item_grass.png'); 
-    this.item_grass_picked.scale = 2;
+    this.item_grass_picked = new Framework.Sprite(define.materialPath + 'item_grass_picked.png'); 
+    this.item_grass_picked.scale = 0.8;
 
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
@@ -198,7 +198,7 @@ var SynthesisBar = function(backpackList) {
             [{item: 38,amount: 1,position:{x:3, y:7}},{item: 4,amount: 1,position:{x:3, y:8}},{item: 11,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}]
         ],
         [
-            [{item: 25,amount: 1,position:{x:3, y:5}},{item: 36,amount: 1,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
+            [{item: 25,amount: 1,position:{x:3, y:5}},{item: 44,amount: 1,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
             [{item: 5,amount: 1,position:{x:3, y:6}},{item: 29,amount: 1,position:{x:3, y:7}},{item: 30,amount: 1,position:{x:3, y:8}},{item: 14,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
             [{item: 25,amount: 2,position:{x:3, y:7}},{item: 32,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
             [{item: 25,amount: 2,position:{x:3, y:8}},{item: 35,amount: 2,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
@@ -434,6 +434,10 @@ var SynthesisBar = function(backpackList) {
                 this.item_grass_picked.position = this.positionChange(item_to_draw.position);
                 this.item_grass_picked.draw(ctx);
                 break;
+            case 44:
+                this.item_bush_growed_dig.position = this.positionChange(item_to_draw.position);
+                this.item_bush_growed_dig.draw(ctx);
+                break;
         }
     }
 
@@ -488,10 +492,10 @@ var SynthesisBar = function(backpackList) {
 
     this.click = function(e){
         if(this.firstColumeIndex != -1 && this.secondColumnIndex != -1){
-            var check = backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
+            var check = backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
             var position = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1].position;
-            if(this.currentPoint.x == position.x && this.currentPoint.y == position.y && check == 1){
-                if(backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex])){
+            if(this.currentPoint.x == position.x && this.currentPoint.y == position.y){
+                if(check == 1){
                     backpackList.addItemBySynthesis(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                     backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
                 }
