@@ -31,7 +31,7 @@ var BombMan = function(file, options) {
 
     //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 2;   //"生命";
+    this.character_descruption_point[0] = 6;   //"生命";
     this.character_descruption_point[1] = 5;   //"魔力";
     this.character_descruption_point[2] = 4;   //"物功";
     this.character_descruption_point[3] = 8;   //"魔攻";
@@ -60,6 +60,7 @@ var BombMan = function(file, options) {
     this.level = 1;
     this.is_levelup = false;
     this.capabilityt_point = 0;
+    this.level_up_animation = new Level_up_animation();
 
 
     this.totalDefense = 10;
@@ -74,6 +75,7 @@ var BombMan = function(file, options) {
     this.init = function(){
         this.characterStatus.init();
         this.player_state = "alive";
+        
     }
     this.getExperience= function(experience){
         this.experience += experience;
@@ -82,13 +84,40 @@ var BombMan = function(file, options) {
             this.levelup_experience *= 2;
             this.level ++;
             this.capabilityt_point ++;
-            this.is_levelup = true;
+            this.level_up_animation.start();
+            this.audio = new Framework.Audio({
+                kick: {
+                    mp3: define.musicPath + 'levelup.mp3',
+                    //ogg: define.musicPath + 'kick2.ogg',
+                    //wav: define.musicPath + 'kick2.wav'
+                }, song1:{
+                    mp3: define.musicPath + 'easy.mp3',
+                    //ogg: define.musicPath + 'Hot_Heat.ogg',
+                    //wav: define.musicPath + 'Hot_Heat.wav'
+                }, die_scream:{
+                    mp3: define.musicPath + '女慘叫.mp3',
+                    //ogg: define.musicPath + 'Hot_Heat.ogg',
+                    //wav: define.musicPath + 'Hot_Heat.wav'
+                }, monster_attack:{
+                    mp3: define.musicPath + 'monster_attack.mp3',
+                    //ogg: define.musicPath + 'Hot_Heat.ogg',
+                    //wav: define.musicPath + 'Hot_Heat.wav'
+            }});
+            this.audio.play({name: 'kick', loop: false});
+
+            // this.is_levelup = true;
         }
-        if(this.is_levelup){
-            this.is_levelup = false;
+        // if(this.is_levelup){
+        //     this.is_levelup = false;
             
-            return true;
-        }
+        //     return true;
+        // }
+    }
+    this.gethurt = function(attack_point){
+        this.characterStatus.currentHealth -= attack_point;
+        this.character_descruption_point[0] -= attack_point/20;
+        if(this.character_descruption_point[0]<0)
+            this.character_descruption_point[0] = 0;
     }
     this.getBackPack = function(){
         return this.backpack;
@@ -206,6 +235,9 @@ var BombMan = function(file, options) {
     }
 
     this.update = function(){
+        //更新升級動畫
+        this.level_up_animation.update();
+
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
         // console.log("this.character_descruption_point[0]");
         // console.log(this.character_descruption_point[0]);
@@ -233,6 +265,10 @@ var BombMan = function(file, options) {
 
 
     this.draw = function(ctx){
+        if(this.level_up_animation.level_up_animation._start){
+            console.log("drawdraw");
+            this.level_up_animation.draw(ctx);
+        }
         // console.log("this.sprite.position");
         // console.log(this.spritePosition);
         // console.log("this.canvasPosition");

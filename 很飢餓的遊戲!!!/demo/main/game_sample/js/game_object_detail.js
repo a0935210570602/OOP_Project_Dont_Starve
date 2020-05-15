@@ -56,6 +56,8 @@ var Game_object_detail = function() {
                 {key:44,name:"挖的漿果叢(未拔)", des:"!!!!"},
                 {key:45,name:"挖的花(未拔)", des:"!!!!"},
                 {key:46,name:"挖的草(未拔)", des:"!!!!"},
+                {key:47,name:"挖的樹苗(拔)", des:"粗壯的小樹苗"},
+                {key:48,name:"挖的樹苗(未拔)", des:"小樹苗好可愛"},
             ];
     }
     
@@ -64,7 +66,7 @@ var Game_object_detail = function() {
     this.des_string = "";
     this.showUpdate = function(item_number){
         if(item_number != null){
-            if(item_number <= 46 && item_number >=1 && item_number){
+            if(item_number <= 48 && item_number >=1 && item_number){
                 this.title_string = this.description[item_number-1].name;
                 this.des_string = this.description[item_number-1].des;
             }else{

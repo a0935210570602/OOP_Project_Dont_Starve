@@ -11,7 +11,7 @@ var CharacterStatus = function(totalHealth, currentHealth) {
     this.currentHealth = currentHealth;
 
     this.totalHunger = 160;
-    this.currentHunger = 10;
+    this.currentHunger = 100;
 
     this.init = function(){
         this.decreaseHunger();
@@ -31,7 +31,9 @@ var CharacterStatus = function(totalHealth, currentHealth) {
     this.decreaseHealth = function(){
         var healthInterval = setInterval(()=>{
             this.currentHealth = this.currentHealth - 5;
-            if(this.currentHunger > 0){
+            // console.log("this.currentHealth");
+            // console.log(this.currentHealth);
+            if(this.currentHunger > 0 && !(this.currentHealth <= 0)){
                 clearInterval(healthInterval);
                 this.decreaseHunger();
             }else if(this.currentHealth <= 0){
@@ -67,10 +69,19 @@ var CharacterStatus = function(totalHealth, currentHealth) {
         ctx.fillStyle = "yellow";
         ctx.fill();
 
-        ctx.beginPath();
-        ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64*(1-this.currentHealth/this.totalHealth));
-        ctx.fillStyle = "black";
-        ctx.fill();
+        if(this.currentHealth>0){
+
+            ctx.beginPath();
+            ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64*(1-this.currentHealth/this.totalHealth));
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }else{
+            ctx.beginPath();
+            ctx.rect(this.heart.position.x-32, this.heart.position.y-32, 64, 64);
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }
+        // console.log(this.currentHealth);
       
         ctx.beginPath();
         ctx.rect(this.hungry.position.x-32, this.hungry.position.y-32, 64, 64*(1-this.currentHunger/this.totalHunger));

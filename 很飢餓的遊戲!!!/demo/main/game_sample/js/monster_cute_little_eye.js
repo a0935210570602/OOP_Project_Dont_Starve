@@ -25,11 +25,12 @@ var Monster_cute_little_eye = function(map, options) {
     this.isWalking = false;
 
     this.health = 10;
+    this.attack = 5;
 
     var m_monster = this;
 
-    this.monsterDirection = this.constants.DirectionEnum.DOWN;
-
+    // this.monsterDirection = this.constants.DirectionEnum.DOWN;
+    this.monsterDirection = {x:0, y:0};
     this.walk = function(moveStep){
         if(this.isWalking === false){
             this.isWalking = true;
@@ -153,41 +154,50 @@ var Monster_cute_little_eye = function(map, options) {
 
         }
     }
+    this.walkVector = {x:0, y:0};
+    this.isAttack = function(){
+        if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y){
+                return true;
+        }
+        
+        return false;
+    }
 
     this.rushToYou = function()
     {
         walkDir++;
         var walkStep = {x:0,y:0};
-        var walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
-        if(walkVector.x == 0){
-            walkStep = walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};
-        }else if(walkVector.y == 0){
-            walkStep = walkVector.x > 0 ? {x:-1,y:0} : {x:1,y:0};
-        }else if( Math.abs(walkVector.x) >= Math.abs(walkVector.y)){
-            if(walkVector.x < 0){
+        this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
+        var walkDirection;
+        if(this.walkVector.x == 0){
+            walkStep = this.walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};
+        }else if(this.walkVector.y == 0){
+            walkStep = this.walkVector.x > 0 ? {x:-1,y:0} : {x:1,y:0};
+        }else if( Math.abs(this.walkVector.x) >= Math.abs(this.walkVector.y)){
+            if(this.walkVector.x < 0){
                 //{x:-1,y:0}
-                if(walkVector.y>0)
+                if(this.walkVector.y>0)
                     walkStep = this.howToWalk(0,3);
                 else
                     walkStep = this.howToWalk(0,2);
             }else{
                 // {x:1,y:0}
-                if(walkVector.y>0)
+                if(this.walkVector.y>0)
                     walkStep = this.howToWalk(1,3);  //[{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
                 else
                     walkStep = this.howToWalk(1,2);
             }
-        }else if(Math.abs(walkVector.x) < Math.abs(walkVector.y)){
-            if(walkVector.y < 0){
+        }else if(Math.abs(this.walkVector.x) < Math.abs(this.walkVector.y)){
+            if(this.walkVector.y < 0){
                 // {x:0,y:-1}
-                if(walkVector.x>0)
+                if(this.walkVector.x>0)
                     walkStep = this.howToWalk(2,1);
                 else
                     walkStep = this.howToWalk(2,0);
 
             }else{
                 // {x:0,y:1}
-                if(walkVector.x>0)
+                if(this.walkVector.x>0)
                     walkStep = this.howToWalk(3,1);
                 else
                     walkStep = this.howToWalk(3,0);

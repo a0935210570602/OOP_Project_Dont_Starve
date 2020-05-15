@@ -1,6 +1,6 @@
 var World_map = function(map, item_map)
 {
-    this.demo_dead_trigger = 0;
+    this.demo_dead_trigger = false;
     this.mapArray = map;
     this.item_map_Array = item_map;
     this.load = function(){
@@ -149,13 +149,17 @@ var World_map = function(map, item_map)
                 mp3: define.musicPath + '女慘叫.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
-            }
+            }, monster_attack:{
+                mp3: define.musicPath + 'monster_attack.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+        }
         });
     }
 
     this.init = function()
     {
-        this.level_up_animation = new Level_up_animation();
+        // this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
@@ -354,7 +358,8 @@ var World_map = function(map, item_map)
             m_map.score.addScore(200);
         }
     }
-
+    //怪物攻擊的速度
+    this.monster_kill_timer = 0;
 	this.update = function()
 	{   
         // console.log("update");        
@@ -366,7 +371,7 @@ var World_map = function(map, item_map)
         if(this.player1.player_state == "alive"){
             this.checkIsDie();
         }
-        this.level_up_animation.update();
+        // this.level_up_animation.update();
         this.skill_handler.update();
         this.spear_handler.update();
         this.monster_damage_handler.update();
@@ -398,36 +403,32 @@ var World_map = function(map, item_map)
         }
         this.player1.update();
         this.character_description.update(this.player1);
-        for(var i=0;i<this.monster.length;i++)
+        var hurt_point=0;
+        for(var i=0;i<this.monster.length;i++){
             this.monster[i].update();
-            
+            if(this.monster[i].isAttack()){
+                hurt_point += this.monster[i].attack;
+            }
+        }
+        if(hurt_point != 0)
+            this.player1GotHurt(hurt_point);
+        // console.log(hurt_point);
         this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
-
-        // if(this.stopMonster === true)
-        // {
-        //     // console.log("stopMonster");
-        //     this.stopMonsterCounter++;
-        //     if(this.stopMonsterCounter > 1000)
-        //     {
-        //         this.stopMonster = false;
-        //     }
-        // }else
-        // {
-        //     // console.log("stopMonster");
-        //     for(var i=0;i<this.monster.length;i++)
-        //     {
-        //         this.monster[i].update();
-        //         if((this.demo_dead_trigger == 1 && this.player1.characterStatus.currentHealth <= 0)  || (this.monster[i].isDead == false && this.monster[i].position.x == this.player1.position.x && this.monster[i].position.y == this.player1.position.y))
-        //         {
-        //             this.player1.die();
-        //             break;
-        //         }
-        //     }
-        // }
     }
     
+    this.player1GotHurt = function(hurt_point) {
+        this.monster_kill_timer ++;
+        // console.log("this.monster_kill_timer ");
+        // console.log(this.monster_kill_timer );
+        if(this.monster_kill_timer == 15){
+            console.log("gethurt");
+            this.player1.gethurt(hurt_point);
+            this.monster_kill_timer = 0;
+            this.audio.play({name: 'monster_attack', loop: false});
+        }
+    }
     // this.walk = function(moveStep){
     //     if(this.isWalking === false){
     //         if(moveStep.x > 0){
@@ -451,9 +452,9 @@ var World_map = function(map, item_map)
         //     console.log("monster",i," = ",this.monster[i].is_start);
         // }
         this.player1.characterStatus.draw(ctx);
-        console.log("draw");
-        console.log(this.player1.character_descruption_total_point[0]);
-        if(this.player1.character_descruption_total_point[0] >= -1){
+        // console.log("draw");
+        // console.log(this.player1.character_descruption_total_point[0]);
+        // if(this.player1.character_descruption_total_point[0] >= -1){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
                     switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
@@ -515,10 +516,10 @@ var World_map = function(map, item_map)
 
 
             this.character_description.draw(ctx);
-            if(this.level_up_animation.level_up_animation._start){
-                console.log("drawdraw");
-                this.level_up_animation.draw(ctx);
-            }
+            // if(this.level_up_animation.level_up_animation._start){
+            //     console.log("drawdraw");
+            //     this.level_up_animation.draw(ctx);
+            // }
             
             if(this.skill_handler.fire_wand_level1._start){
                 for(var i=-5,ii=0; i<6; i++,ii++){
@@ -540,7 +541,7 @@ var World_map = function(map, item_map)
                 }
             }
      
-        }
+        // }
         
         this.game_object_detail.draw(ctx);
         this.synthesisBar.draw(ctx);
@@ -620,7 +621,11 @@ var World_map = function(map, item_map)
         this.player1.update();
     }
     this.checkIsDie = function(){
-        if(this.player1.character_descruption_point[0] == 0){
+        // console.log("this.player1.character_descruption_point[0]");
+
+        // console.log(this.player1.character_descruption_point[0]);
+        if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
+            this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             this.update();
@@ -710,7 +715,7 @@ var World_map = function(map, item_map)
                 this.handleHoverBackpack();
                 break;
             case 'F':
-                this.demo_dead_trigger = 1;
+                this.demo_dead_trigger = true;
                 break;
             
             case 'E':
@@ -955,7 +960,7 @@ var World_map = function(map, item_map)
         if(this.itemMap[x][y].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
-                this.level_up_animation.start();
+                // this.level_up_animation.start();
             }
         }
     }

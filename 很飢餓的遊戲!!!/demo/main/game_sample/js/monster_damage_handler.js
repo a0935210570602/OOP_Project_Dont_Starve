@@ -72,12 +72,14 @@ var Monster_damage_handler = function(player, monster) {
             }
         }
     }
-
+    
     this.removeDeadMonster = function() {
         var i = 0;
         while(i < this.monster.length) {
             if (this.monster[i].health <= 0) {
                 this.monster.splice(i, 1);
+                this.player.getExperience(5);
+                this.getExperience += 5;
             } else {
             i++;
             }
