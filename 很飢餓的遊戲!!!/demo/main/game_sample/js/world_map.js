@@ -454,7 +454,7 @@ var World_map = function(map, item_map)
         this.player1.characterStatus.draw(ctx);
         // console.log("draw");
         // console.log(this.player1.character_descruption_total_point[0]);
-        if(this.player1.character_descruption_total_point[0] >= -1){
+        // if(this.player1.character_descruption_total_point[0] >= -1){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
                     switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
@@ -541,7 +541,7 @@ var World_map = function(map, item_map)
                 }
             }
      
-        }
+        // }
         
         this.game_object_detail.draw(ctx);
         this.synthesisBar.draw(ctx);
@@ -621,7 +621,11 @@ var World_map = function(map, item_map)
         this.player1.update();
     }
     this.checkIsDie = function(){
-        if(this.player1.character_descruption_point[0] == 0 && this.demo_dead_trigger){
+        // console.log("this.player1.character_descruption_point[0]");
+
+        // console.log(this.player1.character_descruption_point[0]);
+        if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
+            this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             this.update();
