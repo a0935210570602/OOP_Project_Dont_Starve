@@ -1,6 +1,6 @@
 var World_map = function(map, item_map)
 {
-    this.demo_dead_trigger = 0;
+    this.demo_dead_trigger = false;
     this.mapArray = map;
     this.item_map_Array = item_map;
     this.load = function(){
@@ -621,7 +621,7 @@ var World_map = function(map, item_map)
         this.player1.update();
     }
     this.checkIsDie = function(){
-        if(this.player1.character_descruption_point[0] == 0){
+        if(this.player1.character_descruption_point[0] == 0 && this.demo_dead_trigger){
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             this.update();
@@ -711,7 +711,7 @@ var World_map = function(map, item_map)
                 this.handleHoverBackpack();
                 break;
             case 'F':
-                this.demo_dead_trigger = 1;
+                this.demo_dead_trigger = true;
                 break;
             
             case 'E':
