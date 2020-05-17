@@ -95,6 +95,9 @@ var World_map = function(map, item_map)
         this.item_grass_dig = new Framework.Sprite(define.materialPath + 'item_grass_dig.png'); 
         this.item_grass_dig.scale = 2;
 
+        this.item_tree_dig = new Framework.Sprite(define.materialPath + 'item_tree_dig.png'); 
+        this.item_tree_dig.scale = 2;
+
         this.map_item_tree = new Framework.Sprite(define.materialPath + 'map_item_tree.png'); 
         this.map_item_tree_growed = new Framework.Sprite(define.materialPath + 'map_item_tree_growed.png'); 
         this.map_item_tree_cutted = new Framework.Sprite(define.materialPath + 'map_item_tree_cutted.png'); 
@@ -314,7 +317,7 @@ var World_map = function(map, item_map)
                         this.itemArray.push(new Item_bush());
                         break;
                     case -1:
-                        this.itemArray.push(new Map_item_tree());
+                        this.itemArray.push(new Map_item_tree(this));
                         break;
                     case -4:
                         this.itemArray.push(new Item_sapling());
@@ -327,6 +330,10 @@ var World_map = function(map, item_map)
             this.itemMap.push(this.itemArray);
         }
 	};
+
+    this.notifyDraw = function(){
+        m_map.draw(Framework.Game._context);
+    }
 
     this.setPlayerPosition = function(playerPosition){
         this.player1.position = playerPosition;
@@ -582,12 +589,13 @@ var World_map = function(map, item_map)
     this.addMonsterRandom = function(amount){
         var count = 0;
         var m_position;
-        while(this.monster.length != amount){
+        while(count != amount){
             m_position = {x: Math.floor(Math.random()*this.mapArray[0].length),y: Math.floor(Math.random()*this.mapArray.length)};
             if(this.mapArray[m_position.y][m_position.x] != 91 && this.mapArray[m_position.y][m_position.x] != 200 && this.item_map_Array[m_position.y][m_position.x] == 0){
                 var newMonster =  new Monster_cute_little_eye(this);
                 newMonster.position = m_position;
                 this.monster.push(newMonster);
+                count++;
             }
         }
     }
@@ -703,6 +711,10 @@ var World_map = function(map, item_map)
         //     console.log(this.capture_key[i].key);
         // }
         switch(e.key){
+            case 'M':
+                this.addMonsterRandom(1);
+                console.log("M")
+                break;
             case 'S':
                 this.keyPress = "S";
                 if(this.player1.mode == "magic"){
@@ -776,12 +788,13 @@ var World_map = function(map, item_map)
                     this.monster_damage_handler.handle_magic_damage(this.skill_handler.mapPosition);
                 this.skillTimer.stopAccumulateEnergy();
             }
-            else if(this.player1.mode == "spear"){
-                this.monster_damage_handler.handle_spear_damage(this.playerWalkDirection, this.playerPositionOnMap);
-                this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
-            }
             else if(this.player1.mode == "arror"){
                 this.monster_damage_handler.handle_arror_damage(this.playerWalkDirection, this.playerPositionOnMap);
+            }else if(this.player1.mode == "spear"){
+                this.monster_damage_handler.handle_normal_damage(this.playerWalkDirection, this.playerPositionOnMap);
+                this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+            }else{
+                this.monster_damage_handler.handle_normal_damage(this.playerWalkDirection, this.playerPositionOnMap);
             }
         }
 
@@ -1003,16 +1016,20 @@ var World_map = function(map, item_map)
                         var bush = new Item_bush();
                         bush.update();
                         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = bush;
+                        this.regeneration_time = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].regeneration_time;
+                        this.callDrawRegenerationTime();
                         break;
                     case 41:
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 1;
                         var flower = new Item_flower();
                         flower.update();
                         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = flower;
+                        this.regeneration_time = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].regeneration_time;
+                        this.callDrawRegenerationTime();
                         break;
                     case 42:
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = -1;
-                        var tree = new Map_item_tree();
+                        var tree = new Map_item_tree(this);
                         tree.treeStatus = 2;
                         //長兩階段
                         tree.tryGrow();
@@ -1024,6 +1041,8 @@ var World_map = function(map, item_map)
                         var grass = new Item_grass();
                         grass.update();
                         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = grass;
+                        this.regeneration_time = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].regeneration_time;
+                        this.callDrawRegenerationTime();
                         break;
                     case 44:
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = 36;
@@ -1042,6 +1061,8 @@ var World_map = function(map, item_map)
                         var sapling = new Item_sapling();
                         sapling.update();
                         this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = sapling;
+                        this.regeneration_time = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].regeneration_time;
+                        this.callDrawRegenerationTime();
                         break;
                     case 48:
                         this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = -4;

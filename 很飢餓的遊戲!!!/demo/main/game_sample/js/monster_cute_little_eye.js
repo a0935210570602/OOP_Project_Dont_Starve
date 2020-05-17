@@ -157,9 +157,8 @@ var Monster_cute_little_eye = function(map, options) {
     this.walkVector = {x:0, y:0};
     this.isAttack = function(){
         if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y){
-                return true;
+            return true;
         }
-        
         return false;
     }
 
@@ -222,14 +221,18 @@ var Monster_cute_little_eye = function(map, options) {
     this.changeWalkDirection = function(walkStep){
         if(walkStep.x > 0){
             this.playerDirection = this.constants.DirectionEnum.RIGHT;
+            this.monsterDirection = this.constants.Direction.RIGHT;
         }else if(walkStep.x <0){
             this.playerDirection = this.constants.DirectionEnum.LEFT;
+            this.monsterDirection = this.constants.Direction.LEFT;
         }
 
         if(walkStep.y > 0){
             this.playerDirection = this.constants.DirectionEnum.DOWN;
+            this.monsterDirection = this.constants.Direction.DOWN;
         }else if(walkStep.y < 0){
             this.playerDirection = this.constants.DirectionEnum.UP;
+            this.monsterDirection = this.constants.Direction.UP;
         }
         this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
     }

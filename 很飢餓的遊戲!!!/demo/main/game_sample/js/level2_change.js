@@ -151,7 +151,7 @@ var Level2_change = Framework.Class(Framework.Level , {
 
         this.map = new World_map(this.mapArray, this.item_map_Array);
         this.map.load();
-        this.map.addMonsterRandom(1);
+        // this.map.addMonsterRandom(10);
     },
 
     initialize: function() {
