@@ -1,4 +1,4 @@
-var Map_item_tree = function() {
+var Map_item_tree = function(map) {
     this.map_item_tree = new Framework.Sprite(define.materialPath + 'map_item_tree.png'); 
     this.map_item_tree.scale = 2;
     this.map_item_tree_growed = new Framework.Sprite(define.materialPath + 'map_item_tree_growed.png'); 
@@ -27,7 +27,7 @@ var Map_item_tree = function() {
                 this.treeStatus -= 1;
                 this.status = true;
                 this.growing = false;
-                this.draw(Framework.Game._context);
+                map.notifyDraw();
             }
         }, this.regeneration_time);
     }

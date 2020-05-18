@@ -23,7 +23,7 @@ var Monster_damage_handler = function(player, monster) {
         this.player.equipmentBar.equipmentList[2].reduceDurability();
     }
 
-    this.handle_spear_damage = function(playerWalkDirection, playerPositionOnMap){
+    this.handle_normal_damage = function(playerWalkDirection, playerPositionOnMap){
         this.attackSuccess = false;
         for(var i = 0;i < this.monster.length;i++){
             if(this.monster[i].is_start){
