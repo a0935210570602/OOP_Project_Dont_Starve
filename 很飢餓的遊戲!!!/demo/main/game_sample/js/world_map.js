@@ -60,8 +60,10 @@ var World_map = function(map, item_map)
         this.terrain_snow_ground.push(new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png')); 
         this.terrain_snow_ground[2].scale = 2;
         
-
+        
         /////////////////////////////////////////////////////////////////////////////////////
+        
+        this.creation_blood_status = new Creation_blood_status();
 
         this.clock = new Clock();
         this.clock.scale = 2;
@@ -135,7 +137,6 @@ var World_map = function(map, item_map)
 
         this.skill_handler = new Skill_handler();
         this.spear_handler = new Spear_handler();
-        this.creation_blood_status = new Creation_blood_status();
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -413,6 +414,7 @@ var World_map = function(map, item_map)
         if(hurt_point != 0)
             this.player1GotHurt(hurt_point);
         // console.log(hurt_point);
+        console.log(this.player1.characterStatus.currentHealth);
         this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
@@ -546,7 +548,7 @@ var World_map = function(map, item_map)
         this.game_object_detail.draw(ctx);
         this.synthesisBar.draw(ctx);
         this.creation_blood_status.draw(ctx);
-
+        
     }	
     
     this.clockDraw = function(ctx){
