@@ -31,18 +31,18 @@ var BombMan = function(file, options) {
 
     //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 6;   //"生命";
-    this.character_descruption_point[1] = 5;   //"魔力";
-    this.character_descruption_point[2] = 4;   //"物功";
-    this.character_descruption_point[3] = 8;   //"魔攻";
-    this.character_descruption_point[4] = 2;   //"弓攻";
-    this.character_descruption_point[5] = 6;   //"力量";
-    this.character_descruption_point[6] = 13;  //"智力";
-    this.character_descruption_point[7] = 6;   //"防禦";
-    this.character_descruption_point[8] = 14;  //"技巧";
+    this.character_descruption_point[0] = 6*20;   //"生命";
+    this.character_descruption_point[1] = 5*20;   //"魔力";
+    this.character_descruption_point[2] = 4*20;   //"物功";
+    this.character_descruption_point[3] = 8*20;   //"魔攻";
+    this.character_descruption_point[4] = 2*20;   //"弓攻";
+    this.character_descruption_point[5] = 6*20;   //"力量";
+    this.character_descruption_point[6] = 13*20;  //"智力";
+    this.character_descruption_point[7] = 6*20;   //"防禦";
+    this.character_descruption_point[8] = 14*20;  //"技巧";
 
     //角色格子轉成數值
-    this.characterStatus = new CharacterStatus(this.character_descruption_point[5]*20, this.character_descruption_point[0]*20);
+    // this.characterStatus = new CharacterStatus(this.character_descruption_point[5]*20, this.character_descruption_point[0]*20);
 
     this.character_descruption_total_point = [];
     this.character_descruption_total_point[0] = 0;
@@ -54,7 +54,7 @@ var BombMan = function(file, options) {
     this.character_descruption_total_point[6] = 0;
     this.character_descruption_total_point[7] = 0;
     this.character_descruption_total_point[8] = 0;
-
+    
     this.experience = 0;
     this.levelup_experience = 4;
     this.level = 1;
@@ -65,6 +65,8 @@ var BombMan = function(file, options) {
 
     this.totalDefense = 10;
     this.plantIndex = -1;
+    this.hunger_total_point = 200;
+    this.hunger_current_point = 100;
     //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
     //若options.position有值, 則this.sprite.position = options.position
     //原因是在JS中, undefined會被cast成false
@@ -73,10 +75,36 @@ var BombMan = function(file, options) {
     //由於0會被cast成false, 故不能用上面的方法來簡化
     //this.sprite.rotation = (Framework.Util.isUndefined(options.rotation))?0:options.rotation;
     this.init = function(){
-        this.characterStatus.init();
+        // this.characterStatus.init();
         this.player_state = "alive";
-        
+        this.decreaseHunger();
     }
+
+    this.decreaseHunger = function(){
+        var hungerInterval = setInterval(()=>{
+            this.hunger_current_point -= 5;
+            if(this.hunger_current_point <= 0)
+            {
+                clearInterval(hungerInterval);
+                this.decreaseHealth();
+            }
+        }, 1500);
+    }
+
+    this.decreaseHealth = function(){
+        var healthInterval = setInterval(()=>{
+            this.character_descruption_point[0] -= 4;
+            // console.log(this.character_descruption_point[0]);
+            // console.log(this.currentHealth);
+            if(this.hunger_current_point > 0 && !(this.character_descruption_point[0] <= 0)){
+                clearInterval(healthInterval);
+                this.decreaseHunger();
+            }else if(this.character_descruption_point[0] <= 0){
+                clearInterval(healthInterval);
+            }
+        }, 1500);
+    }
+
     this.getExperience= function(experience){
         this.experience += experience;
         if(this.experience >=this.levelup_experience){
@@ -114,8 +142,8 @@ var BombMan = function(file, options) {
         // }
     }
     this.gethurt = function(attack_point){
-        this.characterStatus.currentHealth -= attack_point;
-        this.character_descruption_point[0] -= attack_point/20;
+        // this.characterStatus.currentHealth -= attack_point;
+        this.character_descruption_point[0] -= attack_point;
         if(this.character_descruption_point[0]<0)
             this.character_descruption_point[0] = 0;
     }
@@ -190,7 +218,7 @@ var BombMan = function(file, options) {
         this.player_state = "dead";
         this.character_descruption_point[0] = 0;
         this.character_descruption_total_point[0] = 0;
-        this.characterStatus.currentHealth = 0;
+        // this.characterStatus.currentHealth = 0;
         // this.update();
         this.sprite_dead.position = {x: position.x*64, y: position.y*64};
         this.sprite_dead.start({ from: 0 , to: 2, loop: true});
@@ -241,7 +269,7 @@ var BombMan = function(file, options) {
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
         // console.log("this.character_descruption_point[0]");
         // console.log(this.character_descruption_point[0]);
-        this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
+        // this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
         this.capibility();
         // if(this.character_descruption_total_point[0]<=0){
         //     this.player_state = "dead";
@@ -266,7 +294,7 @@ var BombMan = function(file, options) {
 
     this.draw = function(ctx){
         if(this.level_up_animation.level_up_animation._start){
-            console.log("drawdraw");
+            // console.log("drawdraw");
             this.level_up_animation.draw(ctx);
         }
         // console.log("this.sprite.position");
@@ -276,7 +304,7 @@ var BombMan = function(file, options) {
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        this.characterStatus.draw(ctx);
+        // this.characterStatus.draw(ctx);
         if(this.player_state == "alive"){
             this.sprite.draw(ctx);
         }else if(this.player_state == "dead"){
@@ -340,13 +368,25 @@ var BombMan = function(file, options) {
             }
         }
         if (obj.type == "food"){
-            this.characterStatus.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
+            this.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
+            // this.characterStatus.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
             this.backpack.updateByEat(index);
         }
         if(obj.type == "plant")
             this.plantIndex = index;
     }
 
+    this.increaseStatusByEat = function(hunger, health){
+        if(this.character_descruption_point[0]  + health >= this.character_descruption_point[5])
+            this.character_descruption_point[0] = this.character_descruption_point[5];
+        else
+        this.character_descruption_point[0] += health;
+
+        if(this.hunger_current_point + hunger >= this.hunger_total_point)
+            this.hunger_current_point = this.hunger_total_point;
+        else
+            this.hunger_current_point += hunger;
+    }
     this.removeEquipment = function(index){
         if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
             if(this.equipmentBar.getEquipment(index).item_num == 32)

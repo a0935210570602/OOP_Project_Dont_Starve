@@ -330,6 +330,7 @@ var World_map = function(map, item_map)
             }
             this.itemMap.push(this.itemArray);
         }
+        this.creation_blood_status.init(this.player1);
 	};
 
     this.notifyDraw = function(){
@@ -421,10 +422,14 @@ var World_map = function(map, item_map)
         if(hurt_point != 0)
             this.player1GotHurt(hurt_point);
         // console.log(hurt_point);
-        console.log(this.player1.characterStatus.currentHealth);
-        this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
+        // console.log(this.player1.characterStatus.currentHealth);
+        this.creation_blood_status.characterBloodUpdate(this.player1);
         this.creation_blood_status.characterMagicUpdate(this.player1);
+        this.creation_blood_status.characterHungryUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
+        // console.log(this.player1.hunger_current_point);
+
+        // setTimeout(()=>{this.draw(Framework.Game._context);},500);
     }
     
     this.player1GotHurt = function(hurt_point) {
@@ -457,13 +462,6 @@ var World_map = function(map, item_map)
     //     }
     // }
 	this.draw = function(ctx) {
-        // for(var i=0;i<this.monster.length;i++){
-        //     console.log("monster",i," = ",this.monster[i].is_start);
-        // }
-        this.player1.characterStatus.draw(ctx);
-        // console.log("draw");
-        // console.log(this.player1.character_descruption_total_point[0]);
-        // if(this.player1.character_descruption_total_point[0] >= -1){
             for(var i=0,ii=-5; i<11; i++,ii++){
                 for(var j=0,jj=-5; j<11; j++,jj++){
                     switch(this.mapArray[jj+ this.playerPositionOnMap.y][ii+ this.playerPositionOnMap.x]){
@@ -561,7 +559,10 @@ var World_map = function(map, item_map)
     this.clockDraw = function(ctx){
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
-            this.player1.characterStatus.draw(ctx);
+            this.draw(Framework.Game._context);
+            // console.log("aa");
+            // this.creation_blood_status.draw(ctx);
+            // this.player1.characterStatus.draw(ctx);
             if(this.player1.character_descruption_total_point[0] <= 0){
                 clearInterval(clockInterval);
             }
@@ -626,7 +627,7 @@ var World_map = function(map, item_map)
     this.deadClear = function(){
         this.skillTimer.clear();
         this.capture_key = [];
-        this.player1.characterStatus.currentHealth = 0;
+        // this.player1.characterStatus.currentHealth = 0;
         this.player1.character_descruption_point[0] = 0;
         this.player1.update();
     }
@@ -635,7 +636,7 @@ var World_map = function(map, item_map)
 
         // console.log(this.player1.character_descruption_point[0]);
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
-            this.player1.characterStatus.currentHunger = 0;
+            // this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             this.update();
@@ -738,6 +739,7 @@ var World_map = function(map, item_map)
                 }else{
                     this.character_description.is_character_description_open = true;
                 }
+                console.log()
 
                 break;
 
@@ -1131,14 +1133,14 @@ var World_map = function(map, item_map)
     }
 
     
+    // this.click = function(e){   
+    //     console.log("this.is_character_description_open");
+    //     console.log(this.character_description.is_character_description_open);
+
     this.click = function(e){   
         console.log("this.is_character_description_open");
-        console.log(this.character_description.is_character_description_open);
-
+        console.log(this.is_character_description_open);
         if(this.character_description.is_character_description_open){
-            console.log("is_character_description_open");
-            console.log(this.player1.capabilityt_point);
-
             if(this.player1.capabilityt_point !=0){
                 this.player1.charaerAbilityClick(e);
             }

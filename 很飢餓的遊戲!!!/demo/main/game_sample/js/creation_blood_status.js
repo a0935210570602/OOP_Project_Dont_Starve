@@ -22,10 +22,16 @@ var Creation_blood_status = function() {
     this.blood_point = [];
     this.monster_cute_litter_eye_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
     this.monster_cute_litter_eye_tocan.scale = 1.5;
+    this.init = function(player){
+        this.characterHungryUpdate(player);
+        this.characterMagicUpdate(player);
+        this.characterHungryUpdate(player);
+    }
     this.draw = function(ctx){
         this.character_tocan.draw(ctx);
         ctx.beginPath();
-        console.log(this.character_blood_ratio);
+        // console.log(this.character_blood_ratio);
+        // console.log(this.character_hunger_ratio);
         ctx.rect(64*5-10, 64*3-12, 150*this.character_blood_ratio, 12);
         ctx.fillStyle = "red";
         ctx.fill();
@@ -54,7 +60,7 @@ var Creation_blood_status = function() {
                 this.blood_chart.position.x += 64*2;
                 this.blood_chart.position.y += 25;
                 ctx.beginPath();
-                ctx.rect(this.blood_chart.position.x-64, this.blood_chart.position.y-10, this.blood_point[i]*13, 10);
+                ctx.rect(this.blood_chart.position.x-64, this.blood_chart.position.y-10, (this.blood_point[i]/20)*13, 10);
                 ctx.fillStyle = "red";
                 ctx.fill();
                 ctx.closePath();
@@ -67,21 +73,24 @@ var Creation_blood_status = function() {
     }
 
     this.characterHungryUpdate = function(player){
-        this.character_magic_ratio = player.character_descruption_point[1] / player.character_descruption_point[6];
+        // console.log("update");
+        this.character_hunger_ratio = player.hunger_current_point / player.hunger_total_point;
+
+        // this.draw(Framework.Game._context);
     }
 
     this.characterMagicUpdate = function(player){
         this.character_magic_ratio = player.character_descruption_point[1] / player.character_descruption_point[6];
     }
 
-    this.characterBloodUpdate = function(characterStatus){
+    this.characterBloodUpdate = function(player){
         // console.log(characterStatus.currentHealth);
-        this.character_blood_ratio = characterStatus.currentHealth / characterStatus.totalHealth;
+        this.character_blood_ratio = player.character_descruption_point[0] / player.character_descruption_point[5];
         // console.log(this.character_blood_ratio);
         
         if(this.character_blood_ratio<0)
             this.character_blood_ratio=0;
-        this.draw(Framework.Game._context);
+        // this.draw(Framework.Game._context);
     }
     this.monsterUpdate = function(monsterarray){
         for(var i=0,j=0;i<monsterarray.length;i++){

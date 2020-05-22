@@ -37,7 +37,7 @@ var Level_up_animation = function() {
     this.start = function(){  
         this.level_up_animation.start({ from: 0, to: 9, loop: false});
         // this.audio.play({name: 'levelup', loop: false});
-        console.log("start");
+        // console.log("start");
     }
 
 

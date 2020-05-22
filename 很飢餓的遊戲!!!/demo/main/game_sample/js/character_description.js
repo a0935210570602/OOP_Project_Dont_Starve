@@ -69,8 +69,8 @@ var Character_description = function(backpackList) {
                 ctx.fillStyle = "black";
                 ctx.lineWidth = 2.5;
                 ctx.fillText(this.character_descruption_text[i], this.character_descruption[i].position.x+55,  this.character_descruption[i].position.y+5);
-                console.log("character_descruption_point = ");
-                console.log(this.character_descruption_point[i]);
+                // console.log("character_descruption_point = ");
+                // console.log(this.character_descruption_point[i]);
                 for(var j=0;j<this.character_descruption_point[i];j++){
                     ctx.beginPath();
                     ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
@@ -141,15 +141,15 @@ var Character_description = function(backpackList) {
         this.character_level = player.level;
         this.character_levelup_experience = player.levelup_experience;
         this.capabilityt_point = player.capabilityt_point;
-        this.character_descruption_point[0] = player.character_descruption_total_point[0];
-        this.character_descruption_point[1] = player.character_descruption_total_point[1];
-        this.character_descruption_point[2] = player.character_descruption_total_point[2];
-        this.character_descruption_point[3] = player.character_descruption_total_point[3];
-        this.character_descruption_point[4] = player.character_descruption_total_point[4];
-        this.character_descruption_point[5] = player.character_descruption_total_point[5];
-        this.character_descruption_point[6] = player.character_descruption_total_point[6];
-        this.character_descruption_point[7] = player.character_descruption_total_point[7];
-        this.character_descruption_point[8] = player.character_descruption_total_point[8];
+        this.character_descruption_point[0] = player.character_descruption_total_point[0]/20;
+        this.character_descruption_point[1] = player.character_descruption_total_point[1]/20;
+        this.character_descruption_point[2] = player.character_descruption_total_point[2]/20;
+        this.character_descruption_point[3] = player.character_descruption_total_point[3]/20;
+        this.character_descruption_point[4] = player.character_descruption_total_point[4]/20;
+        this.character_descruption_point[5] = player.character_descruption_total_point[5]/20;
+        this.character_descruption_point[6] = player.character_descruption_total_point[6]/20;
+        this.character_descruption_point[7] = player.character_descruption_total_point[7]/20;
+        this.character_descruption_point[8] = player.character_descruption_total_point[8]/20;
     }
 
     this.click = function(e){

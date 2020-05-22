@@ -24,7 +24,7 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.isWalking = false;
 
-    this.health = 10;
+    this.health = 200;
     this.attack = 5;
 
     var m_monster = this;
