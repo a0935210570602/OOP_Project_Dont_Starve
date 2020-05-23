@@ -139,6 +139,7 @@ var World_map = function(map, item_map)
         this.skill_handler = new Skill_handler();
         this.spear_handler = new Spear_handler();
         this.creation_blood_status = new Creation_blood_status();
+        this.fishing = new Fishing();
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -420,6 +421,13 @@ var World_map = function(map, item_map)
         if(hurt_point != 0)
             this.player1GotHurt(hurt_point);
         // console.log(hurt_point);
+        if(this.fishing.is_start){
+            this.fishing.update();
+            if(this.player1.mode != "fishing"){
+                this.fishing.stop();
+                m_map.draw(Framework.Game._context);
+            }
+        }
         this.creation_blood_status.characterBloodUpdate(this.player1.characterStatus);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.monsterUpdate(this.monster);
@@ -512,9 +520,10 @@ var World_map = function(map, item_map)
 
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
-
             this.monster_damage_handler.draw(ctx);
             this.player1.draw(ctx);
+            if(this.fishing.is_start)
+                this.fishing.draw(ctx);
             this.clock.draw(ctx);
     
             for(var i=0;i<this.monster.length;i++){
@@ -707,6 +716,8 @@ var World_map = function(map, item_map)
         // console.log(e.key);
         this.capture_key.push(e);
        
+        if(e.key != 'Space' && this.fishing.is_start)
+            this.fishing.stop();
         // for(var i=0;i<this.capture_key.length;i++){
         //     console.log(this.capture_key[i].key);
         // }
@@ -726,10 +737,13 @@ var World_map = function(map, item_map)
                 this.handleDrop();
                 this.handleHoverBackpack();
                 break;
-            case 'F':
+            case 'Q':
                 this.demo_dead_trigger = true;
                 break;
-            
+            case 'F':
+                if(this.player1.mode == "fishing" && !this.fishing.is_start)
+                    this.handleFishing();
+                break;
             case 'E':
                 if(this.character_description.is_character_description_open){
                     this.character_description.is_character_description_open = false;
@@ -748,7 +762,6 @@ var World_map = function(map, item_map)
         }
         
         if(this.player1.player_state == "alive"){
-
             if(this.whatIsTheLastKeyMove() == 'Down'){
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
@@ -816,6 +829,11 @@ var World_map = function(map, item_map)
         m_map.draw(Framework.Game._context);
     }
 
+    this.handleFishing = function(){
+        if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 200)
+            this.fishing.start(this.playerWalkDirection);
+    }
+
     this.handleDrop = function(){
         if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 91 &&
             this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 200){
@@ -843,6 +861,28 @@ var World_map = function(map, item_map)
     }
 
     this.handleSpace = function(){
+        if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
+            this.fishing.stop();
+            var addSuccess = false;
+            var x = this.playerPositionOnMap.y;
+            var y =this.playerPositionOnMap.x;
+            for(var i=-1;i<2;i++){
+                for(var j=-1;j<2;j++){
+                    if(this.mapArray[x+i][y+j] != 91 &&
+                        this.mapArray[x+i][y+j] != 200 &&
+                        this.item_map_Array[x+i][y+j] == 0 
+                        ){
+                            this.item_map_Array[x+i][y+j] = 49;
+                            this.itemMap[x+i][y+j] = new Item_fish();
+                            addSuccess = true;
+                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                            break;
+                    }
+                }
+                if(addSuccess)
+                    break;
+            }
+        }
         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 3 ||
                 this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -3){
@@ -1144,7 +1184,6 @@ var World_map = function(map, item_map)
             this.handlePlant();
         }
         this.handleHoverBackpack();
-
         m_map.draw(Framework.Game._context);
     }
 
