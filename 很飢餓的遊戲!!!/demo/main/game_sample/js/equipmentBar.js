@@ -24,9 +24,13 @@ var EquipmentBar = function(backpackList) {
     }
 
     this.getSelectedEquipment = function(){
-        if(this.equipmentList[this.selectedIndex].item_num == 32)
-            this.equipmentList[this.selectedIndex].inEquipmentbar = false;
-        return this.equipmentList[this.selectedIndex];
+        if(this.selectedIndex == -1 || this.equipmentList[this.selectedIndex] == null)
+            return null;
+        else{
+            if(this.equipmentList[this.selectedIndex].item_num == 32)
+                this.equipmentList[this.selectedIndex].inEquipmentbar = false;
+            return this.equipmentList[this.selectedIndex];
+        }
     }
 
 
@@ -42,8 +46,6 @@ var EquipmentBar = function(backpackList) {
 
     this.setEquipment = function(obj, index){
         this.equipmentList[index] = obj;
-        if(obj != null)
-            this.equipmentList[index].update();
     }
 
     this.update = function(){

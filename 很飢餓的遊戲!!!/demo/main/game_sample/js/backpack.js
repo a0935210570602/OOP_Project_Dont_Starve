@@ -15,6 +15,8 @@ var Backpack = function() {
     }
     
     this.getSelectedItem= function(){
+        if(this.selectedIndex == -1)
+            return null;
         if( this.itemList[this.selectedIndex] != null)
             return this.itemList[this.selectedIndex];
         else
