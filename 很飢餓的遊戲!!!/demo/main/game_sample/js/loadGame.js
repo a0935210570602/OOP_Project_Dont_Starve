@@ -137,6 +137,10 @@ var loadGameEnd;
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
         { src: 'game_sample/js/monster_damage_handler.js', lookFor: 'Monster_damage_handler' },
         { src: 'game_sample/js/flying_arror.js', lookFor: 'Flying_arror' },
+
+        { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
+        { src: 'game_sample/js/local_map_1.js', lookFor: 'Local_map_1' },
+        { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },
         
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
