@@ -6,7 +6,6 @@ var Fishing = function() {
     this.remindFishCatch = new Framework.AnimationSprite({url:this.url2, col:8 , row:15 , loop:false , speed:12});
     this.remindFishCatch.position = {x: (13)*64, y: (6)*64};
     this.remindFishCatch.scale = 0.8;
-    this.mapPosition = {x:0, y:0};
     this.is_start = false;
     this.fishBeCaught = false;
 
@@ -23,7 +22,7 @@ var Fishing = function() {
     }
 
     this.waitForFishCatch = function(){
-        var time = Math.floor(Math.random()*10) + 1;
+        var time = Math.floor(Math.random()*8) + 3;
         setTimeout(()=>{
             if(this.is_start)
                 this.fishCatch();
@@ -38,7 +37,7 @@ var Fishing = function() {
             this.remindFishCatch.stop();
             if(this.is_start)
                 this.waitForFishCatch();
-        },1500);
+        },1000);
     }
 
     this.stop = function(){
@@ -54,12 +53,3 @@ var Fishing = function() {
     }
 };
 
-Object.defineProperty(Fishing.prototype, 'position', {
-    get: function() {
-        return this.mapPosition;
-    },
-    set: function(newValue) {
-        this.mapPosition = newValue;
-        this.fishing.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-    }
-}); 
