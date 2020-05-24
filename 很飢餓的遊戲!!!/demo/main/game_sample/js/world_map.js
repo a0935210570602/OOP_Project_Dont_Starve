@@ -190,7 +190,10 @@ var World_map = function()
         this.mapArray = [];
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:19,y:19};
-        this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+
+        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+        // console.log(this.itemArray);
         // console.log("init");
         // console.log(this.mapArray);
 
@@ -398,28 +401,32 @@ var World_map = function()
                 if(this.keyPress == "Down") {
                     this.player1.walk({x:0,y:1});
                     this.playerPositionOnMap.y+=1;
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
 
                 }
                 
                 if(this.keyPress == "Left") {
                     this.player1.walk({x:-1,y:0});
                     this.playerPositionOnMap.x-=1;
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
 
                 }
                 
                 if(this.keyPress == "Right") {
                     this.player1.walk({x:1,y:0});
                     this.playerPositionOnMap.x+=1;
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
 
                 }
                 
                 if(this.keyPress == "Up") {
                     this.player1.walk({x:0,y:-1});
                     this.playerPositionOnMap.y-=1;
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
 
                 }
 
@@ -512,13 +519,14 @@ var World_map = function()
                     }
                 }
             }
-    
-            // for(var i=-5,ii=0; i<6; i++,ii++){
-            //     for(var j=-5,jj=0; j<6; j++,jj++){
-            //         this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].position = this.tilePosition[jj][ii];
-            //         this.itemMap[j+ this.playerPositionOnMap.y][i+ this.playerPositionOnMap.x].draw(ctx);
-            //     }
-            // }
+            console.log(this.itemArray);
+            for(var i=0; i<11; i++){
+                for(var j=0; j<11; j++){
+                    this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
+                    this.itemArray[j][i].draw(ctx);
+                }
+            }
+            console.log(this.itemArray[0][0]);
     
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
@@ -768,7 +776,8 @@ var World_map = function()
                 this.playerWalkDirection = {x:0,y:1};
                 this.keyPress = "Down";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Left'){
@@ -776,7 +785,8 @@ var World_map = function()
                 this.player1.walk({x:-1,y:0});
                 this.keyPress = "Left";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Right'){
@@ -784,7 +794,8 @@ var World_map = function()
                 this.player1.walk({x:1,y:0});
                 this.keyPress = "Right";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Up'){
@@ -792,7 +803,8 @@ var World_map = function()
                 this.player1.walk({x:0,y:-1});
                 this.keyPress = "Up";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
-                    this.mapArray = this.map_selector.makeMape(this.playerPositionOnMap);
+                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
                 }
             }

@@ -139,7 +139,6 @@ var loadGameEnd;
         { src: 'game_sample/js/flying_arror.js', lookFor: 'Flying_arror' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
-        { src: 'game_sample/js/local_map_1.js', lookFor: 'Local_map_1' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },
         
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },

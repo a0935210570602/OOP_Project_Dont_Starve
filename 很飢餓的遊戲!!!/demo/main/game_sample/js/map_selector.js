@@ -3,10 +3,39 @@ var Map_selector = function() {
     this.local_map_0 = new Local_map_0();
     this.init= function(){
     }
-    this.makeMape= function(world_position){
+    this.makeItemMap= function(world_position){
+        this.itemArray = [];
+        this.item_line = [];
+        // console.log(world_position);
+        
+        for(var i=-5;i<6;i++){
+            for(var j=-5;j<6;j++){
+                // console.log(world_position.x+i);
+                // console.log(world_position.y+j);
+                this.flag.x = Math.floor((world_position.y+i) / 40);
+                this.flag.y = Math.floor((world_position.x+j) / 40);
+
+                this.item_line.push(this.littleItem({x:((world_position.y+i)%40), y:((world_position.x+j)%40)}, this.flag.y*10+this.flag.x));
+            }
+            this.itemArray.push(this.item_line);
+            this.item_line = [];
+        }
+        console.log(this.itemArray);
+
+
+        return this.itemArray;
+    }
+
+    this.littleItem = function(position, number){
+        // console.log(number);
+        // console.log(position);
+
+        return this.local_map_0.catchItem(position,number);
+    }
+    this.makeMap= function(world_position){
         this.mapArray = [];
         this.map_line = [];
-        console.log(world_position);
+        // console.log(world_position);
         
         for(var i=-5;i<6;i++){
             for(var j=-5;j<6;j++){
@@ -28,7 +57,8 @@ var Map_selector = function() {
         // console.log(number);
         // console.log(position);
 
-        return this.local_map_0.catch(position,number);
+        return this.local_map_0.catchMap(position,number);
     }
+
 
 };
