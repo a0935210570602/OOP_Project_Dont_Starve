@@ -1,8 +1,7 @@
 var Map_selector = function() {
     this.flag ={x:0, y:0};
     this.local_map_0 = new Local_map_0();
-    this.init= function(){
-    }
+    
     this.makeItemMap= function(world_position){
         this.itemArray = [];
         this.item_line = [];
@@ -20,7 +19,7 @@ var Map_selector = function() {
             this.itemArray.push(this.item_line);
             this.item_line = [];
         }
-        console.log(this.itemArray);
+        // console.log(this.itemArray);
 
 
         return this.itemArray;

@@ -208,6 +208,8 @@ var BombMan = function(file, options) {
                 this.mode = "spear";
             else if(handEquipment.item_num == 26)
                 this.mode = "arror";
+            else if(handEquipment.item_num == 17)
+                this.mode = "fishing";
             else
                 this.mode = "";
         }else{

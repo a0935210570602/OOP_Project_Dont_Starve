@@ -25,6 +25,9 @@ var Item_fishing_rod = function() {
         this.item_fishing_rod.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 10;
+    }
 };
 
 Object.defineProperty(Item_fishing_rod.prototype, 'position', {

@@ -141,6 +141,8 @@ var World_map = function()
 
         this.skill_handler = new Skill_handler();
         this.spear_handler = new Spear_handler();
+        this.creation_blood_status = new Creation_blood_status();
+        this.fishing = new Fishing();
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -205,139 +207,6 @@ var World_map = function()
             this.tilePosition.push(this.tileArrayPosition);
         }
 
-
-        // for(var i=0; i<this.item_map_Array.length; i++){
-        //     var line = this.item_map_Array[i];
-        //     this.itemArray = [];
-        //     for(var j=0; j<this.item_map_Array[i].length; j++){
-        //         switch(line[j]){
-        //             case 1:
-        //                 this.itemArray.push(new Item_flower());
-        //                 break;
-        //             case 2:
-        //                 this.itemArray.push(new Item_spider_web());
-        //                 break;
-        //             case 3:
-        //                 this.itemArray.push(new Item_stone());
-        //                 break;
-        //             case 4:
-        //                 this.itemArray.push(new Item_branch());
-        //                 break;
-        //             case 5:
-        //                 this.itemArray.push(new Item_waikei_homework());
-        //                 break;
-        //             case 6:      
-        //                 this.itemArray.push(new Item_grass());
-        //                 break;
-        //             case 7:      
-        //                 this.itemArray.push(new Item_wood());
-        //                 break;
-        //             case 8:      
-        //                 this.itemArray.push(new Item_flint());
-        //                 break;
-        //             case 9:      
-        //                 this.itemArray.push(new Item_gold());
-        //                 break;
-        //             case 10:      
-        //                 this.itemArray.push(new Item_pigskin());
-        //                 break;
-        //             case 11:      
-        //                 this.itemArray.push(new Item_bee_sting());
-        //                 break;
-        //             case 12:
-        //                 this.itemArray.push(new Item_snow_ball());
-        //                 break;
-        //             case 13:
-        //                 this.itemArray.push(new Item_rope());
-        //                 break;
-        //             case 14:
-        //                 this.itemArray.push(new Item_droplet());
-        //                 break;
-        //             case 15:
-        //                 this.itemArray.push(new Item_pixilart());
-        //                 break;
-        //             case 16:
-        //                 this.itemArray.push(new Item_ax());
-        //                 break;
-        //             case 17:
-        //                 this.itemArray.push(new Item_fishing_rod());
-        //                 break;
-        //             case 18:
-        //                 this.itemArray.push(new Item_shovel());
-        //                 break;
-        //             case 19:
-        //                 this.itemArray.push(new Item_gold_ax());
-        //                 break;
-        //             case 20:
-        //                 this.itemArray.push(new Item_gold_shovel());
-        //                 break;
-        //             case 21:
-        //                 this.itemArray.push(new Item_gold_pixilart());
-        //                 break;
-        //             case 22:
-        //                 this.itemArray.push(new Item_helmat());
-        //                 break;
-        //             case 23:
-        //                 this.itemArray.push(new Item_armor());
-        //                 break;
-        //             case 24:
-        //                 this.itemArray.push(new Item_wood_armor());
-        //                 break;
-        //             case 25:
-        //                 this.itemArray.push(new Item_spear());
-        //                 break;
-        //             case 26:
-        //                 this.itemArray.push(new Item_arror());
-        //                 break;
-        //             case 27:
-        //                 this.itemArray.push(new Item_king_wand());
-        //                 break;
-        //             case 28:
-        //                 this.itemArray.push(new Item_space_wand());
-        //                 break;
-        //             case 29:
-        //                 this.itemArray.push(new Item_fire_wand());
-        //                 break;
-        //             case 30:
-        //                 this.itemArray.push(new Item_ice_wand());
-        //                 break;
-        //             case 31:
-        //                 this.itemArray.push(new Item_lamp());
-        //                 break;
-        //             case 32:
-        //                 this.itemArray.push(new Item_firebundle());
-        //                 break;
-        //             case 33:
-        //                 this.itemArray.push(new Item_camp());
-        //                 break;
-        //             case 34:
-        //                 this.itemArray.push(new Item_campfire());
-        //                 break;
-        //             case 35:
-        //                 this.itemArray.push(new Item_ice());
-        //                 break;
-        //             case 36:
-        //                 this.itemArray.push(new Item_bush());
-        //                 break;
-        //             case 37:
-        //                 this.itemArray.push(new Item_flower_picked());
-        //                 break;
-        //             case 38:
-        //                 this.itemArray.push(new Item_bush());
-        //                 break;
-        //             case -1:
-        //                 this.itemArray.push(new Map_item_tree(this));
-        //                 break;
-        //             case -4:
-        //                 this.itemArray.push(new Item_sapling());
-        //                 break;
-        //             default:
-        //                 this.itemArray.push(new Item_blank());
-        //                 break;    
-        //         }
-        //     }
-        //     this.itemMap.push(this.itemArray);
-        // }
         this.creation_blood_status.init(this.player1);
 	};
 
@@ -379,6 +248,8 @@ var World_map = function()
     this.monster_kill_timer = 0;
 	this.update = function()
 	{   
+        console.log(this.pressWalk);
+        console.log(this.playerPositionOnMap);
         // console.log(this.playerWalkDirection);
         // console.log("update");        
         // console.log(this.keyPress);
@@ -396,6 +267,7 @@ var World_map = function()
 
         if(this.pressWalk === true)
         {
+            console.log(9999999);
             if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerWalkDirection))
             {
                 if(this.keyPress == "Down") {
@@ -445,6 +317,13 @@ var World_map = function()
             this.player1GotHurt(hurt_point);
         // console.log(hurt_point);
         // console.log(this.player1.characterStatus.currentHealth);
+        if(this.fishing.is_start){
+            this.fishing.update();
+            if(this.player1.mode != "fishing"){
+                this.fishing.stop();
+                m_map.draw(Framework.Game._context);
+            }
+        }
         this.creation_blood_status.characterBloodUpdate(this.player1);
         this.creation_blood_status.characterMagicUpdate(this.player1);
         this.creation_blood_status.characterHungryUpdate(this.player1);
@@ -465,25 +344,8 @@ var World_map = function()
             this.audio.play({name: 'monster_attack', loop: false});
         }
     }
-    // this.walk = function(moveStep){
-    //     if(this.isWalking === false){
-    //         if(moveStep.x > 0){
-    //             this.playerDirection = this.constants.DirectionEnum.RIGHT;
-    //         }else if(moveStep.x <0){
-    //             this.playerDirection = this.constants.DirectionEnum.LEFT;
-    //         }
-
-    //         if(moveStep.y > 0){
-    //             this.playerDirection = this.constants.DirectionEnum.DOWN;
-    //         }else if(moveStep.y < 0){
-    //             this.playerDirection = this.constants.DirectionEnum.UP;
-    //         }
-    //         this.isWalking = true;
-    //         this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
-    //         this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
-    //     }
-    // }
 	this.draw = function(ctx) {
+        // console.log(this.playerPositionOnMap);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     // console.log("draw");
@@ -519,20 +381,21 @@ var World_map = function()
                     }
                 }
             }
-            console.log(this.itemArray);
+            // console.log(this.itemArray);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
             }
-            console.log(this.itemArray[0][0]);
+            // console.log(this.itemArray[0][0]);
     
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
-
             this.monster_damage_handler.draw(ctx);
             this.player1.draw(ctx);
+            if(this.fishing.is_start)
+                this.fishing.draw(ctx);
             this.clock.draw(ctx);
     
             for(var i=0;i<this.monster.length;i++){
@@ -728,6 +591,8 @@ var World_map = function()
         // console.log(e.key);
         this.capture_key.push(e);
        
+        if(e.key != 'Space' && this.fishing.is_start)
+            this.fishing.stop();
         // for(var i=0;i<this.capture_key.length;i++){
         //     console.log(this.capture_key[i].key);
         // }
@@ -747,10 +612,13 @@ var World_map = function()
                 this.handleDrop();
                 this.handleHoverBackpack();
                 break;
-            case 'F':
+            case 'Q':
                 this.demo_dead_trigger = true;
                 break;
-            
+            case 'F':
+                if(this.player1.mode == "fishing" && !this.fishing.is_start)
+                    this.handleFishing();
+                break;
             case 'E':
                 if(this.character_description.is_character_description_open){
                     this.character_description.is_character_description_open = false;
@@ -770,12 +638,12 @@ var World_map = function()
         }
         
         if(this.player1.player_state == "alive"){
-
             if(this.whatIsTheLastKeyMove() == 'Down'){
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
                 this.keyPress = "Down";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
+                    console.log("down");
                     this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
@@ -846,29 +714,31 @@ var World_map = function()
         m_map.draw(Framework.Game._context);
     }
 
+    this.handleFishing = function(){
+        if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 200)
+            this.fishing.start(this.playerWalkDirection);
+    }
+
     this.handleDrop = function(){
-        if(this.player1.backpack.getSelectedItem() != null){
-            if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 91 &&
-                this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 200){
-                if(this.player1.equipmentBar.selectedIndex != -1){
-                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
-                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.equipmentBar.getSelectedEquipment();
-                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
-                        this.player1.equipmentBar.dropSelectedEquipment();
-                    }
-                }else if(this.player1.backpack.selectedIndex != -1){
-                    if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
-                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.backpack.getSelectedItem();
-                        this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
+        if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 91 &&
+            this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] != 200){
+            if(this.player1.equipmentBar.selectedIndex != -1 && this.player1.equipmentBar.getSelectedEquipment() != null){
+                if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
+                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.equipmentBar.getSelectedEquipment();
+                    this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
+                    this.player1.equipmentBar.dropSelectedEquipment();
+                }
+            }else if(this.player1.backpack.selectedIndex != -1 && this.player1.backpack.getSelectedItem() != null){
+                if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 0){
+                    this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.player1.backpack.getSelectedItem();
+                    this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
+                    this.player1.backpack.dropSelectedItem();
+                }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == this.player1.backpack.getSelectedItem().item_num){
+                    if(this.player1.backpack.getSelectedItem().type == "material" ||
+                    this.player1.backpack.getSelectedItem().type == "food" ||
+                    this.player1.backpack.getSelectedItem().type == "plant"){
+                        this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].amount += this.player1.backpack.getSelectedItem().amount;
                         this.player1.backpack.dropSelectedItem();
-                    }else if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == this.player1.backpack.getSelectedItem().item_num){
-                        if(this.player1.backpack.getSelectedItem().type == "material" ||
-                        this.player1.backpack.getSelectedItem().type == "food" ||
-                        this.player1.backpack.getSelectedItem().type == "plant"){
-                            this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].amount += this.player1.backpack.getSelectedItem().amount;
-                            this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] = this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].item_num;
-                            this.player1.backpack.dropSelectedItem();
-                        }
                     }
                 }
             }
@@ -876,6 +746,28 @@ var World_map = function()
     }
 
     this.handleSpace = function(){
+        if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
+            this.fishing.stop();
+            var addSuccess = false;
+            var x = this.playerPositionOnMap.y;
+            var y =this.playerPositionOnMap.x;
+            for(var i=-1;i<2;i++){
+                for(var j=-1;j<2;j++){
+                    if(this.mapArray[x+i][y+j] != 91 &&
+                        this.mapArray[x+i][y+j] != 200 &&
+                        this.item_map_Array[x+i][y+j] == 0 
+                        ){
+                            this.item_map_Array[x+i][y+j] = 49;
+                            this.itemMap[x+i][y+j] = new Item_fish();
+                            addSuccess = true;
+                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                            break;
+                    }
+                }
+                if(addSuccess)
+                    break;
+            }
+        }
         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 3 ||
                 this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == -3){
@@ -884,7 +776,6 @@ var World_map = function()
             }
             else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].isRegenerate && this.player1.mode == "plant_dig"){
                 this.handlePlantDig();
-                // console.log("dig");
             }
             else if(this.itemMap[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x].status)
             {
@@ -1190,7 +1081,6 @@ var World_map = function()
             this.handlePlant();
         }
         this.handleHoverBackpack();
-
         m_map.draw(Framework.Game._context);
     }
 
