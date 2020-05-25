@@ -617,7 +617,7 @@ var World_map = function()
                 break;
             case 'F':
                 if(this.player1.mode == "fishing" && !this.fishing.is_start)
-                    this.handleFishing();
+                    this.startFishing();
                 break;
             case 'E':
                 if(this.character_description.is_character_description_open){
@@ -625,10 +625,8 @@ var World_map = function()
                 }else{
                     this.character_description.is_character_description_open = true;
                 }
-                console.log()
 
                 break;
-
             case 'Space':
                 this.handleSpace();
                 this.handleHoverBackpack();
@@ -715,6 +713,31 @@ var World_map = function()
     }
 
     this.handleFishing = function(){
+        this.fishing.stop();
+        var addSuccess = false;
+        var x = this.playerPositionOnMap.y;
+        var y =this.playerPositionOnMap.x;
+        for(var i=-1;i<2;i++){
+            for(var j=-1;j<2;j++){
+                if(this.mapArray[x+i][y+j] != 91 &&
+                    this.mapArray[x+i][y+j] != 200 &&
+                    this.item_map_Array[x+i][y+j] == 0 
+                    ){
+                        if(i == 0&&j == 0)
+                            continue;
+                        this.item_map_Array[x+i][y+j] = 49;
+                        this.itemMap[x+i][y+j] = new Item_fish();
+                        addSuccess = true;
+                        this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                        break;
+                }
+            }
+            if(addSuccess)
+                break;
+        }
+    }
+
+    this.startFishing = function(){
         if(this.mapArray[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 200)
             this.fishing.start(this.playerWalkDirection);
     }
@@ -747,26 +770,7 @@ var World_map = function()
 
     this.handleSpace = function(){
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
-            this.fishing.stop();
-            var addSuccess = false;
-            var x = this.playerPositionOnMap.y;
-            var y =this.playerPositionOnMap.x;
-            for(var i=-1;i<2;i++){
-                for(var j=-1;j<2;j++){
-                    if(this.mapArray[x+i][y+j] != 91 &&
-                        this.mapArray[x+i][y+j] != 200 &&
-                        this.item_map_Array[x+i][y+j] == 0 
-                        ){
-                            this.item_map_Array[x+i][y+j] = 49;
-                            this.itemMap[x+i][y+j] = new Item_fish();
-                            addSuccess = true;
-                            this.player1.equipmentBar.equipmentList[2].reduceDurability();
-                            break;
-                    }
-                }
-                if(addSuccess)
-                    break;
-            }
+            this.handleFishing();
         }
         if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x]!=0){
             if(this.item_map_Array[this.playerPositionOnMap.y+this.playerWalkDirection.y][this.playerPositionOnMap.x+this.playerWalkDirection.x] == 3 ||
