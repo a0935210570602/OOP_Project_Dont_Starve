@@ -142,6 +142,7 @@ var loadGameEnd;
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },
         { src: 'game_sample/js/fishing.js', lookFor: 'Fishing' },
         { src: 'game_sample/js/item_fish.js', lookFor: 'Item_fish' },
+        { src: 'game_sample/js/item_fake.js', lookFor: 'Item_fake' },
         
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },

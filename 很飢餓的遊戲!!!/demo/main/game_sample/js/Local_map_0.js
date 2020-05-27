@@ -1,5 +1,5 @@
 var Local_map_0 = function() {
-    //91 異世界洪水  192平原 123森林 137山區 91雪地 91岩漿 200池塘
+    //91 異世界洪水  192平原 123森林 137山區 91雪地 196 200池塘
     this.mapArray = [
         //1
         [ [91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91],
@@ -5686,6 +5686,7 @@ var Local_map_0 = function() {
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢 37:採摘的花 38:採摘的草 39:漿果 40:挖的漿果叢(拔)
     //41:挖的花(拔) 42:挖的樹 43:挖的草(拔) 44:挖的漿果叢(未拔) 45:挖的花(未拔) 46:挖的草(未拔) 47:挖的樹苗(拔)
     //48:挖的樹苗(未拔)
+    //-1:樹 -3:假空白 -4:小樹苗
     this.item_map_Array = [
         //1
         [ [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -5711,7 +5712,7 @@ var Local_map_0 = function() {
             [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
             [0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,3,-3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -10291,7 +10292,7 @@ var Local_map_0 = function() {
     this.createItemMap= function(){
         console.log("creating");
         
-        for(var i=0;i<100;i++){
+        for(var i=0;i<10;i++){
             for(var j=0;j<this.item_map_Array[i].length;j++){
                 for(var k=0;k<this.item_map_Array[i][j].length;k++){
                     switch(this.item_map_Array[i][j][k]){
@@ -10412,9 +10413,13 @@ var Local_map_0 = function() {
                         case -1:
                             this.itemArray_one_dimension.push(new Map_item_tree(this));
                             break;
+                        case -3:
+                            this.itemArray_one_dimension.push(new Item_fake());
+                            break;
                         case -4:
                             this.itemArray_one_dimension.push(new Item_sapling());
                             break;
+                        
                         default:
                             this.itemArray_one_dimension.push(new Item_blank());
                             break;    
@@ -10429,7 +10434,24 @@ var Local_map_0 = function() {
         // console.log(this.itemArray);
     }
     this.createItemMap();
-   
+    this.addObject= function(position, number, object){
+        console.log(object);
+        console.log(position);
+        console.log(number);
+
+        this.itemArray[number][position.x][position.y] = object;
+    }
+    this.removeObject= function(position, number){
+        this.itemArray[number][position.x][position.y] = new Item_blank();
+    }
+    this.hasItem= function(position, number){
+        console.log(position,number);
+        return this.itemArray[number][position.x][position.y].item_num == 0 ? true : false ;
+    }
+    this.canWalk= function(position, number){
+        console.log(position,number);
+        return this.mapArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : true;
+    }
     this.catchMap= function(position, number){
         return this.mapArray[number][position.x][position.y];
     }

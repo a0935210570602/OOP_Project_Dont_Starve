@@ -27,7 +27,6 @@ var Map_item_tree = function(map) {
                 this.treeStatus -= 1;
                 this.status = true;
                 this.growing = false;
-                map.notifyDraw();
             }
         }, this.regeneration_time);
     }
