@@ -992,6 +992,10 @@ var World_map = function()
     }
 
     this.checkMonsterIsWalkAble = function(map_position){  //檢查人物是否超過地圖大小
+        console.log(map_position);
+        console.log(this.map_selector.checkFloorCanWalk(map_position), this.map_selector.checkIsBlank(map_position));
+
+
         if(this.map_selector.checkFloorCanWalk(map_position) || this.map_selector.checkIsBlank(map_position)){
             return false;
         }else{

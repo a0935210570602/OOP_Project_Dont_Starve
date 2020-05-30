@@ -39,7 +39,7 @@ var Level2_change = Framework.Class(Framework.Level , {
 
         this.map = new World_map();
         this.map.load();
-        this.map.addMonsterRandom(10);
+        this.map.addMonsterRandom(1);
     },
 
     initialize: function() {

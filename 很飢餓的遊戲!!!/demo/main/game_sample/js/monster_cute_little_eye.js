@@ -87,7 +87,7 @@ var Monster_cute_little_eye = function(map, options) {
         {
             if(this.canWalking && this.is_start)
             {
-                this.rushToYou();
+                // this.rushToYou();
                 console.log("rush")
             }
         }
@@ -95,17 +95,25 @@ var Monster_cute_little_eye = function(map, options) {
 
 
     this.draw = function(ctx){
+        console.log("draw");
+        // console.log(this.spritePosition);
+        // console.log(this.map.playerPositionOnMap);
+
         if(this.isdead){ return; }
         var xx = 13*64 + this.spritePosition.x - this.map.playerPositionOnMap.x*64;
         var yy = 7*64 + this.spritePosition.y - this.map.playerPositionOnMap.y*64;
 
         console.log(xx,yy);
+
         this.monster_cute_little_eye.position = {x: xx, y: yy};
+        // console.log(this.monster_cute_little_eye.position);
+
         // console.log("this.map.playerPositionOnMap");
         // console.log(this.map.playerPositionOnMap);
         // console.log(this.mapPosition);
         this.checkIsMonsterOutCanvus();
         if(this.is_start){
+            console.log(this.monster_cute_little_eye.position);
             this.monster_cute_little_eye.draw(ctx);
         }
     }
@@ -165,9 +173,11 @@ var Monster_cute_little_eye = function(map, options) {
 
     this.rushToYou = function()
     {
+        console.log("rushToYou");
         walkDir++;
         var walkStep = {x:0,y:0};
         this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
+        
         if(this.walkVector.x == 0){
             walkStep = this.walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};
         }else if(this.walkVector.y == 0){
@@ -205,7 +215,7 @@ var Monster_cute_little_eye = function(map, options) {
             walkDir = 0;
             return;
         }
-        
+        console.log(9999999999);
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
              this.is_start = true;
              this.changeWalkDirection(walkStep);
