@@ -196,7 +196,7 @@ var World_map = function()
         this.itemArray = [];
         this.mapArray = [];
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
-        this.playerPositionOnMap = {x:19,y:19};
+        this.playerPositionOnMap = {x:17,y:18};
 
         this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
@@ -247,9 +247,7 @@ var World_map = function()
     this.monster_kill_timer = 0;
 	this.update = function()
 	{   
-        if(this.skillTimer.isEnergyFull){
-            this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
-        }
+        
 
         if(this.player1.player_state == "alive"){
             this.checkIsDie();
@@ -296,6 +294,9 @@ var World_map = function()
                 }
 
             }
+        }
+        if(this.skillTimer.isEnergyFull){
+            this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
         }
         this.player1.update();
         this.character_description.update(this.player1);
@@ -466,16 +467,19 @@ var World_map = function()
     this.addMonsterRandom = function(amount){
         var count = 0;
         var m_position = {x:0,y:0};
-        while(count != amount){
-            m_position = {x: Math.floor(Math.random()*30),y: Math.floor(Math.random()*30)};
-            if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-                console.log(m_position);
-                var newMonster =  new Monster_cute_little_eye(this);
-                newMonster.position = m_position;
-                this.monster.push(newMonster);
-                count++;
-            }
-        }
+        var newMonster =  new Monster_cute_little_eye(this);
+        newMonster.position = {x:18,y:18};
+        this.monster.push(newMonster);
+        // while(count != amount){
+        //     m_position = {x: Math.floor(Math.random()*30),y: Math.floor(Math.random()*30)};
+        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
+        //         console.log(m_position);
+        //         var newMonster =  new Monster_cute_little_eye(this);
+        //         newMonster.position = m_position;
+        //         this.monster.push(newMonster);
+        //         count++;
+        //     }
+        // }
     }
 
     var m_map = this;
@@ -992,14 +996,12 @@ var World_map = function()
     }
 
     this.checkMonsterIsWalkAble = function(map_position){  //檢查人物是否超過地圖大小
-        console.log(map_position);
-        console.log(this.map_selector.checkFloorCanWalk(map_position), this.map_selector.checkIsBlank(map_position));
-
-
-        if(this.map_selector.checkFloorCanWalk(map_position) || this.map_selector.checkIsBlank(map_position)){
+        if(map_position.x == this.playerPositionOnMap.x && map_position.y == this.playerPositionOnMap.y)
             return false;
-        }else{
+        else if(this.map_selector.checkFloorCanWalk(map_position) && this.map_selector.checkIsBlank(map_position)){
             return true;
+        }else{
+            return false;
         }
     }
 

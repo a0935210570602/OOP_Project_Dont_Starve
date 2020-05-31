@@ -1,5 +1,5 @@
 var Local_map_0 = function() {
-    //91 異世界洪水  192平原 123森林 137山區 91雪地 196 200池塘
+    //91 異世界洪水  192平原 123森林 137山區 255雪地 196岩漿 200池塘
     this.mapArray = [
         //1
         [ [91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91],
@@ -10445,11 +10445,9 @@ var Local_map_0 = function() {
         this.itemArray[number][position.x][position.y] = new Item_blank();
     }
     this.hasItem= function(position, number){
-        console.log(position,number);
         return this.itemArray[number][position.x][position.y].item_num == 0 ? true : false ;
     }
     this.canWalk= function(position, number){
-        console.log(position,number);
         return this.mapArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : true;
     }
     this.catchMap= function(position, number){
