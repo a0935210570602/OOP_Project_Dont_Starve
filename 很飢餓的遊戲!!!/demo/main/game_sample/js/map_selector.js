@@ -83,5 +83,4 @@ var Map_selector = function() {
         return this.local_map_0.catchMap(position,number);
     }
 
-
 };

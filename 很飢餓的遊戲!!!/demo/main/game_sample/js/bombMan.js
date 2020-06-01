@@ -241,7 +241,6 @@ var BombMan = function(file, options) {
                 this.playerDirection = this.constants.DirectionEnum.UP;
             }
             this.isWalking = true;
-            //this.canvasPosition = {x:this.canvasPosition.x, y:this.canvasPosition.y};
             this.sprite.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
         }
     }
@@ -301,8 +300,6 @@ var BombMan = function(file, options) {
         }
         // console.log("this.sprite.position");
         // console.log(this.spritePosition);
-        // console.log("this.canvasPosition");
-        // console.log(this.canvasPosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
