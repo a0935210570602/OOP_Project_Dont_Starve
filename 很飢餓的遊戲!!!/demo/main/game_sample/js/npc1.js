@@ -8,7 +8,7 @@ var Npc1 = function(map) {
 
     var PIXEL_CONST = 64;
     //怪獸的名字
-    this.name = "大眼仔仔";
+    this.name = "小丑哥哥";
 
     this.mapPosition = {x:0, y:0};
     this.walkTarget = {x:0, y:0};

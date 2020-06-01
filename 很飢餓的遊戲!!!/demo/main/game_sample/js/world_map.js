@@ -252,8 +252,8 @@ var World_map = function()
 	this.update = function()
 	{   
         
-        console.log(this.playerPositionOnMap);
-        console.log(this.npc1.position);
+        // console.log(this.playerPositionOnMap);
+        // console.log(this.npc1.position);
         if(this.player1.player_state == "alive"){
             this.checkIsDie();
         }
@@ -436,6 +436,9 @@ var World_map = function()
         this.synthesisBar.draw(ctx);
         this.creation_blood_status.draw(ctx);
         this.npc1.draw(ctx);
+        if(this.npc_event.taking_is_start){
+            this.npc_event.draw(ctx);
+        }
     }	
     
     this.clockDraw = function(ctx){
@@ -601,7 +604,7 @@ var World_map = function()
                 break;
         }
         
-        if(this.player1.player_state == "alive"){
+        if(this.player1.player_state == "alive" && !this.npc_event.taking_is_start){
             if(this.whatIsTheLastKeyMove() == 'Down'){
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
@@ -732,8 +735,16 @@ var World_map = function()
             m_map.draw(Framework.Game._context);
         }
     }
+    this.npc_event = new Npc_event();
+    this.handleNpcTalking = function(npc_name){
+        this.npc_event.trigger("小丑哥哥", "talking");
+    }
 
     this.handleSpace = function(){
+        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 
+            this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
+                this.handleNpcTalking(this.npc1.name);
+        }
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
             this.handleFishing();
         }
@@ -1000,8 +1011,9 @@ var World_map = function()
         // console.log(this.playerPositionOnMap);
         // console.log(this.npc1.position);
         // console.log({x:xx ,y:yy});
+        console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 ||
-            {x:xx ,y:yy} == this.npc1.position){
+            (xx == this.npc1.position.x && yy == this.npc1.position.y)){
             return false;
         }else{
             return true;
