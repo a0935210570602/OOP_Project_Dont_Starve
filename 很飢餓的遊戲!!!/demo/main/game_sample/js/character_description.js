@@ -1,4 +1,4 @@
-var Character_description = function(backpackList) {
+var Character_description = function() {
     this.back_ground_picture = new Framework.Sprite(define.characterDescriptionPath + 'character_descript_scroll.png'); 
     this.character_image = new Framework.Sprite(define.characterDescriptionPath + 'character_image.png'); 
     this.experience_chart = new Framework.Sprite(define.characterDescriptionPath + 'experience_chart.png'); 
@@ -134,6 +134,11 @@ var Character_description = function(backpackList) {
             ctx.fill();
         }
         
+    }
+
+    this.isChangeCapability = function(which_capability){
+        this.character_descruption_point[which_capability]++;
+        this.capabilityt_point--;
     }
 
     this.update = function(player){

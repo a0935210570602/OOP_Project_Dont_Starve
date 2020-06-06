@@ -255,6 +255,11 @@ var BombMan = function(file, options) {
         this.sprite.stop();
     }
 
+    this.setCapibility = function(capability){
+        for(var i=0;i<9;i++)
+            this.character_descruption_point[i] = capability[i]*20;
+    }
+
     this.capibility = function(){
         for(var i=0;i<9;i++)
             this.character_descruption_total_point[i] = this.character_descruption_point[i];
@@ -411,7 +416,7 @@ var BombMan = function(file, options) {
             this.capabilityt_point--;
     }
 
-    this.charaerAbilityClick = function(e){
+    this.characterAbilityClick = function(e){
         if(e.x >= 470 && e.x <=510){
             if(e.y >=540 && e.y<= 560){
                 this.isChangeCapability(2);

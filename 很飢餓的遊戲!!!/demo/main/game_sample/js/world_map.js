@@ -149,6 +149,8 @@ var World_map = function()
         this.spear_handler = new Spear_handler();
         this.creation_blood_status = new Creation_blood_status();
         this.fishing = new Fishing();
+        this.handle_initial_character = new Handle_initial_character();
+        this.playerInitial = false;
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -177,12 +179,10 @@ var World_map = function()
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
         this.character_description = new Character_description();
-        this.player1.init();
         this.clock.init();
         this.monster_damage_handler = new Monster_damage_handler(this.player1, this.monster);
-
-        //畫
-        this.clockDraw(Framework.Game._context);
+        this.handle_initial_character.init();
+        
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
         this.constants = new Constants();
         this.is_character_description_open = false;
@@ -247,84 +247,87 @@ var World_map = function()
     this.monster_kill_timer = 0;
 	this.update = function()
 	{   
-        
+        if(this.playerInitial){
+            if(this.player1.player_state == "alive"){
+                this.checkIsDie();
+            }
+            // this.level_up_animation.update();
+            this.skill_handler.update();
+            this.spear_handler.update();
+            this.monster_damage_handler.update();
 
-        if(this.player1.player_state == "alive"){
-            this.checkIsDie();
-        }
-        // this.level_up_animation.update();
-        this.skill_handler.update();
-        this.spear_handler.update();
-        this.monster_damage_handler.update();
-
-        if(this.pressWalk === true)
-        {
-            if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerWalkDirection))
+            if(this.pressWalk === true)
             {
-                if(this.keyPress == "Down") {
-                    this.player1.walk({x:0,y:1});
-                    this.playerPositionOnMap.y+=1;
-                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
-                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
-
+                if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerWalkDirection))
+                {
+                    if(this.keyPress == "Down") {
+                        this.player1.walk({x:0,y:1});
+                        this.playerPositionOnMap.y+=1;
+                        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                    }
+                    
+                    if(this.keyPress == "Left") {
+                        this.player1.walk({x:-1,y:0});
+                        this.playerPositionOnMap.x-=1;
+                        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                    }
+                    
+                    if(this.keyPress == "Right") {
+                        this.player1.walk({x:1,y:0});
+                        this.playerPositionOnMap.x+=1;
+                        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                    }
+                    
+                    if(this.keyPress == "Up") {
+                        this.player1.walk({x:0,y:-1});
+                        this.playerPositionOnMap.y-=1;
+                        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                    }
                 }
-                
-                if(this.keyPress == "Left") {
-                    this.player1.walk({x:-1,y:0});
-                    this.playerPositionOnMap.x-=1;
-                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
-                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
-
+            }
+            if(this.skillTimer.isEnergyFull){
+                this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+            }
+            this.player1.update();
+            this.character_description.update(this.player1);
+            var hurt_point=0;
+            for(var i=0;i<this.monster.length;i++){
+                this.monster[i].update();
+                if(this.monster[i].isAttack()){
+                    hurt_point += this.monster[i].attack;
                 }
-                
-                if(this.keyPress == "Right") {
-                    this.player1.walk({x:1,y:0});
-                    this.playerPositionOnMap.x+=1;
-                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
-                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
-
+            }
+            if(hurt_point != 0)
+                this.player1GotHurt(hurt_point);
+            // console.log(hurt_point);
+            // console.log(this.player1.characterStatus.currentHealth);
+            if(this.fishing.is_start){
+                this.fishing.update();
+                if(this.player1.mode != "fishing"){
+                    this.fishing.stop();
+                    m_map.draw(Framework.Game._context);
                 }
-                
-                if(this.keyPress == "Up") {
-                    this.player1.walk({x:0,y:-1});
-                    this.playerPositionOnMap.y-=1;
-                    this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
-                    this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+            }
+            this.creation_blood_status.characterBloodUpdate(this.player1);
+            this.creation_blood_status.characterMagicUpdate(this.player1);
+            this.creation_blood_status.characterHungryUpdate(this.player1);
+            this.creation_blood_status.monsterUpdate(this.monster);
+            // console.log(this.player1.hunger_current_point);
 
-                }
-
+            // setTimeout(()=>{this.draw(Framework.Game._context);},500);
+        }else{
+            this.handle_initial_character.update();
+            if(this.handle_initial_character.is_initial){
+                this.playerInitial = true;
+                this.player1.init();
+                this.player1.setCapibility(this.handle_initial_character.character_description.character_descruption_point);
+                this.clockDraw(Framework.Game._context);
             }
         }
-        if(this.skillTimer.isEnergyFull){
-            this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
-        }
-        this.player1.update();
-        this.character_description.update(this.player1);
-        var hurt_point=0;
-        for(var i=0;i<this.monster.length;i++){
-            this.monster[i].update();
-            if(this.monster[i].isAttack()){
-                hurt_point += this.monster[i].attack;
-            }
-        }
-        if(hurt_point != 0)
-            this.player1GotHurt(hurt_point);
-        // console.log(hurt_point);
-        // console.log(this.player1.characterStatus.currentHealth);
-        if(this.fishing.is_start){
-            this.fishing.update();
-            if(this.player1.mode != "fishing"){
-                this.fishing.stop();
-                m_map.draw(Framework.Game._context);
-            }
-        }
-        this.creation_blood_status.characterBloodUpdate(this.player1);
-        this.creation_blood_status.characterMagicUpdate(this.player1);
-        this.creation_blood_status.characterHungryUpdate(this.player1);
-        this.creation_blood_status.monsterUpdate(this.monster);
-        // console.log(this.player1.hunger_current_point);
-
-        // setTimeout(()=>{this.draw(Framework.Game._context);},500);
     }
     
     this.player1GotHurt = function(hurt_point) {
@@ -339,7 +342,8 @@ var World_map = function()
         }
     }
 	this.draw = function(ctx) {
-        // console.log(this.playerPositionOnMap);
+        if(this.playerInitial){
+            // console.log(this.playerPositionOnMap);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     // console.log("draw");
@@ -428,7 +432,9 @@ var World_map = function()
         this.game_object_detail.draw(ctx);
         this.synthesisBar.draw(ctx);
         this.creation_blood_status.draw(ctx);
-        
+        }else{
+            this.handle_initial_character.draw(ctx);
+        }
     }	
     
     this.clockDraw = function(ctx){
@@ -1008,18 +1014,23 @@ var World_map = function()
     this.click = function(e){   
         // console.log("this.is_character_description_open");
         // console.log(this.is_character_description_open);
-        if(this.character_description.is_character_description_open){
-            if(this.player1.capabilityt_point !=0){
-                this.player1.charaerAbilityClick(e);
+        if(this.playerInitial){
+            if(this.character_description.is_character_description_open){
+                if(this.player1.capabilityt_point !=0){
+                    this.player1.characterAbilityClick(e);
+                }
             }
+            this.synthesisBar.click(e);
+            // console.log(e);
+            this.player1.click(e);
+            if(this.player1.plantIndex != -1){
+                this.handlePlant();
+            }
+            this.handleHoverBackpack();
+        }else{
+            this.handle_initial_character.click(e);
         }
-        this.synthesisBar.click(e);
-        // console.log(e);
-        this.player1.click(e);
-        if(this.player1.plantIndex != -1){
-            this.handlePlant();
-        }
-        this.handleHoverBackpack();
+        
         m_map.draw(Framework.Game._context);
     }
 

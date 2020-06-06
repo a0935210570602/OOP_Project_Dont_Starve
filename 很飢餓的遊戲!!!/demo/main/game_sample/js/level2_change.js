@@ -57,7 +57,6 @@ var Level2_change = Framework.Class(Framework.Level , {
         //this.rootScene.draw();
         //可支援畫各種單純的圖形和字
         this.map.draw(parentCtx);
-        
     },
 
     keydown:function(e, list){
@@ -73,17 +72,14 @@ var Level2_change = Framework.Class(Framework.Level , {
                 Framework.Game.exitFullScreen();
                 this.isFullScreen = false;
             }
-            
         }
     },
 
     keyup:function(e, list){
-        
         this.map.keyup(e, list);
     },
 
     click: function (e) {  
-        console.log(e);
         this.map.click(e);
     },
 
