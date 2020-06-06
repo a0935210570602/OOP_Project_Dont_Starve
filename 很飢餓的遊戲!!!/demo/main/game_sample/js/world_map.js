@@ -138,6 +138,10 @@ var World_map = function()
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
 
+
+        this.npc1 = new Npc1(this);
+        this.npc1.position = {x:18,y:25};
+
         this.monster = [];
         this.stopMonster = false;
         this.stopMonsterCounter =0;
@@ -319,6 +323,7 @@ var World_map = function()
             // console.log(this.player1.hunger_current_point);
 
             // setTimeout(()=>{this.draw(Framework.Game._context);},500);
+            this.npc1.update();
         }else{
             this.handle_initial_character.update();
             if(this.handle_initial_character.is_initial){
@@ -426,12 +431,13 @@ var World_map = function()
                     }
                 }
             }
-     
-        // }
-        
-        this.game_object_detail.draw(ctx);
-        this.synthesisBar.draw(ctx);
-        this.creation_blood_status.draw(ctx);
+            this.game_object_detail.draw(ctx);
+            this.synthesisBar.draw(ctx);
+            this.creation_blood_status.draw(ctx);
+            this.npc1.draw(ctx);
+            if(this.npc_event.taking_is_start){
+                this.npc_event.draw(ctx);
+            }
         }else{
             this.handle_initial_character.draw(ctx);
         }
@@ -476,16 +482,16 @@ var World_map = function()
         var newMonster =  new Monster_cute_little_eye(this);
         newMonster.position = {x:18,y:18};
         this.monster.push(newMonster);
-        // while(count != amount){
-        //     m_position = {x: Math.floor(Math.random()*30),y: Math.floor(Math.random()*30)};
-        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-        //         console.log(m_position);
-        //         var newMonster =  new Monster_cute_little_eye(this);
-        //         newMonster.position = m_position;
-        //         this.monster.push(newMonster);
-        //         count++;
-        //     }
-        // }
+        while(count != amount){
+            m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
+            if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
+                console.log(m_position);
+                var newMonster =  new Monster_cute_little_eye(this);
+                newMonster.position = m_position;
+                this.monster.push(newMonster);
+                count++;
+            }
+        }
     }
 
     var m_map = this;
@@ -600,7 +606,7 @@ var World_map = function()
                 break;
         }
         
-        if(this.player1.player_state == "alive"){
+        if(this.player1.player_state == "alive" && !this.npc_event.taking_is_start){
             if(this.whatIsTheLastKeyMove() == 'Down'){
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
@@ -731,8 +737,16 @@ var World_map = function()
             m_map.draw(Framework.Game._context);
         }
     }
+    this.npc_event = new Npc_event();
+    this.handleNpcTalking = function(npc_name){
+        this.npc_event.trigger("小丑哥哥", "talking");
+    }
 
     this.handleSpace = function(){
+        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 
+            this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
+                this.handleNpcTalking(this.npc1.name);
+        }
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
             this.handleFishing();
         }
@@ -994,7 +1008,14 @@ var World_map = function()
     this.checkIsWalkAble = function(direction){  //檢查人物是否超過地圖大小
         var x = 5+direction.x;
         var y = 5+direction.y;
-        if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0){
+        var xx = this.playerPositionOnMap.x+direction.x;
+        var yy = this.playerPositionOnMap.y+direction.y;
+        // console.log(this.playerPositionOnMap);
+        // console.log(this.npc1.position);
+        // console.log({x:xx ,y:yy});
+        console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
+        if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 ||
+            (xx == this.npc1.position.x && yy == this.npc1.position.y)){
             return false;
         }else{
             return true;
