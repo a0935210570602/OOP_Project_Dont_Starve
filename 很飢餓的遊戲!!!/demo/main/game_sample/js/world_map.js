@@ -435,6 +435,10 @@ var World_map = function()
             this.synthesisBar.draw(ctx);
             this.creation_blood_status.draw(ctx);
             this.npc1.draw(ctx);
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.textAlign = 'center';
+            ctx.fillText(this.handle_initial_character.name, 252 ,250);
             if(this.npc_event.taking_is_start){
                 this.npc_event.draw(ctx);
             }
@@ -1033,7 +1037,8 @@ var World_map = function()
     }
 
     this.click = function(e){   
-        // console.log("this.is_character_description_open");
+
+        console.log(e);
         // console.log(this.is_character_description_open);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
@@ -1056,11 +1061,15 @@ var World_map = function()
     }
 
     this.mousemove = function(e){
-        this.synthesisBar.mousemove(e);
-        this.player1.mousemove(e);
-        this.handleHoverBackpack();
-
-        m_map.draw(Framework.Game._context);
+        if(this.playerInitial){
+            this.synthesisBar.mousemove(e);
+            this.player1.mousemove(e);
+            this.handleHoverBackpack();
+    
+            m_map.draw(Framework.Game._context);
+        }else{
+            this.handle_initial_character.mousemove(e);
+        }
     }
 
     this.handleHoverBackpack = function(){

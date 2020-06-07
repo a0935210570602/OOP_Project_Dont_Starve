@@ -6,13 +6,13 @@ var Creation_blood_status = function() {
 
     this.character_blood_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.character_blood_chart.scale = 1.75;
-    this.character_blood_chart.position = {x: 64*6, y: 64*3}
+    this.character_blood_chart.position = {x: 64*6, y: 64*3-20}
     this.character_magic_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.character_magic_chart.scale = 1.75;
-    this.character_magic_chart.position = {x: 64*6, y: 64*3+25}
+    this.character_magic_chart.position = {x: 64*6, y: 64*3+25-20}
     this.character_hunger_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.character_hunger_chart.scale = 1.75;
-    this.character_hunger_chart.position = {x: 64*6, y: 64*3+50}
+    this.character_hunger_chart.position = {x: 64*6, y: 64*3+50-20}
     this.character_blood_ratio = 1;
     this.character_magic_ratio = 1;
     this.character_hunger_ratio = 1;
@@ -32,19 +32,19 @@ var Creation_blood_status = function() {
         ctx.beginPath();
         // console.log(this.character_blood_ratio);
         // console.log(this.character_hunger_ratio);
-        ctx.rect(64*5-10, 64*3-12, 150*this.character_blood_ratio, 12);
+        ctx.rect(64*5-10, 64*3-12-20, 150*this.character_blood_ratio, 12);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.closePath();
         this.character_blood_chart.draw(ctx);
         ctx.beginPath();
-        ctx.rect(64*5-10, 64*3+12, 150*this.character_magic_ratio, 12);
+        ctx.rect(64*5-10, 64*3+12-20, 150*this.character_magic_ratio, 12);
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.closePath();
         this.character_magic_chart.draw(ctx);
         ctx.beginPath();
-        ctx.rect(64*5-10+1, 64*3+38, 150*this.character_hunger_ratio, 12);
+        ctx.rect(64*5-10+1, 64*3+38-20, 150*this.character_hunger_ratio, 12);
         ctx.fillStyle = "LightGoldenrodYellow";
         ctx.fill();
         ctx.closePath();

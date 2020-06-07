@@ -81,7 +81,7 @@ var Game_object_detail = function() {
     
     this.draw = function(ctx){
         if(this.title_string != ""){
-            console.log(this.des_string.length);
+            // console.log(this.des_string.length);
             ctx.beginPath();
             ctx.rect(15, 557, 250, 330);
             ctx.fillStyle = "brown";
