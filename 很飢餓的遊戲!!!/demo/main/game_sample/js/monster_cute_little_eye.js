@@ -89,7 +89,10 @@ var Monster_cute_little_eye = function(map, options) {
             if(this.canWalking && this.is_start)
             {
                 // this.randomWalk();
-                this.rushToYou();
+                if(map.player1.hide)
+                    this.randomWalk();
+                else
+                    this.rushToYou();
             }
         }
     }

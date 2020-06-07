@@ -294,7 +294,7 @@ var World_map = function()
                 }
             }
             if(this.skillTimer.isEnergyFull){
-                this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+                this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap, this.player1.handEquipmentId);
             }
             this.player1.update();
             this.character_description.update(this.player1);
@@ -412,11 +412,11 @@ var World_map = function()
             //     this.level_up_animation.draw(ctx);
             // }
             
-            if(this.skill_handler.fire_wand_level1._start){
+            if(this.skill_handler.isAnimationStart()){
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
                         if(this.skill_handler.mapPosition.x == i + this.playerPositionOnMap.x && this.skill_handler.mapPosition.y == j+ this.playerPositionOnMap.y){
-                            this.skill_handler.fire_wand_level1.position = {x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y};
+                            this.skill_handler.setPosition({x:64*this.tilePosition[jj][ii].x,y:64*this.tilePosition[jj][ii].y});
                             this.skill_handler.draw(ctx);
                         }
                     }
@@ -654,7 +654,12 @@ var World_map = function()
     }
     this.keyup = function(e, list){
         if(e.key == 'S'){
-            if(this.player1.mode == "magic"){
+            if(this.player1.mode == "hide" && !this.player1.hide){
+                this.player1.hidePlayer();
+                this.player1.hideAnimation.start();
+                this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            }
+            else if(this.player1.mode == "magic"){
                 if(this.skillTimer.isEnergyFull)
                     this.monster_damage_handler.handle_magic_damage(this.skill_handler.mapPosition);
                 this.skillTimer.stopAccumulateEnergy();

@@ -3,6 +3,11 @@
 //只要是this.XXX皆會是Public的property
 var BombMan = function(file, options) {
     this.url = file;      
+    this.item_bush = new Framework.Sprite(define.materialPath + 'item_bush.png'); 
+    this.item_bush.scale = 2;
+    this.item_bush.position = {x:13*64,y:7*64};
+
+    this.hideAnimation = new Player_hide_animation(); 
 
     this.sprite_dead = new Framework.AnimationSprite({url:define.materialPath + 'Actor_dead.png', col:3 , row:1 , loop:false , speed:4}); 
     this.sprite_dead.scale = 1.4;
@@ -26,7 +31,8 @@ var BombMan = function(file, options) {
     this.playerDirection = this.constants.DirectionEnum.DOWN;
     this.equipmentBar = new EquipmentBar();
     this.backpack = new Backpack();
-    
+    this.hide = false;
+
     this.mode = "";
 
     //一個格子 = 20
@@ -67,6 +73,7 @@ var BombMan = function(file, options) {
     this.plantIndex = -1;
     this.hunger_total_point = 200;
     this.hunger_current_point = 100;
+    this.handEquipmentId;
     //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
     //若options.position有值, 則this.sprite.position = options.position
     //原因是在JS中, undefined會被cast成false
@@ -78,6 +85,13 @@ var BombMan = function(file, options) {
         // this.characterStatus.init();
         this.player_state = "alive";
         this.decreaseHunger();
+    }
+
+    this.hidePlayer = function(){
+        this.hide = true;
+        setTimeout(()=>{
+            this.hide = false;
+        },10000);
     }
 
     this.decreaseHunger = function(){
@@ -194,6 +208,7 @@ var BombMan = function(file, options) {
     this.getHandEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null){
+            this.handEquipmentId = handEquipment.item_num;
             if(handEquipment.item_num == 32)
                 this.mode = "light";
             else if(handEquipment.item_num == 16 || handEquipment.item_num == 19)
@@ -202,7 +217,7 @@ var BombMan = function(file, options) {
                 this.mode = "rock_dig";
             else if(handEquipment.item_num == 18 || handEquipment.item_num == 20)
                 this.mode = "plant_dig";
-            else if(handEquipment.item_num == 27 || handEquipment.item_num == 28 || handEquipment.item_num == 29 || handEquipment.item_num == 30)
+            else if(handEquipment.item_num == 28 || handEquipment.item_num == 29 || handEquipment.item_num == 30)
                 this.mode = "magic";
             else if(handEquipment.item_num == 25)
                 this.mode = "spear";
@@ -210,9 +225,12 @@ var BombMan = function(file, options) {
                 this.mode = "arror";
             else if(handEquipment.item_num == 17)
                 this.mode = "fishing";
+            else if(handEquipment.item_num == 27)
+                this.mode = "hide";
             else
                 this.mode = "";
         }else{
+            this.handEquipmentId = null;
             this.mode = "";
         }
     }
@@ -271,7 +289,7 @@ var BombMan = function(file, options) {
     this.update = function(){
         //更新升級動畫
         this.level_up_animation.update();
-
+        this.hideAnimation.update();
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
         // console.log("this.character_descruption_point[0]");
         // console.log(this.character_descruption_point[0]);
@@ -299,6 +317,8 @@ var BombMan = function(file, options) {
 
 
     this.draw = function(ctx){
+        if(this.hideAnimation.hideAnimation._start)
+            this.hideAnimation.draw(ctx);
         if(this.level_up_animation.level_up_animation._start){
             // console.log("drawdraw");
             this.level_up_animation.draw(ctx);
@@ -309,10 +329,12 @@ var BombMan = function(file, options) {
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
         // this.characterStatus.draw(ctx);
-        if(this.player_state == "alive"){
+        if(this.player_state == "alive" && !this.hide){
             this.sprite.draw(ctx);
         }else if(this.player_state == "dead"){
             this.sprite_dead.draw(ctx);
+        }else{
+            this.item_bush.draw(ctx);
         }
     }
 

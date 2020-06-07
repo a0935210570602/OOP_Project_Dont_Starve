@@ -138,6 +138,7 @@ var loadGameEnd;
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
         { src: 'game_sample/js/monster_damage_handler.js', lookFor: 'Monster_damage_handler' },
         { src: 'game_sample/js/flying_arror.js', lookFor: 'Flying_arror' },
+        { src: 'game_sample/js/player_hide_animation.js', lookFor: 'Player_hide_animation' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },
