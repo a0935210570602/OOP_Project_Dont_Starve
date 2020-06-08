@@ -404,14 +404,6 @@ var World_map = function()
             for(var i=0;i<this.monster.length;i++){
                 this.monster[i].draw(ctx);
             }
-
-
-            this.character_description.draw(ctx);
-            // if(this.level_up_animation.level_up_animation._start){
-            //     console.log("drawdraw");
-            //     this.level_up_animation.draw(ctx);
-            // }
-            
             if(this.skill_handler.isAnimationStart()){
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
@@ -433,11 +425,15 @@ var World_map = function()
             }
             this.game_object_detail.draw(ctx);
             this.synthesisBar.draw(ctx);
-            this.creation_blood_status.draw(ctx);
             this.npc1.draw(ctx);
+            this.character_description.draw(ctx);
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
+            if(this.handle_initial_character.name == "請輸入名字"){
+                this.handle_initial_character.name = "";
+            }
+            this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
             if(this.npc_event.taking_is_start){
                 this.npc_event.draw(ctx);

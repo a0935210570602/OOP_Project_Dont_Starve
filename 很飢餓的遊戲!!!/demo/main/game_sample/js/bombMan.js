@@ -281,7 +281,6 @@ var BombMan = function(file, options) {
     this.capibility = function(){
         for(var i=0;i<9;i++)
             this.character_descruption_total_point[i] = this.character_descruption_point[i];
-        
         this.character_descruption_total_point[2] += this.getHandAttackPointEquipment();
         this.character_descruption_total_point[3] += this.getHandMagicAttackPointEquipment();
         this.character_descruption_total_point[4] += this.getHandArrorAttackPointEquipment();
@@ -445,7 +444,7 @@ var BombMan = function(file, options) {
             }else if(e.y >=461 && e.y<= 502){
                 this.isChangeCapability(6);
             }else if(e.y >=622 && e.y<= 661){
-                this.isChangeCapability(9);
+                this.isChangeCapability(8);
             }
         }   
     }
