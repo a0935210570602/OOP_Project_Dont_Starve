@@ -11,7 +11,7 @@ var Item_ax = function() {
     this.durability = 100;
     this.place = "hand";
 
-    this.attack_point = 1;
+    this.attack_point = 40;
     this.magic_attack_point = 0;
     this.arror_attack_point = 0;
     

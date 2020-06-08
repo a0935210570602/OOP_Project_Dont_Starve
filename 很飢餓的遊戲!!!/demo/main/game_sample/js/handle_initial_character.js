@@ -245,7 +245,7 @@ var Handle_initial_character = function(){
             }else if(e.y >=461 && e.y<= 502){
                 this.character_description.isChangeCapability(6);
             }else if(e.y >=622 && e.y<= 661){
-                this.character_description.isChangeCapability(9);
+                this.character_description.isChangeCapability(8);
             }
         }   
     }

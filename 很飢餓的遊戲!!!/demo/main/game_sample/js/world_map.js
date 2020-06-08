@@ -450,7 +450,7 @@ var World_map = function()
     this.clockDraw = function(ctx){
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
-            this.draw(Framework.Game._context);
+            this.creation_blood_status.draw(ctx);
             // console.log("aa");
             // this.creation_blood_status.draw(ctx);
             // this.player1.characterStatus.draw(ctx);
@@ -509,7 +509,7 @@ var World_map = function()
     this.checkIsDie = function(){
         // console.log("this.player1.character_descruption_point[0]");
 
-        // console.log(this.player1.character_descruption_point[0]);
+        console.log(this.player1.character_descruption_point[0]);
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
@@ -616,7 +616,6 @@ var World_map = function()
                 this.playerWalkDirection = {x:0,y:1};
                 this.keyPress = "Down";
                 if(this.checkIsWalkAble(this.playerWalkDirection)){
-                    console.log("down");
                     this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     this.pressWalk = true;
@@ -848,36 +847,35 @@ var World_map = function()
     }
 
     this.handleCutTree = function(){           
-            var x = 5+this.playerWalkDirection.x;
-            var y = 5+this.playerWalkDirection.y;
-            var count = false;
-            this.itemArray[y][x].update();
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        var x = 5+this.playerWalkDirection.x;
+        var y = 5+this.playerWalkDirection.y;
+        var count = false;
+        this.itemArray[y][x].update();
+        this.player1.equipmentBar.equipmentList[2].reduceDurability();
 
-            if(this.itemArray[y][x].dropWood){
+        if(this.itemArray[y][x].dropWood){
+            for(var i=-1;i<2;i++){
+                for(var j=-1;j<2;j++){
+                    if( this.mapArray[y+j][x+i] != 91 &&
+                        this.mapArray[y+j][x+i] != 200 &&
+                        this.itemArray[y+j][x+i].item_num == 0 
+                        ){
+                        if(((y+j) != 5) || ((x+i) != 5)){
+                            count = true;
+                            this.map_selector.addObject({x:this.playerPositionOnMap.x+i+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y+j}, new Item_wood());
+                            this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                            m_map.draw(Framework.Game._context);
 
-                for(var i=-1;i<2;i++){
-                    for(var j=-1;j<2;j++){
-                        if( this.mapArray[y+j][x+i] != 91 &&
-                            this.mapArray[y+j][x+i] != 200 &&
-                            this.itemArray[y+j][x+i].item_num == 0 
-                            ){
-                            if(((y+j) != 5) || ((x+i) != 5)){
-                                count = true;
-                                this.map_selector.addObject({x:this.playerPositionOnMap.x+i+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y+j}, new Item_wood());
-                                this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
-                                m_map.draw(Framework.Game._context);
-
-                                break;
-                            }
+                            break;
                         }
                     }
-                    if(count)
-                        break;
                 }
-
+                if(count)
+                    break;
+            }
         }
-        if(this.mapArray[x][y].treeStatus == 2){
+        console.log(this.itemArray[y][x]);
+        if(this.itemArray[y][x].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
                 // this.level_up_animation.start();
@@ -1022,7 +1020,7 @@ var World_map = function()
         // console.log(this.playerPositionOnMap);
         // console.log(this.npc1.position);
         // console.log({x:xx ,y:yy});
-        console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
+        // console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 ||
             (xx == this.npc1.position.x && yy == this.npc1.position.y)){
             return false;
@@ -1043,7 +1041,6 @@ var World_map = function()
 
     this.click = function(e){   
 
-        console.log(e);
         // console.log(this.is_character_description_open);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){

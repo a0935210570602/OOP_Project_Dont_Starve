@@ -10435,9 +10435,9 @@ var Local_map_0 = function() {
     }
     this.createItemMap();
     this.addObject= function(position, number, object){
-        console.log(object);
-        console.log(position);
-        console.log(number);
+        // console.log(object);
+        // console.log(position);
+        // console.log(number);
 
         this.itemArray[number][position.x][position.y] = object;
     }
