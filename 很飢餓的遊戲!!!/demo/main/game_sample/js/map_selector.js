@@ -9,33 +9,33 @@ var Map_selector = function() {
         this.flag_map = this.flag.y*10+this.flag.x;
         this.local_map_0.removeObject({x:(world_position.y%40), y:(world_position.x%40)}, this.flag_map);
     }
+    
     this.addObject = function(world_position, object){
         this.flag.x = Math.floor((world_position.y) / 40);
         this.flag.y = Math.floor((world_position.x) / 40);
         this.flag_map = this.flag.y*10+this.flag.x;
         this.local_map_0.addObject({x:(world_position.y%40), y:(world_position.x%40)}, this.flag_map, object);
     }
+
     this.checkIsBlank = function(world_position){
         this.flag.x = Math.floor((world_position.y) / 40);
         this.flag.y = Math.floor((world_position.x) / 40);
         this.flag_map = this.flag.y*10+this.flag.x;
         return this.local_map_0.hasItem({x:(world_position.y%40), y:(world_position.x%40)}, this.flag_map);
     }
+
     this.checkFloorCanWalk = function(world_position){
         this.flag.x = Math.floor((world_position.y) / 40);
         this.flag.y = Math.floor((world_position.x) / 40);
         this.flag_map = this.flag.y*10+this.flag.x;
         return this.local_map_0.canWalk({x:(world_position.y%40), y:(world_position.x%40)}, this.flag_map);
     }
+
     this.makeItemMap= function(world_position){
         this.itemArray = [];
         this.item_line = [];
-        // console.log(world_position);
-        
         for(var i=-5;i<6;i++){
             for(var j=-5;j<6;j++){
-                // console.log(world_position.x+i);
-                // console.log(world_position.y+j);
                 this.flag.x = Math.floor((world_position.y+i) / 40);
                 this.flag.y = Math.floor((world_position.x+j) / 40);
 
@@ -44,26 +44,18 @@ var Map_selector = function() {
             this.itemArray.push(this.item_line);
             this.item_line = [];
         }
-        // console.log(this.itemArray);
-
         return this.itemArray;
     }
 
     this.littleItem = function(position, number){
-        // console.log(number);
-        // console.log(position);
-
         return this.local_map_0.catchItem(position,number);
     }
+
     this.makeMap= function(world_position){
         this.mapArray = [];
         this.map_line = [];
-        // console.log(world_position);
-        
         for(var i=-5;i<6;i++){
             for(var j=-5;j<6;j++){
-                // console.log(world_position.x+i);
-                // console.log(world_position.y+j);
                 this.flag.x = Math.floor((world_position.y+i) / 40);
                 this.flag.y = Math.floor((world_position.x+j) / 40);
 
@@ -72,14 +64,10 @@ var Map_selector = function() {
             this.mapArray.push(this.map_line);
             this.map_line = [];
         }
-
         return this.mapArray;
     }
 
     this.littleMap = function(position, number){
-        // console.log(number);
-        // console.log(position);
-
         return this.local_map_0.catchMap(position,number);
     }
 

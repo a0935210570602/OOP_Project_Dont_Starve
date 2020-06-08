@@ -151,6 +151,7 @@ var World_map = function()
 
         this.skill_handler = new Skill_handler();
         this.spear_handler = new Spear_handler();
+        this.visitor = new ReduceDurabilityVisitor();
         this.creation_blood_status = new Creation_blood_status();
         this.fishing = new Fishing();
         this.handle_initial_character = new Handle_initial_character();
@@ -184,7 +185,7 @@ var World_map = function()
         this.skillTimer = new Skill_timer();
         this.character_description = new Character_description();
         this.clock.init();
-        this.monster_damage_handler = new Monster_damage_handler(this.player1, this.monster);
+        this.arror_attack = new Arror_attack(this.player1, this.monster);
         this.handle_initial_character.init();
         
         this.player1.StepMovedCallBack.push(this.playerMovedHandler);
@@ -258,7 +259,7 @@ var World_map = function()
             // this.level_up_animation.update();
             this.skill_handler.update();
             this.spear_handler.update();
-            this.monster_damage_handler.update();
+            this.arror_attack.update();
 
             if(this.pressWalk === true)
             {
@@ -303,6 +304,15 @@ var World_map = function()
                 this.monster[i].update();
                 if(this.monster[i].isAttack()){
                     hurt_point += this.monster[i].attack;
+                }
+            }
+            var i = 0;
+            while(i < this.monster.length) {
+                if(this.monster[i].health <= 0){
+                    this.monster.splice(i, 1);
+                    this.player1.getExperience(5);
+                }else{
+                    i++;
                 }
             }
             if(hurt_point != 0)
@@ -395,7 +405,7 @@ var World_map = function()
     
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
-            this.monster_damage_handler.draw(ctx);
+            this.arror_attack.draw(ctx);
             this.player1.draw(ctx);
             if(this.fishing.is_start)
                 this.fishing.draw(ctx);
@@ -654,24 +664,28 @@ var World_map = function()
     }
     this.keyup = function(e, list){
         if(e.key == 'S'){
+            var attackMode = new Null_attack();
+
             if(this.player1.mode == "hide" && !this.player1.hide){
                 this.player1.hidePlayer();
                 this.player1.hideAnimation.start();
-                this.player1.equipmentBar.equipmentList[2].reduceDurability();
             }
             else if(this.player1.mode == "magic"){
                 if(this.skillTimer.isEnergyFull)
-                    this.monster_damage_handler.handle_magic_damage(this.skill_handler.mapPosition);
+                    attackMode = new Magic_attack(this.player1, this.monster, this.skill_handler.mapPosition);
                 this.skillTimer.stopAccumulateEnergy();
             }
             else if(this.player1.mode == "arror"){
-                this.monster_damage_handler.handle_arror_damage(this.playerWalkDirection, this.playerPositionOnMap);
+                this.arror_attack.setPositionAndDirection(this.playerWalkDirection, this.playerPositionOnMap);
+                attackMode = this.arror_attack;
             }else if(this.player1.mode == "spear"){
-                this.monster_damage_handler.handle_normal_damage(this.playerWalkDirection, this.playerPositionOnMap);
+                attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
                 this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
             }else{
-                this.monster_damage_handler.handle_normal_damage(this.playerWalkDirection, this.playerPositionOnMap);
+                attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
             }
+
+            this.player1.attack(attackMode);
         }
 
         for(var i=0;i<this.capture_key.length;i++){
@@ -707,7 +721,7 @@ var World_map = function()
                         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                         m_map.draw(Framework.Game._context);
                         addSuccess = true;
-                        this.player1.equipmentBar.equipmentList[2].reduceDurability();
+                        this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
                         break;
                 }
             }
@@ -789,33 +803,33 @@ var World_map = function()
             }else{
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_flower_dig());
             }
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         }else if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 36){
             if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].status){
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_bush_growed_dig());
             }else{
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_bush_dig());
             }
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         }else if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 6){
             if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].status){
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_grass_growed_dig());
             }else{
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_grass_dig());
             }
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         }else if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == -4){
             if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].status){
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_sapling_growed_dig());
             }else{
                 this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_sapling_dig());
             }
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         }
         else if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == -1 &&
             this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].treeStatus == 2){
             this.map_selector.addObject({x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_tree_dig());
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         }
         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
         m_map.draw(Framework.Game._context);
@@ -852,7 +866,7 @@ var World_map = function()
             var y = 5+this.playerWalkDirection.y;
             var count = false;
             this.itemArray[y][x].update();
-            this.player1.equipmentBar.equipmentList[2].reduceDurability();
+            this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
 
             if(this.itemArray[y][x].dropWood){
 
@@ -912,7 +926,7 @@ var World_map = function()
                 this.map_selector.addObject({x:-1 + this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, gold);
             }
         }
-        this.player1.equipmentBar.equipmentList[2].reduceDurability();
+        this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
         m_map.draw(Framework.Game._context);
     }

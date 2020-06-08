@@ -87,7 +87,12 @@ var BombMan = function(file, options) {
         this.decreaseHunger();
     }
 
+    this.attack = function(attackMode){
+        attackMode.attack();
+    }
+
     this.hidePlayer = function(){
+        this.equipmentBar.equipmentList[2].reduceDurability();
         this.hide = true;
         setTimeout(()=>{
             this.hide = false;
