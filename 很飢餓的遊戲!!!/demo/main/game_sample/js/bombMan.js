@@ -37,15 +37,15 @@ var BombMan = function(file, options) {
 
     //一個格子 = 20
     this.character_descruption_point = [];
-    this.character_descruption_point[0] = 6*20;   //"生命";
-    this.character_descruption_point[1] = 5*20;   //"魔力";
-    this.character_descruption_point[2] = 4*20;   //"物功";
-    this.character_descruption_point[3] = 8*20;   //"魔攻";
-    this.character_descruption_point[4] = 2*20;   //"弓攻";
-    this.character_descruption_point[5] = 6*20;   //"力量";
-    this.character_descruption_point[6] = 13*20;  //"智力";
-    this.character_descruption_point[7] = 6*20;   //"防禦";
-    this.character_descruption_point[8] = 14*20;  //"技巧";
+    this.character_descruption_point[0] = 0*20;   //"生命";
+    this.character_descruption_point[1] = 0*20;   //"魔力";
+    this.character_descruption_point[2] = 0*20;   //"物功";
+    this.character_descruption_point[3] = 0*20;   //"魔攻";
+    this.character_descruption_point[4] = 0*20;   //"弓攻";
+    this.character_descruption_point[5] = 0*20;   //"力量";
+    this.character_descruption_point[6] = 0*20;  //"智力";
+    this.character_descruption_point[7] = 0*20;   //"防禦";
+    this.character_descruption_point[8] = 0*20;  //"技巧";
 
     //角色格子轉成數值
     // this.characterStatus = new CharacterStatus(this.character_descruption_point[5]*20, this.character_descruption_point[0]*20);
@@ -125,6 +125,7 @@ var BombMan = function(file, options) {
     }
 
     this.getExperience= function(experience){
+        console.log("getexperience");
         this.experience += experience;
         if(this.experience >=this.levelup_experience){
             this.experience -= this.levelup_experience
@@ -191,7 +192,7 @@ var BombMan = function(file, options) {
         if(handEquipment != null)
             return this.equipmentBar.getEquipment(2).attack_point;
         else
-            return 0;
+            return 5;
     }
 
     this.getHandMagicAttackPointEquipment = function(){
@@ -296,20 +297,10 @@ var BombMan = function(file, options) {
         this.level_up_animation.update();
         this.hideAnimation.update();
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
-        // console.log("this.character_descruption_point[0]");
-        // console.log(this.character_descruption_point[0]);
-        // this.character_descruption_point[0] = Math.floor(this.characterStatus.currentHealth/20);
         this.capibility();
-        // if(this.character_descruption_total_point[0]<=0){
-        //     this.player_state = "dead";
-            // this.sprite_dead.update();
-        // }
-
-
         if(this.isWalking){
             this.isWalking = false;
             this.sprite.index = this.playerDirection * 3 + 1;
-
             for(var i=0; i<this.StepMovedCallBack.length; i++){
                 this.StepMovedCallBack[i];
             }
@@ -436,11 +427,14 @@ var BombMan = function(file, options) {
     }
 
     this.isChangeCapability = function(which_capability){
-            this.character_descruption_point[which_capability]++;
-            this.capabilityt_point--;
+        this.character_descruption_point[which_capability] += 20;
+
+        this.capabilityt_point--;
     }
 
     this.characterAbilityClick = function(e){
+        console.log(e);
+
         if(e.x >= 470 && e.x <=510){
             if(e.y >=540 && e.y<= 560){
                 this.isChangeCapability(2);
@@ -455,7 +449,7 @@ var BombMan = function(file, options) {
             }else if(e.y >=461 && e.y<= 502){
                 this.isChangeCapability(6);
             }else if(e.y >=622 && e.y<= 661){
-                this.isChangeCapability(9);
+                this.isChangeCapability(8);
             }
         }   
     }

@@ -137,8 +137,9 @@ var Character_description = function() {
     }
 
     this.isChangeCapability = function(which_capability){
-        this.character_descruption_point[which_capability]++;
+        this.character_descruption_point[which_capability] ++;
         this.capabilityt_point--;
+        this.draw(Framework.Game._context);
     }
 
     this.update = function(player){
