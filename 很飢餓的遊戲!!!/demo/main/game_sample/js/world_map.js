@@ -202,7 +202,7 @@ var World_map = function()
         this.itemArray = [];
         this.mapArray = [];
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
-        this.playerPositionOnMap = {x:17,y:18};
+        this.playerPositionOnMap = {x:47,y:47};
 
         this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
