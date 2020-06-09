@@ -1,4 +1,4 @@
-var SynthesisBar = function(backpackList) {
+var SynthesisBar = function(backpackList, score) {
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
     this.backpack.position = {x:0,y:0};
@@ -498,6 +498,7 @@ var SynthesisBar = function(backpackList) {
                 if(check == 1){
                     backpackList.addItemBySynthesis(this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                     backpackList.update(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex]);
+                    score.scoreAddBySynthesis();
                 }
             }
         }

@@ -1,44 +1,51 @@
-
 var Score = function() {
+    this.score = 100;
+    this.scoreToDraw = 0;
+    this.position = {
+        x: Framework.Game.getCanvasWidth() / 2,
+        y: Framework.Game.getCanvasHeight() / 2
+    };;
+    this.background = new Framework.Sprite(define.materialPath + 'DecorativeTile.png');
+    this.background.scale = 2;
+    this.background.position = this.position;
+    this.frame = new Framework.Sprite(define.materialPath + 'Floral2.png');
+    this.frame.scale = 2;
+    this.frame.position = this.position;
 
-    this._score = 0;
-    this._position = {x:0,y:0};
-    this.load = function()
-    {
+    this.scoreAddBySynthesis = function(){
+        this.score += 1;
     }
 
-    this.update = function(){
+    this.scoreAddByKillMonster = function(){
+        this.score += 5;
     }
-
+    
+    this.drawScore = function(){
+        var interval = setInterval(()=>{
+            if(this.scoreToDraw <= this.score){
+                this.draw(Framework.Game._context);
+                this.scoreToDraw++;
+                if(this.scoreToDraw > this.score)
+                    clearInterval(interval);
+            }
+        },10)
+    }
 
     this.draw = function(ctx){
-        ctx.globalAlpha=0.8;
-        ctx.fillStyle = 'black'; 
-        ctx.fillRect(this._position.x - 10, this._position.y, 300, 40);  
-        ctx.font = '30pt Algerian';
+        this.background.draw(ctx);
+        this.frame.draw(ctx);
+        
+        ctx.font = '90pt Algerian';
         ctx.globalAlpha=1;
         ctx.fillStyle = 'yellow';
         ctx.textBaseline = 'top';
-        ctx.textAlign = 'left';
-        ctx.fillText("Score: " + this._score, this._position.x, this._position.y);
-    }
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2.5;
 
-    this.addScore = function(score)
-    {
-        this._score += score;
-    }
+        ctx.fillText("Score: " + this.scoreToDraw, this.position.x, this.position.y);
+        ctx.strokeText("Score: " + this.scoreToDraw, this.position.x, this.position.y);
 
-    this.resetScore = function()
-    {
-        this._score = 0;
     }
 };
 
-Object.defineProperty(Score.prototype, 'position', {
-    get: function() {
-        return this._position;
-    },
-    set: function(newValue) {
-        this._position = newValue;
-    }
-}); 

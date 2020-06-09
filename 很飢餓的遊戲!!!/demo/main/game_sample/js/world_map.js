@@ -144,8 +144,9 @@ var World_map = function()
 
         this.monster = [];
         this.stopMonster = false;
-        this.stopMonsterCounter =0;
-        this.synthesisBar = new SynthesisBar(this.player1.getBackPack());
+        this.stopMonsterCounter = 0;
+        this.score = new Score();
+        this.synthesisBar = new SynthesisBar(this.player1.getBackPack(), this.score);
 
         this.map_selector = new Map_selector();
 
@@ -311,6 +312,7 @@ var World_map = function()
                 if(this.monster[i].health <= 0){
                     this.monster.splice(i, 1);
                     this.player1.getExperience(5);
+                    this.score.scoreAddByKillMonster();
                 }else{
                     i++;
                 }
@@ -457,9 +459,6 @@ var World_map = function()
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
             this.creation_blood_status.draw(ctx);
-            // console.log("aa");
-            // this.creation_blood_status.draw(ctx);
-            // this.player1.characterStatus.draw(ctx);
             if(this.player1.character_descruption_total_point[0] <= 0){
                 clearInterval(clockInterval);
             }
@@ -572,6 +571,12 @@ var World_map = function()
         // console.log(e.key);
         this.capture_key.push(e);
        
+        if(e.key == 'T'){
+            this.deadClear();
+            Framework.Game.goToLevel('gameOver');  
+        }
+
+
         if(e.key != 'Space' && this.fishing.is_start)
             this.fishing.stop();
         // for(var i=0;i<this.capture_key.length;i++){
