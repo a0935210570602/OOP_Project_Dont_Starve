@@ -44,6 +44,10 @@
 		'characterDescriptionPath': {
 			value: mainPath + 'character_description/',
 			writable: true
+		},
+		'npcPath': {
+			value: mainPath + 'npc/',
+			writable: true
 		}
 
 	});

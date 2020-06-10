@@ -111,6 +111,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_bush_growed_dig.js', lookFor: 'Item_bush_growed_dig' },
         { src: 'game_sample/js/item_sapling_growed_dig.js', lookFor: 'Item_sapling_growed_dig' },
         { src: 'game_sample/js/item_sapling_dig.js', lookFor: 'Item_sapling_dig' },
+        { src: 'game_sample/js/drama0.js', lookFor: 'Drama0' },
 
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },
