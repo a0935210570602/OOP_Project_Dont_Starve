@@ -52,6 +52,7 @@ var loadGameEnd;
     //才會繼續loading下一個檔案, 如果沒有需要lookFor, 則以空字串代表
     var listScript = 
     [
+
         { src: 'game_sample/js/define.js', lookFor: 'define' },
         { src: 'game_sample/js/myMenu.js', lookFor: 'MyMenu' },
         { src: 'game_sample/js/myMenu_tutorial.js', lookFor: 'MyMenu_tutorial' },
@@ -60,6 +61,7 @@ var loadGameEnd;
         { src: 'game_sample/js/score.js', lookFor: 'Score' },
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },
         { src: 'game_sample/js/monster.js', lookFor: 'Monster' },
+        { src: 'game_sample/js/food_base.js', lookFor: 'Food_base' },
 
         { src: 'game_sample/js/map_item_tree.js', lookFor: 'Map_item_tree' },
 
@@ -151,6 +153,12 @@ var loadGameEnd;
         { src: 'game_sample/js/monster_base.js', lookFor: 'Monster_base' },
         { src: 'game_sample/js/basic_monster.js', lookFor: 'Basic_monster' },
         { src: 'game_sample/js/monster_bat.js', lookFor: 'Monster_bat' },
+        { src: 'game_sample/js/bat_wing.js', lookFor: 'Bat_wing' },
+        { src: 'game_sample/js/item_eyeball.js', lookFor: 'Item_eyeball' },
+        { src: 'game_sample/js/monster_pig.js', lookFor: 'Monster_pig' },
+        { src: 'game_sample/js/monster_cow.js', lookFor: 'Monster_cow' },
+
+
         { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },

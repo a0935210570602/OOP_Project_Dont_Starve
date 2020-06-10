@@ -32,7 +32,7 @@ var BombMan = function(file, options) {
     this.equipmentBar = new EquipmentBar();
     this.backpack = new Backpack();
     this.hide = false;
-
+    this.gameClear = false;
     this.mode = "";
 
     //一個格子 = 20
@@ -102,7 +102,10 @@ var BombMan = function(file, options) {
     this.decreaseHunger = function(){
         var hungerInterval = setInterval(()=>{
             this.hunger_current_point -= 5;
-            if(this.hunger_current_point <= 0)
+            if(this.gameClear){
+                clearInterval(hungerInterval);
+            }
+            else if(this.hunger_current_point <= 0)
             {
                 clearInterval(hungerInterval);
                 this.decreaseHealth();
@@ -115,7 +118,10 @@ var BombMan = function(file, options) {
             this.character_descruption_point[0] -= 4;
             // console.log(this.character_descruption_point[0]);
             // console.log(this.currentHealth);
-            if(this.hunger_current_point > 0 && !(this.character_descruption_point[0] <= 0)){
+            if(this.gameClear){
+                clearInterval(healthInterval);
+            }
+            else if(this.hunger_current_point > 0 && !(this.character_descruption_point[0] <= 0)){
                 clearInterval(healthInterval);
                 this.decreaseHunger();
             }else if(this.character_descruption_point[0] <= 0){

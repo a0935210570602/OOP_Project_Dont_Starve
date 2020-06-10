@@ -201,6 +201,7 @@ var World_map = function()
         this.tilePosition = [];
         this.itemArray = [];
         this.mapArray = [];
+        this.clear = false;
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:47,y:47};
 
@@ -464,7 +465,7 @@ var World_map = function()
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
             this.creation_blood_status.draw(ctx);
-            if(this.player1.character_descruption_total_point[0] <= 0){
+            if(this.player1.character_descruption_total_point[0] <= 0 || this.clear){
                 clearInterval(clockInterval);
             }
         }, 500);
@@ -495,10 +496,10 @@ var World_map = function()
         var m_position = {x:0,y:0};
         var newMonster =  new Monster_cute_little_eye(this);
         newMonster.position = {x:48,y:48};
-        var newMonster1 =  new Monster_bat(this);
+        var newMonster1 =  new Monster_cow(this);
         newMonster1.position = {x:48,y:49};
-        this.monster.push(newMonster);
-        // this.monster.push(newMonster1);
+        // this.monster.push(newMonster);
+        this.monster.push(newMonster1);
         // while(count != amount){
         //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
         //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
@@ -519,6 +520,15 @@ var World_map = function()
         this.player1.character_descruption_point[0] = 0;
         this.player1.update();
     }
+
+    this.gameClear = function(){
+        this.skillTimer.clear();
+        this.capture_key = [];
+        this.clear = true;
+        this.player1.gameClear = true;
+
+    }
+
     this.checkIsDie = function(){
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
@@ -580,7 +590,10 @@ var World_map = function()
             this.deadClear();
             Framework.Game.goToLevel('gameOver');  
         }
-
+        if(e.key == 'Y'){
+            this.gameClear();
+            Framework.Game.goToLevel('gameOver');  
+        }
 
         if(e.key != 'Space' && this.fishing.is_start)
             this.fishing.stop();

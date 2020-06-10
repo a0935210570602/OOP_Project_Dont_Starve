@@ -47,6 +47,7 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
             if(Monster[i].is_start){
                 if(this.mapPosition.x == Monster[i].mapPosition.x && this.mapPosition.y == Monster[i].mapPosition.y){
                     Monster[i].health -= Attack;
+                    Monster[i].getHurt();
                     this.attackEnd = true;
                     break;
                 }
