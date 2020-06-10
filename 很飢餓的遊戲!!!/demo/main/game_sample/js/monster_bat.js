@@ -1,11 +1,10 @@
-var Monster_cute_little_eye = function(map, options) {
-    
-    this.monster_cute_little_eye = new Framework.AnimationSprite({url:define.materialPath + 'bat.png', col:3 , row:4 , loop:true , speed:12}); 
-    this.monster_cute_little_eye.scale = 1.5;
-    this.monster_cute_little_eye.index = 1;
+var Monster_bat = function(map, options) {
+    this.monster_bat = new Framework.AnimationSprite({url:define.materialPath + 'bat.png', col:3 , row:4 , loop:true , speed:12}); 
+    this.monster_bat.scale = 1.3;
+    this.monster_bat.index = 1;
     var PIXEL_CONST = 64;
     //怪獸的名字
-    this.name = "大眼仔仔";
+    this.name = "小蝙蝠";
 
     this.mapPosition = {x:0, y:0};
     this.walkTarget = {x:0, y:0};
@@ -19,6 +18,7 @@ var Monster_cute_little_eye = function(map, options) {
     this.is_start = false;
 
     this.canWalking = true;
+    this.walkStep = {x:0,y:0};
 
     // this.StepMovedCallBack = [];
 
@@ -35,7 +35,7 @@ var Monster_cute_little_eye = function(map, options) {
         if(this.isWalking === false){
             this.isWalking = true;
             this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
-            this.changeWalkDirection(moveStep);
+            // this.changeWalkDirection(moveStep);
         }
     }
 
@@ -70,12 +70,11 @@ var Monster_cute_little_eye = function(map, options) {
         if(this.isdead ){ return; }
         this.checkIsMonsterOutCanvus();
         if(!this.is_start){ return; }
-        this.monster_cute_little_eye.update();
+        this.monster_bat.update();
         if(this.isWalking){
             if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
                 this.isWalking = false;
-                this.monster_cute_little_eye.stop();
-                this.monster_cute_little_eye.index = this.playerDirection * 3 + 1;
+                this.monster_bat.index = this.playerDirection * 3 + 1;
                 this.mapPosition = this.walkTarget;
                 //callback
                 // for(var i=0; i<this.StepMovedCallBack.length; i++){
@@ -91,8 +90,10 @@ var Monster_cute_little_eye = function(map, options) {
                 // this.randomWalk();
                 if(map.player1.hide)
                     this.randomWalk();
-                else
+                else{
+                    console.log("rush");
                     this.rushToYou();
+                }
             }
         }
     }
@@ -103,8 +104,8 @@ var Monster_cute_little_eye = function(map, options) {
         if(!this.is_start){ return; }
         var xx = 13*64 + this.spritePosition.x - this.map.playerPositionOnMap.x*64;
         var yy = 7*64 + this.spritePosition.y - this.map.playerPositionOnMap.y*64;
-        this.monster_cute_little_eye.position = {x: xx, y: yy};
-        this.monster_cute_little_eye.draw(ctx);
+        this.monster_bat.position = {x: xx, y: yy};
+        this.monster_bat.draw(ctx);
     }
     var walkDir = 0;
     this.checkIsMonsterOutCanvus = function(){
@@ -194,10 +195,13 @@ var Monster_cute_little_eye = function(map, options) {
                     walkStep = this.howToWalk(3,0);
             }
         }else{
+            console.log("sssssss");
+            this.changeWalkDirection(this.walkStep);
             walkDir = 0;
             return;
         }
-        this.changeWalkDirection(walkStep);
+        if(this.walkStep.x != walkStep.x || this.walkStep.y != walkStep.y)
+            this.changeWalkDirection(walkStep);
         if(this.map.checkMonsterIsWalkAble({x: this.mapPosition.x + walkStep.x, y:this.mapPosition.y + walkStep.y}))
         {
             this.walk(walkStep);
@@ -205,6 +209,7 @@ var Monster_cute_little_eye = function(map, options) {
     }
 
     this.changeWalkDirection = function(walkStep){
+        this.walkStep = walkStep;
         if(walkStep.x > 0){
             this.playerDirection = this.constants.DirectionEnum.RIGHT;
             this.monsterDirection = this.constants.Direction.RIGHT;
@@ -220,7 +225,7 @@ var Monster_cute_little_eye = function(map, options) {
             this.playerDirection = this.constants.DirectionEnum.UP;
             this.monsterDirection = this.constants.Direction.UP;
         }
-        this.monster_cute_little_eye.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
+        this.monster_bat.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
     }
 
     this.randomWalk = function()
@@ -246,7 +251,8 @@ var Monster_cute_little_eye = function(map, options) {
             walkDir = 0;
             return;
         }
-        
+        if(this.walkStep.x != walkStep.x || this.walkStep.y != walkStep.y)
+            this.changeWalkDirection(walkStep);
         if(this.map.checkMonsterIsWalkAble( {x: this.mapPosition.x + walkStep.x, y:this.mapPosition.y + walkStep.y} ))
         {
             this.walk(walkStep);
@@ -255,7 +261,7 @@ var Monster_cute_little_eye = function(map, options) {
     }
 };
 
-Object.defineProperty(Monster_cute_little_eye.prototype, 'position', {
+Object.defineProperty(Monster_bat.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },

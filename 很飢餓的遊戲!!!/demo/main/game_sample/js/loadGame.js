@@ -149,6 +149,7 @@ var loadGameEnd;
         { src: 'game_sample/js/arror_attack.js', lookFor: 'Arror_attack' },
         { src: 'game_sample/js/null_attack.js', lookFor: 'Null_attack' },
         { src: 'game_sample/js/handle_game_over.js', lookFor: 'Handle_game_over' },
+        { src: 'game_sample/js/monster_bat.js', lookFor: 'Monster_bat' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },

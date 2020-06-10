@@ -343,6 +343,7 @@ var World_map = function()
                 this.player1.init();
                 this.player1.setCapibility(this.handle_initial_character.character_description.character_descruption_point);
                 this.clockDraw(Framework.Game._context);
+                m_map.draw(Framework.Game._context);
             }
         }
     }
@@ -488,8 +489,8 @@ var World_map = function()
     this.addMonsterRandom = function(amount){
         var count = 0;
         var m_position = {x:0,y:0};
-        var newMonster =  new Monster_cute_little_eye(this);
-        newMonster.position = {x:18,y:18};
+        var newMonster =  new Monster_bat(this);
+        newMonster.position = {x:48,y:48};
         this.monster.push(newMonster);
         while(count != amount){
             m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
@@ -512,9 +513,6 @@ var World_map = function()
         this.player1.update();
     }
     this.checkIsDie = function(){
-        // console.log("this.player1.character_descruption_point[0]");
-
-        console.log(this.player1.character_descruption_point[0]);
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
@@ -1014,7 +1012,7 @@ var World_map = function()
     {
         for(var i=0;i<this.monster.length;i++)
         {
-            this.monster[i].stopWalk();
+            // this.monster[i].stopWalk();
         }
     }
 

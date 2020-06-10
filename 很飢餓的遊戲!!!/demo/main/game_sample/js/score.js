@@ -11,7 +11,7 @@ var Score = function() {
     this.frame = new Framework.Sprite(define.materialPath + 'Floral2.png');
     this.frame.scale = 2;
     this.frame.position = this.position;
-
+ 
     this.scoreAddBySynthesis = function(){
         this.score += 1;
     }
