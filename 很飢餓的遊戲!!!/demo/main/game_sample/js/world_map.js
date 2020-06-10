@@ -309,10 +309,14 @@ var World_map = function()
             }
             var i = 0;
             while(i < this.monster.length) {
-                if(this.monster[i].health <= 0){
+                if(this.monster[i].isdead){
                     this.monster.splice(i, 1);
                     this.player1.getExperience(5);
                     this.score.scoreAddByKillMonster();
+                }
+                else if(this.monster[i].health <= 0){
+                    this.monster[i].die();
+                    i++;
                 }else{
                     i++;
                 }
@@ -489,19 +493,22 @@ var World_map = function()
     this.addMonsterRandom = function(amount){
         var count = 0;
         var m_position = {x:0,y:0};
-        var newMonster =  new Monster_bat(this);
+        var newMonster =  new Monster_cute_little_eye(this);
         newMonster.position = {x:48,y:48};
+        var newMonster1 =  new Monster_bat(this);
+        newMonster1.position = {x:48,y:49};
         this.monster.push(newMonster);
-        while(count != amount){
-            m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
-            if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-                console.log(m_position);
-                var newMonster =  new Monster_cute_little_eye(this);
-                newMonster.position = m_position;
-                this.monster.push(newMonster);
-                count++;
-            }
-        }
+        // this.monster.push(newMonster1);
+        // while(count != amount){
+        //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
+        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
+        //         console.log(m_position);
+        //         var newMonster =  new Monster_cute_little_eye(this);
+        //         newMonster.position = m_position;
+        //         this.monster.push(newMonster);
+        //         count++;
+        //     }
+        // }
     }
 
     var m_map = this;
@@ -614,6 +621,7 @@ var World_map = function()
             case 'Space':
                 this.handleSpace();
                 this.handleHoverBackpack();
+                m_map.draw(Framework.Game._context);
                 break;
             default:
                 break;
