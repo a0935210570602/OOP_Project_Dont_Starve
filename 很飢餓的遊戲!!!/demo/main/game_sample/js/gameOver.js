@@ -14,6 +14,11 @@ var GameOver = Framework.Class(Framework.Level , {
         this.handle_game_over = new Handle_game_over();
         this.background = new Framework.Sprite(define.materialPath + 'DecorativeTile.png');
         this.frame = new Framework.Sprite(define.materialPath + 'Floral2.png');
+        this.audio = new Framework.Audio({
+            soundeffects: {
+                mp3: define.musicPath + 'soundeffects.mp3',
+        }
+        });
     },
 
     initialize: function() {

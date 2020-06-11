@@ -103,7 +103,6 @@ var loadGameEnd;
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
-        { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
         
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
         { src: 'game_sample/js/item_sapling.js', lookFor: 'Item_sapling' },
@@ -150,6 +149,10 @@ var loadGameEnd;
         { src: 'game_sample/js/arror_attack.js', lookFor: 'Arror_attack' },
         { src: 'game_sample/js/null_attack.js', lookFor: 'Null_attack' },
         { src: 'game_sample/js/handle_game_over.js', lookFor: 'Handle_game_over' },
+        { src: 'game_sample/js/monster_base.js', lookFor: 'Monster_base' },
+        { src: 'game_sample/js/basic_monster.js', lookFor: 'Basic_monster' },
+        { src: 'game_sample/js/monster_bat.js', lookFor: 'Monster_bat' },
+        { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },

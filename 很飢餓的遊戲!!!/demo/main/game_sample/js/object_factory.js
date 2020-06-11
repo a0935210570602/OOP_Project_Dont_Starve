@@ -5,6 +5,8 @@ Object_factory.prototype.createObject = function(options){
     this.objectClass = Tool;
   }else if(options.type == "Weapon"){
     this.objectClass = Weapon;
+  }else{
+    return;
   }
   return new this.objectClass(options);
 };

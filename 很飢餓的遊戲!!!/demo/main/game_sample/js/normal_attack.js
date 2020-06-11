@@ -10,6 +10,7 @@ var Normal_attack = function(player, monster, playerWalkDirection, playerPositio
             if(this.monster[i].is_start){
                 if(playerPositionOnMap.x + playerWalkDirection.x == this.monster[i].mapPosition.x && playerPositionOnMap.y + playerWalkDirection.y == this.monster[i].mapPosition.y){
                     this.monster[i].health -= this.player.character_descruption_total_point[2];
+                    this.monster[i].getHurt();
                     this.attackSuccess = true;
                     break;
                 }

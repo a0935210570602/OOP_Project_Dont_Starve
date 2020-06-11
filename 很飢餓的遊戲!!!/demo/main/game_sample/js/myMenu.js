@@ -125,7 +125,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
     click:function(e){      
 
         if(e.x<1300 && e.x>1058 && e.y<465 && e.y>365){
-            Framework.Game.goToLevel('level1');  
+            Framework.Game.goToLevel('drama0');  
         }
         if(e.x<1300 && e.x>1058 && e.y<577 && e.y>480)
             Framework.Game.goToLevel('menu_tutorial');  

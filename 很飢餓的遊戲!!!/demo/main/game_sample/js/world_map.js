@@ -309,10 +309,14 @@ var World_map = function()
             }
             var i = 0;
             while(i < this.monster.length) {
-                if(this.monster[i].health <= 0){
+                if(this.monster[i].isdead){
                     this.monster.splice(i, 1);
                     this.player1.getExperience(5);
                     this.score.scoreAddByKillMonster();
+                }
+                else if(this.monster[i].health <= 0){
+                    this.monster[i].die();
+                    i++;
                 }else{
                     i++;
                 }
@@ -343,6 +347,7 @@ var World_map = function()
                 this.player1.init();
                 this.player1.setCapibility(this.handle_initial_character.character_description.character_descruption_point);
                 this.clockDraw(Framework.Game._context);
+                m_map.draw(Framework.Game._context);
             }
         }
     }
@@ -496,18 +501,21 @@ var World_map = function()
         var count = 0;
         var m_position = {x:0,y:0};
         var newMonster =  new Monster_cute_little_eye(this);
-        newMonster.position = {x:18,y:18};
+        newMonster.position = {x:48,y:48};
+        var newMonster1 =  new Monster_bat(this);
+        newMonster1.position = {x:48,y:49};
         this.monster.push(newMonster);
-        while(count != amount){
-            m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
-            if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-                console.log(m_position);
-                var newMonster =  new Monster_cute_little_eye(this);
-                newMonster.position = m_position;
-                this.monster.push(newMonster);
-                count++;
-            }
-        }
+        // this.monster.push(newMonster1);
+        // while(count != amount){
+        //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
+        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
+        //         console.log(m_position);
+        //         var newMonster =  new Monster_cute_little_eye(this);
+        //         newMonster.position = m_position;
+        //         this.monster.push(newMonster);
+        //         count++;
+        //     }
+        // }
     }
 
     var m_map = this;
@@ -519,9 +527,6 @@ var World_map = function()
         this.player1.update();
     }
     this.checkIsDie = function(){
-        // console.log("this.player1.character_descruption_point[0]");
-
-        console.log(this.player1.character_descruption_point[0]);
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
             this.player1.dieEvent({x: 13, y: 7});
@@ -624,6 +629,7 @@ var World_map = function()
                 this.handleSpace();
                 this.handleHoverBackpack();
 
+                m_map.draw(Framework.Game._context);
                 break;
             default:
                 break;
@@ -1025,7 +1031,7 @@ var World_map = function()
     {
         for(var i=0;i<this.monster.length;i++)
         {
-            this.monster[i].stopWalk();
+            // this.monster[i].stopWalk();
         }
     }
 
