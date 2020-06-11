@@ -317,7 +317,6 @@ var BombMan = function(file, options) {
         this.sprite.update();
     }
 
-
     this.draw = function(ctx){
         if(this.hideAnimation.hideAnimation._start)
             this.hideAnimation.draw(ctx);

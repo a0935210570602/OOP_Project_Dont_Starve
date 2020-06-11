@@ -243,8 +243,6 @@ var SynthesisBar = function(backpackList, score) {
                 ctx.fillStyle = "black";
                 var index = this.synthesisBarDetail[this.firstColumeIndex][i].item-1;
                 this.drawPicture(this.synthesisBarDetail[this.firstColumeIndex][i],ctx);
-                // ctx.fillText(this.itemNameArray[index], this.synthesisBarDetail[this.firstColumeIndex][i].position.x*64, this.synthesisBarDetail[this.firstColumeIndex][i].position.y*64);
-                
             }
         }
         //第三層工具列
@@ -268,11 +266,11 @@ var SynthesisBar = function(backpackList, score) {
                     this.drawPicture(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i],ctx);
                     ctx.font = "30px Arial";
                     ctx.fillStyle = "white";
-                    ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
+                    ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64);
                     ctx.strokeStyle = 'blue';
                     ctx.lineWidth = 2.5;
                     // ctx.strokeText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+20);
-                    ctx.strokeText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
+                    ctx.strokeText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64);
                 
                 }
             }

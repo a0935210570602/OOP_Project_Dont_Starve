@@ -8,10 +8,17 @@ var Monster_pig = function(map) {
 
     this.name = "小豬";
     this.attack = 5;
-    this.health = 2000;
-    this.maxHealth = 2000;
+    this.health = 200;
+    this.maxHealth = 200;
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_pig, this.monster_pig_die, 8);
+    this.drop = function(){
+        var random = Math.floor(Math.random()*2);
+        if(random == 0)
+            return new Item_pigskin();
+        if(random == 1)
+            return new Item_meat();
+    }
 };
 Monster_pig.prototype = new Monster_base();

@@ -13,5 +13,13 @@ var Monster_cute_little_eye = function(map) {
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_cute_little_eye, this.monster_cute_little_eye_die, 8);
+
+    this.drop = function(){
+        var random = Math.floor(Math.random()*2);
+        if(random == 0)
+            return new Item_eyeball();
+        if(random == 1)
+            return new Item_droplet();
+    }
 };
 Monster_cute_little_eye.prototype = new Monster_base();

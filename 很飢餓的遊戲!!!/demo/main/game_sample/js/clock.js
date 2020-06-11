@@ -1,6 +1,10 @@
 var Clock = function() {
     this.clock = [];
     this.timelevel = new Framework.Sprite(define.materialPath + 'timelevel.png'); 
+    this.day_board = new Framework.Sprite(define.materialPath + 'Home_Sign.png'); 
+    this.day_board.scale = 3;
+    this.day_board.position = {x:22.2*64, y:3.7*64}
+
     this.timelevel.scale = 4;
     this.timelevel.position = {x: 23.75*64, y: 2*64};
     for(var i=0;i<3;i++){
@@ -10,9 +14,9 @@ var Clock = function() {
         this.clock.push(clock_child);
     }
     this.status = 0;
-    this.isRegenerate = true;
     this.currentTime = 192;
     this.regeneration_time = 200;
+    this.day = 1;
 
     this.init = function(){
         this.decrease();
@@ -27,6 +31,7 @@ var Clock = function() {
                 this.status ++;
                 if(this.status >=3){
                     this.status = 0;
+                    this.day += 1;
                 }
             }
             this.decrease();
@@ -37,6 +42,13 @@ var Clock = function() {
     }
 
     this.draw = function(ctx){
+        ctx.beginPath();
+        ctx.rect(1290, 20, 300, 332);
+        ctx.fillStyle = "#BEBEBE";
+        ctx.fill();
+
+        this.day_board.draw(ctx);
+
         ctx.beginPath();
         ctx.rect(23.6*64, 0.5*64, 16, 192);
         ctx.fillStyle = "yellow";
@@ -49,5 +61,14 @@ var Clock = function() {
 
         this.timelevel.draw(ctx);
         this.clock[this.status].draw(ctx);
+
+        ctx.font = '25pt Times New Roman';
+        ctx.globalAlpha=1;
+        ctx.fillStyle = 'yellow';
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 3;
+        ctx.strokeText("Day: " + this.day, 22.2*64, 4.1*64);
     }
 };

@@ -105,7 +105,10 @@ var loadGameEnd;
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
         { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
-        
+        { src: 'game_sample/js/item_honey.js', lookFor: 'Item_honey' },
+        { src: 'game_sample/js/item_meat.js', lookFor: 'Item_meat' },
+        { src: 'game_sample/js/item_monster_meat.js', lookFor: 'Item_monster_meat' },
+
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
         { src: 'game_sample/js/item_sapling.js', lookFor: 'Item_sapling' },
         { src: 'game_sample/js/item_grass_growed_dig.js', lookFor: 'Item_grass_growed_dig' },
@@ -127,7 +130,6 @@ var loadGameEnd;
         { src: 'game_sample/js/box.js', lookFor: 'Box' },
         { src: 'game_sample/js/characterStatus.js', lookFor: 'CharacterStatus' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
-        { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
         { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },
         { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
@@ -157,8 +159,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_eyeball.js', lookFor: 'Item_eyeball' },
         { src: 'game_sample/js/monster_pig.js', lookFor: 'Monster_pig' },
         { src: 'game_sample/js/monster_cow.js', lookFor: 'Monster_cow' },
-
-
+        { src: 'game_sample/js/monster_bee.js', lookFor: 'Monster_bee' },
         { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
@@ -179,6 +180,7 @@ var loadGameEnd;
         { src: 'game_sample/js/level_up_animation.js', lookFor: 'Level_up_animation' },
         { src: 'game_sample/js/terrain_snow_ground.js', lookFor: 'Terrain_snow_ground' },
         { src: 'game_sample/js/terrain_water.js', lookFor: 'Terrain_water' },
+        { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
 
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}

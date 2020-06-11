@@ -8,10 +8,17 @@ var Monster_bat = function(map) {
 
     this.name = "小蝙蝠";
     this.attack = 5;
-    this.health = 2000;
-    this.maxHealth = 2000;
+    this.health = 200;
+    this.maxHealth = 200;
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_bat, this.monster_bat_die, 8);
+    this.drop = function(){
+        var random = Math.floor(Math.random()*2);
+        if(random == 0)
+            return new Bat_wing();
+        if(random == 1)
+            return new Item_monster_meat();
+    }
 };
 Monster_bat.prototype = new Monster_base();

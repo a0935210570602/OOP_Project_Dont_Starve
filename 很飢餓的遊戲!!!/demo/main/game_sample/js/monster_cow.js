@@ -13,5 +13,12 @@ var Monster_cow = function(map) {
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_cow, this.monster_cow_die, 8);
+    this.drop = function(){
+        var random = Math.floor(Math.random()*2);
+        if(random == 0)
+            return new Bat_wing();
+        if(random == 1)
+            return new Item_monster_meat();
+    }
 };
 Monster_cow.prototype = new Monster_base();

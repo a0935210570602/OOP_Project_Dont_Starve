@@ -59,6 +59,10 @@ var World_map = function()
         this.terrain_snow_ground.push(new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png')); 
         this.terrain_snow_ground[2].scale = 2;
         
+        this.item_honey = new Framework.Sprite(define.materialPath + 'Honey.png'); 
+        this.item_meat = new Framework.Sprite(define.materialPath + 'Meat.png'); 
+        this.item_monster_meat = new Framework.Sprite(define.materialPath + 'Monster_Meat.png'); 
+        this.item_bat_wing = new Framework.Sprite(define.materialPath + 'Batilisk_Wing.png'); 
         
         /////////////////////////////////////////////////////////////////////////////////////
         
@@ -311,6 +315,11 @@ var World_map = function()
             var i = 0;
             while(i < this.monster.length) {
                 if(this.monster[i].isdead){
+                    if(this.map_selector.checkIsBlank(this.monster[i].position)){
+                        this.map_selector.addObject(this.monster[i].position, this.monster[i].drop());
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                        m_map.draw(Framework.Game._context);
+                    }
                     this.monster.splice(i, 1);
                     this.player1.getExperience(5);
                     this.score.scoreAddByKillMonster();
@@ -496,7 +505,7 @@ var World_map = function()
         var m_position = {x:0,y:0};
         var newMonster =  new Monster_cute_little_eye(this);
         newMonster.position = {x:48,y:48};
-        var newMonster1 =  new Monster_cow(this);
+        var newMonster1 =  new Monster_bat(this);
         newMonster1.position = {x:48,y:49};
         // this.monster.push(newMonster);
         this.monster.push(newMonster1);
@@ -1075,7 +1084,7 @@ var World_map = function()
 
     this.click = function(e){   
 
-        // console.log(this.is_character_description_open);
+        console.log(e);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){
