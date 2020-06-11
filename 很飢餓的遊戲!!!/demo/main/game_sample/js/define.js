@@ -17,6 +17,10 @@
 			value: mainPath + 'image/',
 			writable: true
 		},
+		'builldingPath': {
+			value: mainPath + 'building/',
+			writable: true
+		},
 		'materialPath': {
 			value: mainPath + 'material/',
 			writable: true

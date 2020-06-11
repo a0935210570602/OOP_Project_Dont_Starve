@@ -412,18 +412,29 @@ var World_map = function()
                 }
             }
             // console.log(this.itemArray);
+            this.player1.draw(ctx);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
             }
-            // console.log(this.itemArray[0][0]);
-    
+            ctx.beginPath();
+            ctx.rect(1185, 100, 100, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(380, 100, 100, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(280, 800, 1100, 90);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            this.player1.backpack.draw(ctx);
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.arror_attack.draw(ctx);
-            this.player1.draw(ctx);
             if(this.fishing.is_start)
                 this.fishing.draw(ctx);
             this.clock.draw(ctx);
@@ -1061,7 +1072,6 @@ var World_map = function()
         var xx = this.playerPositionOnMap.x+direction.x;
         var yy = this.playerPositionOnMap.y+direction.y;
         // console.log(this.playerPositionOnMap);
-        // console.log(this.npc1.position);
         // console.log({x:xx ,y:yy});
         // console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 ||
