@@ -13,6 +13,8 @@ var Monster_base = function(){
     this.isWalking = false;
     this.monsterDirection = {x:0, y:0};
     this.walkVector = {x:0, y:0};
+    this.hurt = new Framework.AnimationSprite({url:define.materialPath + 'Absorb.png', col:5, row:5, loop:false, speed:12}); 
+    this.hurt.scale = 2;
 
     this.init = function(map, monster, monsterDie,walkSpeed){
         this.map = map;
@@ -40,6 +42,7 @@ var Monster_base = function(){
         if(!this.isHurt){
             this.isHurt = true;
             this.monsterDie.start({ from: 0, to: 2, loop: false});
+            this.hurt.start({ from: 17, to: 19, loop: false});
             setTimeout(()=>{
                 this.isHurt = false;
             },200);
@@ -64,6 +67,7 @@ var Monster_base = function(){
     this.update = function(){
         this.checkIsMonsterOutCanvus();
         if(!this.is_start){ return; }
+        this.hurt.update();
         this.monster.update();
         this.monsterDie.update();
         if(this.isWalking){
@@ -96,7 +100,9 @@ var Monster_base = function(){
             this.monster.draw(ctx);
         }else{
             this.monsterDie.position = {x: xx, y: yy};
+            this.hurt.position = {x: xx, y: yy};
             this.monsterDie.draw(ctx);
+            this.hurt.draw(ctx);
         }
     }
 
@@ -245,3 +251,18 @@ var Monster_base = function(){
         }
     }
 }
+Object.defineProperty(Monster_base.prototype, 'position', {
+    get: function() {
+        return this.mapPosition;
+    },
+    set: function(newValue) {
+        this.mapPosition = newValue;
+        this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+    }
+}); 
+
+Object.defineProperty(Monster_base.prototype, 'isDead', {
+    get: function() {
+        return this.isdead;
+    }
+}); 

@@ -11,6 +11,7 @@ var Magic_attack = function(player, monster, mapPosition) {
                     for(var k = -1;k < 2;k++){
                         if(mapPosition.x+j == this.monster[i].mapPosition.x && mapPosition.y+k == this.monster[i].mapPosition.y){
                             this.monster[i].health -= this.player.character_descruption_total_point[3];
+                            this.monster[i].getHurt();
                         }
                     }
                 }

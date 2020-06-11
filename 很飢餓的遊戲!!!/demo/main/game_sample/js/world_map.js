@@ -59,6 +59,10 @@ var World_map = function()
         this.terrain_snow_ground.push(new Framework.Sprite(define.imageNightPath + 'terrain_snow_ground.png')); 
         this.terrain_snow_ground[2].scale = 2;
         
+        this.item_honey = new Framework.Sprite(define.materialPath + 'Honey.png'); 
+        this.item_meat = new Framework.Sprite(define.materialPath + 'Meat.png'); 
+        this.item_monster_meat = new Framework.Sprite(define.materialPath + 'Monster_Meat.png'); 
+        this.item_bat_wing = new Framework.Sprite(define.materialPath + 'Batilisk_Wing.png'); 
         
         /////////////////////////////////////////////////////////////////////////////////////
         
@@ -201,6 +205,7 @@ var World_map = function()
         this.tilePosition = [];
         this.itemArray = [];
         this.mapArray = [];
+        this.clear = false;
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:47,y:47};
 
@@ -310,6 +315,11 @@ var World_map = function()
             var i = 0;
             while(i < this.monster.length) {
                 if(this.monster[i].isdead){
+                    if(this.map_selector.checkIsBlank(this.monster[i].position)){
+                        this.map_selector.addObject(this.monster[i].position, this.monster[i].drop());
+                        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
+                        m_map.draw(Framework.Game._context);
+                    }
                     this.monster.splice(i, 1);
                     this.player1.getExperience(5);
                     this.score.scoreAddByKillMonster();
@@ -402,14 +412,26 @@ var World_map = function()
                 }
             }
             // console.log(this.itemArray);
+            this.player1.draw(ctx);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
             }
-            // console.log(this.itemArray[0][0]);
-    
+            ctx.beginPath();
+            ctx.rect(1185, 100, 80, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(380, 80, 100, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(280, 800, 1100, 90);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            this.player1.backpack.draw(ctx);
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.arror_attack.draw(ctx);
@@ -471,7 +493,7 @@ var World_map = function()
         var clockInterval = setInterval(() => {
             this.clock.draw(ctx);
             this.creation_blood_status.draw(ctx);
-            if(this.player1.character_descruption_total_point[0] <= 0){
+            if(this.player1.character_descruption_total_point[0] <= 0 || this.clear){
                 clearInterval(clockInterval);
             }
         }, 500);
@@ -504,8 +526,8 @@ var World_map = function()
         newMonster.position = {x:48,y:48};
         var newMonster1 =  new Monster_bat(this);
         newMonster1.position = {x:48,y:49};
-        this.monster.push(newMonster);
-        // this.monster.push(newMonster1);
+        // this.monster.push(newMonster);
+        this.monster.push(newMonster1);
         // while(count != amount){
         //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
         //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
@@ -526,6 +548,15 @@ var World_map = function()
         this.player1.character_descruption_point[0] = 0;
         this.player1.update();
     }
+
+    this.gameClear = function(){
+        this.skillTimer.clear();
+        this.capture_key = [];
+        this.clear = true;
+        this.player1.gameClear = true;
+
+    }
+
     this.checkIsDie = function(){
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
@@ -587,7 +618,10 @@ var World_map = function()
             this.deadClear();
             Framework.Game.goToLevel('gameOver');  
         }
-
+        if(e.key == 'Y'){
+            this.gameClear();
+            Framework.Game.goToLevel('gameOver');  
+        }
 
         if(e.key != 'Space' && this.fishing.is_start)
             this.fishing.stop();
@@ -1069,8 +1103,9 @@ var World_map = function()
     }
 
     this.click = function(e){   
-        console.log(e);
         // console.log(this.is_character_description_open);
+
+        console.log(e);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){

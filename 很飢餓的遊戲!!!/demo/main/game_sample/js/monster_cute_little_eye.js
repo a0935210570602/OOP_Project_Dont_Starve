@@ -1,4 +1,4 @@
-var Monster_cute_little_eye = function(map, options) {
+var Monster_cute_little_eye = function(map) {
     
     this.monster_cute_little_eye = new Framework.AnimationSprite({url:define.materialPath + 'monster_cute_litter_eye.png', col:3 , row:4 , loop:true , speed:12}); 
     this.monster_cute_little_eye.scale = 1.5;
@@ -11,23 +11,15 @@ var Monster_cute_little_eye = function(map, options) {
     this.health = 2000;
     this.maxHealth = 2000;
 
-    //地圖 圖片 walkSpeed
+    //地圖，圖片，walkSpeed
     this.init(map, this.monster_cute_little_eye, this.monster_cute_little_eye_die, 8);
+
+    this.drop = function(){
+        var random = Math.floor(Math.random()*2);
+        if(random == 0)
+            return new Item_eyeball();
+        if(random == 1)
+            return new Item_droplet();
+    }
 };
 Monster_cute_little_eye.prototype = new Monster_base();
-
-Object.defineProperty(Monster_cute_little_eye.prototype, 'position', {
-    get: function() {
-        return this.mapPosition;
-    },
-    set: function(newValue) {
-        this.mapPosition = newValue;
-        this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-    }
-}); 
-
-Object.defineProperty(Monster.prototype, 'isDead', {
-    get: function() {
-        return this.isdead;
-    }
-}); 
