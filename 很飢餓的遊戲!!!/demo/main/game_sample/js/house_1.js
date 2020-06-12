@@ -31,8 +31,8 @@ var House_1 = function()
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
 
-        this.npc1 = new Npc1(this);
-        this.npc1.position = {x:49,y:47};
+        this.npc2 = new Npc2(this);
+        this.npc2.position = {x:12,y:9};
 
         this.score = new Score();
         this.synthesisBar = new SynthesisBar(this.player1.getBackPack(), this.score);
@@ -219,14 +219,14 @@ var House_1 = function()
         // console.log(this.player1.hunger_current_point);
 
         // setTimeout(()=>{this.draw(Framework.Game._context);},500);
-        this.npc1.update();
-                
+        this.npc2.update();
+            
         this.clockDraw(Framework.Game._context);
         m_map.draw(Framework.Game._context);
     }
     
 	this.draw = function(ctx) {
-        console.log(this.playerPositionOnMap)
+        // console.log(this.playerPositionOnMap)
         for(var i=-5; i<6; i++){
             for(var j=-5; j<6; j++){
                 switch(this.mapArray[j+this.playerPositionOnMap.y][i+this.playerPositionOnMap.x]){
@@ -270,6 +270,7 @@ var House_1 = function()
         ctx.fillStyle = "#BEBEBE";
         ctx.fill();
         this.synthesisBar.draw(ctx);
+        this.npc2.draw(ctx);
         ctx.font = "20px Arial";
         ctx.fillStyle = "black";
         ctx.textAlign = 'center';
@@ -500,10 +501,10 @@ var House_1 = function()
     }
 
     this.handleSpace = function(){
-        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 
-            this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
+        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc2.position.x && 
+            this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc2.position.y ){
                 if(!this.npc_event.taking_is_start){
-                    this.npc_event.trigger(this.npc1.name, "dialog");
+                    this.npc_event.trigger(this.npc2.name, "dialog");
                     this.npc_event.talking();
                 }
                 else
@@ -565,8 +566,8 @@ var House_1 = function()
     this.checkIsWalkAble = function(direction){  //檢查人物是否超過地圖大小
         var x = this.playerPositionOnMap.x+direction.x;
         var y = this.playerPositionOnMap.y+direction.y;
-        // console.log(this.playerPositionOnMap);
-        if(this.mapArray[y][x] == 4 ){
+        console.log(this.npc2.position);
+        if(this.mapArray[y][x] == 4 || (x == this.npc2.position.x && y == this.npc2.position.y)){
             return false;
         }else{
             return true;

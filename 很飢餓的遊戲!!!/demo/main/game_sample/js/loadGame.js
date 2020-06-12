@@ -170,6 +170,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_fish.js', lookFor: 'Item_fish' },
         { src: 'game_sample/js/item_fake.js', lookFor: 'Item_fake' },
         { src: 'game_sample/js/npc1.js', lookFor: 'Npc1' },
+        { src: 'game_sample/js/npc2.js', lookFor: 'Npc2' },
         { src: 'game_sample/js/npc_event.js', lookFor: 'Npc_event' },
         { src: 'game_sample/js/building_remance.js', lookFor: 'Building_remance' },
         
