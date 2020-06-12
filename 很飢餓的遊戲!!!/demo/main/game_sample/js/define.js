@@ -17,6 +17,10 @@
 			value: mainPath + 'image/',
 			writable: true
 		},
+		'builldingPath': {
+			value: mainPath + 'building/',
+			writable: true
+		},
 		'materialPath': {
 			value: mainPath + 'material/',
 			writable: true
@@ -43,6 +47,10 @@
 		},
 		'characterDescriptionPath': {
 			value: mainPath + 'character_description/',
+			writable: true
+		},
+		'npcPath': {
+			value: mainPath + 'npc/',
 			writable: true
 		}
 

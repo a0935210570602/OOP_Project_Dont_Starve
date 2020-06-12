@@ -144,7 +144,7 @@ var World_map = function()
 
 
         this.npc1 = new Npc1(this);
-        this.npc1.position = {x:18,y:25};
+        this.npc1.position = {x:49,y:47};
 
         this.monster = [];
         this.stopMonster = false;
@@ -412,18 +412,30 @@ var World_map = function()
                 }
             }
             // console.log(this.itemArray);
+            this.player1.draw(ctx);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
             }
-            // console.log(this.itemArray[0][0]);
-    
+            ctx.beginPath();
+            ctx.rect(1185, 100, 80, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(380, 80, 100, 700);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(280, 800, 1100, 90);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            this.player1.backpack.draw(ctx);
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.arror_attack.draw(ctx);
-            this.player1.draw(ctx);
+            
             if(this.fishing.is_start)
                 this.fishing.draw(ctx);
             this.clock.draw(ctx);
@@ -451,20 +463,27 @@ var World_map = function()
                 }
             }
             this.game_object_detail.draw(ctx);
+            ctx.beginPath();
+            ctx.rect(1182, 293, 200, 600);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(242, 256, 225, 600);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
             this.synthesisBar.draw(ctx);
             this.npc1.draw(ctx);
             this.character_description.draw(ctx);
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
+            this.player1.draw(ctx);
             if(this.handle_initial_character.name == "請輸入名字"){
                 this.handle_initial_character.name = "";
             }
             this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
-            if(this.npc_event.taking_is_start){
-                this.npc_event.draw(ctx);
-            }
+            this.npc_event.draw(ctx);
         }else{
             this.handle_initial_character.draw(ctx);
         }
@@ -643,6 +662,7 @@ var World_map = function()
             case 'Space':
                 this.handleSpace();
                 this.handleHoverBackpack();
+
                 m_map.draw(Framework.Game._context);
                 break;
             default:
@@ -789,14 +809,16 @@ var World_map = function()
         }
     }
     this.npc_event = new Npc_event();
-    this.handleNpcTalking = function(npc_name){
-        this.npc_event.trigger("小丑哥哥", "talking");
-    }
 
     this.handleSpace = function(){
         if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 
             this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
-                this.handleNpcTalking(this.npc1.name);
+                if(!this.npc_event.taking_is_start){
+                    this.npc_event.trigger(this.npc1.name, "dialog");
+                    this.npc_event.talking();
+                }
+                else
+                    this.npc_event.talking();
         }
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
             this.handleFishing();
@@ -820,6 +842,7 @@ var World_map = function()
                 }
             }
         }
+        m_map.draw(Framework.Game._context);
     }
 
     this.handlePlantDig = function(){
@@ -1061,9 +1084,6 @@ var World_map = function()
         var xx = this.playerPositionOnMap.x+direction.x;
         var yy = this.playerPositionOnMap.y+direction.y;
         // console.log(this.playerPositionOnMap);
-        // console.log(this.npc1.position);
-        // console.log({x:xx ,y:yy});
-        // console.log(xx == this.npc1.position.x && yy == this.npc1.position.y);
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 ||
             (xx == this.npc1.position.x && yy == this.npc1.position.y)){
             return false;
@@ -1083,6 +1103,7 @@ var World_map = function()
     }
 
     this.click = function(e){   
+        // console.log(this.is_character_description_open);
 
         console.log(e);
         if(this.playerInitial){

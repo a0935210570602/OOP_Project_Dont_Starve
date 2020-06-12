@@ -115,6 +115,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_bush_growed_dig.js', lookFor: 'Item_bush_growed_dig' },
         { src: 'game_sample/js/item_sapling_growed_dig.js', lookFor: 'Item_sapling_growed_dig' },
         { src: 'game_sample/js/item_sapling_dig.js', lookFor: 'Item_sapling_dig' },
+        { src: 'game_sample/js/drama0.js', lookFor: 'Drama0' },
 
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },
@@ -169,6 +170,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_fake.js', lookFor: 'Item_fake' },
         { src: 'game_sample/js/npc1.js', lookFor: 'Npc1' },
         { src: 'game_sample/js/npc_event.js', lookFor: 'Npc_event' },
+        { src: 'game_sample/js/building_remance.js', lookFor: 'Building_remance' },
         
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },
         { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
