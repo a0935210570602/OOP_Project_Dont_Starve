@@ -55,6 +55,7 @@ var loadGameEnd;
 
         { src: 'game_sample/js/define.js', lookFor: 'define' },
         { src: 'game_sample/js/myMenu.js', lookFor: 'MyMenu' },
+        { src: 'game_sample/js/house_1.js', lookFor: 'House_1' },
         { src: 'game_sample/js/myMenu_tutorial.js', lookFor: 'MyMenu_tutorial' },
         { src: 'game_sample/js/myMenu_gameteam.js', lookFor: 'MyMenu_gameteam' },
         { src: 'game_sample/js/constants.js', lookFor: 'Constants' },
@@ -169,6 +170,7 @@ var loadGameEnd;
         { src: 'game_sample/js/item_fish.js', lookFor: 'Item_fish' },
         { src: 'game_sample/js/item_fake.js', lookFor: 'Item_fake' },
         { src: 'game_sample/js/npc1.js', lookFor: 'Npc1' },
+        { src: 'game_sample/js/npc2.js', lookFor: 'Npc2' },
         { src: 'game_sample/js/npc_event.js', lookFor: 'Npc_event' },
         { src: 'game_sample/js/building_remance.js', lookFor: 'Building_remance' },
         
