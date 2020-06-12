@@ -292,7 +292,7 @@ var World_map = function()
                         this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
                     }
                     
-                    if(this.keyPress == "Up") {
+                    if(this.keyPress == "Up") {             
                         this.player1.walk({x:0,y:-1});
                         this.playerPositionOnMap.y-=1;
                         this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
@@ -374,8 +374,8 @@ var World_map = function()
         }
     }
 	this.draw = function(ctx) {
+        console.log(this.playerPositionOnMap);
         if(this.playerInitial){
-            // console.log(this.playerPositionOnMap);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     // console.log("draw");
@@ -698,6 +698,9 @@ var World_map = function()
                     this.pressWalk = true;
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Up'){
+                if(this.playerPositionOnMap.x == 66 && this.playerPositionOnMap.y ==58){
+                    Framework.Game.goToLevel('map1');
+                }
                 this.playerWalkDirection = {x:0,y:-1};
                 this.player1.walk({x:0,y:-1});
                 this.keyPress = "Up";
