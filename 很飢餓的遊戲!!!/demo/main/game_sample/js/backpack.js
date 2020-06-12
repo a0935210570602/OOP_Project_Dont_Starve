@@ -338,11 +338,11 @@ var Backpack = function() {
             ctx.textAlign = 'center';
             ctx.lineWidth = 2.5;
             if(this.stackableList.indexOf(this.itemList[i].item_num) != -1){
-                ctx.fillText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y);
-                ctx.strokeText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y);
+                ctx.fillText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+20);
+                ctx.strokeText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+20);
             }else{
-                ctx.fillText(this.itemList[i].durability.toString()+"%", this.backpackPosition[i].x, this.backpackPosition[i].y);
-                ctx.strokeText(this.itemList[i].durability.toString()+"%", this.backpackPosition[i].x, this.backpackPosition[i].y);
+                ctx.fillText(this.itemList[i].durability.toString()+"%", this.backpackPosition[i].x, this.backpackPosition[i].y+20);
+                ctx.strokeText(this.itemList[i].durability.toString()+"%", this.backpackPosition[i].x, this.backpackPosition[i].y+20);
             }
         }
     }

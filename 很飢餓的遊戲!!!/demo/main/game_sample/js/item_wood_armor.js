@@ -10,7 +10,7 @@ var Item_wood_armor = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "body";
-    this.deffense_point = 3;
+    this.deffense_point = 60;
     this.item_can_be_picked = true;
 
     this.update = function(){
@@ -19,6 +19,10 @@ var Item_wood_armor = function() {
 
     this.draw = function(ctx){
         this.item_wood_armor.draw(ctx);
+    }
+
+    this.reduceDurability = function(){
+        this.durability -= 2;
     }
 
 };

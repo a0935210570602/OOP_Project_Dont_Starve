@@ -63,12 +63,9 @@ var Clock = function() {
         this.clock[this.status].draw(ctx);
 
         ctx.font = '25pt Times New Roman';
-        ctx.globalAlpha=1;
         ctx.fillStyle = 'yellow';
-        ctx.textBaseline = 'top';
-        ctx.textAlign = 'center';
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 3;
-        ctx.strokeText("Day: " + this.day, 22.2*64, 4.1*64);
+        ctx.strokeText("Day: " + this.day, 22.2*64, 4.1*64+20);
     }
 };

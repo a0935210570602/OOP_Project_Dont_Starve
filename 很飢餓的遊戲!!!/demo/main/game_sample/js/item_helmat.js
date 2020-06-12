@@ -11,7 +11,7 @@ var Item_helmat = function() {
     this.durability = 100;
     this.place = "head";
 
-    this.deffense_point = 2;
+    this.deffense_point = 40;
 
     this.item_can_be_picked = true;
     this.update = function(){
@@ -22,6 +22,9 @@ var Item_helmat = function() {
         this.item_helmat.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 2;
+    }
 };
 
 Object.defineProperty(Item_helmat.prototype, 'position', {

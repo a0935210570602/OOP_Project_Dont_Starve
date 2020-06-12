@@ -23,6 +23,9 @@ var Item_armor = function() {
         this.item_armor.draw(ctx);
     }
 
+    this.reduceDurability = function(){
+        this.durability -= 2;
+    }
 };
 
 Object.defineProperty(Item_armor.prototype, 'position', {

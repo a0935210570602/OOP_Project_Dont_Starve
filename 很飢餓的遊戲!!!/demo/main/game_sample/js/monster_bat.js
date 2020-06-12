@@ -7,7 +7,7 @@ var Monster_bat = function(map) {
     this.monster_bat_die.scale = 1.2;
 
     this.name = "小蝙蝠";
-    this.attack = 5;
+    this.attack = 100;
     this.health = 200;
     this.maxHealth = 200;
 

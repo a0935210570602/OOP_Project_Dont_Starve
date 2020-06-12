@@ -28,7 +28,7 @@ var Handle_game_over = function(){
             this.showScore = true;
             this.draw(Framework.Game._context);
         }
-        if(Framework.Game._levels[1].level.map.score.scoreToDraw >= Framework.Game._levels[1].level.map.score.score)
+        if(Framework.Game._levels[2].level.map.score.scoreToDraw >= Framework.Game._levels[2].level.map.score.score)
             Framework.Game.goToLevel('menu'); 
     }
 
@@ -36,7 +36,7 @@ var Handle_game_over = function(){
         if(this.open._start)
             this.open.draw(ctx);
         else{
-            if(Framework.Game._levels[1].level.map.player1.character_descruption_point[0] <= 0){
+            if(Framework.Game._levels[2].level.map.player1.character_descruption_point[0] <= 0){
                 this.menu.draw(ctx);
             }else{
                 this.gameClear.draw(ctx);
@@ -53,7 +53,7 @@ var Handle_game_over = function(){
         }
 
         if(this.showScore){
-            Framework.Game._levels[1].level.map.score.drawScore();
+            Framework.Game._levels[2].level.map.score.drawScore();
         }
     }
 }

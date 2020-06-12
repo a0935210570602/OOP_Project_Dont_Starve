@@ -45,30 +45,27 @@ var Score = function() {
         this.frame.draw(ctx);
         
         ctx.font = '90pt Algerian';
-        ctx.globalAlpha=1;
         ctx.fillStyle = 'yellow';
-        ctx.textBaseline = 'top';
-        ctx.textAlign = 'center';
         ctx.strokeStyle = 'blue';
         ctx.lineWidth = 2.5;
         if(this.state == 0){
-            ctx.fillText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y);
-            ctx.strokeText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y);
+            ctx.fillText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y);
+            ctx.strokeText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y);
         }else if(this.state == 1){
             ctx.fillText("Kill: " + this.kill, this.position.x, this.position.y+64);
             ctx.strokeText("Kill: " + this.kill, this.position.x, this.position.y+64);
-            ctx.fillText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-64);
-            ctx.strokeText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-64);
+            ctx.fillText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-64);
+            ctx.strokeText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-64);
         }else if(this.state == 2){
-            ctx.fillText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-128);
-            ctx.strokeText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-128);
+            ctx.fillText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-128);
+            ctx.strokeText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-128);
             ctx.fillText("Kill: " + this.kill, this.position.x, this.position.y);
             ctx.strokeText("Kill: " + this.kill, this.position.x, this.position.y);
             ctx.fillText("Synthesis: " + this.synthesis, this.position.x, this.position.y+128);
             ctx.strokeText("Synthesis: " + this.synthesis, this.position.x, this.position.y+128);
         }else{
-            ctx.fillText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-196);
-            ctx.strokeText("Day: " + Framework.Game._levels[1].level.map.clock.day, this.position.x, this.position.y-196);
+            ctx.fillText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-196);
+            ctx.strokeText("Day: " + Framework.Game._levels[2].level.map.clock.day, this.position.x, this.position.y-196);
             ctx.fillText("Kill: " + this.kill, this.position.x, this.position.y-64);
             ctx.strokeText("Kill: " + this.kill, this.position.x, this.position.y-64);
             ctx.fillText("Synthesis: " + this.synthesis, this.position.x, this.position.y+64);

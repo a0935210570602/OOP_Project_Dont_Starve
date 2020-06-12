@@ -17,8 +17,8 @@ var EquipmentBar = function(backpackList) {
                 ctx.fillStyle = "white";
                 ctx.strokeStyle = 'blue';
                 ctx.lineWidth = 2.5;
-                ctx.fillText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+20);
-                ctx.strokeText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+20);
+                ctx.fillText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+15);
+                ctx.strokeText(this.equipmentList[i].durability.toString()+"%", this.equipmentList[i].position.x*64, this.equipmentList[i].position.y*64+15);
             }
         }
     }

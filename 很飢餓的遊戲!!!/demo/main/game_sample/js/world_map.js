@@ -431,7 +431,6 @@ var World_map = function()
             ctx.rect(280, 800, 1100, 90);
             ctx.fillStyle = "#BEBEBE";
             ctx.fill();
-            this.player1.backpack.draw(ctx);
             if(this.skillTimer.buttonPress)
                 this.skillTimer.draw(ctx);
             this.arror_attack.draw(ctx);
@@ -477,7 +476,9 @@ var World_map = function()
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
-            this.player1.draw(ctx);
+            // this.player1.draw(ctx);
+            this.player1.backpack.draw(ctx);
+
             if(this.handle_initial_character.name == "請輸入名字"){
                 this.handle_initial_character.name = "";
             }
