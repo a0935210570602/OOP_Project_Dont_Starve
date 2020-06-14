@@ -145,6 +145,8 @@ var World_map = function()
 
         this.npc1 = new Npc1(this);
         this.npc1.position = {x:49,y:47};
+        console.log(999);
+        this.npc_event = new Npc_event(this);
 
         this.monster = [];
         this.stopMonster = false;
@@ -350,6 +352,8 @@ var World_map = function()
 
             // setTimeout(()=>{this.draw(Framework.Game._context);},500);
             this.npc1.update();
+            this.npc_event.update();
+
         }else{
             this.handle_initial_character.update();
             if(this.handle_initial_character.is_initial){
@@ -367,14 +371,14 @@ var World_map = function()
         // console.log("this.monster_kill_timer ");
         // console.log(this.monster_kill_timer );
         if(this.monster_kill_timer == 15){
-            console.log("gethurt");
+            // console.log("gethurt");
             this.player1.gethurt(hurt_point);
             this.monster_kill_timer = 0;
             this.audio.play({name: 'monster_attack', loop: false});
         }
     }
 	this.draw = function(ctx) {
-        console.log(this.playerPositionOnMap);
+        // console.log(this.playerPositionOnMap);
         if(this.playerInitial){
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
@@ -812,7 +816,6 @@ var World_map = function()
             m_map.draw(Framework.Game._context);
         }
     }
-    this.npc_event = new Npc_event();
 
     this.handleSpace = function(){
         if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 

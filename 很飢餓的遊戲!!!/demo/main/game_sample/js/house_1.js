@@ -60,7 +60,6 @@ var House_1 = function()
 
     this.init = function()
     {
-        this.npc_event = new Npc_event();
 
         // this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
@@ -84,6 +83,7 @@ var House_1 = function()
         this.clear = false;
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:12,y:19};
+        this.npc_event = new Npc_event(this);
         this.mapArray = [];
         //for demo
 

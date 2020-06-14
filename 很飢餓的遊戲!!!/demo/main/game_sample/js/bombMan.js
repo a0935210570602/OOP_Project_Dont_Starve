@@ -169,11 +169,11 @@ var BombMan = function(file, options) {
     }
     this.gethurt = function(attack_point){
         // this.characterStatus.currentHealth -= attack_point;
-        console.log("attack_point",attack_point);
-        console.log("this.character_descruption_total_point[7]",this.character_descruption_total_point[7]);
-        console.log("this.character_descruption_point[0]",this.character_descruption_point[0]);
+        // console.log("attack_point",attack_point);
+        // console.log("this.character_descruption_total_point[7]",this.character_descruption_total_point[7]);
+        // console.log("this.character_descruption_point[0]",this.character_descruption_point[0]);
         var damage = attack_point - (this.character_descruption_total_point[7]/2);
-        console.log("damage",damage);
+        // console.log("damage",damage);
 
         if(this.equipmentBar.getEquipment(0) != null)
             this.equipmentBar.getEquipment(0).reduceDurability();

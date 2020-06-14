@@ -1,6 +1,11 @@
-var Npc_event = function() {
+var Npc_event = function(map) {
+    console.log(map);
+    this.map = map;
     this.dialog_blue = new Framework.Sprite(define.materialPath + 'dialog_blue.png'); 
     this.dialog_blue.scale = 1.5;
+    this.mission_block = new Framework.AnimationSprite({url: define.npcPath + '任務框.png', col:7 , row:1 , loop:false , speed:1.5});
+    this.mission_block.position = {x: (13)*64, y: (6)*64};
+    this.mission_block.scale = 0.8;
     this.dialog_blue.position = {x: 800, y:700};
     this.npc = [];
     this.npc1 =  new Framework.Sprite(define.npcPath + '小丑.png'); 
@@ -10,6 +15,10 @@ var Npc_event = function() {
     this.npc1 =  new Framework.Sprite(define.npcPath + '主角.jpg'); 
     this.npc1.scale =  1.5;
     this.npc1.position = {x: 800, y:350};
+    this.npc.push(this.npc1);
+    this.npc1 =  new Framework.Sprite(define.npcPath + '莉莉.png'); 
+    this.npc1.scale =  1.3;
+    this.npc1.position = {x: 800, y:450};
     this.npc.push(this.npc1);
 
     this.npc_name = "";
@@ -21,19 +30,15 @@ var Npc_event = function() {
     this.description = {
         "任務一":{
             "開始":"小丑哥哥",
-            "主角":[
-                {key:1, des:"請問一下，這裡是..."},
+            "劇本":[
+                {key:"主角", des:"請問一下，這裡是...", finish:false, loop:false},
+                {key:"小丑哥哥", des:"吵屁喔，沒看到我正在分莓果嗎？"},
+                {key:"小丑哥哥", des:"有什麼問題先幫我把壞掉的莓果挑出來，拿給旁邊遺跡4裡的的莉莉，並把退的錢拿來給我。"},
+                {key:"小丑哥哥", des:"馬的，淨賣些爛東西給我"},
+                {key:"主角", des:"(......)"},
+                {key:"主角", des:"好像也只能照做了。"},
             ],
-            "小丑哥哥":[
-                {key:1, des:"吵屁喔，沒看到我正在分莓果嗎？"},
-                {key:2, des:"有什麼問題先幫我把壞掉的莓果挑出來，拿給旁邊遺跡4裡的的莉莉，並把退的錢拿來給我。"},
-                {key:3, des:"馬的，淨賣些爛東西給我"},
-            ],
-            "主角":[
-                {key:1, des:"(......)"},
-                {key:2, des:"好像也只能照做了。"},
-            ],
-            "任務":1
+            "說了":false
         },
         "主角":{
             "picture":[
@@ -56,6 +61,20 @@ var Npc_event = function() {
             ],
             "dialog":[
                 {loop:true, des:"看屁喔!", finish:false},
+                {key:1, des:"還看"},
+                {key:2, des:"看你媽媽"},],
+            "drama1":[
+                {loop:false, des:"對你，就是你。!", finish:false},
+                {key:"主角", des:"(我？))"},
+                {key:"小丑哥哥", des:"對，還看"},
+                {key:2, des:"看你媽媽"},]
+        },
+        "商人莉莉":{
+            "picture":[
+                {key:0, picture:this.npc[2]},
+            ],
+            "dialog":[
+                {loop:true, des:"你好啊小朋友", finish:false},
                 {key:1, des:"還看"},
                 {key:2, des:"看你媽媽"},],
             "drama1":[
@@ -88,29 +107,77 @@ var Npc_event = function() {
                 {key:6, des:"這邊的蘋果你先拿一點去吃吧。"}]
         }
     };
+    this.mission_chain.push(this.description['任務一']);
+    this.npc_position = {x:0, y:0};
+    this.characterHasMission = function(){
+        switch(this.mission_chain[0]['開始']){
+            case "小丑哥哥":
+                this.npc_position = {x: 49, y:47}
+                break;
+            case "商人莉莉":
+                this.npc_position = {x: 12, y:9}
+                break;
+            default:
+                break
+        }   
+    }
+    this.characterHasMission();
+    this.checkMissionBlockHasStart = function(){
+        if( Math.abs(this.npc_position.x - map.playerPositionOnMap.x)<=5 &&  Math.abs(this.npc_position.y - map.playerPositionOnMap.y)<=5){
+           
+            return true;;
+        }else{
+            return false;
+        }
+    }
     this.trigger = function(name, drama_name){
         this.npc_name = name;
         this.taking_is_start = true;
-        this.drama = drama_name;
+        if(this.mission_chain[0]["開始"] == this.npc_name && !this.mission_chain[0]["說了"]){
+            this.drama = -999;
+        }else
+            this.drama = drama_name;
         this.amount = -1;
     }
 
     this.talking = function(){
         this.amount ++;
-        if(this.description[this.npc_name][this.drama][0].finish){
-            this.taking_is_start = false;
-        }else{
-            if(this.amount >= this.returnSayLong()){
+        console.log(this.drama);
+        if(this.drama == -999){
+            if(this.mission_chain[0]["劇本"][0].finish){
                 this.taking_is_start = false;
-                this.amount = 0;
-                if(!this.description[this.npc_name][this.drama][0].finish){
-                    if(!this.description[this.npc_name][this.drama][0].loop)
-                        this.description[this.npc_name][this.drama][0].finish = true;
-                }else{
+            }else{
+                if(this.amount >=  this.mission_chain[0]["劇本"].length){
                     this.taking_is_start = false;
+                    this.amount = 0;
+                    this.mission_chain[0]["說了"] = true;
+                    if(! this.mission_chain[0]["劇本"][0].finish){
+                        if(! this.mission_chain[0]["劇本"][0].loop)
+                            this.mission_chain[0]["劇本"][0].finish = true;
+                    }else{
+                        this.taking_is_start = false;
+                    }
+                }else{
+                    this.talk_des = this.mission_chain[0]["劇本"][this.amount].des;
                 }
-            }else
-                this.talk_des = this.description[this.npc_name][this.drama][this.amount].des;
+            }
+        }else{
+            if(this.description[this.npc_name][this.drama][0].finish){
+                this.taking_is_start = false;
+            }else{
+                if(this.amount >= this.returnSayLong()){
+                    this.taking_is_start = false;
+                    this.amount = 0;
+                    if(!this.description[this.npc_name][this.drama][0].finish){
+                        if(!this.description[this.npc_name][this.drama][0].loop)
+                            this.description[this.npc_name][this.drama][0].finish = true;
+                    }else{
+                        this.taking_is_start = false;
+                    }
+                }else{
+                    this.talk_des = this.description[this.npc_name][this.drama][this.amount].des;
+                }
+            }
         }
     }
 
@@ -119,19 +186,34 @@ var Npc_event = function() {
     }
 
     this.update = function(){
+        this.mission_block.update();
     }
-    this.close =false;
-    this.close = function(){
-        this.taking_is_start = false;
+    if(this.mission_chain.length != 0){
+        this.mission_block.start({ from: 0, to: 2, loop: true});
     }
     this.draw = function(ctx){
+        // console.log(this.map);
+        // console.log(this.checkMissionBlockHasStart());
+        // console.log(this.npc_position);
+        if(this.checkMissionBlockHasStart()){
+            this.mission_block.position = {x:(13+this.npc_position.x - this.map.playerPositionOnMap.x)*64+16,y:(7+this.npc_position.y - this.map.playerPositionOnMap.y)*64-32};
+            // console.log(this.mission_block.position);
+
+            this.mission_block.draw(ctx); 
+        }
         if(this.taking_is_start){
-            this.description[this.npc_name]["picture"][0].picture.draw(ctx);
-            this.dialog_blue.draw(ctx);
             ctx.textAlign = 'center';
             ctx.font = "40px Arial";
             ctx.fillStyle = "gold";
-            ctx.fillText(this.npc_name,370 ,615);
+            if(this.drama == -999){
+                ctx.fillText(this.mission_chain[0]["劇本"][this.amount].key,370 ,615);
+                this.description[ this.mission_chain[0]["劇本"][this.amount].key ]["picture"][0].picture.draw(ctx);
+            }
+            else{
+                ctx.fillText(this.npc_name,370 ,615);
+                this.description[this.npc_name]["picture"][0].picture.draw(ctx);
+            }
+            this.dialog_blue.draw(ctx);
             ctx.font = "30px Arial";
             ctx.fillStyle = "white";
             for(var i=0,j=0,k=0;i<this.talk_des.length;i++){

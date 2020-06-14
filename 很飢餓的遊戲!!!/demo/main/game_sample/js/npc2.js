@@ -4,7 +4,7 @@ var Npc2 = function(map) {
         col:3 , row:4 , loop:true , speed:12}); 
     this.npc1.scale = 1.5;
     this.npc1.index = 1;
-    this.item_num = -10;
+    this.item_num = -11;
 
     var PIXEL_CONST = 64;
     //怪獸的名字
@@ -111,11 +111,15 @@ var Npc2 = function(map) {
 
 
     this.draw = function(ctx){
-        console.log(999);
+        // console.log(999);
         if(this.isdead){ return; }
         if(!this.is_start){ return; }
         var xx = 13*64 + this.spritePosition.x - this.map.playerPositionOnMap.x*64;
         var yy = 7*64 + this.spritePosition.y - this.map.playerPositionOnMap.y*64;
+        // console.log(xx,yy);
+        // console.log(this.map.playerPositionOnMap);
+        // console.log(this.spritePosition);
+
         this.npc1.position = {x: xx, y: yy};
         this.npc1.draw(ctx);
     }
@@ -154,17 +158,21 @@ var Npc2 = function(map) {
     }
 };
 
-Object.defineProperty(Npc1.prototype, 'position', {
+Object.defineProperty(Npc2.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },
     set: function(newValue) {
         this.mapPosition = newValue;
+        console.log(newValue);
+
         this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
+        console.log(this.spritePosition);
+
     }
 }); 
 
-Object.defineProperty(Npc1.prototype, 'isDead', {
+Object.defineProperty(Npc2.prototype, 'isDead', {
     get: function() {
         return this.isdead;
     }
