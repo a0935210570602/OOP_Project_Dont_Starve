@@ -68,10 +68,7 @@ var World_map = function()
         
         this.creation_blood_status = new Creation_blood_status();
 
-        this.clock = new Clock();
-        this.clock.scale = 2;
-
-        this.game_object_detail = new Game_object_detail();
+        
         
         this.item_flower_growed_dig = new Framework.Sprite(define.materialPath + 'item_flower_growed_dig.png'); 
         this.item_flower_growed_dig.scale = 2;
@@ -129,6 +126,25 @@ var World_map = function()
         this.flying_arror_down = new Framework.Sprite(define.materialPath + 'arror_down.png'); 
         this.flying_arror_down.scale = 2;
 
+
+        this.remance1 = new Framework.Sprite(define.builldingPath + '遺跡1.png'); 
+        this.remance1.scale = 2;
+
+        this.remance2 = new Framework.Sprite(define.builldingPath + '遺跡2.png'); 
+        this.remance2.scale = 2;
+
+        this.remance3 = new Framework.Sprite(define.builldingPath + '遺跡3.png'); 
+        this.remance3.scale = 2;
+
+        this.remance3 = new Framework.Sprite(define.builldingPath + '遺跡3.png'); 
+        this.remance3.scale = 2;
+
+        this.clock1 = new Framework.Sprite(define.materialPath + 'clock1.png'); 
+        this.clock1.scale = 2;
+
+        this.clock2 = new Framework.Sprite(define.materialPath + 'clock2.png'); 
+        this.clock2.scale = 2;
+
         this.item_fish = new Framework.Sprite(define.materialPath + 'item_fish.png'); 
         this.item_fish.scale = 2;
 
@@ -137,32 +153,6 @@ var World_map = function()
 
         this.item_sapling_dig = new Framework.Sprite(define.materialPath + 'item_sapling_dig.png'); 
         this.item_sapling_dig.scale = 0.4;
-
-        this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
-        this.player1.canvasPosition = {x:13, y:7};
-        this.player1.position = {x:10, y:1};
-
-
-        this.npc1 = new Npc1(this);
-        this.npc1.position = {x:49,y:47};
-        console.log(999);
-        this.npc_event = new Npc_event(this);
-
-        this.monster = [];
-        this.stopMonster = false;
-        this.stopMonsterCounter = 0;
-        this.score = new Score();
-        this.synthesisBar = new SynthesisBar(this.player1.getBackPack(), this.score);
-
-        this.map_selector = new Map_selector();
-
-        this.skill_handler = new Skill_handler();
-        this.spear_handler = new Spear_handler();
-        this.visitor = new ReduceDurabilityVisitor();
-        this.creation_blood_status = new Creation_blood_status();
-        this.fishing = new Fishing();
-        this.handle_initial_character = new Handle_initial_character();
-        this.playerInitial = false;
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
@@ -186,6 +176,32 @@ var World_map = function()
 
     this.init = function()
     {
+        this.player1 = new BombMan(define.materialPath + 'Actor.png', {down: {from: 0, to: 2}, left: {from:3, to: 5}, right: {from: 6, to: 8}, up: {from: 9, to: 11}});
+        this.player1.canvasPosition = {x:13, y:7};
+        this.player1.position = {x:10, y:1};
+        this.map_selector = new Map_selector();
+        this.score = new Score();
+        this.monster = [];
+        this.stopMonster = false;
+        this.stopMonsterCounter = 0;
+        this.synthesisBar = new SynthesisBar(this.player1.getBackPack(), this.score);
+
+
+        this.skill_handler = new Skill_handler();
+        this.spear_handler = new Spear_handler();
+        this.visitor = new ReduceDurabilityVisitor();
+        this.creation_blood_status = new Creation_blood_status();
+        this.fishing = new Fishing();
+        this.handle_initial_character = new Handle_initial_character();
+
+        this.npc1 = new Npc1(this);
+        this.npc1.position = {x:49,y:47};
+        console.log(999);
+        this.npc_event = new Npc_event(this);
+        this.clock = new Clock();
+        this.clock.scale = 2;
+
+        this.game_object_detail = new Game_object_detail();
         // this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
@@ -260,7 +276,7 @@ var World_map = function()
     this.monster_kill_timer = 0;
 	this.update = function()
 	{   
-        if(this.playerInitial){
+        if(Framework.Game.playerInitial){
             if(this.player1.player_state == "alive"){
                 this.checkIsDie();
             }
@@ -357,7 +373,7 @@ var World_map = function()
         }else{
             this.handle_initial_character.update();
             if(this.handle_initial_character.is_initial){
-                this.playerInitial = true;
+                Framework.Game.playerInitial = true;
                 this.player1.init();
                 this.player1.setCapibility(this.handle_initial_character.character_description.character_descruption_point);
                 this.clockDraw(Framework.Game._context);
@@ -379,7 +395,7 @@ var World_map = function()
     }
 	this.draw = function(ctx) {
         // console.log(this.playerPositionOnMap);
-        if(this.playerInitial){
+        if(Framework.Game.playerInitial){
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
                     // console.log("draw");
@@ -1113,7 +1129,7 @@ var World_map = function()
         // console.log(this.is_character_description_open);
 
         console.log(e);
-        if(this.playerInitial){
+        if(Framework.Game.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){
                     this.player1.characterAbilityClick(e);
@@ -1134,7 +1150,7 @@ var World_map = function()
     }
 
     this.mousemove = function(e){
-        if(this.playerInitial){
+        if(Framework.Game.playerInitial){
             this.synthesisBar.mousemove(e);
             this.player1.mousemove(e);
             this.handleHoverBackpack();

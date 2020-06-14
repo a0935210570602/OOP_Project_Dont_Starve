@@ -403,6 +403,9 @@ var House_1 = function()
         
         if(this.player1.player_state == "alive" && !this.npc_event.taking_is_start){
             if(this.whatIsTheLastKeyMove() == 'Down'){
+                if(this.playerPositionOnMap.x ==12 && this.playerPositionOnMap.y ==19){
+                    Framework.Game.goToLevel('level1');  
+                }
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
                 this.keyPress = "Down";

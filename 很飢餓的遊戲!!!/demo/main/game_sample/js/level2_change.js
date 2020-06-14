@@ -36,17 +36,19 @@ var Level2_change = Framework.Class(Framework.Level , {
         });
         //播放時, 需要給name, 其餘參數可參考W3C
         // this.audio.play({name: 'song3', loop: true});
-
-        this.map = new World_map();
+        if(!Framework.Game.playerInitial){
+            this.map = new World_map();
+        }
         this.map.load();
         this.map.addMonsterRandom(10);
     },
 
     initialize: function() {
-        
-        this.map.init();
-        //for demo
-        this.map.setPlayerPosition({x:13,y:7});
+        if(!Framework.Game.playerInitial){
+            this.map.init();
+            //for demo
+            this.map.setPlayerPosition({x:13,y:7});
+        }
     },
 
     update: function() {     
