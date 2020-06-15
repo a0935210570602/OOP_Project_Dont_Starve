@@ -60,7 +60,7 @@ var Drama0 = Framework.Class(Framework.Level , {
             this.draw(Framework.Game._context);
         }else if(e.key === 'Z'){
             this.npc_event.amount -= 2;
-            if( this.npc_event.amount <= 0){
+            if( this.npc_event.amount <= -1){
                 this.npc_event.amount = -1;
             }
             this.npc_event.talking();
