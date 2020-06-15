@@ -156,6 +156,8 @@ var World_map = function()
 
         this.npc1 = new Npc1(this);
         this.npc1.position = {x:49,y:47};
+        this.npc2 = new Npc2(this);
+        this.npc2.position = {x:20,y:15};
         this.npc_event = new Npc_event(this);
 
         this.monster = [];
@@ -431,6 +433,8 @@ var World_map = function()
                 this.skill_handler.start(this.playerWalkDirection, this.playerPositionOnMap, this.player1.handEquipmentId);
             }
             this.player1.update();
+            this.npc2.update();
+            this.npc_event.update();
             this.character_description.update(this.player1);
             var hurt_point=0;
             this.creation_blood_status.characterBloodUpdate(this.player1);
@@ -439,8 +443,6 @@ var World_map = function()
             // console.log(this.player1.hunger_current_point);
 
             // setTimeout(()=>{this.draw(Framework.Game._context);},500);
-            this.npc1.update();
-            this.npc_event.update();
         }
     }
     
@@ -553,15 +555,12 @@ var World_map = function()
             }
             this.game_object_detail.draw(ctx);
             ctx.beginPath();
-            // ctx.rect(1182, 293, 200, 600);
-            // ctx.fillStyle = "#BEBEBE";
-            ctx.fill();
-            ctx.beginPath();
             ctx.rect(242, 256, 225, 600);
             ctx.fillStyle = "#BEBEBE";
             ctx.fill();
             this.synthesisBar.draw(ctx);
             this.npc1.draw(ctx);
+            this.npc2.draw(ctx);
             this.character_description.draw(ctx);
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";

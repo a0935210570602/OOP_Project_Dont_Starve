@@ -206,14 +206,15 @@ var Npc_event = function(map) {
             ctx.font = "40px Arial";
             ctx.fillStyle = "gold";
             if(this.drama == -999){
-                ctx.fillText(this.mission_chain[0]["劇本"][this.amount].key,370 ,615);
                 this.description[ this.mission_chain[0]["劇本"][this.amount].key ]["picture"][0].picture.draw(ctx);
+                this.dialog_blue.draw(ctx);
+                ctx.fillText(this.mission_chain[0]["劇本"][this.amount].key,370 ,615);
             }
             else{
-                ctx.fillText(this.npc_name,370 ,615);
                 this.description[this.npc_name]["picture"][0].picture.draw(ctx);
+                this.dialog_blue.draw(ctx);
+                ctx.fillText(this.npc_name,370 ,615);
             }
-            this.dialog_blue.draw(ctx);
             ctx.font = "30px Arial";
             ctx.fillStyle = "white";
             for(var i=0,j=0,k=0;i<this.talk_des.length;i++){
