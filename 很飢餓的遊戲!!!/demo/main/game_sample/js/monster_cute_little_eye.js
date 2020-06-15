@@ -8,8 +8,8 @@ var Monster_cute_little_eye = function(map) {
     
     this.name = "大眼仔仔";
     this.attack = 5;
-    this.health = 2000;
-    this.maxHealth = 2000;
+    this.health = 100;
+    this.maxHealth = 100;
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_cute_little_eye, this.monster_cute_little_eye_die, 8);

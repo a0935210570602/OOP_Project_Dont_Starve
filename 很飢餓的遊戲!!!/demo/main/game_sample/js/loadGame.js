@@ -163,6 +163,7 @@ var loadGameEnd;
         { src: 'game_sample/js/monster_cow.js', lookFor: 'Monster_cow' },
         { src: 'game_sample/js/monster_bee.js', lookFor: 'Monster_bee' },
         { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
+        { src: 'game_sample/js/monster_boss.js', lookFor: 'Monster_boss' },
 
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },

@@ -72,7 +72,7 @@ var Drama0 = Framework.Class(Framework.Level , {
     },
 
     click: function (e) {  
-        // Framework.Game.goToLevel('level1');  
+        Framework.Game.goToLevel('level1');  
     },
 
     mousemove: function(e) {        

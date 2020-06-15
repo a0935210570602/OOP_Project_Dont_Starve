@@ -8,8 +8,8 @@ var Monster_bat = function(map) {
 
     this.name = "小蝙蝠";
     this.attack = 100;
-    this.health = 200;
-    this.maxHealth = 200;
+    this.health = 1000;
+    this.maxHealth = 1000;
 
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_bat, this.monster_bat_die, 8);

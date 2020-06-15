@@ -12,7 +12,7 @@ var Handle_initial_character = function(){
     this.init = function(){
         this.character_description.is_character_description_open = true;
         this.character_description.experience = 0;
-        this.character_description.capabilityt_point = 3;
+        this.character_description.capabilityt_point = 5;
         for(var i = 0;i < this.character_description.character_descruption_point.length;i++){
             this.character_description.character_descruption_point[i] = 5;
         }

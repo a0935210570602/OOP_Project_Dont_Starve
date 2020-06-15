@@ -45,7 +45,7 @@ var Monster_base = function(){
             this.hurt.start({ from: 17, to: 19, loop: false});
             setTimeout(()=>{
                 this.isHurt = false;
-            },200);
+            },300);
         }
     }
 

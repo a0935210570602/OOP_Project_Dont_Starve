@@ -6,6 +6,9 @@ var BombMan = function(file, options) {
     this.item_bush = new Framework.Sprite(define.materialPath + 'item_bush.png'); 
     this.item_bush.scale = 2;
     this.item_bush.position = {x:13*64,y:7*64};
+    this.hurt = new Framework.AnimationSprite({url:define.materialPath + 'Absorb.png', col:5, row:5, loop:false, speed:12}); 
+    this.hurt.position = {x:13*64,y:7*64};
+    this.hurt.scale = 2;
 
     this.hideAnimation = new Player_hide_animation(); 
 
@@ -34,7 +37,7 @@ var BombMan = function(file, options) {
     this.hide = false;
     this.gameClear = false;
     this.mode = "";
-
+    this.beCaught = false;
     //一個格子 = 20
     this.character_descruption_point = [];
     this.character_descruption_point[0] = 0*20;   //"生命";
@@ -101,7 +104,7 @@ var BombMan = function(file, options) {
 
     this.decreaseHunger = function(){
         var hungerInterval = setInterval(()=>{
-            this.hunger_current_point -= 5;
+            this.hunger_current_point -= 1;
             if(this.gameClear){
                 clearInterval(hungerInterval);
             }
@@ -169,17 +172,18 @@ var BombMan = function(file, options) {
     }
     this.gethurt = function(attack_point){
         // this.characterStatus.currentHealth -= attack_point;
-        console.log("attack_point",attack_point);
-        console.log("this.character_descruption_total_point[7]",this.character_descruption_total_point[7]);
-        console.log("this.character_descruption_point[0]",this.character_descruption_point[0]);
+        // console.log("attack_point",attack_point);
+        // console.log("this.character_descruption_total_point[7]",this.character_descruption_total_point[7]);
+        // console.log("this.character_descruption_point[0]",this.character_descruption_point[0]);
+        // console.log("damage",damage);
         var damage = attack_point - (this.character_descruption_total_point[7]/2);
-        console.log("damage",damage);
 
         if(this.equipmentBar.getEquipment(0) != null)
             this.equipmentBar.getEquipment(0).reduceDurability();
         if(this.equipmentBar.getEquipment(1) != null)
             this.equipmentBar.getEquipment(1).reduceDurability();
         if(damage > 0){
+            this.hurt.start({ from: 17, to: 18, loop: false});
             this.character_descruption_point[0] -= damage;
             if(this.character_descruption_point[0]<0)
                 this.character_descruption_point[0] = 0;
@@ -210,7 +214,7 @@ var BombMan = function(file, options) {
         if(handEquipment != null)
             return this.equipmentBar.getEquipment(2).attack_point;
         else
-            return 5;
+            return 0;
     }
 
     this.getHandMagicAttackPointEquipment = function(){
@@ -299,6 +303,7 @@ var BombMan = function(file, options) {
     this.setCapibility = function(capability){
         for(var i=0;i<9;i++)
             this.character_descruption_point[i] = capability[i]*20;
+        this.character_descruption_point[0] = capability[5]*20;
     }
 
     this.capibility = function(){
@@ -314,6 +319,7 @@ var BombMan = function(file, options) {
         //更新升級動畫
         this.level_up_animation.update();
         this.hideAnimation.update();
+        this.hurt.update();
         //更新角色血量(飢餓狀態)  this.characterStatus.currentHunger是數值,要轉成格子
         this.capibility();
         if(this.isWalking){
@@ -349,6 +355,9 @@ var BombMan = function(file, options) {
         }else{
             this.item_bush.draw(ctx);
         }
+
+        // if(this.hurt._start)
+        //     this.hurt.draw(ctx);
     }
 
     this.increaseBombNum = function(){
@@ -445,7 +454,6 @@ var BombMan = function(file, options) {
 
     this.isChangeCapability = function(which_capability){
         this.character_descruption_point[which_capability] += 20;
-
         this.capabilityt_point--;
     }
 
