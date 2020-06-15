@@ -69,6 +69,7 @@ var World_map = function()
         this.monster_cute_little_eye = new Framework.AnimationSprite({url:define.materialPath + 'monster_cute_litter_eye.png', col:3 , row:4 , loop:true , speed:12}); 
         this.monster_pig = new Framework.AnimationSprite({url:define.materialPath + 'pig.png', col:3 , row:4 , loop:true , speed:12}); 
         this.monster_bee = new Framework.AnimationSprite({url:define.materialPath + 'bee.png', col:3 , row:4 , loop:true , speed:12}); 
+        this.monster_boss = new Framework.AnimationSprite({url:define.materialPath + 'boss.png', col:3 , row:4 , loop:true , speed:12}); 
         
         /////////////////////////////////////////////////////////////////////////////////////
         
@@ -170,8 +171,7 @@ var World_map = function()
         this.visitor = new ReduceDurabilityVisitor();
         this.creation_blood_status = new Creation_blood_status();
         this.fishing = new Fishing();
-        this.boss = new Monster_boss(this);
-        this.boss.position = {x:98,y:49};
+
 
         this.handle_initial_character = new Handle_initial_character();
         this.playerInitial = false;
@@ -290,7 +290,7 @@ var World_map = function()
                 this.spear_handler.update();
                 this.arror_attack.update();
     
-                if(this.pressWalk === true)
+                if(this.pressWalk === true && !this.player1.beCaught)
                 {
                     if(this.player1.player_state == "alive" && this.checkIsWalkAble(this.playerWalkDirection))
                     {
@@ -432,7 +432,6 @@ var World_map = function()
             }
             this.player1.update();
             this.character_description.update(this.player1);
-            this.boss.update();
             var hurt_point=0;
             this.creation_blood_status.characterBloodUpdate(this.player1);
             this.creation_blood_status.characterMagicUpdate(this.player1);
@@ -533,7 +532,6 @@ var World_map = function()
             for(var i=0;i<this.monster.length;i++){
                 this.monster[i].draw(ctx);
             }
-            this.boss.draw(ctx);
             if(this.skill_handler.isAnimationStart()){
                 for(var i=-5,ii=0; i<6; i++,ii++){
                     for(var j=-5,jj=0; j<6; j++,jj++){
@@ -718,6 +716,11 @@ var World_map = function()
                 this.deadClear();
                 Framework.Game.goToLevel('gameOver'); 
                 break;
+            case 'O':
+                var newMonster1 =  new Monster_boss(this);
+                newMonster1.position = {x:48,y:49};
+                this.monster.push(newMonster1);
+                break;
             case 'R':
                 var newMonster1 =  new Monster_bee(this);
                 newMonster1.position = {x:48,y:49};
@@ -862,10 +865,10 @@ var World_map = function()
                 this.arror_attack.setPositionAndDirection(this.playerWalkDirection, this.playerPositionOnMap);
                 attackMode = this.arror_attack;
             }else if(this.player1.mode == "spear"){
-                attackMode = new Normal_attack(this.player1, this.monster, this.boss, this.playerWalkDirection, this.playerPositionOnMap);
+                attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
                 this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
             }else{
-                attackMode = new Normal_attack(this.player1, this.monster, this.boss, this.playerWalkDirection, this.playerPositionOnMap);
+                attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
             }
 
             this.player1.attack(attackMode);
