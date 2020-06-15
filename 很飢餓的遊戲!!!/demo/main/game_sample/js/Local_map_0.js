@@ -1,5 +1,53 @@
 var Local_map_0 = function() {
     //91 異世界洪水  192平原 123森林 137山區 255雪地 196岩漿 200池塘
+    this.houseArray = [
+        //1
+        [   [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+            [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4],
+
+
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+            [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+        ]
+    ]
     this.mapArray = [
         //1
         [ [91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91],
@@ -4648,37 +4696,89 @@ var Local_map_0 = function() {
     ];
     
     this.itemArray = [];
+    this.houseItemArray = [];
     this.itemArray_two_dimension = [];
     this.itemArray_one_dimension = [];
     for(var i=0;i<10;i++)
         this.itemArray.push(null);
 
-    this.proxy = new Proxy(this.itemArray);
+    this.proxy = new Proxy();
     
-    this.addObject= function(position, number, object){
-        // console.log(object);
-        // console.log(position);
-        // console.log(number);
-
+    this.addObject= function(map_name, position, number, object){
         this.itemArray[number][position.x][position.y] = object;
+        switch(map_name){
+            case "World":
+                this.itemArray[number][position.x][position.y] = object;
+
+                break;
+            case "House1":
+                this.houseItemArray[number][position.x][position.y] = object;
+
+                break;
+            default:
+                break;
+        }
     }
-    this.removeObject= function(position, number){
-        this.itemArray[number][position.x][position.y] = new Item_blank();
+    this.removeObject= function(map_name, position, number){
+        switch(map_name){
+            case "World":
+                this.itemArray[number][position.x][position.y] = new Item_blank();
+
+                break;
+            case "House1":
+                this.houseItemArray[number][position.x][position.y] = new Item_blank();
+
+                break;
+            default:
+                break;
+        }
     }
-    this.hasItem= function(position, number){
-        return this.itemArray[number][position.x][position.y].item_num == 0 ? true : false ;
+    this.hasItem= function(map_name, position, number){
+        switch(map_name){
+            case "World":
+                return this.itemArray[number][position.x][position.y].item_num == 0 ? true : false ;
+            case "House1":
+                return this.houseItemArray[number][position.x][position.y].item_num == 0 ? true : false ;
+            default:
+                break;
+        }
     }
-    this.canWalk= function(position, number){
-        return this.mapArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : true;
+    this.canWalk= function(map_name, position, number){
+        switch(map_name){
+            case "World":
+                return this.mapArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : this.mapArray[number][position.x][position.y] == 4 ? false : true;
+            case "House1":
+                return this.houseArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : this.mapArray[number][position.x][position.y] == 4 ? false : true;
+            default:
+                break;
+        }
     }
     
-    this.catchMap= function(position, number){
-
-        return this.mapArray[number][position.x][position.y];
+    this.catchMap= function(map_name, position, number){
+        switch(map_name){
+            case "World":
+                return this.mapArray[number][position.x][position.y];
+            case "House1":
+                return this.houseArray[number][position.x][position.y];
+            default:
+                break;
+        }
     }
 
-    this.catchItem= function(position, number){
-        this.proxy.detect(number);
-        return this.itemArray[number][position.x][position.y];
+    this.catchItem= function(map_name, position, number){
+        switch(map_name){
+            case "World":
+                this.proxy.whichToDetect(map_name, this.itemArray);
+                this.proxy.detect(number);
+
+                return this.itemArray[number][position.x][position.y];
+            case "House1":
+                this.proxy.whichToDetect(map_name, this.houseItemArray);
+                this.proxy.detect(number);
+
+                return this.houseItemArray[number][position.x][position.y];
+            default:
+                break;
+        }
     }
 };

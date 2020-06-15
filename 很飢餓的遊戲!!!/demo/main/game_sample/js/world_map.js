@@ -142,10 +142,13 @@ var World_map = function()
         this.player1.canvasPosition = {x:13, y:7};
         this.player1.position = {x:10, y:1};
 
+        this.floor = new Framework.Sprite(define.builldingPath + '石磚.png'); 
+        this.floor.scale = 2;
+        this.wall = new Framework.Sprite(define.builldingPath + '石牆.png'); 
+        this.wall.scale = 2;
 
         this.npc1 = new Npc1(this);
         this.npc1.position = {x:49,y:47};
-        console.log(999);
         this.npc_event = new Npc_event(this);
 
         this.monster = [];
@@ -207,15 +210,16 @@ var World_map = function()
         this.tilePosition = [];
         this.itemArray = [];
         this.mapArray = [];
+        this.on_map_name = "World";
         this.clear = false;
         //playerPositionOnMap為人物出現在mapArray的位置，只要改這個，勿動其他常數
         this.playerPositionOnMap = {x:47,y:47};
-
-        this.mapArray = this.map_selector.makeMap(this.playerPositionOnMap);
-        this.itemArray = this.map_selector.makeItemMap(this.playerPositionOnMap);
-        // console.log(this.itemArray);
-        // console.log("init");
-        // console.log(this.mapArray);
+        this.playerPositionOnMapSave = {
+            "World": this.playerPositionOnMap,
+            "House1": {x:19, y:34}
+        };
+        this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
+        this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
 
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
@@ -228,6 +232,10 @@ var World_map = function()
         this.creation_blood_status.init(this.player1);
 	};
 
+    this.goToMap = function(map_name){
+        this.on_map_name = map_name;
+        this.playerPositionOnMap = this.playerPositionOnMapSave["map_name"];
+    }
     this.notifyDraw = function(){
         m_map.draw(Framework.Game._context);
     }
@@ -412,6 +420,14 @@ var World_map = function()
                             this.terrain_snow_ground[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
                             this.terrain_snow_ground[this.clock.status].draw(ctx);
                             break;
+                        case 3:
+                            this.floor.position = {x:this.tilePosition[j][5].x*64,y:this.tilePosition[j][i].y*64};
+                            this.floor.draw(ctx);
+                            break;
+                        case 4:
+                            this.wall.position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
+                            this.wall.draw(ctx);
+                            break;
                     }
                 }
             }
@@ -531,25 +547,13 @@ var World_map = function()
         newMonster.position = {x:48,y:48};
         var newMonster1 =  new Monster_bat(this);
         newMonster1.position = {x:48,y:49};
-        // this.monster.push(newMonster);
         this.monster.push(newMonster1);
-        // while(count != amount){
-        //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
-        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-        //         console.log(m_position);
-        //         var newMonster =  new Monster_cute_little_eye(this);
-        //         newMonster.position = m_position;
-        //         this.monster.push(newMonster);
-        //         count++;
-        //     }
-        // }
     }
 
     var m_map = this;
     this.deadClear = function(){
         this.skillTimer.clear();
         this.capture_key = [];
-        // this.player1.characterStatus.currentHealth = 0;
         this.player1.character_descruption_point[0] = 0;
         this.player1.update();
     }
@@ -687,6 +691,11 @@ var World_map = function()
         
         if(this.player1.player_state == "alive" && !this.npc_event.taking_is_start){
             if(this.whatIsTheLastKeyMove() == 'Down'){
+                if(this.playerPositionOnMap.x == 19 && this.playerPositionOnMap.y ==34 && this.on_map_name == "House1"){
+                    this.goToMap("World");
+                    this.playerPositionOnMapSave["House1"] = this.playerPositionOnMap;
+                    this.playerPositionOnMap = this.playerPositionOnMapSave["World"];
+                }
                 this.player1.walk({x:0,y:1});
                 this.playerWalkDirection = {x:0,y:1};
                 this.keyPress = "Down";
@@ -714,8 +723,10 @@ var World_map = function()
                     this.pressWalk = true;
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Up'){
-                if(this.playerPositionOnMap.x == 66 && this.playerPositionOnMap.y ==58){
-                    Framework.Game.goToLevel('map1');
+                if(this.playerPositionOnMap.x == 66 && this.playerPositionOnMap.y ==58 && this.on_map_name == "World"){
+                    this.goToMap("House1");
+                    this.playerPositionOnMapSave["World"] = this.playerPositionOnMap;
+                    this.playerPositionOnMap = this.playerPositionOnMapSave["House1"];
                 }
                 this.playerWalkDirection = {x:0,y:-1};
                 this.player1.walk({x:0,y:-1});
