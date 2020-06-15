@@ -553,8 +553,8 @@ var World_map = function()
             }
             this.game_object_detail.draw(ctx);
             ctx.beginPath();
-            ctx.rect(1182, 293, 200, 600);
-            ctx.fillStyle = "#BEBEBE";
+            // ctx.rect(1182, 293, 200, 600);
+            // ctx.fillStyle = "#BEBEBE";
             ctx.fill();
             ctx.beginPath();
             ctx.rect(242, 256, 225, 600);
@@ -582,8 +582,10 @@ var World_map = function()
     
     this.clockDraw = function(ctx){
         var clockInterval = setInterval(() => {
-            this.clock.draw(ctx);
-            this.creation_blood_status.draw(ctx);
+            if(!this.npc_event.taking_is_start){
+                this.clock.draw(ctx);
+                this.creation_blood_status.draw(ctx);
+            }
             if(this.player1.character_descruption_total_point[0] <= 0 || this.clear){
                 clearInterval(clockInterval);
             }

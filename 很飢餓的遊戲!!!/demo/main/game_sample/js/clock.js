@@ -43,7 +43,7 @@ var Clock = function() {
 
     this.draw = function(ctx){
         ctx.beginPath();
-        ctx.rect(1290, 20, 300, 332);
+        ctx.rect(1290, 20, 300, 290);
         ctx.fillStyle = "#BEBEBE";
         ctx.fill();
 
