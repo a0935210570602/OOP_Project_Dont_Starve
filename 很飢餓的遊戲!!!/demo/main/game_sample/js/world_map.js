@@ -758,7 +758,7 @@ var World_map = function()
                 this.handleDrop();
                 this.handleHoverBackpack();
                 break;
-            case 'Q':
+            case 'P':
                 this.demo_dead_trigger = true;
                 break;
             case 'F':
