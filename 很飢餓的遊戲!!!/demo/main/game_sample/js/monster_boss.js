@@ -38,7 +38,7 @@ var Monster_boss = function(map) {
     }
 
     this.name = "boss";
-    this.attack = 100;
+    this.attack = 10;
     this.health = 2000;
     this.maxHealth = 2000;
 
@@ -150,6 +150,7 @@ var Monster_boss = function(map) {
         var random = Math.floor(Math.random()*5);
         if(random == 1)
             this.hurtRevolution.start({ from: 17, to: 19, loop: false});
+        this.map.player1.gethurt(120);
     }
 
     this.walkAlittle = function(){
@@ -196,6 +197,10 @@ var Monster_boss = function(map) {
                 this.remoteTarget.x += this.remoteDirection.x;
                 this.remoteTarget.y += this.remoteDirection.x;
             }
+            if(this.remotePosition.x == this.map.playerPositionOnMap.x && this.remotePosition.y == this.map.playerPositionOnMap.y){
+                this.map.player1.gethurt(150);
+                this.remote_attack.stop();
+            }
         }
 
         if(this.trace && this.attackTimer == this.frequency){
@@ -222,7 +227,6 @@ var Monster_boss = function(map) {
             this.operationChoose();
         if(this.isAttack() && this.attackTimer == this.frequency && !this.normal_attack._start){
             this.normal_attack.start({ from: 0, to: 5, loop: false});
-            this.attackTimer = 0;
         }
         if(this.attackTimer == this.frequency)
             this.attackTimer = 0;
@@ -240,8 +244,8 @@ var Monster_boss = function(map) {
 
     this.remoteAttack = function(){
         this.remote_attack.start({from:18,to:25,loop:false});
-        this.remotePosition.x = this.mapPosition.x;
-        this.remotePosition.y = this.mapPosition.y;
+        this.remotePosition.x = this.mapPosition.x+this.monsterDirection.x;
+        this.remotePosition.y = this.mapPosition.y+this.monsterDirection.y;
         this.remoteDirection.x = this.monsterDirection.x;
         this.remoteDirection.y = this.monsterDirection.y;
         this.remoteSprite = {x:this.remotePosition.x*64,y:this.remotePosition.y*64};
@@ -259,9 +263,28 @@ var Monster_boss = function(map) {
     }
 
     this.rangeAttack = function(){
-        this.range_attack.start({from:0,to:24,loop:false});
+        this.range_attack.start({from:1,to:24,loop:false});
         this.rangePosition.x = this.map.playerPositionOnMap.x;
         this.rangePosition.y = this.map.playerPositionOnMap.y;
+        setTimeout(()=>{
+            this.checkIfRangeAttackHit();
+        },200);
+    }
+
+    this.checkIfRangeAttackHit = function(){
+        var interval = setInterval(()=>{
+            if(this.range_attack._start){
+                for(var i = -1;i < 2;i++){
+                    for(var j = -1;j < 2;j++){
+                        console.log("check");
+                        if(this.map.playerPositionOnMap.x == this.rangePosition.x + i && this.map.playerPositionOnMap.y == this.rangePosition.y + j)
+                            this.map.player1.gethurt(120);
+                    }
+                }
+            }else{
+                clearInterval(interval);
+            }
+        },500)
     }
 
     this.draw = function(ctx){
