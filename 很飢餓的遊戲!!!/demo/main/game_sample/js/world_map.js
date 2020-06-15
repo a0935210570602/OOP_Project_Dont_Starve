@@ -66,6 +66,9 @@ var World_map = function()
         this.monster_bat = new Framework.AnimationSprite({url:define.materialPath + 'bat.png', col:3 , row:4 , loop:true , speed:12}); 
         this.item_eyeball = new Framework.Sprite(define.materialPath + 'Eyeball.png'); 
         this.monster_cow = new Framework.AnimationSprite({url:define.materialPath + 'cow.png', col:3 , row:4 , loop:true , speed:12}); 
+        this.monster_cute_little_eye = new Framework.AnimationSprite({url:define.materialPath + 'monster_cute_litter_eye.png', col:3 , row:4 , loop:true , speed:12}); 
+        this.monster_pig = new Framework.AnimationSprite({url:define.materialPath + 'pig.png', col:3 , row:4 , loop:true , speed:12}); 
+        this.monster_bee = new Framework.AnimationSprite({url:define.materialPath + 'bee.png', col:3 , row:4 , loop:true , speed:12}); 
         
         /////////////////////////////////////////////////////////////////////////////////////
         
