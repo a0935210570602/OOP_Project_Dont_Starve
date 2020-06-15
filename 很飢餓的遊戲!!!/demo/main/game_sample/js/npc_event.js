@@ -33,10 +33,50 @@ var Npc_event = function(map) {
             "劇本":[
                 {key:"主角", des:"請問一下，這裡是...", finish:false, loop:false},
                 {key:"小丑哥哥", des:"吵屁喔，沒看到我正在分莓果嗎？"},
-                {key:"小丑哥哥", des:"有什麼問題先幫我把壞掉的莓果挑出來，拿給旁邊遺跡4裡的的莉莉，並把退的錢拿來給我。"},
-                {key:"小丑哥哥", des:"馬的，淨賣些爛東西給我"},
-                {key:"主角", des:"(......)"},
-                {key:"主角", des:"好像也只能照做了。"},
+                {key:"小丑哥哥", des:"有什麼問題先幫我把壞掉的莓果挑出來，拿給旁邊遺跡4裡的的莉莉，他會跟你說要怎麼做。"},
+                {key:"小丑哥哥", des:"希望你找得到遺跡4在哪裡，哈哈"},
+                {key:"小丑哥哥", des:"什麼！你連怎麼撿東西都不會！？"},
+                {key:"小丑哥哥", des:"你對著物品按空白鍵就撿起來了，很簡單吧"},
+                {key:"主角", des:"好像真的蠻簡單的"},
+                {key:"小丑哥哥", des:"那還不快去"},
+                {key:"小丑哥哥", des:"最後提醒一下，如果按下\'E\'鍵，可以查看角色屬性。而且在左方角色狀態有一條灰色的" + 
+                                    "那是飢餓值，如果他它0的話，生命就會開始下降，要特別小心。"},
+                {key:"主角", des:"好喔"},
+            ],
+            "說了":false
+        },
+        "任務二":{ 
+            "開始":"商人莉莉", //攻擊、
+            "劇本":[
+                {key:"主角", des:"姊姊", finish:false, loop:false},
+                {key:"商人莉莉", des:"!!!!"},
+                {key:"商人莉莉", des:"嘴巴真甜呢，女孩。"+
+                                "你知道我今年已經兩百歲了嗎，哈哈"},
+                {key:"主角", des:"!!!!!!!!!!!!!!!!!!!!!!!!!!!!"},
+                {key:"商人莉莉", des:"看在你這麼可愛的份上，就跟你說這個世界的運作方式。"},                                                         
+                {key:"商人莉莉", des:"別管什麼莓果了"},                                                         
+                {key:"商人莉莉", des:"撿起來的東西會放進背包裡，如果想要丟棄的話，你要先將滑鼠移到物品上，按\'D\'，這樣就丟掉了。"},
+                {key:"主角", des:"好麻煩的操作方式喔！"},
+                {key:"商人莉莉", des:"再講講合成方式，左邊的欄位是合成欄，按一下就可以合成物資"},                                                                                                                                      
+                {key:"商人莉莉", des:"但要小心背包裡如果沒有足夠的材料，是沒有辦法合成物品的"},                                                                     
+                {key:"主角", des:"好喔"},
+                {key:"主角", des:"那要怎麼裝備裝備呢？"},
+                {key:"商人莉莉", des:"問得漂亮。"},
+                {key:"商人莉莉", des:"用滑鼠點擊背包裡的裝備，就可以裝備囉。"},
+                {key:"主角", des:"這麼簡單喔"},
+                {key:"商人莉莉", des:"但知道這些是不夠的，再跟你說說種植物、砍樹和挖植物"},
+                {key:"商人莉莉", des:"挖植物之前你需要一把鏟子、裝備上後，朝著植物按空白鍵，多按幾下你就可以把它挖起囉。"},
+                {key:"商人莉莉", des:"砍樹和挖植物也是同樣的道理，裝備上斧頭和十字鎬，對著樹木和岩石按空白鍵有各自的效果。"},
+                {key:"主角", des:"啊不就好棒棒"},
+                {key:"商人莉莉", des:"別吵啦，再說說釣魚，你需要一把釣魚竿，裝備後對著湖面按\'F\'，等你覺得差不多就可以按空白收竿囉。"},
+                {key:"商人莉莉", des:"湖裡的魚可好吃了，你一定要吃吃看。"},
+                {key:"商人莉莉", des:"最後說到攻擊方式"},
+                {key:"商人莉莉", des:"有些武器是需要詠唱的，像是魔杖類武器，按下\'S\'，就可以施放魔法"},
+                {key:"商人莉莉", des:"其他武器也是，按下\'S\'，就可以有不同的攻擊效果，但就不需要詠唱。"},
+                {key:"商人莉莉", des:"好啦，介紹就到這邊，你可以走了"},
+                {key:"商人莉莉", des:"記得要贏得遊戲，不但要生存下來，還要打倒魔王喔。"},
+                {key:"商人莉莉", des:"魔王就住在岩漿那裡，快去吧。"},
+                
             ],
             "說了":false
         },
@@ -60,9 +100,11 @@ var Npc_event = function(map) {
                 {key:0, picture:this.npc[0]},
             ],
             "dialog":[
-                {loop:true, des:"看屁喔!", finish:false},
-                {key:1, des:"還看"},
-                {key:2, des:"看你媽媽"},],
+                {loop:true, des:"你知道", finish:false},
+                {key:1, des:"偉凱的課很難修"},
+                {key:2, des:"很多人都會當了"},
+                {key:3, des:"你要不要放棄"},
+            ],
             "drama1":[
                 {loop:false, des:"對你，就是你。!", finish:false},
                 {key:"主角", des:"(我？))"},
@@ -74,9 +116,10 @@ var Npc_event = function(map) {
                 {key:0, picture:this.npc[2]},
             ],
             "dialog":[
-                {loop:true, des:"你好啊小朋友", finish:false},
-                {key:1, des:"還看"},
-                {key:2, des:"看你媽媽"},],
+                {loop:true, des:"還不快去", finish:false},
+                {key:1, des:"不打倒魔王的話"},
+                {key:2, des:"就永遠逃離不了這裡了"},
+                {key:3, des:"你知道嗎？"},],
             "drama1":[
                 {loop:false, des:"對你，就是你。!", finish:false},
                 {key:"主角", des:"(我？))"},
@@ -108,6 +151,7 @@ var Npc_event = function(map) {
         }
     };
     this.mission_chain.push(this.description['任務一']);
+    this.mission_chain.push(this.description['任務二']);
     this.npc_position = {x:0, y:0};
     this.characterHasMission = function(){
         switch(this.mission_chain[0]['開始']){
@@ -115,7 +159,7 @@ var Npc_event = function(map) {
                 this.npc_position = {x: 49, y:47}
                 break;
             case "商人莉莉":
-                this.npc_position = {x: 12, y:9}
+                this.npc_position = {x: 20, y:15}
                 break;
             default:
                 break
@@ -123,6 +167,7 @@ var Npc_event = function(map) {
     }
     this.characterHasMission();
     this.checkMissionBlockHasStart = function(){
+        console.log();
         if( Math.abs(this.npc_position.x - map.playerPositionOnMap.x)<=5 &&  Math.abs(this.npc_position.y - map.playerPositionOnMap.y)<=5){
            
             return true;;
@@ -134,6 +179,7 @@ var Npc_event = function(map) {
         this.npc_name = name;
         this.taking_is_start = true;
         if(this.mission_chain[0]["開始"] == this.npc_name && !this.mission_chain[0]["說了"]){
+            console.log("歷歷");
             this.drama = -999;
         }else
             this.drama = drama_name;
@@ -142,21 +188,37 @@ var Npc_event = function(map) {
 
     this.talking = function(){
         this.amount ++;
-        console.log(this.drama);
+        console.log(this.mission_chain[0]["劇本"][0].finish);
+        console.log(this.amount);
+        console.log(this.taking_is_start);
+        console.log(this.mission_chain[0]["劇本"].length);
         if(this.drama == -999){
             if(this.mission_chain[0]["劇本"][0].finish){
                 this.taking_is_start = false;
             }else{
+                console.log(this.mission_chain[0]["劇本"].length);
+
                 if(this.amount >=  this.mission_chain[0]["劇本"].length){
                     this.taking_is_start = false;
                     this.amount = 0;
                     this.mission_chain[0]["說了"] = true;
+                    
+
+                    console.log(this.mission_chain);
+
                     if(! this.mission_chain[0]["劇本"][0].finish){
                         if(! this.mission_chain[0]["劇本"][0].loop)
                             this.mission_chain[0]["劇本"][0].finish = true;
                     }else{
                         this.taking_is_start = false;
                     }
+                    if(this.mission_chain.length > 1){
+                        this.mission_chain.splice(0, 1);
+                    }else{
+                        this.mission_block.stop();
+                    }
+                    this.characterHasMission();
+                    
                 }else{
                     this.talk_des = this.mission_chain[0]["劇本"][this.amount].des;
                 }
@@ -171,6 +233,7 @@ var Npc_event = function(map) {
                     if(!this.description[this.npc_name][this.drama][0].finish){
                         if(!this.description[this.npc_name][this.drama][0].loop)
                             this.description[this.npc_name][this.drama][0].finish = true;
+                            
                     }else{
                         this.taking_is_start = false;
                     }
@@ -193,14 +256,16 @@ var Npc_event = function(map) {
     }
     this.draw = function(ctx){
         // console.log(this.map);
-        // console.log(this.checkMissionBlockHasStart());
+        console.log(this.checkMissionBlockHasStart());
         // console.log(this.npc_position);
+
         if(this.checkMissionBlockHasStart()){
             this.mission_block.position = {x:(13+this.npc_position.x - this.map.playerPositionOnMap.x)*64+16,y:(7+this.npc_position.y - this.map.playerPositionOnMap.y)*64-32};
             // console.log(this.mission_block.position);
-
-            this.mission_block.draw(ctx); 
+            if(this.mission_block._start)
+                this.mission_block.draw(ctx); 
         }
+        console.log(this.taking_is_start);
         if(this.taking_is_start){
             ctx.textAlign = 'center';
             ctx.font = "40px Arial";
