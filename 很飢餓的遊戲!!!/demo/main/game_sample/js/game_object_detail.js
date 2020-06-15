@@ -58,6 +58,12 @@ var Game_object_detail = function() {
                 {key:46,name:"挖的草(未拔)", des:"!!!!"},
                 {key:47,name:"挖的樹苗(拔)", des:"粗壯的小樹苗"},
                 {key:48,name:"挖的樹苗(未拔)", des:"小樹苗好可愛"},
+                {key:49,name:"蝙蝠翅膀", des:"小樹苗好可愛"},
+                {key:50,name:"眼球", des:"小樹苗好可愛"},
+                {key:51,name:"蜂蜜", des:"小樹苗好可愛"},
+                {key:52,name:"大肉", des:"小樹苗好可愛"},
+                {key:53,name:"怪物肉", des:"3分熟左右"},
+                {key:54,name:"黑漿果", des:"上面長滿了黴菌，好臭，不能吃了。"},
             ];
     }
     
@@ -65,8 +71,9 @@ var Game_object_detail = function() {
     this.title_string = "";
     this.des_string = "";
     this.showUpdate = function(item_number){
+        // console.log(item_number);
         if(item_number != null){
-            if(item_number <= 48 && item_number >=1 && item_number){
+            if(item_number <= 54 && item_number >=1 && item_number){
                 this.title_string = this.description[item_number-1].name;
                 this.des_string = this.description[item_number-1].des;
             }else{
