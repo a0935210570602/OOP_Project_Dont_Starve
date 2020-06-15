@@ -71,7 +71,7 @@ var Game_object_detail = function() {
     this.title_string = "";
     this.des_string = "";
     this.showUpdate = function(item_number){
-        console.log(item_number);
+        // console.log(item_number);
         if(item_number != null){
             if(item_number <= 54 && item_number >=1 && item_number){
                 this.title_string = this.description[item_number-1].name;

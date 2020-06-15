@@ -36,7 +36,7 @@ var Proxy = function() {
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
-            [0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -4646,7 +4646,7 @@ var Proxy = function() {
         ],
 
     ];
-    this.whichToDetect = function(itemArray, map_name){
+    this.whichToDetect = function(map_name, itemArray){
         this.itemArray = itemArray
         this.map_name = map_name;
     }
@@ -4664,9 +4664,11 @@ var Proxy = function() {
     //48:挖的樹苗(未拔) 49:蝙蝠翅膀 50:眼球 51:蜂蜜 52:大肉 53:怪物肉 54:黑漿果
     //-1:樹 -3:假空白 -4:小樹苗 -10:小丑哥哥 -11:商人莉莉
     this.createItemMap= function(map_number){
+        console.log("createItemMap");
         var i = map_number;
         this.itemArray_two_dimension = [];
         this.itemArray_one_dimension = [];
+        console.log(this.map_name);
         switch(this.map_name){
             case "World":
                 this.item = this.item_map_Array;
@@ -4679,6 +4681,7 @@ var Proxy = function() {
             default:
                 break;
         }
+        console.log(this.item,map_number);
         for(var j=0;j<this.item[i].length;j++){
             for(var k=0;k<this.item[i][j].length;k++){
                 console.log();

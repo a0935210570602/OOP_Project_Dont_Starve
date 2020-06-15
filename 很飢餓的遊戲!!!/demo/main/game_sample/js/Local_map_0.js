@@ -4759,6 +4759,7 @@ var Local_map_0 = function() {
             case "World":
                 return this.mapArray[number][position.x][position.y];
             case "House1":
+                console.log("catchMap");
                 return this.houseArray[number][position.x][position.y];
             default:
                 break;

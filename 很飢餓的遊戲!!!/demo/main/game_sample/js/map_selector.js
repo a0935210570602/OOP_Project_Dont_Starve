@@ -55,6 +55,7 @@ var Map_selector = function() {
         this.mapArray = [];
         this.map_line = [];
         for(var i=-5;i<6;i++){
+            // console.log(world_position);
             for(var j=-5;j<6;j++){
                 this.flag.x = Math.floor((world_position.y+i) / 40);
                 this.flag.y = Math.floor((world_position.x+j) / 40);
