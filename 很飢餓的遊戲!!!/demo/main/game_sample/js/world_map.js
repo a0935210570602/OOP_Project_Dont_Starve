@@ -758,7 +758,7 @@ var World_map = function()
                 this.handleDrop();
                 this.handleHoverBackpack();
                 break;
-            case 'Q':
+            case 'P':
                 this.demo_dead_trigger = true;
                 break;
             case 'F':
@@ -793,8 +793,6 @@ var World_map = function()
             default:
                 break;
         }
-        console.log(this.playerPositionOnMapSave["World"]);
-        console.log(this.playerPositionOnMapSave["House1"]);
 
         if(this.player1.player_state == "alive" && !this.npc_event.taking_is_start){
             if(this.whatIsTheLastKeyMove() == 'Down'){
