@@ -21,7 +21,7 @@ var Monster_cow = function(map) {
         if(random == 0)
             return new Item_meat();
         if(random == 1)
-            return new Item_monster_meat();
+            return new Item_spider_web();
     }
 };
 Monster_cow.prototype = new Monster_base();
