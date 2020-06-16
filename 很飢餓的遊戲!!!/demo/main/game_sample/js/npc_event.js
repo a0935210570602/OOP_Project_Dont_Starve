@@ -256,7 +256,6 @@ var Npc_event = function(map) {
     }
     this.draw = function(ctx){
         // console.log(this.map);
-        console.log(this.checkMissionBlockHasStart());
         // console.log(this.npc_position);
 
         if(this.checkMissionBlockHasStart()){
@@ -265,7 +264,6 @@ var Npc_event = function(map) {
             if(this.mission_block._start)
                 this.mission_block.draw(ctx); 
         }
-        console.log(this.taking_is_start);
         if(this.taking_is_start){
             ctx.textAlign = 'center';
             ctx.font = "40px Arial";

@@ -24,11 +24,25 @@ var Skill_handler = function() {
     }
 
     this.start = function(playerWalkDirection,playerPositionOnMap,equipmentId){  
+        var audio = new Framework.Audio({
+            fire: {
+                mp3: define.musicPath + '火魔法.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            },
+            ice: {
+                mp3: define.musicPath + '冰魔法.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         this.mapPosition = {x: playerPositionOnMap.x+playerWalkDirection.x*3, y: playerPositionOnMap.y+playerWalkDirection.y*3};
-        if(equipmentId == 29)
+        if(equipmentId == 29){
             this.fire_wand_level1.start({ from: 0, to: 14, loop: false});
-        if(equipmentId == 30)
+        }
+        if(equipmentId == 30){
             this.ice_wand_level1.start({ from: 0, to: 14, loop: false});
+        }
     }
 
     this.setPosition = function(positionOnMap){

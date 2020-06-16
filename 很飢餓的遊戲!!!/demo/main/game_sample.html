@@ -4,11 +4,11 @@
 //才會繼續loading下一個檔案, 如果沒有需要lookFor, 則以空字串代表
 var listScript = 
 [
-    { src: '../../src/loadFramework.js',lookFor: 'loadFrameworkEnd'},
-    { src: 'game_sample/js/loadGame.js',lookFor: 'loadGameEnd'},
+    { src: '../../src/loadFramework.js', allow="autoplay",lookFor: 'loadFrameworkEnd'},
+    { src: 'game_sample/js/loadGame.js', allow="autoplay",lookFor: 'loadGameEnd'},
 ]
 </script>
-<script type="text/javascript" src="../../src/load.js"></script>
+<script type="text/javascript" src="../../src/load.js", allow="autoplay" ></script>
 <!---->
 
 <style type="text/css">

@@ -18,6 +18,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
     },
 
     load: function() {
+        this.music_start = false;
         this.menu = new Framework.Sprite(define.imagePath + 'game_loading.png');
         this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_untouch.png');
         this.botton_tutorial = new Framework.Sprite(define.welcomimgPath + 'tutorial_game_untouch.png');
@@ -32,8 +33,8 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
                 mp3: define.musicPath + '遊戲開場音樂.mp3',
                 //ogg: define.musicPath + 'kick2.ogg',
                 //wav: define.musicPath + 'kick2.wav'
-            }, song1:{
-                mp3: define.musicPath + '遊戲王經典配樂.mp3',
+            }, keyup:{
+                mp3: define.musicPath + '按按鍵.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
             }, song2:{
@@ -42,8 +43,15 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
                 //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
-        this.audio.play({name: 'start_game', loop: true});
-        //播放時, 需要給name, 其餘參數可參考W3C
+        // document.querySelector('__game_canvas__').click();
+        // this.audio.openVolume(this.audio._audioInstanceObj['start_game']);
+        // console.log(Framework.Audio._audioInstanceObj);
+
+        console.log(this.audio);
+            //播放時, 需要給name, 其餘參數可參考W3C
+        // setTimeout(()=>{
+        //     this.audio.play({name: 'start_game', loop: true});
+        // },2000);
 
     },
 
@@ -91,12 +99,13 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         };
         this.botton_team.scale = 1;
         // this.rootScene.attach(this.botton_team);
-        
+        this.audio.play({name: 'start_game', loop: true});
 
         // this.botton_rootScene.attach(this.botton_start);
     },
 
     update:function(){     
+        
         //this.rootScene.update();一定要在第一行
         // this.rootScene.update(); 
         // this.botton_rootScene.update(); 
@@ -119,24 +128,34 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
     },
 
     mousedown: function(e) {
+        
         //console.log為Browser提供的function, 可以在debugger的console內看到被印出的訊息                    
         // Framework.Game.goToNextLevel();
     },
 
     click:function(e){      
+        this.audio.play({name: 'keyup', loop: false});
 
         if(e.x<1300+196 && e.x>1058+196 && e.y<465 && e.y>365){
+            this.audio.stop('start_game');
             Framework.Game.goToLevel('drama0');  
         }
-        if(e.x<1300+196 && e.x>1058+196 && e.y<577 && e.y>480)
+        if(e.x<1300+196 && e.x>1058+196 && e.y<577 && e.y>480){
+            this.audio.stop('start_game');
             Framework.Game.goToLevel('menu_tutorial');  
-        if(e.x<1300+196 && e.x>1058+196 && e.y<686 && e.y>588)
+        }
+        if(e.x<1300+196 && e.x>1058+196 && e.y<686 && e.y>588){
+            
+            this.audio.stop('start_game');
+
             window.close();   
-        if(e.x<1300+196 && e.x>1058+196 && e.y<798 && e.y>699)
+        }
+        if(e.x<1300+196 && e.x>1058+196 && e.y<798 && e.y>699){
+            this.audio.stop('start_game');
             Framework.Game.goToLevel('menu_gameteam');  
-        },
+        }
+    },
     mousemove: function(e) {        
-        // console.log(e);     
         if(e.x >= 1060+196 && e.x<=1296+196 && e.y<=466 && e.y>=369){
             this.botton_start = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
         }else{

@@ -1,4 +1,11 @@
 var SynthesisBar = function(backpackList, score) {
+    this.audio = new Framework.Audio({
+         click_change:{
+            mp3: define.musicPath + '合成.mp3',
+            //ogg: define.musicPath + 'Hot_Heat.ogg',
+            //wav: define.musicPath + 'Hot_Heat.wav'
+        }
+    });
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
     this.backpack.position = {x:0,y:0};
@@ -441,7 +448,8 @@ var SynthesisBar = function(backpackList, score) {
 
     this.updateChildBar = function(index){
         // this.drawChildBar = index;
-        // console.log("drawChildBar",this.drawChildBar);
+        // this.audio.play({name: 'click_change', loop: true});
+
         this.currentPoint = index;
 
         if(this.currentPoint.x == 1 &&  this.currentPoint.y <= 8 &&  this.currentPoint.y >= 4){

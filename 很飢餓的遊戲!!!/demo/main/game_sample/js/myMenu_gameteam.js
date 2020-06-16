@@ -15,10 +15,27 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         ctx.textAlign = 'center';
         ctx.fillStyle = 'white';
         ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
+        
     },
 
     load: function() {
         this.go_back_menu = new Framework.Sprite(define.welcomimgPath + 'go_back_menu.png');
+        this.audio = new Framework.Audio({
+            start_game: {
+                mp3: define.musicPath + '遊戲開場音樂.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, keyup:{
+                mp3: define.musicPath + '按按鍵.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, song2:{
+                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }
+        });
+        this.audio.play({name: 'song2', loop: true});
     },
 
     initialize: function() {
@@ -65,11 +82,15 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
     },
 
     mousedown: function(e) {
-        if(e.x<915 && e.x>682 && e.y<573 && e.y>285)
-            Framework.Game.goToLevel('menu');                   
+        
     },
 
     click:function(e){      
+        this.audio.play({name: 'keyup', loop: false});
+        if(e.x<915 && e.x>682 && e.y<573 && e.y>285){
+            this.audio.stop('song2');
+            Framework.Game.goToLevel('menu');                   
+        }
     },
 
     mousemove: function(e) {               

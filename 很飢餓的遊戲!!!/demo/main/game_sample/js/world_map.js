@@ -182,8 +182,20 @@ var World_map = function()
                 mp3: define.musicPath + 'levelup.mp3',
                 //ogg: define.musicPath + 'kick2.ogg',
                 //wav: define.musicPath + 'kick2.wav'
-            }, song1:{
-                mp3: define.musicPath + 'easy.mp3',
+            },kick: {
+                mp3: define.musicPath + 'levelup.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, click_change:{
+                mp3: define.musicPath + '合成.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, morning:{
+                mp3: define.musicPath + 'Hot_Heat.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, night:{
+                mp3: define.musicPath + 'night.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
             }, die_scream:{
@@ -205,7 +217,6 @@ var World_map = function()
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
         this.character_description = new Character_description();
-        this.clock.init();
         this.arror_attack = new Arror_attack(this.player1, this.monster);
         this.handle_initial_character.init();
         
@@ -580,6 +591,8 @@ var World_map = function()
     }	
     
     this.clockDraw = function(ctx){
+        this.clock.init();
+
         var clockInterval = setInterval(() => {
             if(!this.npc_event.taking_is_start){
                 this.clock.draw(ctx);
@@ -848,6 +861,32 @@ var World_map = function()
         }
     }
     this.keyup = function(e, list){
+        var audio = new Framework.Audio({
+            fight: {
+                mp3: define.musicPath + '打擊.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            },
+            spear: {
+                mp3: define.musicPath + '長矛.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            },
+            arror: {
+                mp3: define.musicPath + '弓箭.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            },fire: {
+                mp3: define.musicPath + '火魔法.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            },
+            ice: {
+                mp3: define.musicPath + '冰魔法.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         if(e.key == 'S'){
             var attackMode = new Null_attack();
 
@@ -856,18 +895,28 @@ var World_map = function()
                 this.player1.hideAnimation.start();
             }
             else if(this.player1.mode == "magic"){
-                if(this.skillTimer.isEnergyFull)
+                if(this.skillTimer.isEnergyFull){
+                    console.log(this.player1.equipmentBar.getEquipment(2));
+                    if(this.player1.equipmentBar.getEquipment(2).item_num == 29)
+                        audio.play({name: 'fire', loop: false});
+                    if(this.player1.equipmentBar.getEquipment(2).item_num == 30)
+                        audio.play({name: 'ice', loop: false});
                     attackMode = new Magic_attack(this.player1, this.monster, this.skill_handler.mapPosition);
+                }    
                 this.skillTimer.stopAccumulateEnergy();
             }
             else if(this.player1.mode == "arror"){
                 this.arror_attack.setPositionAndDirection(this.playerWalkDirection, this.playerPositionOnMap);
                 attackMode = this.arror_attack;
+                audio.play({name: 'arror', loop: false});
+
             }else if(this.player1.mode == "spear"){
                 attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
                 this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
+                audio.play({name: 'spear', loop: false});
             }else{
                 attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
+                audio.play({name: 'fight', loop: false});
             }
 
             this.player1.attack(attackMode);
@@ -892,6 +941,8 @@ var World_map = function()
     }
 
     this.handleFishing = function(){
+       
+
         this.fishing.stop();
         var addSuccess = false;
         for(var i=-1;i<2;i++){
@@ -916,8 +967,17 @@ var World_map = function()
     }
 
     this.startFishing = function(){
-        if(this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] == 200)
+        var audio = new Framework.Audio({
+            fish: {
+                mp3: define.musicPath + '釣魚.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
+        if(this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] == 200){
+            audio.play({name: 'fish', loop: false});
             this.fishing.start(this.playerWalkDirection);
+        }
     }
 
     this.handleDrop = function(){
@@ -947,6 +1007,7 @@ var World_map = function()
     }
 
     this.handleSpace = function(){
+        
         if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x &&  this.on_map_name == "World" &&
             this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
                 if(!this.npc_event.taking_is_start){
@@ -996,8 +1057,13 @@ var World_map = function()
     }
 
     this.handlePlantDig = function(){
-        console.log(this.player1.mode);
-
+        var audio = new Framework.Audio({
+            dig: {
+                mp3: define.musicPath + '挖掘.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 1){
             if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].status){
                 this.map_selector.addObject(this.on_map_name,{x:this.playerPositionOnMap.x+this.playerWalkDirection.x, y:this.playerPositionOnMap.y+this.playerWalkDirection.y}, new Item_flower_growed_dig());
@@ -1034,9 +1100,18 @@ var World_map = function()
         }
         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
         m_map.draw(Framework.Game._context);
+        audio.play({name: 'dig', loop: false});
+
     }
 
     this.handlePick = function(){
+        var audio = new Framework.Audio({
+            pick: {
+                mp3: define.musicPath + 'soundeffects.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 1){
             this.player1.backpack.addItemByObject(new Item_flower_picked());
             this.pickRegenerateObject();
@@ -1060,9 +1135,17 @@ var World_map = function()
             if(this.checkIsWalkAble(this.playerWalkDirection) && this.keyPress != "")
                 this.pressWalk = true;
         }
+        audio.play({name: 'pick', loop: false});
     }
 
     this.handleCutTree = function(){           
+        var audio = new Framework.Audio({
+            cut: {
+                mp3: define.musicPath + '砍樹.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         var x = 5+this.playerWalkDirection.x;
         var y = 5+this.playerWalkDirection.y;
         var count = false;
@@ -1097,9 +1180,17 @@ var World_map = function()
                 // this.level_up_animation.start();
             }
         }
+        audio.play({name: 'cut', loop: false});
     }
 
     this.handleRockDig = function(){
+        var audio = new Framework.Audio({
+            dig: {
+                mp3: define.musicPath + '挖掘.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         var y = 5+this.playerWalkDirection.y;
         var x = 5+this.playerWalkDirection.x;
         if(this.itemArray[y][x].item_num == 3){
@@ -1129,9 +1220,17 @@ var World_map = function()
         this.player1.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
         m_map.draw(Framework.Game._context);
+        audio.play({name: 'dig', loop: false});
     }
 
     this.handlePlant = function(){
+        var audio = new Framework.Audio({
+            dig: {
+                mp3: define.musicPath + '挖掘.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }
+        });
         if(this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] != 91 &&
             this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] != 200){
             if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 0){
@@ -1194,6 +1293,7 @@ var World_map = function()
                     this.player1.backpack.arrayRemoveByIndex(this.player1.plantIndex);
             }
         }
+        audio.play({name: 'dig', loop: false});
     }
 
     this.pickRegenerateObject = function(){

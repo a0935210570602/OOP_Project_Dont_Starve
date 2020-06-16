@@ -176,6 +176,7 @@ var Framework = (function (Framework) {
         */
 		//因為stop為native code, 故private命名部分改用stopMusic
 		var stopMusic = function(audioName) {
+			console.log("stopMusic");
 			var audio = _audioInstanceObj[audioName];
 			audio.pause();
 			audio.currentTime = 0;
@@ -210,7 +211,12 @@ var Framework = (function (Framework) {
 
 		
 		var manageMute = function(name, muted) {
+			console.log(_audioInstanceObj);
+			console.log(name);
+
 			var audio = _audioInstanceObj[name];
+			console.log(audio);
+
 			audio.muted = muted;
 		};
 

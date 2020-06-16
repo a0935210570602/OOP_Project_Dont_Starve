@@ -23,7 +23,7 @@ var Drama0 = Framework.Class(Framework.Level , {
             }
         });
         //播放時, 需要給name, 其餘參數可參考W3C
-        // this.audio.play({name: 'song1', loop: true});
+        this.audio.play({name: 'song1', loop: true});
         this.playerPositionOnMap = {x:0,y:0};
         this.npc_event = new Npc_event(this);
         this.npc_event.trigger("主角", "drama0");
@@ -54,8 +54,10 @@ var Drama0 = Framework.Class(Framework.Level , {
             }
         }else if(e.key === 'Space'){
             this.npc_event.talking();
-            if( !this.npc_event.taking_is_start)
+            if( !this.npc_event.taking_is_start){
+                this.audio.stopAll();
                 Framework.Game.goToLevel('level1');  
+            }
             
             this.draw(Framework.Game._context);
         }else if(e.key === 'Z'){
@@ -72,6 +74,7 @@ var Drama0 = Framework.Class(Framework.Level , {
     },
 
     click: function (e) {  
+        this.audio.stopAll();
         Framework.Game.goToLevel('level1');  
     },
 
