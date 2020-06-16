@@ -947,7 +947,7 @@ var World_map = function()
     }
 
     this.handleSpace = function(){
-        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x && 
+        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc1.position.x &&  this.on_map_name == "World" &&
             this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc1.position.y ){
                 if(!this.npc_event.taking_is_start){
                     this.npc_event.trigger(this.npc1.name, "dialog");
@@ -955,6 +955,20 @@ var World_map = function()
                 }
                 else
                     this.npc_event.talking();
+        }
+        if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc2.position.x &&  this.on_map_name == "House1" &&
+            this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc2.position.y ){
+                console.log("莉莉再說話");
+
+                if(!this.npc_event.taking_is_start){
+                    console.log(88888);
+                    this.npc_event.trigger(this.npc2.name, "dialog");
+                    this.npc_event.talking();
+                }
+                else{
+                    console.log("莉莉再說話");
+                    this.npc_event.talking();
+                }
         }
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
             this.handleFishing();
@@ -1219,9 +1233,9 @@ var World_map = function()
         var y = 5+direction.y;
         var xx = this.playerPositionOnMap.x+direction.x;
         var yy = this.playerPositionOnMap.y+direction.y;
-        // console.log(this.playerPositionOnMap);
         if(this.mapArray[y][x] == 91 || this.mapArray[y][x] == 200 || this.itemArray[y][x].item_num !=0 || this.mapArray[y][x] == 4 ||
-            (xx == this.npc1.position.x && yy == this.npc1.position.y)){
+            (xx == this.npc1.position.x && yy == this.npc1.position.y && this.on_map_name == "World") ||
+            (xx == this.npc2.position.x && yy == this.npc2.position.y && this.on_map_name == "House1")){
             return false;
         }else{
             return true;
