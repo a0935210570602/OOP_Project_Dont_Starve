@@ -27,21 +27,22 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         this.start_game_touch = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
         this.team_game_touch = new Framework.Sprite(define.welcomimgPath + 'team_game_touch.png');
         this.quit_game_touch = new Framework.Sprite(define.welcomimgPath + 'quit_game_touch.png');
-        // this.audio = new Framework.Audio({
-        //     kick: {
-        //         mp3: define.musicPath + 'kick2.mp3',
-        //         //ogg: define.musicPath + 'kick2.ogg',
-        //         //wav: define.musicPath + 'kick2.wav'
-        //     }, song1:{
-        //         mp3: define.musicPath + '遊戲王經典配樂.mp3',
-        //         //ogg: define.musicPath + 'Hot_Heat.ogg',
-        //         //wav: define.musicPath + 'Hot_Heat.wav'
-        //     }, song2:{
-        //         mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
-        //         //ogg: define.musicPath + 'Hot_Heat.ogg',
-        //         //wav: define.musicPath + 'Hot_Heat.wav'
-        //     }
-        // });
+        this.audio = new Framework.Audio({
+            start_game: {
+                mp3: define.musicPath + '遊戲開場音樂.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, song1:{
+                mp3: define.musicPath + '遊戲王經典配樂.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, song2:{
+                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }
+        });
+        this.audio.play({name: 'start_game', loop: true});
         //播放時, 需要給name, 其餘參數可參考W3C
 
     },
