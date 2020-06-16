@@ -6,7 +6,7 @@ var Backpack = function() {
     this.objectPosition = [];
     var berry = new Item_berry();
     berry.amount = 100;
-    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry];
+    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,new Item_pixilart()];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
     
     this.selectedIndex = -1;
@@ -174,6 +174,18 @@ var Backpack = function() {
         else if(item_num == 6){
             for(var i = 0;i < this.itemList.length;i++){
                 if(this.itemList[i].item_num == 38)
+                    return true;
+            }
+        }
+        else if(item_num == 36){
+            for(var i = 0;i < this.itemList.length;i++){
+                if(this.itemList[i].item_num == 39)
+                    return true;
+            }
+        }
+        else if(item_num == -4){
+            for(var i = 0;i < this.itemList.length;i++){
+                if(this.itemList[i].item_num == 4)
                     return true;
             }
         }

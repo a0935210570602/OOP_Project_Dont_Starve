@@ -5,7 +5,10 @@ var Monster_boss = function(map) {
     
     this.monster_boss_die = new Framework.AnimationSprite({url:define.materialPath + 'boss_die.png', col:3 , row:1 , loop:false , speed:12}); 
     this.monster_boss_die.scale = 1.2;
-    
+
+    this.monster_tocan = new Framework.Sprite(define.materialPath + 'boss_tocan.png'); 
+    this.monster_tocan.scale = 0.8; 
+
     this.normal_attack = new Framework.AnimationSprite({url:define.skillAnimationPath + 'ClawSpecial1.png', col:5 , row:5 , loop:false , speed:12}); 
     this.normal_attack.position = {x:13*64,y:7*64};
     this.normal_attack.scale = 0.8;

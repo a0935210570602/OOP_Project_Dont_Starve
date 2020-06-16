@@ -6,6 +6,9 @@ var Monster_cow = function(map) {
     this.monster_cow_die = new Framework.AnimationSprite({url:define.materialPath + 'cow_die.png', col:3 , row:1 , loop:false , speed:12}); 
     this.monster_cow_die.scale = 1.2;
 
+    this.monster_tocan = new Framework.Sprite(define.materialPath + 'cow_tocan.png'); 
+    this.monster_tocan.scale = 0.8; 
+
     this.name = "閃耀魔眼";
     this.attack = 5;
     this.health = 200;
@@ -18,7 +21,7 @@ var Monster_cow = function(map) {
         if(random == 0)
             return new Item_meat();
         if(random == 1)
-            return new Item_monster_meat();
+            return new Item_spider_web();
     }
 };
 Monster_cow.prototype = new Monster_base();

@@ -20,8 +20,7 @@ var Creation_blood_status = function() {
     this.blood_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.blood_chart.scale = 1.5;
     this.blood_ratio = [];
-    this.monster_cute_litter_eye_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
-    this.monster_cute_litter_eye_tocan.scale = 1.5;
+    this.monster_tocan; 
     this.init = function(player){
         this.characterHungryUpdate(player);
         this.characterMagicUpdate(player);
@@ -57,8 +56,8 @@ var Creation_blood_status = function() {
             for(var i=0;i<this.monsterarray.length;i++){
                 this.monsterarray[i].draw(ctx);
                 this.blood_chart.position = this.monsterarray[i].position;
-                this.blood_chart.position.x += 64*2;
-                this.blood_chart.position.y += 25;
+                this.blood_chart.position.x += 64*2 - 24;
+                this.blood_chart.position.y += 25 - 18;
                 ctx.beginPath();
                 ctx.rect(this.blood_chart.position.x-64, this.blood_chart.position.y-10, (this.blood_ratio[i])*128, 10);
                 ctx.fillStyle = "red";
@@ -96,10 +95,10 @@ var Creation_blood_status = function() {
         for(var i=0,j=0;i<monsterarray.length;i++){
             if(monsterarray[i].is_start && monsterarray[i].health > 0){
                 // console.log("is_start", i);
-                this.monster_cute_litter_eye_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
-                this.monster_cute_litter_eye_tocan.position = {x:65*4, y:65*(4+j)};
+                this.monster_tocan = monsterarray[i].monster_tocan; 
+                this.monster_tocan.position = {x:65*4+5, y:65*(4+j)+10};
                 this.blood_ratio.push(monsterarray[i].health/monsterarray[i].maxHealth);
-                this.monsterarray.push(this.monster_cute_litter_eye_tocan);
+                this.monsterarray.push(this.monster_tocan);
                 j++;
             }
         }

@@ -6,6 +6,9 @@ var Monster_bat = function(map) {
     this.monster_bat_die = new Framework.AnimationSprite({url:define.materialPath + 'bat_die.png', col:3 , row:1 , loop:false , speed:12}); 
     this.monster_bat_die.scale = 1.2;
 
+    this.monster_tocan = new Framework.Sprite(define.materialPath + 'bat_tocan.png'); 
+    this.monster_tocan.scale = 0.8;
+
     this.name = "小蝙蝠";
     this.attack = 100;
     this.health = 1000;

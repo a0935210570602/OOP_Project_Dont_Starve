@@ -1,5 +1,5 @@
 var Npc_event = function(map) {
-    console.log(map);
+    // console.log(map);
     this.map = map;
     this.dialog_blue = new Framework.Sprite(define.materialPath + 'dialog_blue.png'); 
     this.dialog_blue.scale = 1.5;
@@ -167,7 +167,7 @@ var Npc_event = function(map) {
     }
     this.characterHasMission();
     this.checkMissionBlockHasStart = function(){
-        console.log();
+        // console.log();
         if( Math.abs(this.npc_position.x - map.playerPositionOnMap.x)<=5 &&  Math.abs(this.npc_position.y - map.playerPositionOnMap.y)<=5){
            
             return true;;
@@ -179,7 +179,7 @@ var Npc_event = function(map) {
         this.npc_name = name;
         this.taking_is_start = true;
         if(this.mission_chain[0]["開始"] == this.npc_name && !this.mission_chain[0]["說了"]){
-            console.log("歷歷");
+            // console.log("歷歷");
             this.drama = -999;
         }else
             this.drama = drama_name;
@@ -188,15 +188,15 @@ var Npc_event = function(map) {
 
     this.talking = function(){
         this.amount ++;
-        console.log(this.mission_chain[0]["劇本"][0].finish);
-        console.log(this.amount);
-        console.log(this.taking_is_start);
-        console.log(this.mission_chain[0]["劇本"].length);
+        // console.log(this.mission_chain[0]["劇本"][0].finish);
+        // console.log(this.amount);
+        // console.log(this.taking_is_start);
+        // console.log(this.mission_chain[0]["劇本"].length);
         if(this.drama == -999){
             if(this.mission_chain[0]["劇本"][0].finish){
                 this.taking_is_start = false;
             }else{
-                console.log(this.mission_chain[0]["劇本"].length);
+                // console.log(this.mission_chain[0]["劇本"].length);
 
                 if(this.amount >=  this.mission_chain[0]["劇本"].length){
                     this.taking_is_start = false;
@@ -204,7 +204,7 @@ var Npc_event = function(map) {
                     this.mission_chain[0]["說了"] = true;
                     
 
-                    console.log(this.mission_chain);
+                    // console.log(this.mission_chain);
 
                     if(! this.mission_chain[0]["劇本"][0].finish){
                         if(! this.mission_chain[0]["劇本"][0].loop)
@@ -256,6 +256,7 @@ var Npc_event = function(map) {
     }
     this.draw = function(ctx){
         // console.log(this.map);
+        // console.log(this.checkMissionBlockHasStart());
         // console.log(this.npc_position);
 
         if(this.checkMissionBlockHasStart()){

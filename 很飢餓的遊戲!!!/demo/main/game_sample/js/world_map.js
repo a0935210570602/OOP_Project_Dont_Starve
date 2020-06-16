@@ -3,6 +3,14 @@ var World_map = function()
     this.demo_dead_trigger = false;
     this.item_map_Array = [];
     this.load = function(){
+        this.item_black_berry = new Framework.Sprite(define.materialPath + 'item_black_berry.png'); 
+        this.monster_boss_tocan = new Framework.Sprite(define.materialPath + 'boss_tocan.png'); 
+        this.monster_tocan = new Framework.Sprite(define.materialPath + 'pig_tocan.png'); 
+        this.monster_tocan = new Framework.Sprite(define.materialPath + 'cow_tocan.png'); 
+        this.monster_tocan = new Framework.Sprite(define.materialPath + 'bat_tocan.png'); 
+        this.monster_tocan = new Framework.Sprite(define.materialPath + 'bee_tocan.png'); 
+        this.item_sapling = new Framework.Sprite(define.materialPath + 'item_sapling.png'); 
+
         this.terrain_plain = [];
         this.terrain_plain.push(new Framework.Sprite(define.imageMorningPath + 'terrain_plain.png')); 
         this.terrain_plain[0].scale = 2;
@@ -514,10 +522,10 @@ var World_map = function()
                     }
                 }
             }
-            // console.log(this.itemArray);
             this.player1.draw(ctx);
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
+                    // console.log(this.tilePosition[j][i]);
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
@@ -720,7 +728,7 @@ var World_map = function()
         if(e.key != 'Space' && this.fishing.is_start)
             this.fishing.stop();
         
-        //Q:死亡結束  W:勝利結束 R:蜜蜂 T:豬 Y:牛 U:眼球 I:蝙蝠
+        //Q:死亡結束  W:勝利結束 R:蜜蜂 T:豬 Y:牛 U:眼球 I:蝙蝠 O:boss
         switch(e.key){
             case 'Q':
                 this.gameClear();
@@ -1048,7 +1056,7 @@ var World_map = function()
                 if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == -1 
                     && (this.player1.mode == "cut_tree") )
                     this.handleCutTree();
-                if(this.player1.backpack.checkIfPickAvailable(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x])){
+                if(this.player1.backpack.checkIfPickAvailable(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num)){
                     this.handlePick();
                 }
             }

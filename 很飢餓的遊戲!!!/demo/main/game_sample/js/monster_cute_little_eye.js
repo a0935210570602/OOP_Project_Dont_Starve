@@ -5,6 +5,8 @@ var Monster_cute_little_eye = function(map) {
     this.monster_cute_little_eye.index = 1;
     this.monster_cute_little_eye_die = new Framework.AnimationSprite({url:define.materialPath + 'eye_die.png', col:3 , row:1 , loop:true , speed:12}); 
     this.monster_cute_little_eye_die.scale = 1.2;
+    this.monster_tocan = new Framework.Sprite(define.materialPath + 'monster_cute_litter_eye_tocan.png'); 
+    this.monster_tocan.scale = 1.2; 
     
     this.name = "大眼仔仔";
     this.attack = 5;
