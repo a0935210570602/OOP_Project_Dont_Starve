@@ -274,13 +274,11 @@ var Backpack = function() {
 
     this.arrayRemoveEmpty = function() {
         var i = 0;
-        while(i < this.itemList.length) {
-            if (this.itemList[i].amount == 0) {
-            this.itemList.splice(i, 1);
-            } else {
-            i++;
-            }
-        }
+        while(i < this.itemList.length) 
+            if (this.itemList[i].amount == 0)
+                this.itemList.splice(i, 1);
+            else 
+                i++;
     }
 
     this.itemNameArray = [
