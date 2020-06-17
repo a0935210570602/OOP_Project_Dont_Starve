@@ -384,13 +384,11 @@ var Backpack = function() {
 
     this.arrayRemoveEmpty = function() {
         var i = 0;
-        while(i < this.itemList.length) {
-            if (this.itemList[i].amount == 0) {
-            this.itemList.splice(i, 1);
-            } else {
-            i++;
-            }
-        }
+        while(i < this.itemList.length) 
+            if (this.itemList[i].amount == 0)
+                this.itemList.splice(i, 1);
+            else 
+                i++;
     }
     this.mousemove = function(e){
         // this.mousePosition = e;
@@ -439,6 +437,47 @@ var Backpack = function() {
         "黃金十字鎬", "頭盔", "草製盔甲", "木製盔甲", "長矛", "吹箭", "國王法杖", "空間法杖", "火法杖", "冰法杖",
         "黃金提燈", "火把", "帳篷", "篝火", "冰塊", "漿果叢"
     ];
+
+    this.mousemove = function(e){
+        this.mousePosition = e;
+
+        if(e.x<=290+64 && e.x>= 290 && e.y<=860 && e.y>= 807){
+            return this.itemList[0].item_num;
+        }else if(e.x<=290+64*2 && e.x>= 290+64*1 && e.y<=860 && e.y>= 807){
+            return this.itemList[1].item_num;
+        }else if(e.x<=290+64*3 && e.x>= 290+64*2 && e.y<=860 && e.y>= 807){
+            return this.itemList[2].item_num;
+        }else if(e.x<=290+64*4 && e.x>= 290+64*3 && e.y<=860 && e.y>= 807){
+            return this.itemList[3].item_num;
+        }else if(e.x<=290+64*5 && e.x>= 290+64*4 && e.y<=860 && e.y>= 807){
+            return this.itemList[4].item_num;
+        }else if(e.x<=290+64*6 && e.x>= 290+64*5 && e.y<=860 && e.y>= 807){
+            return this.itemList[5].item_num;
+        }else if(e.x<=290+64*7 && e.x>= 290+64*6 && e.y<=860 && e.y>= 807){
+            return this.itemList[6].item_num;
+        }else if(e.x<=290+64*8 && e.x>= 290+64*7 && e.y<=860 && e.y>= 807){
+            return this.itemList[7].item_num;
+        }else if(e.x<=290+64*9 && e.x>= 290+64*8 && e.y<=860 && e.y>= 807){
+            return this.itemList[8].item_num;
+        }else if(e.x<=290+64*10 && e.x>= 290+64*9 && e.y<=860 && e.y>= 807){
+            return this.itemList[9].item_num;
+        }else if(e.x<=290+64*11 && e.x>= 290+64*10 && e.y<=860 && e.y>= 807){
+            return this.itemList[10].item_num;
+        }else if(e.x<=290+64*12 && e.x>= 290+64*11 && e.y<=860 && e.y>= 807){
+            return this.itemList[11].item_num;
+        }else if(e.x<=290+64*13 && e.x>= 290+64*12 && e.y<=860 && e.y>= 807){
+            return this.itemList[12].item_num;
+        }else if(e.x<=290+64*14 && e.x>= 290+64*13 && e.y<=860 && e.y>= 807){
+            return this.itemList[13].item_num;
+        }else if(e.x<=290+64*15 && e.x>= 290+64*14 && e.y<=860 && e.y>= 807){
+            return this.itemList[14].item_num;
+        }else if(e.x<=290+64*16 && e.x>= 290+64*15 && e.y<=860 && e.y>= 807){
+            return this.itemList[15].item_num;
+        }else if(e.x<=290+64*17 && e.x>= 290+64*16 && e.y<=860 && e.y>= 807){
+            return this.itemList[16].item_num;
+        }
+        return null;
+    }
 
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 

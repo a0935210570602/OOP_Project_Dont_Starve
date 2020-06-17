@@ -139,7 +139,7 @@ var Handle_initial_character = function(){
         }
     }
     this.click = function(e){
-        this.audio = new Framework.Audio({
+        var audio = new Framework.Audio({
             start_game: {
                 mp3: define.musicPath + '遊戲開場音樂.mp3',
             }, keyup:{
@@ -148,7 +148,7 @@ var Handle_initial_character = function(){
                 mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
             }
         });
-        this.audio.play({name: 'keyup', loop: false});
+        audio.play({name: 'keyup', loop: false});
         if(this.is_typepanel_open){
             this.is_alphabet_touch = true;
             if(e.x>= 1086 && e.x<= 1145){
