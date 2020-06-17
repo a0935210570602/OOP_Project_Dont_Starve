@@ -282,46 +282,6 @@ var Backpack = function() {
             }
         }
     }
-    this.mousemove = function(e){
-        // this.mousePosition = e;
-
-        // if(e.x<=290+64 && e.x>= 290 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[0].item_num;
-        // }else if(e.x<=290+64*2 && e.x>= 290+64*1 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[1].item_num;
-        // }else if(e.x<=290+64*3 && e.x>= 290+64*2 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[2].item_num;
-        // }else if(e.x<=290+64*4 && e.x>= 290+64*3 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[3].item_num;
-        // }else if(e.x<=290+64*5 && e.x>= 290+64*4 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[4].item_num;
-        // }else if(e.x<=290+64*6 && e.x>= 290+64*5 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[5].item_num;
-        // }else if(e.x<=290+64*7 && e.x>= 290+64*6 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[6].item_num;
-        // }else if(e.x<=290+64*8 && e.x>= 290+64*7 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[7].item_num;
-        // }else if(e.x<=290+64*9 && e.x>= 290+64*8 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[8].item_num;
-        // }else if(e.x<=290+64*10 && e.x>= 290+64*9 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[9].item_num;
-        // }else if(e.x<=290+64*11 && e.x>= 290+64*10 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[10].item_num;
-        // }else if(e.x<=290+64*12 && e.x>= 290+64*11 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[11].item_num;
-        // }else if(e.x<=290+64*13 && e.x>= 290+64*12 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[12].item_num;
-        // }else if(e.x<=290+64*14 && e.x>= 290+64*13 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[13].item_num;
-        // }else if(e.x<=290+64*15 && e.x>= 290+64*14 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[14].item_num;
-        // }else if(e.x<=290+64*16 && e.x>= 290+64*15 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[15].item_num;
-        // }else if(e.x<=290+64*17 && e.x>= 290+64*16 && e.y<=860 && e.y>= 807){
-        //     return this.itemList[16].item_num;
-        // }
-        // return null;
-    }
 
     this.itemNameArray = [
         "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
@@ -335,9 +295,6 @@ var Backpack = function() {
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢
     this.draw = function(ctx){
-        // if(this.selectedIndex != -1){
-            // ctx.fillRect(x, y, width, height)
-        // }
         for(var j = 0; j < 17; j++){
             this.backpack.position = this.backpackPosition[j];
             this.backpack.draw(ctx);

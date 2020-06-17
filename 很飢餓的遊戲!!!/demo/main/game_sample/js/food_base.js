@@ -20,6 +20,7 @@ Object.defineProperty(Food_base.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },
+    
     set: function(newValue) {
         this.mapPosition = newValue;
         this.food.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};

@@ -21,12 +21,9 @@ var Tool = function(option) {
     this.isRegenerate = false;
     this.item_can_be_picked = true;
 
-    
-
     this.draw = function(ctx){
         this.tool.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Tool.prototype, 'position', {

@@ -1,5 +1,4 @@
 var Npc_event = function(map) {
-    // console.log(map);
     this.map = map;
     this.dialog_blue = new Framework.Sprite(define.materialPath + 'dialog_blue.png'); 
     this.dialog_blue.scale = 1.5;
@@ -104,12 +103,7 @@ var Npc_event = function(map) {
                 {key:1, des:"偉凱的課很難修"},
                 {key:2, des:"很多人都會當了"},
                 {key:3, des:"你要不要放棄"},
-            ],
-            "drama1":[
-                {loop:false, des:"對你，就是你。!", finish:false},
-                {key:"主角", des:"(我？))"},
-                {key:"小丑哥哥", des:"對，還看"},
-                {key:2, des:"看你媽媽"},]
+            ]
         },
         "商人莉莉":{
             "picture":[
@@ -119,35 +113,7 @@ var Npc_event = function(map) {
                 {loop:true, des:"還不快去", finish:false},
                 {key:1, des:"不打倒魔王的話"},
                 {key:2, des:"就永遠逃離不了這裡了"},
-                {key:3, des:"你知道嗎？"},],
-            "drama1":[
-                {loop:false, des:"對你，就是你。!", finish:false},
-                {key:"主角", des:"(我？))"},
-                {key:"小丑哥哥", des:"對，還看"},
-                {key:2, des:"看你媽媽"},]
-        },
-        "凝視者":{
-            "神秘力量":[
-                {key:0, des:"請稍等一下，在你前往<奧術平原>之前我有話想要跟你說。"},
-                {key:1, des:"你記得這裡的神官中有一位叫做卡歐的嗎？"},
-                {key:2, des:"那孩子直到最後都沒有辦法找到自己是什麼，看來好像為了找尋自我什麼什麼都願意做，不過一切終究只是說" +
-                            "說而已。" },
-                {key:3, des:"神官為了追尋愛爾達斯異常運行的原因異常的原因前往門的那端時，那孩子也一起消失在那邊了。" +
-                            "雖然我極力挽留她，但一切燈已經太遲了。" +
-                            "" +
-                            "" +
-                            "我要馬上前往門的那端找看看"},
-                {key:4, des:"請稍等，奧術平原的怪物是從充滿高密度愛爾達斯的河流中誕生......." +
-                            ""+
-                            "你必須要帶<神祕福斯>才能夠完全發揮力量。" +
-                            "" +
-                            "" +
-                            "<神祕福斯>？"},
-                {key:5, des:"百聞不如一見，先去到那邊狩獵一些怪物看看吧！ 之後我會去找你的。" +
-                            "" +
-                            "" +
-                            "(先跟門的那端奧術平原中第一個見到的怪物交手看看之後，在接受凝視者的幫助吧！)"},
-                {key:6, des:"這邊的蘋果你先拿一點去吃吧。"}]
+                {key:3, des:"你知道嗎？"},]
         }
     };
     this.mission_chain.push(this.description['任務一']);
@@ -167,7 +133,6 @@ var Npc_event = function(map) {
     }
     this.characterHasMission();
     this.checkMissionBlockHasStart = function(){
-        // console.log();
         if( Math.abs(this.npc_position.x - map.playerPositionOnMap.x)<=5 &&  Math.abs(this.npc_position.y - map.playerPositionOnMap.y)<=5){
            
             return true;;
@@ -179,7 +144,6 @@ var Npc_event = function(map) {
         this.npc_name = name;
         this.taking_is_start = true;
         if(this.mission_chain[0]["開始"] == this.npc_name && !this.mission_chain[0]["說了"]){
-            // console.log("歷歷");
             this.drama = -999;
         }else
             this.drama = drama_name;
@@ -188,45 +152,33 @@ var Npc_event = function(map) {
 
     this.talking = function(){
         this.amount ++;
-        // console.log(this.mission_chain[0]["劇本"][0].finish);
-        // console.log(this.amount);
-        // console.log(this.taking_is_start);
-        // console.log(this.mission_chain[0]["劇本"].length);
         if(this.drama == -999){
-            if(this.mission_chain[0]["劇本"][0].finish){
+            if(this.mission_chain[0]["劇本"][0].finish)
                 this.taking_is_start = false;
-            }else{
-                // console.log(this.mission_chain[0]["劇本"].length);
-
+            else{
                 if(this.amount >=  this.mission_chain[0]["劇本"].length){
                     this.taking_is_start = false;
                     this.amount = 0;
                     this.mission_chain[0]["說了"] = true;
-                    
-
-                    // console.log(this.mission_chain);
-
-                    if(! this.mission_chain[0]["劇本"][0].finish){
+                    if(! this.mission_chain[0]["劇本"][0].finish)
                         if(! this.mission_chain[0]["劇本"][0].loop)
                             this.mission_chain[0]["劇本"][0].finish = true;
-                    }else{
+                    else
                         this.taking_is_start = false;
-                    }
-                    if(this.mission_chain.length > 1){
+                    
+                    if(this.mission_chain.length > 1)
                         this.mission_chain.splice(0, 1);
-                    }else{
+                    else
                         this.mission_block.stop();
-                    }
                     this.characterHasMission();
                     
-                }else{
+                }else
                     this.talk_des = this.mission_chain[0]["劇本"][this.amount].des;
-                }
             }
         }else{
-            if(this.description[this.npc_name][this.drama][0].finish){
+            if(this.description[this.npc_name][this.drama][0].finish)
                 this.taking_is_start = false;
-            }else{
+            else{
                 if(this.amount >= this.returnSayLong()){
                     this.taking_is_start = false;
                     this.amount = 0;
@@ -234,12 +186,10 @@ var Npc_event = function(map) {
                         if(!this.description[this.npc_name][this.drama][0].loop)
                             this.description[this.npc_name][this.drama][0].finish = true;
                             
-                    }else{
+                    }else
                         this.taking_is_start = false;
-                    }
-                }else{
+                }else
                     this.talk_des = this.description[this.npc_name][this.drama][this.amount].des;
-                }
             }
         }
     }
@@ -255,16 +205,12 @@ var Npc_event = function(map) {
         this.mission_block.start({ from: 0, to: 2, loop: true});
     }
     this.draw = function(ctx){
-        // console.log(this.map);
-        // console.log(this.checkMissionBlockHasStart());
-        // console.log(this.npc_position);
-
         if(this.checkMissionBlockHasStart()){
             this.mission_block.position = {x:(13+this.npc_position.x - this.map.playerPositionOnMap.x)*64+16,y:(7+this.npc_position.y - this.map.playerPositionOnMap.y)*64-32};
-            // console.log(this.mission_block.position);
             if(this.mission_block._start)
                 this.mission_block.draw(ctx); 
         }
+
         if(this.taking_is_start){
             ctx.textAlign = 'center';
             ctx.font = "40px Arial";
@@ -290,9 +236,6 @@ var Npc_event = function(map) {
                 k++;
             }
         }
-    }
-    this.keydown = function(e){
-
     }
 };
 

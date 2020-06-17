@@ -17,7 +17,6 @@ var Item_gold = function() {
     this.draw = function(ctx){
         this.item_gold.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_gold.prototype, 'position', {

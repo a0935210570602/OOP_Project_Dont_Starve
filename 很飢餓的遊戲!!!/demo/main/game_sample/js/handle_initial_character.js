@@ -19,16 +19,10 @@ var Handle_initial_character = function(){
         this.audio = new Framework.Audio({
             start_game: {
                 mp3: define.musicPath + '遊戲開場音樂.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }, keyup:{
                 mp3: define.musicPath + '按按鍵.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, song2:{
                 mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
     }
@@ -70,93 +64,82 @@ var Handle_initial_character = function(){
         if(this.is_typepanel_open){
             this.is_alphabet_touch = true;
             if(e.x>= 1086 && e.x<= 1145){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1086, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1086, y:269};
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.alphabet_touch_anchor = {x:1086, y:311};
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.alphabet_touch_anchor = {x:1086, y:353};
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.alphabet_touch_anchor = {x:1086, y:396};
-                }
-                else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1149 && e.x<= 1208){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1149, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1149, y:269};
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.alphabet_touch_anchor = {x:1149, y:311};
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.alphabet_touch_anchor = {x:1149, y:353};
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.alphabet_touch_anchor = {x:1149, y:396};
-                }
-                else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1214 && e.x<= 1271){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1214, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1214, y:269};
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.alphabet_touch_anchor = {x:1214, y:311};
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.alphabet_touch_anchor = {x:1214, y:353};
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.alphabet_touch_anchor = {x:1214, y:396};
-                }
-                else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1276 && e.x<= 1336){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1276, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1276, y:269};
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.alphabet_touch_anchor = {x:1276, y:311};
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.alphabet_touch_anchor = {x:1276, y:353};
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.alphabet_touch_anchor = {x:1276, y:396};
-                }
-                else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1339 && e.x<= 1398){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1339, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1339, y:269};
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.alphabet_touch_anchor = {x:1339, y:311};
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.alphabet_touch_anchor = {x:1339, y:353};
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.alphabet_touch_anchor = {x:1339, y:396};
-                }
-                else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1403 && e.x<= 1461){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.alphabet_touch_anchor = {x:1403, y:226};
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.alphabet_touch_anchor = {x:1403, y:269};
-                }else{
+                else
                     this.is_alphabet_touch = false;
-                }
                 this.draw(Framework.Game._context);
             }else{
                 this.is_alphabet_touch = false;
@@ -169,76 +152,70 @@ var Handle_initial_character = function(){
         if(this.is_typepanel_open){
             this.is_alphabet_touch = true;
             if(e.x>= 1086 && e.x<= 1145){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "A";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.name += "B";
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.name += "C";
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.name += "D";
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.name += "E";
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1149 && e.x<= 1208){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "F";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.name += "G";
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.name += "H";
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.name += "I";
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.name += "J";
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1214 && e.x<= 1271){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "K";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.name += "L";
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.name += "M";
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.name += "N";
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.name += "O";
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1276 && e.x<= 1336){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "P";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.name += "Q";
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.name += "R";
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.name += "S";
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.name += "T";
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1339 && e.x<= 1398){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "U";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.name += "V";
-                }else if(e.y>= 311 && e.y<= 349){
+                else if(e.y>= 311 && e.y<= 349)
                     this.name += "W";
-                }else if(e.y>= 353 && e.y<= 391){
+                else if(e.y>= 353 && e.y<= 391)
                     this.name += "X";
-                }else if(e.y>= 396 && e.y<= 433){
+                else if(e.y>= 396 && e.y<= 433)
                     this.name += "Y";
-                }
                 this.draw(Framework.Game._context);
             }else if(e.x>= 1403 && e.x<= 1461){
-                if(e.y>= 226 && e.y<= 262){
+                if(e.y>= 226 && e.y<= 262)
                     this.name += "Z";
-                }else if(e.y>= 269 && e.y<= 307){
+                else if(e.y>= 269 && e.y<= 307)
                     this.is_typepanel_open = false;
-                }
                 this.draw(Framework.Game._context);
             }
         }
@@ -248,21 +225,19 @@ var Handle_initial_character = function(){
             this.is_typepanel_open = true;
         }
         if(e.x >= 470 && e.x <=510){
-            if(e.y >=540 && e.y<= 560){
+            if(e.y >=540 && e.y<= 560)
                 this.character_description.isChangeCapability(2);
-            }else if(e.y >=622 && e.y<= 642){
+            else if(e.y >=622 && e.y<= 642)
                 this.character_description.isChangeCapability(3);
-            }else if(e.y >=700 && e.y<= 720){
+            else if(e.y >=700 && e.y<= 720)
                 this.character_description.isChangeCapability(4);
-            }
         }else if(e.x >= 822 && e.x <=861){
-            if(e.y >=382 && e.y<= 415){
+            if(e.y >=382 && e.y<= 415)
                 this.character_description.isChangeCapability(5);
-            }else if(e.y >=461 && e.y<= 502){
+            else if(e.y >=461 && e.y<= 502)
                 this.character_description.isChangeCapability(6);
-            }else if(e.y >=622 && e.y<= 661){
+            else if(e.y >=622 && e.y<= 661)
                 this.character_description.isChangeCapability(8);
-            }
         }   
     }
 }

@@ -22,42 +22,28 @@ var Clock = function() {
         this.audio = new Framework.Audio({
             morning:{
                 mp3: define.musicPath + 'Hot_Heat.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, night:{
                 mp3: define.musicPath + 'night.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, afternoon:{
                 mp3: define.musicPath + '遊戲王經典配樂.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
         this.audio.play({name: 'morning', loop: true});
         this.decrease();
     }
     this.decrease = function(){
-        // console.log("decrease");
         this.audio = new Framework.Audio({
             morning:{
                 mp3: define.musicPath + 'Hot_Heat.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, night:{
                 mp3: define.musicPath + 'night.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, afternoon:{
                 mp3: define.musicPath + '遊戲王經典配樂.mp3'
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }
         });
         setTimeout(()=>{
             this.currentTime -= 1;
-            if(this.currentTime <= 0)
-            {
+            if(this.currentTime <= 0){
                 this.currentTime = 192;
                 if(!this.music_stop){
                     if( this.status == 0){

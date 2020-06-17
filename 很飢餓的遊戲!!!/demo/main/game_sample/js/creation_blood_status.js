@@ -29,8 +29,6 @@ var Creation_blood_status = function() {
     this.draw = function(ctx){
         this.character_tocan.draw(ctx);
         ctx.beginPath();
-        // console.log(this.character_blood_ratio);
-        // console.log(this.character_hunger_ratio);
         ctx.rect(64*5-10, 64*3-12-20, 150*this.character_blood_ratio, 12);
         ctx.fillStyle = "red";
         ctx.fill();
@@ -48,10 +46,8 @@ var Creation_blood_status = function() {
         ctx.fill();
         ctx.closePath();
         this.character_hunger_chart.draw(ctx);
-        // console.log(this.monsterarray.length);
-        if(this.monsterarray.length>8){
+        if(this.monsterarray.length>8)
             this.monsterarray.length=8;
-        }
         if(this.monsterarray.length >0){
             for(var i=0;i<this.monsterarray.length;i++){
                 this.monsterarray[i].draw(ctx);
@@ -72,10 +68,7 @@ var Creation_blood_status = function() {
     }
 
     this.characterHungryUpdate = function(player){
-        // console.log("update");
         this.character_hunger_ratio = player.hunger_current_point / player.hunger_total_point;
-
-        // this.draw(Framework.Game._context);
     }
 
     this.characterMagicUpdate = function(player){
@@ -83,18 +76,15 @@ var Creation_blood_status = function() {
     }
 
     this.characterBloodUpdate = function(player){
-        // console.log(characterStatus.currentHealth);
         this.character_blood_ratio = player.character_descruption_point[0] / player.character_descruption_point[5];
-        // console.log(this.character_blood_ratio);
         
         if(this.character_blood_ratio<0)
             this.character_blood_ratio=0;
-        // this.draw(Framework.Game._context);
     }
+    
     this.monsterUpdate = function(monsterarray){
         for(var i=0,j=0;i<monsterarray.length;i++){
             if(monsterarray[i].is_start && monsterarray[i].health > 0){
-                // console.log("is_start", i);
                 this.monster_tocan = monsterarray[i].monster_tocan; 
                 this.monster_tocan.position = {x:65*4+5, y:65*(4+j)+10};
                 this.blood_ratio.push(monsterarray[i].health/monsterarray[i].maxHealth);

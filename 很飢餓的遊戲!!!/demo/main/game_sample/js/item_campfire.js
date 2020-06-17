@@ -10,7 +10,7 @@ var Item_campfire = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.item_can_be_picked = true;
-    
+
     this.update = function(){
         this.status = false;
     }
@@ -18,7 +18,6 @@ var Item_campfire = function() {
     this.draw = function(ctx){
         this.item_campfire.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_campfire.prototype, 'position', {

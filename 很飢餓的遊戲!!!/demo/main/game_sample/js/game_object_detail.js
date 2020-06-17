@@ -67,11 +67,9 @@ var Game_object_detail = function() {
             ];
     }
     
-
     this.title_string = "";
     this.des_string = "";
     this.showUpdate = function(item_number){
-        // console.log(item_number);
         if(item_number != null){
             if(item_number <= 54 && item_number >=1 && item_number){
                 this.title_string = this.description[item_number-1].name;
@@ -88,7 +86,6 @@ var Game_object_detail = function() {
     
     this.draw = function(ctx){
         if(this.title_string != ""){
-            // console.log(this.des_string.length);
             ctx.beginPath();
             ctx.rect(15, 557, 250, 330);
             ctx.fillStyle = "brown";
@@ -109,25 +106,11 @@ var Game_object_detail = function() {
                 ctx.fillText(this.des_string.charAt(i),45 +k*25,645+j);
                 k++;
             }
-
         }else{
             ctx.beginPath();
             ctx.rect(0, 557, 282, 380);
             ctx.fillStyle = "#BEBEBE";
             ctx.fill();
         }
-        // console.log(this.description[0]);
-        // ctx.font = "bold 24px serif";
-        // ctx.fillStyle = "black";
-        // ctx.lineWidth = 2.5;
-        // ctx.fillText("( " + this.experience+" / "+ this.character_levelup_experience +")", 1135, 2*64-5);
-        // ctx.font = "bold 24px serif";
-        // ctx.fillStyle = "black";
-        // ctx.lineWidth = 2.5;
-        // ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
     }
-
-    this.update = function(player){
-    }
-
 };

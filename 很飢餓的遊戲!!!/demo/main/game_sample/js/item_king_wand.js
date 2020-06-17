@@ -27,7 +27,6 @@ var Item_king_wand = function() {
     this.reduceDurability = function(){
         this.durability -= 20;
     }
-
 };
 
 Object.defineProperty(Item_king_wand.prototype, 'position', {

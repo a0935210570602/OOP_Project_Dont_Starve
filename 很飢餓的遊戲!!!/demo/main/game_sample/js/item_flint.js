@@ -17,7 +17,6 @@ var Item_flint = function() {
     this.draw = function(ctx){
         this.item_flint.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_flint.prototype, 'position', {

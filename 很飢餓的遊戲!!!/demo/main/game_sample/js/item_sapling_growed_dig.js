@@ -11,13 +11,9 @@ var Item_sapling_growed_dig = function() {
     this.amount = 1;
     this.item_can_be_picked = true;
 
-    this.update = function(){
-    }
-
     this.draw = function(ctx){
         this.item_sapling_growed_dig.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_sapling_growed_dig.prototype, 'position', {

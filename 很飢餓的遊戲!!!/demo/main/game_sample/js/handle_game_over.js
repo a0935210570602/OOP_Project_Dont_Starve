@@ -34,11 +34,13 @@ var Handle_game_over = function(){
                 mp3: define.musicPath + '勝利.mp3',
             }
         });
+
         if(!this.showScore && !this.open._start){
             this.showScore = true;
             audio.play({name: 'victory', loop: true});
             this.draw(Framework.Game._context);
         }
+
         if(Framework.Game._levels[2].level.map.score.scoreToDraw >= Framework.Game._levels[2].level.map.score.score){
             audio.stopAll();
             Framework.Game.goToLevel('menu'); 
@@ -49,9 +51,9 @@ var Handle_game_over = function(){
         if(this.open._start)
             this.open.draw(ctx);
         else{
-            if(Framework.Game._levels[2].level.map.player1.character_descruption_point[0] <= 0){
+            if(Framework.Game._levels[2].level.map.player1.character_descruption_point[0] <= 0)
                 this.menu.draw(ctx);
-            }else{
+            else{
                 this.gameClear.draw(ctx);
                 ctx.font = '90pt Algerian';
                 ctx.globalAlpha=1;
@@ -65,8 +67,7 @@ var Handle_game_over = function(){
             }
         }
 
-        if(this.showScore){
+        if(this.showScore)
             Framework.Game._levels[2].level.map.score.drawScore();
-        }
     }
 }

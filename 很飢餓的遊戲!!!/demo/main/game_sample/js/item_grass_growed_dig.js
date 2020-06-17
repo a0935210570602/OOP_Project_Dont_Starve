@@ -17,7 +17,6 @@ var Item_grass_growed_dig = function() {
     this.draw = function(ctx){
         this.item_grass_growed_dig.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_grass_growed_dig.prototype, 'position', {

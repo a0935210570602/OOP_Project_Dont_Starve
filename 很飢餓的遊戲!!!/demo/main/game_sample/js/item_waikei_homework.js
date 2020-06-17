@@ -17,7 +17,6 @@ var Item_waikei_homework = function() {
     this.draw = function(ctx){
         this.item_waikei_homework.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_waikei_homework.prototype, 'position', {

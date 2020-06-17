@@ -189,27 +189,16 @@ var World_map = function()
         this.audio = new Framework.Audio({
             kick: {
                 mp3: define.musicPath + 'levelup.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
-            }, click_change:{
-                mp3: define.musicPath + '合成.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, die_scream:{
                 mp3: define.musicPath + '女慘叫.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
             }, monster_attack:{
                 mp3: define.musicPath + '怪物攻擊.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
         }
         });
     }
 
     this.init = function()
     {
-        // this.level_up_animation = new Level_up_animation();
         this.game_object_detail.init();
         this.playerWalkDirection = {x:0, y:1};
         this.skillTimer = new Skill_timer();
@@ -242,9 +231,8 @@ var World_map = function()
 
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
-            for(var j = 0; j < 11; j++){
+            for(var j = 0; j < 11; j++)
                 this.tileArrayPosition.push({x: j+8, y: i+2});
-            }
             this.tilePosition.push(this.tileArrayPosition);
         }
 
@@ -295,7 +283,6 @@ var World_map = function()
                 if(this.player1.player_state == "alive" || false){
                     this.checkIsDie();
                 }
-                // this.level_up_animation.update();
                 this.skill_handler.update();
                 this.spear_handler.update();
                 this.arror_attack.update();
@@ -366,8 +353,6 @@ var World_map = function()
                 }
                 if(hurt_point != 0)
                     this.player1GotHurt(hurt_point);
-                // console.log(hurt_point);
-                // console.log(this.player1.characterStatus.currentHealth);
                 if(this.fishing.is_start){
                     this.fishing.update();
                     if(this.player1.mode != "fishing"){
@@ -379,9 +364,6 @@ var World_map = function()
                 this.creation_blood_status.characterMagicUpdate(this.player1);
                 this.creation_blood_status.characterHungryUpdate(this.player1);
                 this.creation_blood_status.monsterUpdate(this.monster);
-                // console.log(this.player1.hunger_current_point);
-    
-                // setTimeout(()=>{this.draw(Framework.Game._context);},500);
                 this.npc1.update();
                 this.npc_event.update();
     
@@ -396,10 +378,8 @@ var World_map = function()
                 }
             }
         }else if(this.on_map_name == "House1"){
-            if(this.player1.player_state == "alive"){
+            if(this.player1.player_state == "alive")
                 this.checkIsDie();
-            }
-            // this.level_up_animation.update();
             this.skill_handler.update();
             this.spear_handler.update();
             this.arror_attack.update();
@@ -448,25 +428,17 @@ var World_map = function()
             this.creation_blood_status.characterBloodUpdate(this.player1);
             this.creation_blood_status.characterMagicUpdate(this.player1);
             this.creation_blood_status.characterHungryUpdate(this.player1);
-            // console.log(this.player1.hunger_current_point);
-
-            // setTimeout(()=>{this.draw(Framework.Game._context);},500);
         }
     }
     
     this.player1GotHurt = function(hurt_point) {
         this.monster_kill_timer ++;
-        // console.log("this.monster_kill_timer ");
-        // console.log(this.monster_kill_timer );
         var audio = new Framework.Audio({
             monster_attack:{
                 mp3: define.musicPath + 'monster_attack.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
         }
         });
         if(this.monster_kill_timer == 15){
-            // console.log("gethurt");
             this.player1.gethurt(hurt_point);
             this.monster_kill_timer = 0;
 
@@ -474,11 +446,9 @@ var World_map = function()
         }
     }
 	this.draw = function(ctx) {
-        // console.log(this.playerPositionOnMap);
         if(this.playerInitial){
             for(var i=0; i<11; i++){
                 for(var j=0; j<11; j++){
-                    // console.log("draw");
                     switch(this.mapArray[j][i]){
                         case 192:
                             this.terrain_plain[this.clock.status].position = {x:this.tilePosition[j][i].x*64,y:this.tilePosition[j][i].y*64};
@@ -520,13 +490,11 @@ var World_map = function()
                 }
             }
             this.player1.draw(ctx);
-            for(var i=0; i<11; i++){
+            for(var i=0; i<11; i++)
                 for(var j=0; j<11; j++){
-                    // console.log(this.tilePosition[j][i]);
                     this.itemArray[j][i].position = {x:this.tilePosition[j][i].x,y:this.tilePosition[j][i].y};
                     this.itemArray[j][i].draw(ctx);
                 }
-            }
             ctx.beginPath();
             ctx.rect(1185, 100, 80, 700);
             ctx.fillStyle = "#BEBEBE";
@@ -581,7 +549,6 @@ var World_map = function()
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
-            // this.player1.draw(ctx);
             this.player1.backpack.draw(ctx);
 
             if(this.handle_initial_character.name == "請輸入名字"){
@@ -590,9 +557,8 @@ var World_map = function()
             this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
             this.npc_event.draw(ctx);
-        }else{
+        }else
             this.handle_initial_character.draw(ctx);
-        }
     }	
     
     this.clockDraw = function(ctx){
@@ -629,27 +595,6 @@ var World_map = function()
         return "No";
     }
 
-    this.addMonsterRandom = function(amount){
-        // var count = 0;
-        // var m_position = {x:0,y:0};
-        // var newMonster =  new Monster_cute_little_eye(this);
-        // newMonster.position = {x:48,y:48};
-        // var newMonster1 =  new Monster_boss(this);
-        // newMonster1.position = {x:48,y:49};
-        // this.monster.push(newMonster);
-        // this.monster.push(newMonster1);
-        // while(count != amount){
-        //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
-        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
-        //         console.log(m_position);
-        //         var newMonster =  new Monster_cute_little_eye(this);
-        //         newMonster.position = m_position;
-        //         this.monster.push(newMonster);
-        //         count++;
-        //     }
-        // }
-    }
-
     var m_map = this;
     this.deadClear = function(){
         this.skillTimer.clear();
@@ -668,7 +613,6 @@ var World_map = function()
 
     this.checkIsDie = function(){
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
-            // this.player1.characterStatus.currentHunger = 0;
             var audio = new Framework.Audio({
                 die_scream: {
                     mp3: define.musicPath + '女慘叫.mp3'
@@ -708,12 +652,8 @@ var World_map = function()
     {
         var count =0;
         for(var i=0;i<this.monster.length;i++)
-        {
             if(this.monster[i].isDead === false)
-            {
                 count++;
-            }
-        }
         return count;
     }
 
@@ -724,8 +664,6 @@ var World_map = function()
   
     this.capture_key = [];
     this.keydown = function(e, list){
-        // console.log("keydown");
-        // console.log(e.key);
         this.capture_key.push(e);
         if(e.key != 'Space' && this.fishing.is_start)
             this.fishing.stop();
@@ -876,27 +814,17 @@ var World_map = function()
         var audio = new Framework.Audio({
             fight: {
                 mp3: define.musicPath + '打擊.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             },
             spear: {
                 mp3: define.musicPath + '長矛.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             },
             arror: {
                 mp3: define.musicPath + '弓箭.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             },fire: {
                 mp3: define.musicPath + '火魔法.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             },
             ice: {
                 mp3: define.musicPath + '冰魔法.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         if(e.key == 'S'){
@@ -953,8 +881,6 @@ var World_map = function()
     }
 
     this.handleFishing = function(){
-       
-
         this.fishing.stop();
         var addSuccess = false;
         for(var i=-1;i<2;i++){
@@ -982,8 +908,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             fish: {
                 mp3: define.musicPath + '釣魚.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         if(this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] == 200){
@@ -1072,8 +996,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             dig: {
                 mp3: define.musicPath + '挖掘.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 1){
@@ -1120,8 +1042,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             pick: {
                 mp3: define.musicPath + '撿取.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         if(this.itemArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x].item_num == 1){
@@ -1154,8 +1074,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             cut: {
                 mp3: define.musicPath + '砍樹.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         var x = 5+this.playerWalkDirection.x;
@@ -1189,7 +1107,6 @@ var World_map = function()
         if(this.itemArray[y][x].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
-                // this.level_up_animation.start();
             }
         }
         audio.play({name: 'cut', loop: false});
@@ -1199,8 +1116,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             dig: {
                 mp3: define.musicPath + '挖掘.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         var y = 5+this.playerWalkDirection.y;
@@ -1239,8 +1154,6 @@ var World_map = function()
         var audio = new Framework.Audio({
             dig: {
                 mp3: define.musicPath + '挖掘.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         if(this.mapArray[5+this.playerWalkDirection.y][5+this.playerWalkDirection.x] != 91 &&
@@ -1357,9 +1270,6 @@ var World_map = function()
     }
 
     this.click = function(e){   
-        // console.log(this.is_character_description_open);
-
-        // console.log(e);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){
@@ -1367,7 +1277,6 @@ var World_map = function()
                 }
             }
             this.synthesisBar.click(e);
-            // console.log(e);
             this.player1.click(e);
             if(this.player1.plantIndex != -1){
                 this.handlePlant();

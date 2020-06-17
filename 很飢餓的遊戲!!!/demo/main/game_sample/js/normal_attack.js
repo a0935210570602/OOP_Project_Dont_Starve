@@ -16,9 +16,9 @@ var Normal_attack = function(player, monster, playerWalkDirection, playerPositio
                 }
             }
         }
-        if(this.attackSuccess && this.player.equipmentBar.equipmentList[2] != null){
+        
+        if(this.attackSuccess && this.player.equipmentBar.equipmentList[2] != null)
             this.player.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
-        }
     }
 };
 

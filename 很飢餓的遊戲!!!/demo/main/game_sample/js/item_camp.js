@@ -18,7 +18,6 @@ var Item_camp = function() {
     this.draw = function(ctx){
         this.item_camp.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_camp.prototype, 'position', {

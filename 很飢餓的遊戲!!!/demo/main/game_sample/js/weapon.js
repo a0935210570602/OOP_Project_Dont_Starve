@@ -22,7 +22,6 @@ var Weapon = function(option) {
     this.draw = function(ctx){
         this.weapon.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Weapon.prototype, 'position', {

@@ -17,7 +17,6 @@ var Item_ice = function() {
     this.draw = function(ctx){
         this.item_ice.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_ice.prototype, 'position', {

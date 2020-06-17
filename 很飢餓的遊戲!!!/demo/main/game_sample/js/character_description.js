@@ -36,9 +36,6 @@ var Character_description = function() {
     this.character_descruption_text[6] = "智力";
     this.character_descruption_text[7] = "防禦";
     this.character_descruption_text[8] = "技巧";
-    // for(var i=0;i<9;i++){
-    //     this.character_descruption_point[i] = 6;
-    // }
     this.push_button.scale = 0.5;
     this.back_ground_picture.scale = 3;
     this.character_image.scale = 0.75;
@@ -69,8 +66,6 @@ var Character_description = function() {
                 ctx.fillStyle = "black";
                 ctx.lineWidth = 2.5;
                 ctx.fillText(this.character_descruption_text[i], this.character_descruption[i].position.x+55,  this.character_descruption[i].position.y+5);
-                // console.log("character_descruption_point = ");
-                // console.log(this.character_descruption_point[i]);
                 for(var j=0;j<this.character_descruption_point[i];j++){
                     ctx.beginPath();
                     ctx.rect(this.character_descruption[i].position.x+95 + j*13, this.character_descruption[i].position.y-10, 10, 15);
@@ -90,14 +85,10 @@ var Character_description = function() {
             ctx.lineWidth = 2.5;
             ctx.fillText("Lv " + this.character_level, 10*64+20, 2*64);
             var experience_scale;
-            if(this.experience == 0){
+            if(this.experience == 0)
                 experience_scale = -1;
-            }else{
+            else
                 experience_scale = 15/(this.character_levelup_experience/this.experience);
-            }
-            // console.log("experience = ",this.experience);
-            // console.log("character_level = ",this.character_level);
-            // console.log("character_levelup_experience = ",this.character_levelup_experience);
 
             for(var i=0;i<=experience_scale;i++){
                 ctx.beginPath();
@@ -117,9 +108,8 @@ var Character_description = function() {
             ctx.fillText("能力值點數: "+this.capabilityt_point, 955, 315);
             if(this.capabilityt_point!=0){
                 for(var i=2;i<9;i++){
-                    if(i==7){
+                    if(i==7)
                         continue;
-                    }
                     this.push_button.position = {x:this.character_descruption[i].position.x-56, y:this.character_descruption[i].position.y};
                     this.push_button.draw(ctx);
                 }
@@ -129,11 +119,9 @@ var Character_description = function() {
             ctx.rect(449, 31, 30, 768);
             ctx.rect(1183, 31, 30, 768);
             ctx.rect(477, 32, 710, 65);
-
             ctx.fillStyle = "#BEBEBE";
             ctx.fill();
         }
-        
     }
 
     this.isChangeCapability = function(which_capability){
@@ -156,9 +144,5 @@ var Character_description = function() {
         this.character_descruption_point[6] = player.character_descruption_total_point[6]/20;
         this.character_descruption_point[7] = player.character_descruption_total_point[7]/20;
         this.character_descruption_point[8] = player.character_descruption_total_point[8]/20;
-    }
-
-    this.click = function(e){
-        
     }
 };

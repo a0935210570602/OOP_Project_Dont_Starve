@@ -1,7 +1,6 @@
 var Item_sapling = function() {
     this.item_sapling = new Framework.Sprite(define.materialPath + 'item_sapling.png'); 
     this.item_sapling_pulled = new Framework.Sprite(define.materialPath + 'item_sapling_pulled.png'); 
-
     this.item_sapling.scale = 0.6;
     this.item_sapling_pulled.scale = 0.4;
 

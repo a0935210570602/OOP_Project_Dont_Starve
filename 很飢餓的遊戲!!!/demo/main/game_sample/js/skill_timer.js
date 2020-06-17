@@ -41,5 +41,4 @@ var Skill_timer = function() {
         ctx.fill();
         this.magic_time_counter.draw(ctx);
     }
-
 };

@@ -18,7 +18,6 @@ var Item_lamp = function() {
     this.draw = function(ctx){
         this.item_lamp.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_lamp.prototype, 'position', {

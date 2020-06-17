@@ -26,7 +26,6 @@ var Item_stone = function() {
         else
             this.item_stone_dig.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_stone.prototype, 'position', {

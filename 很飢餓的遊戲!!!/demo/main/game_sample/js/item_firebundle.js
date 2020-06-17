@@ -18,8 +18,6 @@ var Item_firebundle = function() {
     this.attack_point = 1;
     this.magic_attack_point = 0;
     this.arror_attack_point = 0;
-    this.update = function(){
-    }
 
     this.reduceDurability = function(){
         if(this.inEquipmentbar){

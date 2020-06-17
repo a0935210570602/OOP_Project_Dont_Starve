@@ -164,18 +164,14 @@ var Monster_boss = function(map) {
     }
 
     this.walkAlittle = function(){
-        if(this.playerDirection === this.constants.DirectionEnum.DOWN){
+        if(this.playerDirection === this.constants.DirectionEnum.DOWN)
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + this.walkSpeed};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.LEFT){
+        else if(this.playerDirection === this.constants.DirectionEnum.LEFT)
             this.spritePosition = {x:this.spritePosition.x - this.walkSpeed, y:this.spritePosition.y};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.RIGHT){
+        else if(this.playerDirection === this.constants.DirectionEnum.RIGHT)
             this.spritePosition = {x:this.spritePosition.x + this.walkSpeed, y:this.spritePosition.y};
-        }
-        else if(this.playerDirection === this.constants.DirectionEnum.UP){
+        else if(this.playerDirection === this.constants.DirectionEnum.UP)
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - this.walkSpeed};
-        }
     }
 
     this.update = function(){
@@ -184,7 +180,6 @@ var Monster_boss = function(map) {
         if(!this.is_start){ return; }
         if(this.health <= 0)
             this.die();
-
         this.normal_attack.update();
         this.hurt.update();
         this.monster_boss.update();
@@ -193,7 +188,6 @@ var Monster_boss = function(map) {
         this.hurtRevolution.update();
         this.range_attack.update();
         this.remote_attack.update();
-        
         for(var i = 0;i < 4;i++)
             this.catch[i].update();
         this.attackTimer += 1;
@@ -223,8 +217,6 @@ var Monster_boss = function(map) {
                             mp3: define.musicPath + '魔王叫聲.mp3',
                         }
                     });
-                    // audio.play({name: 'roar', loop: false});
-                    
                     this.isWalking = false;
                     this.monster_boss.index = this.playerDirection * 3 + 1;
                     this.mapPosition = this.walkTarget;
@@ -286,7 +278,6 @@ var Monster_boss = function(map) {
     }
 
     this.rangeAttack = function(){
-
         var audio = new Framework.Audio({
             light: {
                 mp3: define.musicPath + '範圍攻擊.mp3'
@@ -376,17 +367,15 @@ var Monster_boss = function(map) {
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             this.is_start = true;
             this.trace = false;
-        }else{
+        }else
             this.trace = true;
-        }
     }
 
     this.checkIfDraw = function(sprite){
-        if( Math.abs((sprite.x-this.map.playerPositionOnMap.x*64)) <6*64 &&　Math.abs((sprite.y-this.map.playerPositionOnMap.y*64)) <6*64){
+        if( Math.abs((sprite.x-this.map.playerPositionOnMap.x*64)) <6*64 &&　Math.abs((sprite.y-this.map.playerPositionOnMap.y*64)) <6*64)
             return true;
-        }else{
+        else
             return false;
-        }
     }
 
     this.transportToPlayer = function(){
@@ -408,10 +397,8 @@ var Monster_boss = function(map) {
             this.spritePosition = {x:this.mapPosition.x*64, y:this.mapPosition.y*64};
             this.isWalking = false;
         }
-        else{
+        else
             this.transportToPlayer();
-        }
-           
     }
 
     this.howToWalk = function(restriction, thirdDirection){
@@ -421,6 +408,7 @@ var Monster_boss = function(map) {
         for(var i=0;i<directionArray.length;i++){
             if(directionArray[i].x == thirdDirection.x && directionArray[i].y == thirdDirection.y){
                 directionArray.splice( i, 1 );
+
                 break;
             }
         }
@@ -436,19 +424,16 @@ var Monster_boss = function(map) {
                 return directionArray[0];
             }else{
                 if(this.map.checkMonsterIsWalkAble({x:this.mapPosition.x +thirdDirection.x, y:this.mapPosition.y +thirdDirection.y}))
-                {
                     return thirdDirection;
-                }else{
+                else
                     return {x:0, y:0};
-                }
             }
         }
     }
 
     this.isAttack = function(){
-        if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y && !this.isHurt){
+        if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y && !this.isHurt)
             return true;
-        }
         return false;
     }
 
@@ -497,9 +482,7 @@ var Monster_boss = function(map) {
         if(this.walkStep.x != walkStep.x || this.walkStep.y != walkStep.y)
             this.changeWalkDirection(walkStep);
         if(this.map.checkMonsterIsWalkAble({x: this.mapPosition.x + walkStep.x, y:this.mapPosition.y + walkStep.y}))
-        {
             this.walk(walkStep);
-        }
     }
 
     this.changeWalkDirection = function(walkStep){
@@ -528,27 +511,21 @@ var Monster_boss = function(map) {
         var walkStep = {x:0,y:0};
 
         if(randNum % 117 == 0)
-        {
             walkStep.x = 1
-        }else if(randNum % 79 == 0)
-        {
+        else if(randNum % 79 == 0)
             walkStep.x = -1
-        }else if(randNum % 133 == 0)
-        {
+        else if(randNum % 133 == 0)
             walkStep.y = 1
-        }else if(randNum % 157 == 0)
-        {
+        else if(randNum % 157 == 0)
             walkStep.y = -1
-        }else
-        {
+        else
             return;
-        }
+            
         if(this.walkStep.x != walkStep.x || this.walkStep.y != walkStep.y)
             this.changeWalkDirection(walkStep);
+
         if(this.map.checkMonsterIsWalkAble( {x: this.mapPosition.x + walkStep.x, y:this.mapPosition.y + walkStep.y} ))
-        {
             this.walk(walkStep);
-        }
     }
 };
 Object.defineProperty(Monster_boss.prototype, 'position', {

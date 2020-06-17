@@ -17,7 +17,6 @@ var Item_droplet = function() {
     this.draw = function(ctx){
         this.item_droplet.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_droplet.prototype, 'position', {

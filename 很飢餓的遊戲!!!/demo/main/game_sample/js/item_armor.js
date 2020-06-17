@@ -14,7 +14,6 @@ var Item_armor = function() {
     this.place = "body";
     this.deffense_point = 40;
 
-
     this.update = function(){
         this.status = false;
     }

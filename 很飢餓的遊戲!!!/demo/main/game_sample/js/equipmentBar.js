@@ -33,7 +33,6 @@ var EquipmentBar = function(backpackList) {
         }
     }
 
-
     this.dropSelectedEquipment = function(){
         if(this.selectedIndex != -1)
             this.equipmentList[this.selectedIndex] = null;

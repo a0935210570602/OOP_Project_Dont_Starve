@@ -9,9 +9,7 @@ var Building_remance = function(number) {
     this.isRegenerate = false;
     this.mapPosition = {x:0, y:0};
     this.item_num = -5;
-    //equipment: 可入裝備欄的物件 material: 可堆疊的基本物件 tool: 不可堆疊的其他物件 food: 可堆疊的食物 plant: 可堆疊植物
     this.type = "build";
-    //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = false;
     this.draw = function(ctx){

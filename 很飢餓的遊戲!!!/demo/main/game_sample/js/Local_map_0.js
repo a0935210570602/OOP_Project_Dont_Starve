@@ -4701,7 +4701,6 @@ var Local_map_0 = function() {
     this.itemArray_one_dimension = [];
     for(var i=0;i<10;i++)
         this.itemArray.push(null);
-
     this.proxy = new Proxy();
     
     this.addObject= function(map_name, position, number, object){
@@ -4716,9 +4715,11 @@ var Local_map_0 = function() {
 
                 break;
             default:
+
                 break;
         }
     }
+
     this.removeObject= function(map_name, position, number){
         switch(map_name){
             case "World":
@@ -4730,9 +4731,11 @@ var Local_map_0 = function() {
 
                 break;
             default:
+
                 break;
         }
     }
+
     this.hasItem= function(map_name, position, number){
         switch(map_name){
             case "World":
@@ -4740,9 +4743,11 @@ var Local_map_0 = function() {
             case "House1":
                 return this.houseItemArray[number][position.x][position.y].item_num == 0 ? true : false ;
             default:
+
                 break;
         }
     }
+
     this.canWalk= function(map_name, position, number){
         switch(map_name){
             case "World":
@@ -4750,6 +4755,7 @@ var Local_map_0 = function() {
             case "House1":
                 return this.houseArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : this.mapArray[number][position.x][position.y] == 4 ? false : true;
             default:
+
                 break;
         }
     }
@@ -4762,6 +4768,7 @@ var Local_map_0 = function() {
                 console.log("catchMap");
                 return this.houseArray[number][position.x][position.y];
             default:
+
                 break;
         }
     }
@@ -4779,6 +4786,7 @@ var Local_map_0 = function() {
 
                 return this.houseItemArray[number][position.x][position.y];
             default:
+                
                 break;
         }
     }

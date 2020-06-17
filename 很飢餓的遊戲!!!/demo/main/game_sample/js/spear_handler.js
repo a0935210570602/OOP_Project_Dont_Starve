@@ -21,5 +21,4 @@ var Spear_handler = function() {
     this.draw = function(ctx){
         this.spear.draw(ctx);
     }
-
 };

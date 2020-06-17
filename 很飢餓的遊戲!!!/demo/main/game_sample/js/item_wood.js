@@ -17,7 +17,6 @@ var Item_wood = function() {
     this.draw = function(ctx){
         this.item_wood.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_wood.prototype, 'position', {

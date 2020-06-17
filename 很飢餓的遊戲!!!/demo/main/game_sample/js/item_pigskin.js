@@ -17,7 +17,6 @@ var Item_pigskin = function() {
     this.draw = function(ctx){
         this.item_pigskin.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_pigskin.prototype, 'position', {

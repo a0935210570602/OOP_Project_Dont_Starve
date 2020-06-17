@@ -11,9 +11,6 @@ var Skill_handler = function() {
     this.ice_wand_level1.index = 0;
     this.ice_wand_level1.position = {x:13*64-64*3, y:7*64};
 
-    this.init = function(){
-    }
-    
     this.update = function(){
         this.fire_wand_level1.update();
         this.ice_wand_level1.update();
@@ -27,13 +24,9 @@ var Skill_handler = function() {
         var audio = new Framework.Audio({
             fire: {
                 mp3: define.musicPath + '火魔法.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             },
             ice: {
                 mp3: define.musicPath + '冰魔法.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
         this.mapPosition = {x: playerPositionOnMap.x+playerWalkDirection.x*3, y: playerPositionOnMap.y+playerWalkDirection.y*3};

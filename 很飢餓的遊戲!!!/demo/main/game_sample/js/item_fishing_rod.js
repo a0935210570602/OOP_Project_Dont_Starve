@@ -16,7 +16,6 @@ var Item_fishing_rod = function() {
     this.magic_attack_point = 0;
     this.arror_attack_point = 0;
 
-
     this.update = function(){
         this.status = false;
     }

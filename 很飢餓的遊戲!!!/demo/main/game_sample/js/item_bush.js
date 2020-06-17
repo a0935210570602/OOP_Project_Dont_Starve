@@ -12,7 +12,6 @@ var Item_bush = function() {
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = false;
-
     this.regeneration_time = 3000;
 
     this.reset = function(){

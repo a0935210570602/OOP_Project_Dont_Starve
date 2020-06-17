@@ -28,7 +28,6 @@ var Item_ax = function() {
     this.reduceDurability = function(){
         this.durability -= 10;
     }
-
 };
 
 Object.defineProperty(Item_ax.prototype, 'position', {

@@ -21,6 +21,7 @@ var Constants = function() {
         Terrain_PLAIN : -4,
         Terrain_WATER : -5
     };
+    
     this.Items = {
         NONE : 0,
         ITEM_1 : 1,

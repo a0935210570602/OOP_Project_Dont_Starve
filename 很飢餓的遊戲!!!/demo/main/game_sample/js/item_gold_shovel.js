@@ -27,7 +27,6 @@ var Item_gold_shovel = function() {
     this.draw = function(ctx){
         this.item_gold_shovel.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_gold_shovel.prototype, 'position', {

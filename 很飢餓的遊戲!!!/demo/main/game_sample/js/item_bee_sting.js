@@ -18,7 +18,6 @@ var Item_bee_sting = function() {
     this.draw = function(ctx){
         this.item_bee_sting.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_bee_sting.prototype, 'position', {

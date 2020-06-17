@@ -24,7 +24,6 @@ var Item_wood_armor = function() {
     this.reduceDurability = function(){
         this.durability -= 2;
     }
-
 };
 
 Object.defineProperty(Item_wood_armor.prototype, 'position', {

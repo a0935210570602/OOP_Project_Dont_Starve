@@ -2,11 +2,8 @@ var Drama0 = Framework.Class(Framework.Level , {
     initializeProgressResource: function() {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
-
-        //為了或得到this.loading這個Sprite的絕對位置, 故需要先計算一次(在Game Loop執行時, 則會自動計算, 但因為loadingProgress只支援draw故需要自行計算)                  
     },
     loadingProgress: function(ctx, requestInfo) {
-        //console.log(Framework.ResourceManager.getFinishedRequestPercent())
         this.loading.draw(ctx);
         ctx.font ='90px Arial';
         ctx.textAlign = 'center';
@@ -14,27 +11,16 @@ var Drama0 = Framework.Class(Framework.Level , {
         ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
     },
     load: function() {
-
         this.audio = new Framework.Audio({
             song1: {
-                // mp3: define.musicPath + 'kick2.mp3',
                 ogg: define.musicPath + '開場.mp3',
-                //wav: define.musicPath + 'kick2.wav'
             }
         });
-        //播放時, 需要給name, 其餘參數可參考W3C
         this.audio.play({name: 'song1', loop: true});
         this.playerPositionOnMap = {x:0,y:0};
         this.npc_event = new Npc_event(this);
         this.npc_event.trigger("主角", "drama0");
         this.npc_event.talking();
-    },
-
-    initialize: function() {
-        
-    },
-
-    update: function() {     
     },
 
     draw:function(parentCtx){
@@ -68,14 +54,8 @@ var Drama0 = Framework.Class(Framework.Level , {
         }
     },
 
-    keyup:function(e){
-    },
-
     click: function (e) {  
         this.audio.stopAll();
         Framework.Game.goToLevel('level1');  
-    },
-
-    mousemove: function(e) {        
     },
 });

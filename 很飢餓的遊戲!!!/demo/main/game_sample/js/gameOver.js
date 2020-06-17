@@ -1,10 +1,8 @@
 var GameOver = Framework.Class(Framework.Level , {
-            //初始化loadingProgress需要用到的圖片
+    //初始化loadingProgress需要用到的圖片
     initializeProgressResource: function() {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
-
-        //為了或得到this.loading這個Sprite的絕對位置, 故需要先計算一次(在Game Loop執行時, 則會自動計算, 但因為loadingProgress只支援draw故需要自行計算)                  
     },
 
     load: function() {
@@ -17,11 +15,11 @@ var GameOver = Framework.Class(Framework.Level , {
         this.audio = new Framework.Audio({
             soundeffects: {
                 mp3: define.musicPath + 'soundeffects.mp3',
-        }
+            }
         });
     },
 
-    initialize: function() {
+    initialize: function(){
         this.counter = 0;
         this.gameOverCount = 50;
         this.handle_game_over.init();
@@ -29,7 +27,7 @@ var GameOver = Framework.Class(Framework.Level , {
 
     update:function(){     
         if(this.counter > this.gameOverCount){
-            //Framework.Game.goToLevel('menu');
+            // Framework.Game.goToLevel('menu');
         }
         this.counter++;
         this.handle_game_over.update();
@@ -42,6 +40,4 @@ var GameOver = Framework.Class(Framework.Level , {
     draw: function(parentCtx) { 
         this.handle_game_over.draw(parentCtx);
     },
-
-
 });

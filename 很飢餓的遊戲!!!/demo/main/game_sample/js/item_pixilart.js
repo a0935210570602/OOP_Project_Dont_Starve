@@ -14,7 +14,6 @@ var Item_pixilart = function() {
     this.attack_point = 1;    
     this.magic_attack_point = 0;
     this.arror_attack_point = 0
-    
     this.item_can_be_picked = true;
 
     this.update = function(){
@@ -28,7 +27,6 @@ var Item_pixilart = function() {
     this.draw = function(ctx){
         this.item_pixilart.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_pixilart.prototype, 'position', {

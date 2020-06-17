@@ -17,7 +17,6 @@ var Item_rope = function() {
     this.draw = function(ctx){
         this.item_rope.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_rope.prototype, 'position', {

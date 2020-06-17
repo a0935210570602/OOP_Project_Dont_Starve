@@ -55,13 +55,11 @@ var loadGameEnd;
 
         { src: 'game_sample/js/define.js', lookFor: 'define' },
         { src: 'game_sample/js/myMenu.js', lookFor: 'MyMenu' },
-        { src: 'game_sample/js/house_1.js', lookFor: 'House_1' },
         { src: 'game_sample/js/myMenu_tutorial.js', lookFor: 'MyMenu_tutorial' },
         { src: 'game_sample/js/myMenu_gameteam.js', lookFor: 'MyMenu_gameteam' },
         { src: 'game_sample/js/constants.js', lookFor: 'Constants' },
         { src: 'game_sample/js/score.js', lookFor: 'Score' },
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },
-        { src: 'game_sample/js/monster.js', lookFor: 'Monster' },
         { src: 'game_sample/js/food_base.js', lookFor: 'Food_base' },
 
         { src: 'game_sample/js/map_item_tree.js', lookFor: 'Map_item_tree' },
@@ -106,7 +104,6 @@ var loadGameEnd;
         { src: 'game_sample/js/item_waikei_homework.js', lookFor: 'Item_waikei_homework' },
         { src: 'game_sample/js/item_spider_web.js', lookFor: 'Item_spider_web' },
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
-        { src: 'game_sample/js/final_Monster.js', lookFor: 'Final_Monster' },
         { src: 'game_sample/js/item_honey.js', lookFor: 'Item_honey' },
         { src: 'game_sample/js/item_meat.js', lookFor: 'Item_meat' },
         { src: 'game_sample/js/item_monster_meat.js', lookFor: 'Item_monster_meat' },
@@ -128,16 +125,11 @@ var loadGameEnd;
         { src: 'game_sample/js/character_description.js', lookFor: 'Character_description' },
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
         { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },
-        { src: 'game_sample/js/explore.js', lookFor: 'Explore' },
-        { src: 'game_sample/js/box.js', lookFor: 'Box' },
         { src: 'game_sample/js/characterStatus.js', lookFor: 'CharacterStatus' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
-        { src: 'game_sample/js/myGameLevel1.js', lookFor: 'MyGame' },
-        { src: 'game_sample/js/level2.js', lookFor: 'Level2' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
         { src: 'game_sample/js/handle_initial_character.js', lookFor: 'Handle_initial_character' },
-        { src: 'game_sample/js/map_1.js', lookFor: 'Map_1' },
         { src: 'game_sample/js/skill_handler.js', lookFor: 'Skill_handler' },
         { src: 'game_sample/js/spear_handler.js', lookFor: 'Spear_handler' },
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
@@ -175,22 +167,14 @@ var loadGameEnd;
         { src: 'game_sample/js/building_remance.js', lookFor: 'Building_remance' },
         
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },
-        { src: 'game_sample/js/terrain_blood_water.js', lookFor: 'Terrain_blood_water' },
         { src: 'game_sample/js/game_object_detail.js', lookFor: 'Game_object_detail' },
-        { src: 'game_sample/js/terrain_forest.js', lookFor: 'Terrain_forest' },
-        { src: 'game_sample/js/terrain_lava.js', lookFor: 'Terrain_lava' },
-        { src: 'game_sample/js/terrain_mountain.js', lookFor: 'Terrain_mountain' },
-        { src: 'game_sample/js/terrain_plain.js', lookFor: 'Terrain_plain' },
         { src: 'game_sample/js/level_up_animation.js', lookFor: 'Level_up_animation' },
-        { src: 'game_sample/js/terrain_snow_ground.js', lookFor: 'Terrain_snow_ground' },
-        { src: 'game_sample/js/terrain_water.js', lookFor: 'Terrain_water' },
         { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
 
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}
     ]
     importJS(listScript);
-    
 })();
 
 

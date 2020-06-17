@@ -13,7 +13,6 @@ var Item_grass_picked = function() {
     this.draw = function(ctx){
         this.item_grass_picked.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_grass_picked.prototype, 'position', {

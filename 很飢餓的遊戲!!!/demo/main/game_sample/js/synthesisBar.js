@@ -2,8 +2,6 @@ var SynthesisBar = function(backpackList, score) {
     this.audio = new Framework.Audio({
          click_change:{
             mp3: define.musicPath + '合成.mp3',
-            //ogg: define.musicPath + 'Hot_Heat.ogg',
-            //wav: define.musicPath + 'Hot_Heat.wav'
         }
     });
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
@@ -143,7 +141,6 @@ var SynthesisBar = function(backpackList, score) {
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢
-
     this.synthesisBar = [
         {item:"工具", position:{x:1, y:4}},
         {item:"戰鬥", position:{x:1, y:5}},
@@ -259,7 +256,6 @@ var SynthesisBar = function(backpackList, score) {
                 this.backpack.draw(ctx);
                 ctx.font = "15px Arial";
                 ctx.fillStyle = "black";
-                // var index = this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].item-1;
                 var check = backpackList.checkIfSynthesisAvailable(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex], this.synthesisBarDetail[this.firstColumeIndex][this.secondColumnIndex].item);
                 if(i == this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex].length-1){
                     if(check == 1)
@@ -269,16 +265,13 @@ var SynthesisBar = function(backpackList, score) {
                     else
                         ctx.fillText("沒材料拉",this.backpack.position.x, this.backpack.position.y+5);
                 }else{
-                    // ctx.fillText(this.itemNameArray[index], this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64-10);
                     this.drawPicture(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i],ctx);
                     ctx.font = "30px Arial";
                     ctx.fillStyle = "white";
                     ctx.fillText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
                     ctx.strokeStyle = 'blue';
                     ctx.lineWidth = 2.5;
-                    // ctx.strokeText(this.itemList[i].amount.toString(), this.backpackPosition[i].x, this.backpackPosition[i].y+20);
                     ctx.strokeText(this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].amount.toString(), this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.x*64, this.synthesisBarMaterial[this.firstColumeIndex][this.secondColumnIndex][i].position.y*64+15);
-                
                 }
             }
         }
@@ -447,9 +440,6 @@ var SynthesisBar = function(backpackList, score) {
     }
 
     this.updateChildBar = function(index){
-        // this.drawChildBar = index;
-        // this.audio.play({name: 'click_change', loop: true});
-
         this.currentPoint = index;
 
         if(this.currentPoint.x == 1 &&  this.currentPoint.y <= 8 &&  this.currentPoint.y >= 4){

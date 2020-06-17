@@ -17,7 +17,6 @@ var Item_flower_growed_dig = function() {
     this.draw = function(ctx){
         this.item_flower_growed_dig.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_flower_growed_dig.prototype, 'position', {

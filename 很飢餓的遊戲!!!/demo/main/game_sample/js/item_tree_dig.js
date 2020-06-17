@@ -11,13 +11,9 @@ var Item_tree_dig = function() {
     this.amount = 1;
     this.item_can_be_picked = true;
 
-    this.update = function(){
-    }
-
     this.draw = function(ctx){
         this.item_tree_dig.draw(ctx);
     }
-
 };
 
 Object.defineProperty(Item_tree_dig.prototype, 'position', {

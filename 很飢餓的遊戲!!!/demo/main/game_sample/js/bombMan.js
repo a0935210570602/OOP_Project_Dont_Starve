@@ -11,6 +11,7 @@ var BombMan = function(file, options) {
     this.hurt.scale = 2;
 
     this.hideAnimation = new Player_hide_animation(); 
+    this.get_back_number;
 
     this.sprite_dead = new Framework.AnimationSprite({url:define.materialPath + 'Actor_dead.png', col:3 , row:1 , loop:false , speed:4}); 
     this.sprite_dead.scale = 1.4;
@@ -38,6 +39,7 @@ var BombMan = function(file, options) {
     this.gameClear = false;
     this.mode = "";
     this.beCaught = false;
+    
     //一個格子 = 20
     this.character_descruption_point = [];
     this.character_descruption_point[0] = 0*20;   //"生命";
@@ -51,8 +53,6 @@ var BombMan = function(file, options) {
     this.character_descruption_point[8] = 0*20;  //"技巧";
 
     //角色格子轉成數值
-    // this.characterStatus = new CharacterStatus(this.character_descruption_point[5]*20, this.character_descruption_point[0]*20);
-
     this.character_descruption_total_point = [];
     this.character_descruption_total_point[0] = 0;
     this.character_descruption_total_point[1] = 0;
@@ -77,13 +77,6 @@ var BombMan = function(file, options) {
     this.hunger_total_point = 200;
     this.hunger_current_point = 100;
     this.handEquipmentId;
-    //以下這句話的意思是當options.position為undefined時this.sprite.position = x: 0, y: 0}
-    //若options.position有值, 則this.sprite.position = options.position
-    //原因是在JS中, undefined會被cast成false
-    //this.sprite.position = options.position || {x: 0, y: 0};
-    //this.sprite.scale = options.scale || 1;
-    //由於0會被cast成false, 故不能用上面的方法來簡化
-    //this.sprite.rotation = (Framework.Util.isUndefined(options.rotation))?0:options.rotation;
     this.init = function(){
         // this.characterStatus.init();
         this.player_state = "alive";
@@ -119,8 +112,6 @@ var BombMan = function(file, options) {
     this.decreaseHealth = function(){
         var healthInterval = setInterval(()=>{
             this.character_descruption_point[0] -= 4;
-            // console.log(this.character_descruption_point[0]);
-            // console.log(this.currentHealth);
             if(this.gameClear){
                 clearInterval(healthInterval);
             }
@@ -145,37 +136,21 @@ var BombMan = function(file, options) {
             this.audio = new Framework.Audio({
                 kick: {
                     mp3: define.musicPath + 'levelup.mp3',
-                    //ogg: define.musicPath + 'kick2.ogg',
-                    //wav: define.musicPath + 'kick2.wav'
-                }, song1:{
+                }, 
+                song1:{
                     mp3: define.musicPath + 'easy.mp3',
-                    //ogg: define.musicPath + 'Hot_Heat.ogg',
-                    //wav: define.musicPath + 'Hot_Heat.wav'
-                }, die_scream:{
+                }, 
+                die_scream:{
                     mp3: define.musicPath + '女慘叫.mp3',
-                    //ogg: define.musicPath + 'Hot_Heat.ogg',
-                    //wav: define.musicPath + 'Hot_Heat.wav'
-                }, monster_attack:{
+                }, 
+                monster_attack:{
                     mp3: define.musicPath + 'monster_attack.mp3',
-                    //ogg: define.musicPath + 'Hot_Heat.ogg',
-                    //wav: define.musicPath + 'Hot_Heat.wav'
             }});
             this.audio.play({name: 'kick', loop: false});
-
-            // this.is_levelup = true;
         }
-        // if(this.is_levelup){
-        //     this.is_levelup = false;
-            
-        //     return true;
-        // }
     }
+
     this.gethurt = function(attack_point){
-        // this.characterStatus.currentHealth -= attack_point;
-        // console.log("attack_point",attack_point);
-        // console.log("this.character_descruption_total_point[7]",this.character_descruption_total_point[7]);
-        // console.log("this.character_descruption_point[0]",this.character_descruption_point[0]);
-        // console.log("damage",damage);
         var damage = attack_point - (this.character_descruption_total_point[7]/2);
 
         if(this.equipmentBar.getEquipment(0) != null)
@@ -189,6 +164,7 @@ var BombMan = function(file, options) {
                 this.character_descruption_point[0] = 0;
         }
     }
+
     this.getBackPack = function(){
         return this.backpack;
     }
@@ -262,37 +238,33 @@ var BombMan = function(file, options) {
             this.mode = "";
         }
     }
+
     this.dieEvent = function(position){
         this.player_state = "dead";
         this.character_descruption_point[0] = 0;
         this.character_descruption_total_point[0] = 0;
-        // this.characterStatus.currentHealth = 0;
-        // this.update();
         this.sprite_dead.position = {x: position.x*64, y: position.y*64};
         this.sprite_dead.start({ from: 0 , to: 2, loop: true});
     }
-    //moveStep為位移量  格式範例{x:1,y:0}
-    this.walk = function(moveStep){
-        //console.log("player walk " + this.spritePosition.x + ", " + this.spritePosition.y);
-        if(this.isWalking === false){
-            if(moveStep.x > 0){
-                this.playerDirection = this.constants.DirectionEnum.RIGHT;
-            }else if(moveStep.x <0){
-                this.playerDirection = this.constants.DirectionEnum.LEFT;
-            }
 
-            if(moveStep.y > 0){
+    this.walk = function(moveStep){
+        if(this.isWalking === false){
+            if(moveStep.x > 0)
+                this.playerDirection = this.constants.DirectionEnum.RIGHT;
+            else if(moveStep.x <0)
+                this.playerDirection = this.constants.DirectionEnum.LEFT;
+
+            if(moveStep.y > 0)
                 this.playerDirection = this.constants.DirectionEnum.DOWN;
-            }else if(moveStep.y < 0){
+            else if(moveStep.y < 0)
                 this.playerDirection = this.constants.DirectionEnum.UP;
-            }
+
             this.isWalking = true;
             this.sprite.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
         }
     }
 
     this.die = function(){
-        // console.log('player die');
         Framework.Game.goToLevel('gameOver');
     }
 
@@ -339,48 +311,17 @@ var BombMan = function(file, options) {
         if(this.hideAnimation.hideAnimation._start)
             this.hideAnimation.draw(ctx);
         if(this.level_up_animation.level_up_animation._start){
-            // console.log("drawdraw");
             this.level_up_animation.draw(ctx);
         }
-        // console.log("this.sprite.position");
-        // console.log(this.spritePosition);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        // this.characterStatus.draw(ctx);
-        if(this.player_state == "alive" && !this.hide){
+        if(this.player_state == "alive" && !this.hide)
             this.sprite.draw(ctx);
-        }else if(this.player_state == "dead"){
+        else if(this.player_state == "dead")
             this.sprite_dead.draw(ctx);
-        }else{
+        else
             this.item_bush.draw(ctx);
-        }
-
-        // if(this.hurt._start)
-        //     this.hurt.draw(ctx);
-    }
-
-    this.increaseBombNum = function(){
-        this.maxBombNum += 1;
-    }
-
-    this.increaseBombPower = function(){
-        this.bombPower += 1;
-    }
-
-    this.bombExploredHandler = function(exploredArray, bomb){
-        m_bombMan.bombNum -= 1;
-    }
-
-    this.placeBomb = function(){
-        if(this.bombNum < this.maxBombNum){
-            var bomb = new Bomb(this.bombPower);
-            bomb.position = this.canvasPosition;
-            bomb.ExploredCallBack.push(this.bombExploredHandler);
-            this.bombNum += 1;
-            return bomb;
-        }
-        return null;
     }
 
     this.equipFromBackpack = function(indexForBackpack, indexForEquipment){
@@ -417,7 +358,6 @@ var BombMan = function(file, options) {
         }
         if (obj.type == "food"){
             this.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
-            // this.characterStatus.increaseStatusByEat(obj.hungerAddition, obj.healthAddition);
             this.backpack.updateByEat(index);
         }
         if(obj.type == "plant")
@@ -428,13 +368,14 @@ var BombMan = function(file, options) {
         if(this.character_descruption_point[0]  + health >= this.character_descruption_point[5])
             this.character_descruption_point[0] = this.character_descruption_point[5];
         else
-        this.character_descruption_point[0] += health;
+            this.character_descruption_point[0] += health;
 
         if(this.hunger_current_point + hunger >= this.hunger_total_point)
             this.hunger_current_point = this.hunger_total_point;
         else
             this.hunger_current_point += hunger;
     }
+
     this.removeEquipment = function(index){
         if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
             if(this.equipmentBar.getEquipment(index).item_num == 32)
@@ -443,7 +384,7 @@ var BombMan = function(file, options) {
             this.equipmentBar.setEquipment(null, index);
         }
     }
-    this.get_back_number;
+
     this.mousemove = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);
@@ -458,33 +399,28 @@ var BombMan = function(file, options) {
     }
 
     this.characterAbilityClick = function(e){
-        console.log(e);
-
         if(e.x >= 470 && e.x <=510){
-            if(e.y >=540 && e.y<= 560){
+            if(e.y >=540 && e.y<= 560)
                 this.isChangeCapability(2);
-            }else if(e.y >=622 && e.y<= 642){
+            else if(e.y >=622 && e.y<= 642)
                 this.isChangeCapability(3);
-            }else if(e.y >=700 && e.y<= 720){
+            else if(e.y >=700 && e.y<= 720)
                 this.isChangeCapability(4);
-            }
         }else if(e.x >= 822 && e.x <=861){
-            if(e.y >=382 && e.y<= 415){
+            if(e.y >=382 && e.y<= 415)
                 this.isChangeCapability(5);
-            }else if(e.y >=461 && e.y<= 502){
+            else if(e.y >=461 && e.y<= 502)
                 this.isChangeCapability(6);
-            }else if(e.y >=622 && e.y<= 661){
+            else if(e.y >=622 && e.y<= 661)
                 this.isChangeCapability(8);
-            }
         }   
     }
+
     this.click = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);
-        
         if(index != -1)
             this.clickInBackPack(index);
-        
         if(equipmentIndex != -1)
             this.removeEquipment(equipmentIndex);
     }

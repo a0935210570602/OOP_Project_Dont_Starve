@@ -28,18 +28,14 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
     this.is_start = false;
 
     this.init = function(){
-        if(this.direction.x == this.constants.Direction.DOWN.x && this.direction.y == this.constants.Direction.DOWN.y){
+        if(this.direction.x == this.constants.Direction.DOWN.x && this.direction.y == this.constants.Direction.DOWN.y)
             this.directionNum = 0;
-        }
-        else if(this.direction.x == this.constants.Direction.LEFT.x && this.direction.y == this.constants.Direction.LEFT.y){
+        else if(this.direction.x == this.constants.Direction.LEFT.x && this.direction.y == this.constants.Direction.LEFT.y)
             this.directionNum = 1;
-        }
-        else if(this.direction.x == this.constants.Direction.RIGHT.x && this.direction.y == this.constants.Direction.RIGHT.y){
+        else if(this.direction.x == this.constants.Direction.RIGHT.x && this.direction.y == this.constants.Direction.RIGHT.y)
             this.directionNum = 2;
-        }
-        else{
+        else
             this.directionNum = 3;
-        }
     }
 
     this.fly = function(){
@@ -59,19 +55,14 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
 
     var flySpeed = 16;
     this.flyAlittle = function(){
-
-        if(this.directionNum == 0){
+        if(this.directionNum == 0)
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + flySpeed};
-        }
-        else if(this.directionNum == 1){
+        else if(this.directionNum == 1)
             this.spritePosition = {x:this.spritePosition.x - flySpeed, y:this.spritePosition.y};
-        }
-        else if(this.directionNum == 2){
+        else if(this.directionNum == 2)
             this.spritePosition = {x:this.spritePosition.x + flySpeed, y:this.spritePosition.y};
-        }
-        else{
+        else
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - flySpeed};
-        }
     }
 
     this.update = function(){
@@ -88,16 +79,14 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
     }
 
     this.check = function(){
-        if( Math.abs((this.spritePosition.x - Position.x*64)) <6*64 &&　Math.abs((this.spritePosition.y - Position.y*64)) <64*6){
+        if( Math.abs((this.spritePosition.x - Position.x*64)) <6*64 &&　Math.abs((this.spritePosition.y - Position.y*64)) <64*6)
             this.is_start = true;
-        }else{
+        else
             this.is_start = false;
-        }
     }
 
     this.draw = function(ctx){
         this.is_start = false;
-
         this.check();
         if(this.is_start){
             var xx = 13*64 + this.spritePosition.x - Position.x*64;
@@ -122,8 +111,8 @@ var Flying_arror = function(Direction,Position,Monster,Attack) {
             }
         }
     }
-
 };
+
 Object.defineProperty(Flying_arror.prototype, 'position', {
     get: function() {
         return this.mapPosition;

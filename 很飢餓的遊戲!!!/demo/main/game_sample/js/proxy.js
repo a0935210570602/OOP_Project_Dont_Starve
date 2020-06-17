@@ -9371,6 +9371,7 @@ var Proxy = function() {
                 return new Item_blank();
         }
     }
+
     this.createItemMap= function(map_number){
         console.log("createItemMap");
         var i = map_number;
@@ -9389,10 +9390,8 @@ var Proxy = function() {
             default:
                 break;
         }
-        // console.log(this.item,map_number);
         for(var j=0;j<this.item[i].length;j++){
             for(var k=0;k<this.item[i][j].length;k++){
-                // console.log();
                 switch(this.item[i][j][k]){
                     case 0:
                         if(this.map_name == "World"){
