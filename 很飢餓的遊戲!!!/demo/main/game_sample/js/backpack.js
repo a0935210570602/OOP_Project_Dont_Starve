@@ -1,12 +1,30 @@
 var Backpack = function() {
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
+    this.objectFactory = new Object_factory();
 
     this.backpackPosition = [];
     this.objectPosition = [];
     var berry = new Item_berry();
     berry.amount = 100;
-    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,new Item_pixilart()];
+    var branch = new Item_branch();
+    branch.amount = 100;
+    var flint = new Item_flint();
+    flint.amount = 100;
+    var gold = new Item_gold();
+    gold.amount = 100;
+    var grass = new Item_grass_picked();
+    grass.amount = 100;
+    var pix = this.objectFactory.createObject(
+        {
+            type: "Tool",
+            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png'),
+            attackPoint: 2,
+            itemNumber: 21,
+            reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
+        }
+    );
+    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,branch,flint,gold,grass,pix];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
     
     this.selectedIndex = -1;
@@ -77,25 +95,81 @@ var Backpack = function() {
                     this.itemList.push(new Item_droplet());
                     break;
                 case 15:
-                    this.itemList.push(new Item_pixilart());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_pixilart.png'),
+                            attackPoint: 1,
+                            itemNumber: 15,
+                            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
+                        }
+                    ));
                     break;
                 case 16:
-                    this.itemList.push(new Item_ax());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_ax.png'),
+                            attackPoint: 1,
+                            itemNumber: 16,
+                            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
+                        }
+                    ));
                     break;
                 case 17:
-                    this.itemList.push(new Item_fishing_rod());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_fishing_rod.png'),
+                            attackPoint: 1,
+                            itemNumber: 17,
+                            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
+                        }
+                    ));
                     break;
                 case 18:
-                    this.itemList.push(new Item_shovel());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_shovel.png'),
+                            attackPoint: 1,
+                            itemNumber: 18,
+                            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
+                        }
+                    ));
                     break;
                 case 19:
-                    this.itemList.push(new Item_gold_ax());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_ax.png'),
+                            attackPoint: 2,
+                            itemNumber: 19,
+                            reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
+                        }
+                    ));
                     break;
                 case 20:
-                    this.itemList.push(new Item_gold_shovel());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_shovel.png'),
+                            attackPoint: 2,
+                            itemNumber: 20,
+                            reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
+                        }
+                    ));
                     break;
                 case 21:
-                    this.itemList.push(new Item_gold_pixilart());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Tool",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png'),
+                            attackPoint: 2,
+                            itemNumber: 21,
+                            reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
+                        }
+                    ));
                     break;
                 case 22:
                     this.itemList.push(new Item_helmat());
@@ -107,10 +181,28 @@ var Backpack = function() {
                     this.itemList.push(new Item_wood_armor());
                     break;
                 case 25:
-                    this.itemList.push(new Item_spear());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Weapon",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_spear.png'),
+                            attack: [3,0,0],
+                            itemNumber: 25,
+                            scale: 0.8,
+                            reduceDurability: function(visitor){visitor.visitSpear(this)}
+                        }
+                    ));
                     break;
                 case 26:
-                    this.itemList.push(new Item_arror());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Weapon",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_arror.png'),
+                            attack: [0,0,3],
+                            itemNumber: 26,
+                            scale: 2,
+                            reduceDurability: function(visitor){visitor.visitArror(this)}
+                        }
+                    ));
                     break;
                 case 27:
                     this.itemList.push(new Item_king_wand());
@@ -119,10 +211,28 @@ var Backpack = function() {
                     this.itemList.push(new Item_space_wand());
                     break;
                 case 29:
-                    this.itemList.push(new Item_fire_wand());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Weapon",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_fire_wand.png'),
+                            attack: [0,2,0],
+                            itemNumber: 29,
+                            scale: 0.8,
+                            reduceDurability: function(visitor){visitor.visitWand(this)}
+                        }
+                    ));
                     break;
                 case 30:
-                    this.itemList.push(new Item_ice_wand());
+                    this.itemList.push(this.objectFactory.createObject(
+                        {
+                            type: "Weapon",
+                            imagePath: new Framework.Sprite(define.materialPath + 'item_ice_wand.png'),
+                            attack: [0,2,0],
+                            itemNumber: 30,
+                            scale: 0.8,
+                            reduceDurability: function(visitor){visitor.visitWand(this)}
+                        }
+                    ));
                     break;
                 case 31:
                     this.itemList.push(new Item_lamp());
@@ -146,7 +256,7 @@ var Backpack = function() {
                     this.itemList.push(new Item_flower_picked());
                     break;
                 case 38:
-                    this.itemList.push(new Item_bush());
+                    this.itemList.push(new Item_grass_picked());
                     break;
             }
         }else{
@@ -282,6 +392,46 @@ var Backpack = function() {
             }
         }
     }
+    this.mousemove = function(e){
+        // this.mousePosition = e;
+
+        // if(e.x<=290+64 && e.x>= 290 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[0].item_num;
+        // }else if(e.x<=290+64*2 && e.x>= 290+64*1 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[1].item_num;
+        // }else if(e.x<=290+64*3 && e.x>= 290+64*2 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[2].item_num;
+        // }else if(e.x<=290+64*4 && e.x>= 290+64*3 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[3].item_num;
+        // }else if(e.x<=290+64*5 && e.x>= 290+64*4 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[4].item_num;
+        // }else if(e.x<=290+64*6 && e.x>= 290+64*5 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[5].item_num;
+        // }else if(e.x<=290+64*7 && e.x>= 290+64*6 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[6].item_num;
+        // }else if(e.x<=290+64*8 && e.x>= 290+64*7 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[7].item_num;
+        // }else if(e.x<=290+64*9 && e.x>= 290+64*8 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[8].item_num;
+        // }else if(e.x<=290+64*10 && e.x>= 290+64*9 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[9].item_num;
+        // }else if(e.x<=290+64*11 && e.x>= 290+64*10 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[10].item_num;
+        // }else if(e.x<=290+64*12 && e.x>= 290+64*11 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[11].item_num;
+        // }else if(e.x<=290+64*13 && e.x>= 290+64*12 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[12].item_num;
+        // }else if(e.x<=290+64*14 && e.x>= 290+64*13 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[13].item_num;
+        // }else if(e.x<=290+64*15 && e.x>= 290+64*14 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[14].item_num;
+        // }else if(e.x<=290+64*16 && e.x>= 290+64*15 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[15].item_num;
+        // }else if(e.x<=290+64*17 && e.x>= 290+64*16 && e.y<=860 && e.y>= 807){
+        //     return this.itemList[16].item_num;
+        // }
+        // return null;
+    }
 
     this.itemNameArray = [
         "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
@@ -295,6 +445,9 @@ var Backpack = function() {
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
     //31:黃金提燈 32:火把 33:帳篷 34:篝火 35:冰塊 36:漿果叢
     this.draw = function(ctx){
+        // if(this.selectedIndex != -1){
+            // ctx.fillRect(x, y, width, height)
+        // }
         for(var j = 0; j < 17; j++){
             this.backpack.position = this.backpackPosition[j];
             this.backpack.draw(ctx);

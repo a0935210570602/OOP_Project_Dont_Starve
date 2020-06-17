@@ -390,7 +390,7 @@ var BombMan = function(file, options) {
         var equipmentIndex = this.getEquipmentIndex(e);
         this.backpack.selectedIndex = index;
         this.equipmentBar.selectedIndex = equipmentIndex;
-        this.get_back_number = this.backpack.mousemove(e);
+        // this.get_back_number = this.backpack.mousemove(e);
     }
 
     this.isChangeCapability = function(which_capability){

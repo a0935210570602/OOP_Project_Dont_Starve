@@ -204,8 +204,8 @@ var SynthesisBar = function(backpackList, score) {
         [
             [{item: 25,amount: 1,position:{x:3, y:5}},{item: 44,amount: 1,position:{x:3, y:6}},{item:"合成",position:{x:3,y:7}}],
             [{item: 5,amount: 1,position:{x:3, y:6}},{item: 29,amount: 1,position:{x:3, y:7}},{item: 30,amount: 1,position:{x:3, y:8}},{item: 14,amount: 1,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
-            [{item: 25,amount: 2,position:{x:3, y:7}},{item: 32,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
-            [{item: 25,amount: 2,position:{x:3, y:8}},{item: 35,amount: 2,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
+            [{item: 25,amount: 1,position:{x:3, y:7}},{item: 32,amount: 1,position:{x:3, y:8}},{item:"合成",position:{x:3,y:9}}],
+            [{item: 25,amount: 1,position:{x:3, y:8}},{item: 35,amount: 2,position:{x:3, y:9}},{item:"合成",position:{x:3,y:10}}],
         ],
         [
             [{item: 4,amount: 2,position: {x:3,y:6}},{item: 9,amount: 2,position: {x:3,y:7}},{item: 8,amount: 1,position: {x:3,y:8}},{item: 13,amount: 2,position: {x:3,y:9}},{item:"合成",position:{x:3,y:10}}],

@@ -445,6 +445,7 @@ var World_map = function()
             audio.play({name: 'monster_attack', loop: false});
         }
     }
+
 	this.draw = function(ctx) {
         if(this.playerInitial){
             for(var i=0; i<11; i++){
@@ -545,7 +546,6 @@ var World_map = function()
             this.synthesisBar.draw(ctx);
             this.npc1.draw(ctx);
             this.npc2.draw(ctx);
-            this.character_description.draw(ctx);
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
@@ -556,7 +556,10 @@ var World_map = function()
             }
             this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
-            this.npc_event.draw(ctx);
+            if(!this.is_character_description_open)
+                this.npc_event.draw(ctx);
+            if(!this.npc_event.taking_is_start)
+                this.character_description.draw(ctx);
         }else
             this.handle_initial_character.draw(ctx);
     }	
@@ -595,12 +598,34 @@ var World_map = function()
         return "No";
     }
 
+    this.addMonsterRandom = function(amount){
+        // var count = 0;
+        // var m_position = {x:0,y:0};
+        // var newMonster =  new Monster_cute_little_eye(this);
+        // newMonster.position = {x:48,y:48};
+        // var newMonster1 =  new Monster_boss(this);
+        // newMonster1.position = {x:48,y:49};
+        // this.monster.push(newMonster);
+        // this.monster.push(newMonster1);
+        // while(count != amount){
+        //     m_position = {x: Math.floor(Math.random()*50),y: Math.floor(Math.random()*50)};
+        //     if(this.map_selector.checkFloorCanWalk(m_position) && this.map_selector.checkIsBlank(m_position)){
+        //         console.log(m_position);
+        //         var newMonster =  new Monster_cute_little_eye(this);
+        //         newMonster.position = m_position;
+        //         this.monster.push(newMonster);
+        //         count++;
+        //     }
+        // }
+    }
+
     var m_map = this;
     this.deadClear = function(){
         this.skillTimer.clear();
         this.capture_key = [];
         this.player1.character_descruption_point[0] = 0;
         this.player1.update();
+        this.clock.stopMusic(true);
     }
 
     this.gameClear = function(){
@@ -608,7 +633,7 @@ var World_map = function()
         this.capture_key = [];
         this.clear = true;
         this.player1.gameClear = true;
-
+        this.clock.stopMusic(true);
     }
 
     this.checkIsDie = function(){
@@ -677,7 +702,6 @@ var World_map = function()
             case 'W':
                 this.deadClear();
                 this.audio.stopAll();
-                this.clock.stopMusic(true);
                 Framework.Game.goToLevel('gameOver'); 
                 break;
             case 'O':
