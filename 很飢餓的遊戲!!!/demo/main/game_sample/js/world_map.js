@@ -545,7 +545,6 @@ var World_map = function()
             this.synthesisBar.draw(ctx);
             this.npc1.draw(ctx);
             this.npc2.draw(ctx);
-            this.character_description.draw(ctx);
             ctx.font = "20px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
@@ -556,7 +555,10 @@ var World_map = function()
             }
             this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
-            this.npc_event.draw(ctx);
+            if(!this.is_character_description_open)
+                this.npc_event.draw(ctx);
+            if(!this.npc_event.taking_is_start)
+                this.character_description.draw(ctx);
         }else
             this.handle_initial_character.draw(ctx);
     }	

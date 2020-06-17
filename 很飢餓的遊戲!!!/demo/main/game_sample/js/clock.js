@@ -19,7 +19,7 @@ var Clock = function() {
     this.day = 1;
     
     this.init = function(){
-        this.audio = new Framework.Audio({
+        var audio = new Framework.Audio({
             morning:{
                 mp3: define.musicPath + 'Hot_Heat.mp3'
             }, night:{
@@ -28,11 +28,11 @@ var Clock = function() {
                 mp3: define.musicPath + '遊戲王經典配樂.mp3'
             }
         });
-        this.audio.play({name: 'morning', loop: true});
+        audio.play({name: 'morning', loop: true});
         this.decrease();
     }
     this.decrease = function(){
-        this.audio = new Framework.Audio({
+        var audio = new Framework.Audio({
             morning:{
                 mp3: define.musicPath + 'Hot_Heat.mp3'
             }, night:{
@@ -47,14 +47,14 @@ var Clock = function() {
                 this.currentTime = 192;
                 if(!this.music_stop){
                     if( this.status == 0){
-                        this.audio.stopAll();
-                        this.audio.play({name: 'afternoon', loop: true});
+                        audio.stopAll();
+                        audio.play({name: 'afternoon', loop: true});
                     }else if( this.status == 1){
-                        this.audio.stopAll();
-                        this.audio.play({name: 'night', loop: true});
+                        audio.stopAll();
+                        audio.play({name: 'night', loop: true});
                     }else{
-                        this.audio.stopAll();
-                        this.audio.play({name: 'morning', loop: true});
+                        audio.stopAll();
+                        audio.play({name: 'morning', loop: true});
                     }
                 }
                 this.status ++;
