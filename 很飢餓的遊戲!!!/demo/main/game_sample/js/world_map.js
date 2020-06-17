@@ -83,6 +83,7 @@ var World_map = function()
         
         this.creation_blood_status = new Creation_blood_status();
 
+        this.music_stop = false;
         this.clock = new Clock();
         this.clock.scale = 2;
 
@@ -190,20 +191,8 @@ var World_map = function()
                 mp3: define.musicPath + 'levelup.mp3',
                 //ogg: define.musicPath + 'kick2.ogg',
                 //wav: define.musicPath + 'kick2.wav'
-            },kick: {
-                mp3: define.musicPath + 'levelup.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
             }, click_change:{
                 mp3: define.musicPath + '合成.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
-            }, morning:{
-                mp3: define.musicPath + 'Hot_Heat.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
-            }, night:{
-                mp3: define.musicPath + 'night.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
             }, die_scream:{
@@ -211,7 +200,7 @@ var World_map = function()
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
             }, monster_attack:{
-                mp3: define.musicPath + 'monster_attack.mp3',
+                mp3: define.musicPath + '怪物攻擊.mp3',
                 //ogg: define.musicPath + 'Hot_Heat.ogg',
                 //wav: define.musicPath + 'Hot_Heat.wav'
         }
@@ -303,7 +292,7 @@ var World_map = function()
 	{   
         if(this.on_map_name == "World"){
             if(this.playerInitial){
-                if(this.player1.player_state == "alive"){
+                if(this.player1.player_state == "alive" || false){
                     this.checkIsDie();
                 }
                 // this.level_up_animation.update();
@@ -469,11 +458,19 @@ var World_map = function()
         this.monster_kill_timer ++;
         // console.log("this.monster_kill_timer ");
         // console.log(this.monster_kill_timer );
+        var audio = new Framework.Audio({
+            monster_attack:{
+                mp3: define.musicPath + 'monster_attack.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+        }
+        });
         if(this.monster_kill_timer == 15){
             // console.log("gethurt");
             this.player1.gethurt(hurt_point);
             this.monster_kill_timer = 0;
-            this.audio.play({name: 'monster_attack', loop: false});
+
+            audio.play({name: 'monster_attack', loop: false});
         }
     }
 	this.draw = function(ctx) {
@@ -672,6 +669,11 @@ var World_map = function()
     this.checkIsDie = function(){
         if(this.player1.character_descruption_point[0] <= 0 && this.demo_dead_trigger){
             // this.player1.characterStatus.currentHunger = 0;
+            var audio = new Framework.Audio({
+                die_scream: {
+                    mp3: define.musicPath + '女慘叫.mp3'
+                }
+            });
             this.player1.dieEvent({x: 13, y: 7});
             this.audio.play({name: 'die_scream', loop: false});
             this.update();
@@ -736,6 +738,8 @@ var World_map = function()
                 break;
             case 'W':
                 this.deadClear();
+                this.audio.stopAll();
+                this.clock.stopMusic(true);
                 Framework.Game.goToLevel('gameOver'); 
                 break;
             case 'O':
@@ -1115,7 +1119,7 @@ var World_map = function()
     this.handlePick = function(){
         var audio = new Framework.Audio({
             pick: {
-                mp3: define.musicPath + 'soundeffects.mp3',
+                mp3: define.musicPath + '撿取.mp3',
                 //ogg: define.musicPath + 'kick2.ogg',
                 //wav: define.musicPath + 'kick2.wav'
             }
@@ -1319,14 +1323,6 @@ var World_map = function()
         m_map.draw(Framework.Game._context);
     }
 
-    this.stopAllMonsterWalk = function()
-    {
-        for(var i=0;i<this.monster.length;i++)
-        {
-            // this.monster[i].stopWalk();
-        }
-    }
-
     this.drawSkillTimer = function(ctx){
         var interval = setInterval(()=>{
             if(this.skillTimer.buttonPress)
@@ -1363,7 +1359,7 @@ var World_map = function()
     this.click = function(e){   
         // console.log(this.is_character_description_open);
 
-        console.log(e);
+        // console.log(e);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){

@@ -16,20 +16,33 @@ var Handle_game_over = function(){
     this.showScore = false;
 
     this.init = function(){
+        var audio = new Framework.Audio({
+            open_door: {
+                mp3: define.musicPath + '開門.mp3',
+            }
+        });
+        audio.play({name: 'open_door', loop: false});
         this.open.start({ from: 0, to: 11, loop: false});
     }
 
     this.update = function(){
         this.open.update();
     }
-
     this.click = function(e){
+        var audio = new Framework.Audio({
+            victory: {
+                mp3: define.musicPath + '勝利.mp3',
+            }
+        });
         if(!this.showScore && !this.open._start){
             this.showScore = true;
+            audio.play({name: 'victory', loop: true});
             this.draw(Framework.Game._context);
         }
-        if(Framework.Game._levels[2].level.map.score.scoreToDraw >= Framework.Game._levels[2].level.map.score.score)
+        if(Framework.Game._levels[2].level.map.score.scoreToDraw >= Framework.Game._levels[2].level.map.score.score){
+            audio.stopAll();
             Framework.Game.goToLevel('menu'); 
+        }
     }
 
     this.draw = function(ctx){

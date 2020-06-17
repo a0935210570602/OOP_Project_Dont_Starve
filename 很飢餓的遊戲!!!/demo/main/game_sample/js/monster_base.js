@@ -115,6 +115,33 @@ var Monster_base = function(){
     }
 
     this.howToWalk = function(restriction, thirdDirection){
+        this.audio = new Framework.Audio({
+            cow: {
+                mp3: define.musicPath + '牛叫聲.mp3',
+            },bat: {
+                mp3: define.musicPath + '蝙蝠叫聲.mp3',
+            },pig: {
+                mp3: define.musicPath + '豬叫聲.mp3',
+            },eye: {
+                mp3: define.musicPath + '眼球叫聲.mp3',
+            }
+        });
+        switch(this.name){
+            case "閃耀魔眼":
+                this.audio.play({name: 'cow', loop: false});
+                break;
+            case "小蝙蝠":
+                this.audio.play({name: 'bat', loop: false});
+                break;
+            case "小豬":
+                this.audio.play({name: 'pig', loop: false});
+                break;
+            case "大眼仔仔":
+                this.audio.play({name: 'eye', loop: false});
+                break;
+            default:
+                break;
+        }
         var directionArray = [{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
         var thirdDirection = directionArray[thirdDirection];
         directionArray.splice( restriction, 1 );
@@ -154,6 +181,7 @@ var Monster_base = function(){
 
     this.rushToYou = function()
     {
+        
         var walkStep = {x:0,y:0};
         this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
         

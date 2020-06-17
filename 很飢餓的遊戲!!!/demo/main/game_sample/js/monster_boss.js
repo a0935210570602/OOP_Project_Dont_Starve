@@ -69,6 +69,12 @@ var Monster_boss = function(map) {
     this.frequency = 15;
 
     this.catchPlayer = function(){
+        var audio = new Framework.Audio({
+            catch: {
+                mp3: define.musicPath + '綑綁.mp3'
+            }
+        });
+        audio.play({name: 'catch', loop: false});
         this.catchPosition = [];
         this.catchPosition.push({x:this.map.playerPositionOnMap.x+1, y:this.map.playerPositionOnMap.y});
         this.catchPosition.push({x:this.map.playerPositionOnMap.x-1, y:this.map.playerPositionOnMap.y});
@@ -124,6 +130,7 @@ var Monster_boss = function(map) {
     this.walk = function(moveStep){
         if(this.isWalking === false){
             this.isWalking = true;
+            
             this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
         }
     }
@@ -211,6 +218,13 @@ var Monster_boss = function(map) {
         }else{
             if(this.isWalking){
                 if(this.walkTarget.x * PIXEL_CONST === this.spritePosition.x && this.walkTarget.y * PIXEL_CONST === this.spritePosition.y){
+                    var audio = new Framework.Audio({
+                        roar: {
+                            mp3: define.musicPath + '魔王叫聲.mp3',
+                        }
+                    });
+                    // audio.play({name: 'roar', loop: false});
+                    
                     this.isWalking = false;
                     this.monster_boss.index = this.playerDirection * 3 + 1;
                     this.mapPosition = this.walkTarget;
@@ -246,6 +260,12 @@ var Monster_boss = function(map) {
     }
 
     this.remoteAttack = function(){
+        var audio1 = new Framework.Audio({
+            drop: {
+                mp3: define.musicPath + '摔東西.mp3'
+            }
+        });
+        audio1.play({name: 'drop', loop: false});
         this.remote_attack.start({from:18,to:25,loop:false});
         this.remotePosition.x = this.mapPosition.x+this.monsterDirection.x;
         this.remotePosition.y = this.mapPosition.y+this.monsterDirection.y;
@@ -266,6 +286,13 @@ var Monster_boss = function(map) {
     }
 
     this.rangeAttack = function(){
+
+        var audio = new Framework.Audio({
+            light: {
+                mp3: define.musicPath + '範圍攻擊.mp3'
+            }
+        });
+        audio.play({name: 'light', loop: false});
         this.range_attack.start({from:1,to:24,loop:false});
         this.rangePosition.x = this.map.playerPositionOnMap.x;
         this.rangePosition.y = this.map.playerPositionOnMap.y;
@@ -366,6 +393,12 @@ var Monster_boss = function(map) {
         var i = (Math.floor(Math.random()*3) + 1)*(Math.random() > 0.5 ? 1 : -1);
         var j = (Math.floor(Math.random()*3) + 1)*(Math.random() > 0.5 ? 1 : -1);
        
+        var audio1 = new Framework.Audio({
+            move: {
+                mp3: define.musicPath + '順移.mp3'
+            }
+        });
+        audio1.play({name: 'move', loop: false});
         if(this.map.mapArray[5+i][5+j] != 91 &&
             this.map.mapArray[5+i][5+j] != 200 &&
             this.map.itemArray[5+i][5+j].item_num == 0 

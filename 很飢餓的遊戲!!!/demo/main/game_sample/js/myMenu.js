@@ -28,21 +28,7 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
         this.start_game_touch = new Framework.Sprite(define.welcomimgPath + 'start_game_touch.png');
         this.team_game_touch = new Framework.Sprite(define.welcomimgPath + 'team_game_touch.png');
         this.quit_game_touch = new Framework.Sprite(define.welcomimgPath + 'quit_game_touch.png');
-        this.audio = new Framework.Audio({
-            start_game: {
-                mp3: define.musicPath + '遊戲開場音樂.mp3',
-                //ogg: define.musicPath + 'kick2.ogg',
-                //wav: define.musicPath + 'kick2.wav'
-            }, keyup:{
-                mp3: define.musicPath + '按按鍵.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
-            }, song2:{
-                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
-                //ogg: define.musicPath + 'Hot_Heat.ogg',
-                //wav: define.musicPath + 'Hot_Heat.wav'
-            }
-        });
+        
         // document.querySelector('__game_canvas__').click();
         // this.audio.openVolume(this.audio._audioInstanceObj['start_game']);
         // console.log(Framework.Audio._audioInstanceObj);
@@ -98,6 +84,21 @@ var MyMenu = Framework.exClass(Framework.GameMainMenu , {
             y: 680
         };
         this.botton_team.scale = 1;
+        this.audio = new Framework.Audio({
+            start_game: {
+                mp3: define.musicPath + '遊戲開場音樂.mp3',
+                //ogg: define.musicPath + 'kick2.ogg',
+                //wav: define.musicPath + 'kick2.wav'
+            }, keyup:{
+                mp3: define.musicPath + '按按鍵.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }, song2:{
+                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+                //ogg: define.musicPath + 'Hot_Heat.ogg',
+                //wav: define.musicPath + 'Hot_Heat.wav'
+            }
+        });
         // this.rootScene.attach(this.botton_team);
         this.audio.play({name: 'start_game', loop: true});
 

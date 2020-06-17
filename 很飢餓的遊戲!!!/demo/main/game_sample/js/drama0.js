@@ -42,8 +42,6 @@ var Drama0 = Framework.Class(Framework.Level , {
     },
 
     keydown:function(e, list){
-        
-        // Framework.DebugInfo.Log.warning(e.key);
         if(e.key === 'F11') {
             if(!this.isFullScreen) {
                 Framework.Game.fullScreen();

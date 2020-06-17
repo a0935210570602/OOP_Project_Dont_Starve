@@ -59,15 +59,17 @@ var Clock = function() {
             if(this.currentTime <= 0)
             {
                 this.currentTime = 192;
-                if( this.status == 0){
-                    this.audio.stopAll();
-                    this.audio.play({name: 'afternoon', loop: true});
-                }else if( this.status == 1){
-                    this.audio.stopAll();
-                    this.audio.play({name: 'night', loop: true});
-                }else{
-                    this.audio.stopAll();
-                    this.audio.play({name: 'morning', loop: true});
+                if(!this.music_stop){
+                    if( this.status == 0){
+                        this.audio.stopAll();
+                        this.audio.play({name: 'afternoon', loop: true});
+                    }else if( this.status == 1){
+                        this.audio.stopAll();
+                        this.audio.play({name: 'night', loop: true});
+                    }else{
+                        this.audio.stopAll();
+                        this.audio.play({name: 'morning', loop: true});
+                    }
                 }
                 this.status ++;
                 if(this.status >=3){
@@ -79,7 +81,8 @@ var Clock = function() {
         }, this.regeneration_time);
     }
 
-    this.update = function(){
+    this.stopMusic = function(music_stop){
+        this.music_stop = music_stop;
     }
 
     this.draw = function(ctx){
