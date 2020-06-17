@@ -1294,7 +1294,6 @@ var World_map = function()
             this.synthesisBar.mousemove(e);
             this.player1.mousemove(e);
             this.handleHoverBackpack();
-    
             m_map.draw(Framework.Game._context);
         }else{
             this.handle_initial_character.mousemove(e);
@@ -1302,9 +1301,13 @@ var World_map = function()
     }
 
     this.handleHoverBackpack = function(){
-        if(this.player1.backpack.getSelectedItem() != null)
+        if(this.player1.backpack.getSelectedItem() != null){
             this.game_object_detail.showUpdate(this.player1.backpack.getSelectedItem().item_num); 
-        else
+            m_map.draw(Framework.Game._context);
+        }
+        else{
             this.game_object_detail.showUpdate(null); 
+            m_map.draw(Framework.Game._context);
+        }
     }
 }

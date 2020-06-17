@@ -16,15 +16,7 @@ var Handle_initial_character = function(){
         for(var i = 0;i < this.character_description.character_descruption_point.length;i++){
             this.character_description.character_descruption_point[i] = 5;
         }
-        this.audio = new Framework.Audio({
-            start_game: {
-                mp3: define.musicPath + '遊戲開場音樂.mp3',
-            }, keyup:{
-                mp3: define.musicPath + '按按鍵.mp3',
-            }, song2:{
-                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
-            }
-        });
+        
     }
 
     this.update = function(){
@@ -148,7 +140,16 @@ var Handle_initial_character = function(){
         }
     }
     this.click = function(e){
-        this.audio.play({name: 'keyup', loop: false});
+        var audio = new Framework.Audio({
+            start_game: {
+                mp3: define.musicPath + '遊戲開場音樂.mp3',
+            }, keyup:{
+                mp3: define.musicPath + '按按鍵.mp3',
+            }, song2:{
+                mp3: define.musicPath + '刀劍神域op1《crossing field》鋼琴曲.mp3',
+            }
+        });
+        audio.play({name: 'keyup', loop: false});
         if(this.is_typepanel_open){
             this.is_alphabet_touch = true;
             if(e.x>= 1086 && e.x<= 1145){
