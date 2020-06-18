@@ -51,6 +51,7 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         parentCtx.fillText("遊戲專案團隊", 750, 100);
         parentCtx.fillText("106820003 電資三潘建蒼", 750, 200);
         parentCtx.fillText("106820046 電資三凃昱安", 750, 300);
+        parentCtx.fillText("指導老師：陳偉凱", 750, 700);
         parentCtx.fillText("PS.偉凱好帥", 750, 800);
         this.rootScene.draw(parentCtx); 
         this.go_back_menu.draw(parentCtx);

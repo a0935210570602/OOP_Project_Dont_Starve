@@ -1,6 +1,6 @@
 var World_map = function()
 {
-    this.demo_dead_trigger = false;
+    this.demo_dead_trigger = true;
     this.item_map_Array = [];
     this.load = function(){
         this.item_black_berry = new Framework.Sprite(define.materialPath + 'item_black_berry.png'); 
@@ -602,15 +602,19 @@ var World_map = function()
         this.skillTimer.clear();
         this.capture_key = [];
         this.player1.character_descruption_point[0] = 0;
+        this.clock.stopMusic(true);
+        this.audio.stopAll();
         this.player1.update();
     }
 
     this.gameClear = function(){
         this.skillTimer.clear();
+        this.audio.stopAll();
+
         this.capture_key = [];
         this.clear = true;
+        this.clock.stopMusic(true);
         this.player1.gameClear = true;
-
     }
 
     this.checkIsDie = function(){
@@ -678,8 +682,6 @@ var World_map = function()
                 break;
             case 'W':
                 this.deadClear();
-                this.audio.stopAll();
-                this.clock.stopMusic(true);
                 Framework.Game.goToLevel('gameOver'); 
                 break;
             case 'O':
@@ -724,7 +726,7 @@ var World_map = function()
                 this.handleHoverBackpack();
                 break;
             case 'P':
-                this.demo_dead_trigger = true;
+                this.demo_dead_trigger = false;
                 break;
             case 'F':
                 if(this.player1.mode == "fishing" && !this.fishing.is_start)

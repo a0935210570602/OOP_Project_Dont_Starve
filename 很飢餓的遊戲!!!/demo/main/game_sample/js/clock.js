@@ -41,30 +41,32 @@ var Clock = function() {
                 mp3: define.musicPath + '遊戲王經典配樂.mp3'
             }
         });
-        setTimeout(()=>{
-            this.currentTime -= 1;
-            if(this.currentTime <= 0){
-                this.currentTime = 192;
-                if(!this.music_stop){
-                    if( this.status == 0){
-                        audio.stopAll();
-                        audio.play({name: 'afternoon', loop: true});
-                    }else if( this.status == 1){
-                        audio.stopAll();
-                        audio.play({name: 'night', loop: true});
-                    }else{
-                        audio.stopAll();
-                        audio.play({name: 'morning', loop: true});
+        if(!this.music_stop){
+            setTimeout(()=>{
+                this.currentTime -= 1;
+                if(this.currentTime <= 0){
+                    this.currentTime = 192;
+                        if( this.status == 0){
+                            audio.stopAll();
+                            audio.play({name: 'afternoon', loop: true});
+                        }else if( this.status == 1){
+                            audio.stopAll();
+                            audio.play({name: 'night', loop: true});
+                        }else{
+                            audio.stopAll();
+                            audio.play({name: 'morning', loop: true});
+                        }
+                    this.status ++;
+                    if(this.status >=3){
+                        this.status = 0;
+                        this.day += 1;
                     }
                 }
-                this.status ++;
-                if(this.status >=3){
-                    this.status = 0;
-                    this.day += 1;
-                }
-            }
-            this.decrease();
-        }, this.regeneration_time);
+                this.decrease();
+            }, this.regeneration_time);
+        }else{
+            audio.stopAll();
+        }
     }
 
     this.stopMusic = function(music_stop){
