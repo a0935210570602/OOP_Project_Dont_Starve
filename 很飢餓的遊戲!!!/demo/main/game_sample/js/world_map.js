@@ -248,7 +248,6 @@ var World_map = function()
 
     this.goToMap = function(map_name){
         this.on_map_name = map_name;
-        console.log(map_name);
         this.playerPositionOnMap = this.playerPositionOnMapSave[map_name];
         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
@@ -643,7 +642,6 @@ var World_map = function()
                 map_number = this.map_selector.local_map_0.proxy.null_map[i];
                 flag_x = Math.floor(map_number/10)*40;
                 flag_y = (map_number%10)*40;
-                console.log(flag_x, flag_y);
                 this.createMonster(flag_x, flag_y);
             }
         }
@@ -875,8 +873,6 @@ var World_map = function()
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Up'){
                 if(this.playerPositionOnMap.x == 66 && this.playerPositionOnMap.y ==58 && this.on_map_name == "World"){
-                    console.log("House1");
-                    console.log(this.playerPositionOnMapSave["World"]);
                     this.playerPositionOnMapSave["World"] = this.playerPositionOnMap;
                     this.playerPositionOnMap = this.playerPositionOnMapSave["House1"];
                     this.goToMap("House1");
@@ -924,7 +920,6 @@ var World_map = function()
             }
             else if(this.player1.mode == "magic"){
                 if(this.skillTimer.isEnergyFull){
-                    console.log(this.player1.equipmentBar.getEquipment(2));
                     if(this.player1.equipmentBar.getEquipment(2).item_num == 29)
                         audio.play({name: 'fire', loop: false});
                     if(this.player1.equipmentBar.getEquipment(2).item_num == 30)
@@ -1049,15 +1044,11 @@ var World_map = function()
         }
         if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc2.position.x &&  this.on_map_name == "House1" &&
             this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc2.position.y ){
-                console.log("莉莉再說話");
-
                 if(!this.npc_event.taking_is_start){
-                    console.log(88888);
                     this.npc_event.trigger(this.npc2.name, "dialog");
                     this.npc_event.talking();
                 }
                 else{
-                    console.log("莉莉再說話");
                     this.npc_event.talking();
                 }
         }
@@ -1197,7 +1188,6 @@ var World_map = function()
                     break;
             }
         }
-        console.log(this.itemArray[y][x]);
         if(this.itemArray[y][x].treeStatus == 2){
             if(this.player1.getExperience(8)){
                 this.audio.play({name: 'kick', loop: false});
@@ -1376,7 +1366,6 @@ var World_map = function()
                 this.handlePlant();
             }
             this.handleHoverBackpack();
-            console.log(this.playerPositionOnMap);
         }else{
             this.handle_initial_character.click(e);
         }

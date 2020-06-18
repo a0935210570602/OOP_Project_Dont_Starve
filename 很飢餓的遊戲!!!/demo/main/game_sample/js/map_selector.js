@@ -38,13 +38,11 @@ var Map_selector = function() {
             for(var j=-5;j<6;j++){
                 this.flag.x = Math.floor((world_position.y+i) / 40);
                 this.flag.y = Math.floor((world_position.x+j) / 40);
-
                 this.item_line.push(this.littleItem(map_name, {x:((world_position.y+i)%40), y:((world_position.x+j)%40)}, this.flag.y*10+this.flag.x));
             }
             this.itemArray.push(this.item_line);
             this.item_line = [];
         }
-        // console.log(this.local_map_0.proxy.null_map);
         return this.itemArray;
     }
 

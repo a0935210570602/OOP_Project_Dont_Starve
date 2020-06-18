@@ -9382,19 +9382,15 @@ var Proxy = function() {
     }
 
     this.createItemMap= function(map_number){
-        console.log("createItemMap");
         var i = map_number;
         this.itemArray_two_dimension = [];
         this.itemArray_one_dimension = [];
-        console.log(this.map_name);
         switch(this.map_name){
             case "World":
                 this.item = this.item_map_Array;
-
                 break;
             case "House1":
                 this.item = this.house_item_map_Array;
-
                 break;
             default:
                 break;

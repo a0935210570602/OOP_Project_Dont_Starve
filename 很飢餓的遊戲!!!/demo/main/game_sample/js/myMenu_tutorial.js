@@ -80,7 +80,6 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
     },
 
     click:function(e){ 
-        console.log(e);        
         this.audio.play({name: 'keyup', loop: false});
         if(e.x<1329 && e.x>1078 && e.y<348 && e.y>83){
             this.audio.stop('song2');
