@@ -73,7 +73,7 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         parentCtx.fillText("召喚眼球：按U鍵", 400, 850);
         parentCtx.fillText("召喚蝙蝠：按I鍵", 400, 890);
         parentCtx.fillText("召喚BOSS：按O鍵", 740, 770);
-        parentCtx.fillText("大祕寶：往左走", 740, 770);
+        parentCtx.fillText("大祕寶：往左走", 740, 810);
         //Q:死亡結束  W:勝利結束 R:蜜蜂 T:豬 Y:牛 U:眼球 I:蝙蝠 O:boss
         this.rootScene.draw(parentCtx); 
         this.go_back_menu.draw(parentCtx);

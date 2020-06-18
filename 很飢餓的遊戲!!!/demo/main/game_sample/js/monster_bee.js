@@ -10,7 +10,7 @@ var Monster_bee = function(map) {
     this.monster_tocan.scale = 0.8; 
 
     this.name = "蜂哥";
-    this.attack = 5;
+    this.attack = 60;
     this.health = 200;
     this.maxHealth = 200;
 

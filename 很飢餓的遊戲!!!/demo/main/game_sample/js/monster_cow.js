@@ -10,7 +10,7 @@ var Monster_cow = function(map) {
     this.monster_tocan.scale = 0.8; 
 
     this.name = "閃耀魔眼";
-    this.attack = 5;
+    this.attack = 100;
     this.health = 200;
     this.maxHealth = 200;
 

@@ -4,7 +4,7 @@ var Clock = function() {
     this.day_board = new Framework.Sprite(define.materialPath + 'Home_Sign.png'); 
     this.day_board.scale = 3;
     this.day_board.position = {x:22.2*64, y:3.7*64}
-
+    this.music_stop = false;
     this.timelevel.scale = 4;
     this.timelevel.position = {x: 23.75*64, y: 2*64};
     for(var i=0;i<3;i++){
@@ -32,30 +32,31 @@ var Clock = function() {
         this.decrease();
     }
     this.decrease = function(){
-        var audio = new Framework.Audio({
-            morning:{
-                mp3: define.musicPath + 'Hot_Heat.mp3'
-            }, night:{
-                mp3: define.musicPath + 'night.mp3'
-            }, afternoon:{
-                mp3: define.musicPath + '遊戲王經典配樂.mp3'
-            }
-        });
         if(!this.music_stop){
             setTimeout(()=>{
                 this.currentTime -= 1;
                 if(this.currentTime <= 0){
                     this.currentTime = 192;
-                        if( this.status == 0){
-                            audio.stopAll();
-                            audio.play({name: 'afternoon', loop: true});
-                        }else if( this.status == 1){
-                            audio.stopAll();
-                            audio.play({name: 'night', loop: true});
-                        }else{
-                            audio.stopAll();
-                            audio.play({name: 'morning', loop: true});
+                    var audio = new Framework.Audio({
+                        morning:{
+                            mp3: define.musicPath + 'Hot_Heat.mp3'
+                        }, night:{
+                            mp3: define.musicPath + 'night.mp3'
+                        }, afternoon:{
+                            mp3: define.musicPath + '遊戲王經典配樂.mp3'
                         }
+                    });
+                    if(this.status == 0){
+                        audio.stopAll();
+                        audio.play({name: 'afternoon', loop: true});
+                    }else if(this.status == 1){
+                        audio.stopAll();
+                        audio.play({name: 'night', loop: true});
+                    }else{
+                        audio.stopAll();
+                        audio.play({name: 'morning', loop: true});
+                    }
+
                     this.status ++;
                     if(this.status >=3){
                         this.status = 0;
@@ -101,3 +102,4 @@ var Clock = function() {
         ctx.strokeText("Day: " + this.day, 22.2*64, 4.1*64+20);
     }
 };
+

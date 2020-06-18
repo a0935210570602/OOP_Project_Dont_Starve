@@ -16,7 +16,6 @@ var Handle_initial_character = function(){
         for(var i = 0;i < this.character_description.character_descruption_point.length;i++){
             this.character_description.character_descruption_point[i] = 5;
         }
-        
     }
 
     this.update = function(){
@@ -226,14 +225,14 @@ var Handle_initial_character = function(){
             this.is_typepanel_open = true;
         }
         if(e.x >= 470 && e.x <=510){
-            if(e.y >=540 && e.y<= 560)
+            if(e.y >=530 && e.y<= 570)
                 this.character_description.isChangeCapability(2);
-            else if(e.y >=622 && e.y<= 642)
+            else if(e.y >=612 && e.y<= 652)
                 this.character_description.isChangeCapability(3);
-            else if(e.y >=700 && e.y<= 720)
+            else if(e.y >=690 && e.y<= 730)
                 this.character_description.isChangeCapability(4);
         }else if(e.x >= 822 && e.x <=861){
-            if(e.y >=382 && e.y<= 415)
+            if(e.y >=382 && e.y<= 425)
                 this.character_description.isChangeCapability(5);
             else if(e.y >=461 && e.y<= 502)
                 this.character_description.isChangeCapability(6);

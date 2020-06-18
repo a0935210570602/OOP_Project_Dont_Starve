@@ -9300,8 +9300,17 @@ var Proxy = function() {
     }
     this.objectFactory = new Object_factory();
     this.detect = function(map_number){
-        if(this.itemArray[map_number] == null)
+        if(this.itemArray[map_number] == null){
             this.createItemMap(map_number);
+            this.collectNullMap(map_number);
+        }
+    }   
+    this.null_map = [];
+    this.nullMapClean = function(){
+        this.null_map = [];
+    }
+    this.collectNullMap = function(map_number){
+        this.null_map.push(map_number);
     }
     this.item;
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮

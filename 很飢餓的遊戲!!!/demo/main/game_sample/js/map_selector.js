@@ -31,7 +31,7 @@ var Map_selector = function() {
         return this.local_map_0.canWalk(map_name, {x:(world_position.y%40), y:(world_position.x%40)}, this.flag_map);
     }
 
-    this.makeItemMap= function(map_name, world_position){
+    this.makeItemMap = function(map_name, world_position){
         this.itemArray = [];
         this.item_line = [];
         for(var i=-5;i<6;i++){
@@ -44,7 +44,12 @@ var Map_selector = function() {
             this.itemArray.push(this.item_line);
             this.item_line = [];
         }
+        // console.log(this.local_map_0.proxy.null_map);
         return this.itemArray;
+    }
+
+    this.nullClean = function(){
+        this.local_map_0.proxy.nullMapClean();
     }
 
     this.littleItem = function(map_name, position, number){

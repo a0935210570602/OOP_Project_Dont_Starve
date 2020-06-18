@@ -9,7 +9,7 @@ var Monster_cute_little_eye = function(map) {
     this.monster_tocan.scale = 1.2; 
     
     this.name = "大眼仔仔";
-    this.attack = 5;
+    this.attack = 55;
     this.health = 100;
     this.maxHealth = 100;
 

@@ -170,6 +170,10 @@ var World_map = function()
         this.npc_event = new Npc_event(this);
 
         this.monster = [];
+        var boss =  new Monster_boss(this);
+        boss.position = {x:393,y:393};
+        this.monster.push(boss);
+        
         this.stopMonster = false;
         this.stopMonsterCounter = 0;
         this.score = new Score();
@@ -182,7 +186,7 @@ var World_map = function()
         this.visitor = new ReduceDurabilityVisitor();
         this.creation_blood_status = new Creation_blood_status();
         this.fishing = new Fishing();
-
+        this.objectFactory = new Object_factory();
 
         this.handle_initial_character = new Handle_initial_character();
         this.playerInitial = false;
@@ -193,7 +197,7 @@ var World_map = function()
                 mp3: define.musicPath + '女慘叫.mp3',
             }, monster_attack:{
                 mp3: define.musicPath + '怪物攻擊.mp3',
-        }
+            }
         });
     }
 
@@ -228,6 +232,9 @@ var World_map = function()
         };
         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+        this.addMonsterRandom();
+        this.map_selector.nullClean();
+
 
         for(var i = 0; i < 11;i++){
             this.tileArrayPosition = [];
@@ -296,6 +303,9 @@ var World_map = function()
                             this.playerPositionOnMap.y+=1;
                             this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                             this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                            this.addMonsterRandom();
+                            
+                            this.map_selector.nullClean();
                         }
                         
                         if(this.keyPress == "Left") {
@@ -303,6 +313,9 @@ var World_map = function()
                             this.playerPositionOnMap.x-=1;
                             this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                             this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                            this.addMonsterRandom();
+                            
+                            this.map_selector.nullClean();
                         }
                         
                         if(this.keyPress == "Right") {
@@ -310,6 +323,9 @@ var World_map = function()
                             this.playerPositionOnMap.x+=1;
                             this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                             this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                            this.addMonsterRandom();
+                            
+                            this.map_selector.nullClean();
                         }
                         
                         if(this.keyPress == "Up") {             
@@ -317,6 +333,9 @@ var World_map = function()
                             this.playerPositionOnMap.y-=1;
                             this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                             this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                            this.addMonsterRandom();
+                            
+                            this.map_selector.nullClean();
                         }
                     }
                 }
@@ -393,6 +412,9 @@ var World_map = function()
                         this.playerPositionOnMap.y+=1;
                         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                        this.addMonsterRandom();
+                        
+                        this.map_selector.nullClean();
                     }
                     
                     if(this.keyPress == "Left") {
@@ -400,6 +422,9 @@ var World_map = function()
                         this.playerPositionOnMap.x-=1;
                         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                        this.addMonsterRandom();
+                        
+                        this.map_selector.nullClean();
                     }
                     
                     if(this.keyPress == "Right") {
@@ -407,6 +432,9 @@ var World_map = function()
                         this.playerPositionOnMap.x+=1;
                         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                        this.addMonsterRandom();
+                        
+                        this.map_selector.nullClean();
                     }
                     
                     if(this.keyPress == "Up") {             
@@ -414,6 +442,9 @@ var World_map = function()
                         this.playerPositionOnMap.y-=1;
                         this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                         this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                        this.addMonsterRandom();
+                        
+                        this.map_selector.nullClean();
                     }
                 }
             }
@@ -445,6 +476,7 @@ var World_map = function()
             audio.play({name: 'monster_attack', loop: false});
         }
     }
+
 	this.draw = function(ctx) {
         if(this.playerInitial){
             for(var i=0; i<11; i++){
@@ -553,12 +585,16 @@ var World_map = function()
             if(this.handle_initial_character.name == "請輸入名字"){
                 this.handle_initial_character.name = "";
             }
-            this.creation_blood_status.draw(ctx);
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
-            if(!this.is_character_description_open)
+            if(!this.is_character_description_open){
                 this.npc_event.draw(ctx);
+                m_map.draw(Framework.Game._context);
+            }    
             if(!this.npc_event.taking_is_start)
                 this.character_description.draw(ctx);
+            if(!this.npc_event.taking_is_start){
+                this.creation_blood_status.draw(ctx);
+            }
         }else
             this.handle_initial_character.draw(ctx);
     }	
@@ -597,6 +633,34 @@ var World_map = function()
         return "No";
     }
 
+    this.addMonsterRandom = function(){
+        var map_number,flag_x,flag_y;
+        if(this.map_selector.local_map_0.proxy.null_map.length > 0){
+            for(var i=0;i<this.map_selector.local_map_0.proxy.null_map.length;i++){
+                map_number = this.map_selector.local_map_0.proxy.null_map[i];
+                flag_x = Math.floor(map_number/10)*40;
+                flag_y = (map_number%10)*40;
+                console.log(flag_x, flag_y);
+                this.createMonster(flag_x, flag_y);
+            }
+        }
+    }
+
+    this.createMonster = function(flag_x, flag_y){
+        var amount = Math.floor(Math.random()*5) + 5;
+        var count = 0;
+        while(count != amount){
+            var position_x = (Math.floor(Math.random()*40));
+            var position_y = (Math.floor(Math.random()*40));
+            var m_position = {x: flag_x + position_x,y: flag_y + position_y};
+            if(this.map_selector.checkFloorCanWalk(this.on_map_name, m_position) && this.map_selector.checkIsBlank(this.on_map_name, m_position)){
+                var newMonster = this.objectFactory.createMonster(this);
+                newMonster.position = m_position;
+                this.monster.push(newMonster);
+                count++;
+            }
+        }
+    }
     var m_map = this;
     this.deadClear = function(){
         this.skillTimer.clear();
@@ -605,6 +669,7 @@ var World_map = function()
         this.clock.stopMusic(true);
         this.audio.stopAll();
         this.player1.update();
+        this.clock.stopMusic(true);
     }
 
     this.gameClear = function(){
@@ -615,6 +680,7 @@ var World_map = function()
         this.clear = true;
         this.clock.stopMusic(true);
         this.player1.gameClear = true;
+        this.clock.stopMusic(true);
     }
 
     this.checkIsDie = function(){
@@ -682,36 +748,37 @@ var World_map = function()
                 break;
             case 'W':
                 this.deadClear();
+                this.audio.stopAll();
                 Framework.Game.goToLevel('gameOver'); 
                 break;
             case 'O':
                 var newMonster1 =  new Monster_boss(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'R':
                 var newMonster1 =  new Monster_bee(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'T':
                 var newMonster1 =  new Monster_pig(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'Y':
                 var newMonster1 =  new Monster_cow(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'U':
                 var newMonster1 =  new Monster_cute_little_eye(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'I':
                 var newMonster1 =  new Monster_bat(this);
-                newMonster1.position = {x:48,y:49};
+                newMonster1.position = this.playerPositionOnMap;
                 this.monster.push(newMonster1);
                 break;
             case 'S':
@@ -775,6 +842,9 @@ var World_map = function()
                     this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
                     this.pressWalk = true;
+                    this.addMonsterRandom();
+                    
+                    this.map_selector.nullClean();
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Left'){
                 this.playerWalkDirection = {x:-1,y:0};
@@ -784,6 +854,9 @@ var World_map = function()
                     this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.on_map_name,this.playerPositionOnMap);
                     this.pressWalk = true;
+                    this.addMonsterRandom();
+                    
+                    this.map_selector.nullClean();
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Right'){
                 this.playerWalkDirection = {x:1,y:0};
@@ -793,6 +866,9 @@ var World_map = function()
                     this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
                     this.pressWalk = true;
+                    this.addMonsterRandom();
+                    
+                    this.map_selector.nullClean();
                 }
             }else if(this.whatIsTheLastKeyMove() == 'Up'){
                 if(this.playerPositionOnMap.x == 66 && this.playerPositionOnMap.y ==58 && this.on_map_name == "World"){
@@ -809,6 +885,9 @@ var World_map = function()
                     this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
                     this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
                     this.pressWalk = true;
+                    this.addMonsterRandom();
+                    
+                    this.map_selector.nullClean();
                 }
             }
 
@@ -829,6 +908,8 @@ var World_map = function()
             },
             ice: {
                 mp3: define.musicPath + '冰魔法.mp3',
+            },move: {
+                mp3: define.musicPath + '順移.mp3'
             }
         });
         if(e.key == 'S'){
@@ -858,6 +939,12 @@ var World_map = function()
                 attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
                 this.spear_handler.start(this.playerWalkDirection, this.playerPositionOnMap);
                 audio.play({name: 'spear', loop: false});
+            }else if(this.player1.mode == "space"){
+                this.player1.transportPlayer();
+                this.playerPositionOnMap =  {x:392,y:392};
+                this.itemArray = this.map_selector.makeItemMap(this.on_map_name, this.playerPositionOnMap);
+                this.mapArray = this.map_selector.makeMap(this.on_map_name, this.playerPositionOnMap);
+                audio.play({name: 'move', loop: false});
             }else{
                 attackMode = new Normal_attack(this.player1, this.monster, this.playerWalkDirection, this.playerPositionOnMap);
                 audio.play({name: 'fight', loop: false});
@@ -1286,6 +1373,7 @@ var World_map = function()
                 this.handlePlant();
             }
             this.handleHoverBackpack();
+            console.log(this.playerPositionOnMap);
         }else{
             this.handle_initial_character.click(e);
         }

@@ -41,7 +41,7 @@ var Monster_boss = function(map) {
     }
 
     this.name = "boss";
-    this.attack = 100;
+    this.attack = 150;
     this.health = 6000;
     this.maxHealth = 6000;
 

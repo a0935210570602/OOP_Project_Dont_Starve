@@ -10,7 +10,7 @@ var Monster_bat = function(map) {
     this.monster_tocan.scale = 0.8;
 
     this.name = "小蝙蝠";
-    this.attack = 100;
+    this.attack = 80;
     this.health = 1000;
     this.maxHealth = 1000;
 

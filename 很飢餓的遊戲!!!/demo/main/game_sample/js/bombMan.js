@@ -9,6 +9,9 @@ var BombMan = function(file, options) {
     this.hurt = new Framework.AnimationSprite({url:define.materialPath + 'Absorb.png', col:5, row:5, loop:false, speed:12}); 
     this.hurt.position = {x:13*64,y:7*64};
     this.hurt.scale = 2;
+    this.transport = new Framework.AnimationSprite({url:define.skillAnimationPath + 'Cure3.png', col:5, row:6, loop:false, speed:12}); 
+    this.transport.position = {x:11.5*64,y:5*64};
+    this.transport.scale = 1;
 
     this.hideAnimation = new Player_hide_animation(); 
     this.get_back_number;
@@ -93,6 +96,11 @@ var BombMan = function(file, options) {
         setTimeout(()=>{
             this.hide = false;
         },10000);
+    }
+
+    this.transportPlayer = function(){
+        this.equipmentBar.equipmentList[2].reduceDurability();
+        this.transport.start({from:0,to:6,loop:false});
     }
 
     this.decreaseHunger = function(){
@@ -221,8 +229,10 @@ var BombMan = function(file, options) {
                 this.mode = "rock_dig";
             else if(handEquipment.item_num == 18 || handEquipment.item_num == 20)
                 this.mode = "plant_dig";
-            else if(handEquipment.item_num == 28 || handEquipment.item_num == 29 || handEquipment.item_num == 30)
+            else if(handEquipment.item_num == 29 || handEquipment.item_num == 30)
                 this.mode = "magic";
+            else if(handEquipment.item_num == 28)
+                this.mode = "space";
             else if(handEquipment.item_num == 25)
                 this.mode = "spear";
             else if(handEquipment.item_num == 26)
@@ -305,6 +315,7 @@ var BombMan = function(file, options) {
         this.getHandEquipment();
         this.sprite_dead.update();
         this.sprite.update();
+        this.transport.update();
     }
 
     this.draw = function(ctx){
@@ -313,14 +324,16 @@ var BombMan = function(file, options) {
         if(this.level_up_animation.level_up_animation._start){
             this.level_up_animation.draw(ctx);
         }
+        if(this.transport._start)
+            this.transport.draw(ctx);
         this.sprite.position = {x: this.spritePosition.x, y: this.spritePosition.y};
         this.equipmentBar.draw(ctx);
         this.backpack.draw(ctx);
-        if(this.player_state == "alive" && !this.hide)
+        if(this.player_state == "alive" && !this.hide && !this.transport._start)
             this.sprite.draw(ctx);
         else if(this.player_state == "dead")
             this.sprite_dead.draw(ctx);
-        else
+        else if(this.hide)
             this.item_bush.draw(ctx);
     }
 
@@ -390,7 +403,7 @@ var BombMan = function(file, options) {
         var equipmentIndex = this.getEquipmentIndex(e);
         this.backpack.selectedIndex = index;
         this.equipmentBar.selectedIndex = equipmentIndex;
-        this.get_back_number = this.backpack.mousemove(e);
+        // this.get_back_number = this.backpack.mousemove(e);
     }
 
     this.isChangeCapability = function(which_capability){
