@@ -4708,14 +4708,11 @@ var Local_map_0 = function() {
         switch(map_name){
             case "World":
                 this.itemArray[number][position.x][position.y] = object;
-
                 break;
             case "House1":
                 this.houseItemArray[number][position.x][position.y] = object;
-
                 break;
             default:
-
                 break;
         }
     }
@@ -4724,14 +4721,11 @@ var Local_map_0 = function() {
         switch(map_name){
             case "World":
                 this.itemArray[number][position.x][position.y] = new Item_blank();
-
                 break;
             case "House1":
                 this.houseItemArray[number][position.x][position.y] = new Item_blank();
-
                 break;
             default:
-
                 break;
         }
     }
@@ -4743,7 +4737,6 @@ var Local_map_0 = function() {
             case "House1":
                 return this.houseItemArray[number][position.x][position.y].item_num == 0 ? true : false ;
             default:
-
                 break;
         }
     }
@@ -4755,7 +4748,6 @@ var Local_map_0 = function() {
             case "House1":
                 return this.houseArray[number][position.x][position.y] == 91 ? false : this.mapArray[number][position.x][position.y] == 200 ? false : this.mapArray[number][position.x][position.y] == 4 ? false : true;
             default:
-
                 break;
         }
     }
@@ -4765,10 +4757,8 @@ var Local_map_0 = function() {
             case "World":
                 return this.mapArray[number][position.x][position.y];
             case "House1":
-                console.log("catchMap");
                 return this.houseArray[number][position.x][position.y];
             default:
-
                 break;
         }
     }
@@ -4778,15 +4768,12 @@ var Local_map_0 = function() {
             case "World":
                 this.proxy.whichToDetect(map_name, this.itemArray);
                 this.proxy.detect(number);
-
                 return this.itemArray[number][position.x][position.y];
             case "House1":
                 this.proxy.whichToDetect(map_name, this.houseItemArray);
                 this.proxy.detect(number);
-
                 return this.houseItemArray[number][position.x][position.y];
             default:
-                
                 break;
         }
     }

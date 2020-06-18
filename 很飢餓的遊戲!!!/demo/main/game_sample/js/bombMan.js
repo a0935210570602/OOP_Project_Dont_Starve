@@ -133,7 +133,6 @@ var BombMan = function(file, options) {
     }
 
     this.getExperience= function(experience){
-        console.log("getexperience");
         this.experience += experience;
         if(this.experience >=this.levelup_experience){
             this.experience -= this.levelup_experience

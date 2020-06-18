@@ -2,28 +2,21 @@ var Monster_boss = function(map) {
     this.monster_boss = new Framework.AnimationSprite({url:define.materialPath + 'boss.png', col:3 , row:4 , loop:true , speed:12}); 
     this.monster_boss.scale = 1.3;
     this.monster_boss.index = 1;
-    
     this.monster_boss_die = new Framework.AnimationSprite({url:define.materialPath + 'boss_die.png', col:3 , row:1 , loop:false , speed:12}); 
     this.monster_boss_die.scale = 1.2;
-
     this.monster_tocan = new Framework.Sprite(define.materialPath + 'boss_tocan.png'); 
     this.monster_tocan.scale = 0.8; 
-
     this.normal_attack = new Framework.AnimationSprite({url:define.skillAnimationPath + 'ClawSpecial1.png', col:5 , row:5 , loop:false , speed:12}); 
     this.normal_attack.position = {x:13*64,y:7*64};
     this.normal_attack.scale = 0.8;
-
     this.hurtRevolution =  new Framework.AnimationSprite({url:define.skillAnimationPath + 'Darkness1.png', col:5 , row:4 , loop:false , speed:12}); 
     this.hurtRevolution.scale = 2;
-
     this.transport = new Framework.AnimationSprite({url:define.skillAnimationPath + 'Thunder3.png', col:5 , row:1 , loop:false , speed:12}); 
     this.transport.position = {x:13*64,y:7*64};
     this.transport.scale = 0.8;
-
     this.range_attack = new Framework.AnimationSprite({url:define.skillAnimationPath + 'Darkness5.png', col:5 , row:5 , loop:false , speed:12}); 
     this.range_attack.scale = 2;
     this.rangePosition = {x:0,y:0};
-    
     this.remote_attack = new Framework.AnimationSprite({url:define.skillAnimationPath + 'Darkness4.png', col:5 , row:6 , loop:false , speed:12}); 
     this.remote_attack.scale = 0.8;
     this.remotePosition = {x:0,y:0};
@@ -31,7 +24,6 @@ var Monster_boss = function(map) {
     this.remoteTarget = {x:0,y:0};
     this.remoteDirection = {x:0,y:0};
     this.speed = 16;
-
     this.catch = [];
     this.catchPosition = [];
     for(var i=0;i < 4;i++){
@@ -39,12 +31,10 @@ var Monster_boss = function(map) {
         img.scale = 0.4;
         this.catch.push(img);
     }
-
     this.name = "boss";
     this.attack = 150;
     this.health = 6000;
     this.maxHealth = 6000;
-
     this.monster_boss;
     this.map = map;
     var PIXEL_CONST = 64;
@@ -62,7 +52,6 @@ var Monster_boss = function(map) {
     this.hurt = new Framework.AnimationSprite({url:define.materialPath + 'Absorb.png', col:5, row:5, loop:false, speed:12}); 
     this.hurt.scale = 2;
     this.walkSpeed = 8;
-
     this.attackTimer = 0;
     this.trace = false;
     this.isCatching = false;
@@ -297,7 +286,6 @@ var Monster_boss = function(map) {
             if(this.range_attack._start){
                 for(var i = -1;i < 2;i++){
                     for(var j = -1;j < 2;j++){
-                        console.log("check");
                         if(this.map.playerPositionOnMap.x == this.rangePosition.x + i && this.map.playerPositionOnMap.y == this.rangePosition.y + j)
                             this.map.player1.gethurt(120);
                     }
@@ -416,7 +404,8 @@ var Monster_boss = function(map) {
         if(this.map.checkMonsterIsWalkAble({x: this.mapPosition.x +directionArray[randum_number].x,y:this.mapPosition.y + directionArray[randum_number].y}))
         {
             return directionArray[randum_number];
-        }else
+        }
+        else
         {
             directionArray.splice( randum_number, 1 );
             if(this.map.checkMonsterIsWalkAble({x: this.mapPosition.x +directionArray[0].x, y:this.mapPosition.y + directionArray[0].y}))
@@ -448,28 +437,24 @@ var Monster_boss = function(map) {
             walkStep = this.walkVector.x > 0 ? {x:-1,y:0} : {x:1,y:0};
         }else if( Math.abs(this.walkVector.x) >= Math.abs(this.walkVector.y)){
             if(this.walkVector.x < 0){
-                //{x:-1,y:0}
                 if(this.walkVector.y>0)
                     walkStep = this.howToWalk(0,3);
                 else
                     walkStep = this.howToWalk(0,2);
             }else{
-                // {x:1,y:0}
                 if(this.walkVector.y>0)
-                    walkStep = this.howToWalk(1,3);  //[{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
+                    walkStep = this.howToWalk(1,3);
                 else
                     walkStep = this.howToWalk(1,2);
             }
         }else if(Math.abs(this.walkVector.x) < Math.abs(this.walkVector.y)){
             if(this.walkVector.y < 0){
-                // {x:0,y:-1}
                 if(this.walkVector.x>0)
                     walkStep = this.howToWalk(2,1);
                 else
                     walkStep = this.howToWalk(2,0);
 
             }else{
-                // {x:0,y:1}
                 if(this.walkVector.x>0)
                     walkStep = this.howToWalk(3,1);
                 else
