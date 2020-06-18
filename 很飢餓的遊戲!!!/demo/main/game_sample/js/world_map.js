@@ -285,6 +285,10 @@ var World_map = function()
     this.monster_kill_timer = 0;
 	this.update = function()
 	{   
+        if(this.monster[0].isdead){
+            this.gameClear();
+            Framework.Game.goToLevel('gameOver');
+        }
         if(this.on_map_name == "World"){
             if(this.playerInitial){
                 if(this.player1.player_state == "alive" || false){
@@ -588,7 +592,6 @@ var World_map = function()
             ctx.fillText(this.handle_initial_character.name, 252 ,250);
             if(!this.is_character_description_open){
                 this.npc_event.draw(ctx);
-                m_map.draw(Framework.Game._context);
             }    
             if(!this.npc_event.taking_is_start)
                 this.character_description.draw(ctx);
@@ -1386,7 +1389,6 @@ var World_map = function()
             this.synthesisBar.mousemove(e);
             this.player1.mousemove(e);
             this.handleHoverBackpack();
-            m_map.draw(Framework.Game._context);
         }else{
             this.handle_initial_character.mousemove(e);
         }

@@ -44,4 +44,3 @@ var Arror_attack = function(player, monster) {
         }
     }
 };
-

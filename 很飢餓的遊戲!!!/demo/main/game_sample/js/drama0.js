@@ -55,7 +55,5 @@ var Drama0 = Framework.Class(Framework.Level , {
     },
 
     click: function (e) {  
-        this.audio.stopAll();
-        Framework.Game.goToLevel('level1');  
     },
 });
