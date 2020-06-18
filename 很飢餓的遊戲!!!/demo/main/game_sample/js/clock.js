@@ -32,31 +32,30 @@ var Clock = function() {
         this.decrease();
     }
     this.decrease = function(){
-        var audio = new Framework.Audio({
-            morning:{
-                mp3: define.musicPath + 'Hot_Heat.mp3'
-            }, night:{
-                mp3: define.musicPath + 'night.mp3'
-            }, afternoon:{
-                mp3: define.musicPath + '遊戲王經典配樂.mp3'
-            }
-        });
         if(!this.music_stop){
             setTimeout(()=>{
                 this.currentTime -= 1;
                 if(this.currentTime <= 0){
                     this.currentTime = 192;
-                    
-                        if(this.status == 0){
-                            audio.stopAll();
-                            audio.play({name: 'afternoon', loop: true});
-                        }else if(this.status == 1){
-                            audio.stopAll();
-                            audio.play({name: 'night', loop: true});
-                        }else{
-                            audio.stopAll();
-                            audio.play({name: 'morning', loop: true});
+                    var audio = new Framework.Audio({
+                        morning:{
+                            mp3: define.musicPath + 'Hot_Heat.mp3'
+                        }, night:{
+                            mp3: define.musicPath + 'night.mp3'
+                        }, afternoon:{
+                            mp3: define.musicPath + '遊戲王經典配樂.mp3'
                         }
+                    });
+                    if(this.status == 0){
+                        audio.stopAll();
+                        audio.play({name: 'afternoon', loop: true});
+                    }else if(this.status == 1){
+                        audio.stopAll();
+                        audio.play({name: 'night', loop: true});
+                    }else{
+                        audio.stopAll();
+                        audio.play({name: 'morning', loop: true});
+                    }
 
                     this.status ++;
                     if(this.status >=3){
