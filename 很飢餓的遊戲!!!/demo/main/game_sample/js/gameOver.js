@@ -23,9 +23,6 @@ var GameOver = Framework.Class(Framework.Level , {
         this.handle_game_over.init();
     },
     update:function(){     
-        if(this.counter > this.gameOverCount){
-            // Framework.Game.goToLevel('menu');
-        }
         this.counter++;
         this.handle_game_over.update();
     },

@@ -178,27 +178,23 @@ var Monster_base = function(){
             walkStep = this.walkVector.x > 0 ? {x:-1,y:0} : {x:1,y:0};
         }else if( Math.abs(this.walkVector.x) >= Math.abs(this.walkVector.y)){
             if(this.walkVector.x < 0){
-                //{x:-1,y:0}
                 if(this.walkVector.y>0)
                     walkStep = this.howToWalk(0,3);
                 else
                     walkStep = this.howToWalk(0,2);
             }else{
-                // {x:1,y:0}
                 if(this.walkVector.y>0)
-                    walkStep = this.howToWalk(1,3);  //[{x:-1,y:0},{x:1,y:0},{x:0,y:-1},{x:0,y:1}];
+                    walkStep = this.howToWalk(1,3); 
                 else
                     walkStep = this.howToWalk(1,2);
             }
         }else if(Math.abs(this.walkVector.x) < Math.abs(this.walkVector.y)){
             if(this.walkVector.y < 0){
-                // {x:0,y:-1}
                 if(this.walkVector.x>0)
                     walkStep = this.howToWalk(2,1);
                 else
                     walkStep = this.howToWalk(2,0);
             }else{
-                // {x:0,y:1}
                 if(this.walkVector.x>0)
                     walkStep = this.howToWalk(3,1);
                 else
