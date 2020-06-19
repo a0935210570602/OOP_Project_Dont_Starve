@@ -14,7 +14,6 @@ var Handle_game_over = function(){
     this.open.scale = 11;
     this.open.position = this.position;
     this.showScore = false;
-
     this.init = function(){
         var audio = new Framework.Audio({
             open_door: {
@@ -24,7 +23,6 @@ var Handle_game_over = function(){
         audio.play({name: 'open_door', loop: false});
         this.open.start({ from: 0, to: 11, loop: false});
     }
-
     this.update = function(){
         this.open.update();
     }
@@ -34,19 +32,16 @@ var Handle_game_over = function(){
                 mp3: define.musicPath + '勝利.mp3',
             }
         });
-
         if(!this.showScore && !this.open._start){
             this.showScore = true;
             audio.play({name: 'victory', loop: true});
             this.draw(Framework.Game._context);
         }
-
         if(Framework.Game._levels[2].level.map.score.scoreToDraw >= Framework.Game._levels[2].level.map.score.score){
             audio.stopAll();
             Framework.Game.goToLevel('menu'); 
         }
     }
-
     this.draw = function(ctx){
         if(this.open._start)
             this.open.draw(ctx);
@@ -66,7 +61,6 @@ var Handle_game_over = function(){
                 ctx.strokeText("Game Clear !!!", this.position.x, this.position.y);
             }
         }
-
         if(this.showScore)
             Framework.Game._levels[2].level.map.score.drawScore();
     }

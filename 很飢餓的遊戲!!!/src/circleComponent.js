@@ -1,6 +1,5 @@
 var Framework = (function (Framework) {
 	'use strict'
-
 	Framework.circleComponent = function (sprite, bodyType, box2D) {
 		var physicScale = 30;
 		this.sprite = sprite;
@@ -12,7 +11,6 @@ var Framework = (function (Framework) {
 		this.isSensor;
 		this.mbodyWidth;
 		this.mbodyHeight;
-		
 		Object.defineProperty(this, 'BodyType', {
 			get : function () {
 				return this.bodyType;
@@ -22,24 +20,20 @@ var Framework = (function (Framework) {
 				this.body.setType(newValue);
 			}
 		});
-		
 		Object.defineProperty(this, 'Body', {
 			get : function () {
 				return this.body;
 			}
 		});
-
 		Object.defineProperty(this, 'fixtureDef', {
 			get : function () {
 				return this.body.m_fixtureList;
 			}
 		});
-
 		Object.defineProperty(this, 'position', {
 			get : function () {
 				return this.sprite.position;
 			},
-
 			set : function (newValue) {
 				this.body.SetPosition(new this.mBox2D.b2Vec2(newValue.x / physicScale, newValue.y / physicScale));
 				if(this.sprite != null){
@@ -50,12 +44,10 @@ var Framework = (function (Framework) {
 				}
 			},
 		});
-
 		Object.defineProperty(this, 'scale', {
 			get : function () {
 				return this.mScale;
 			},
-
 			set : function (newValue) {
 				this.mScale = newValue;
 				if(this.sprite != null){
@@ -67,12 +59,10 @@ var Framework = (function (Framework) {
 				}
 			},
 		});
-
 		Object.defineProperty(this, 'rotation', {
 			get : function () {
 				return this.mRotation;
 			},
-
 			set : function (newValue) {
 				this.mRotation = newValue;
 				this.body.SetAngle(newValue * Math.PI / 180);
@@ -81,31 +71,25 @@ var Framework = (function (Framework) {
 				}
 			},
 		});
-
 		Object.defineProperty(this, 'isSensor', {
 			get : function () {
 				return this.isSensor;
 			},
-
 			set : function (newValue) {
 				this.body.m_fixtureList.SetSensor(newValue);
 			},
 		});
-		
 		Object.defineProperty(this, 'bodyWidth', {
 			get : function () {
 				return this.mbodyWidth;
 			},
-
 			set : function (newValue) {
 				this.mbodyWidth = newValue;
 			},
 		});
-		
 		this.registerContact = function (contactCallBack) {
 			this.mBox2D.addDictionary(this.body, contactCallBack);
 		};
-
 		this.update = function () {
 			if (!this.bodyCreated && this.secondUpdate) {
 				this.bodyCreated = true;
@@ -126,6 +110,5 @@ var Framework = (function (Framework) {
 			}
 		}
 	}
-
 	return Framework;
 })(Framework || {});

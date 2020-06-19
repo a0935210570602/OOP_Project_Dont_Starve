@@ -10,16 +10,13 @@ var Item_camp = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.item_can_be_picked = true;
-    
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_camp.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_camp.prototype, 'position', {
     get: function() {
         return this.mapPosition;

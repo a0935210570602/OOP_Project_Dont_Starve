@@ -13,20 +13,16 @@ var Item_armor = function() {
     this.durability = 100;
     this.place = "body";
     this.deffense_point = 40;
-
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_armor.draw(ctx);
     }
-
     this.reduceDurability = function(){
         this.durability -= 2;
     }
 };
-
 Object.defineProperty(Item_armor.prototype, 'position', {
     get: function() {
         return this.mapPosition;

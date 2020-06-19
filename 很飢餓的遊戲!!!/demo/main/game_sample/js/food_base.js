@@ -10,17 +10,14 @@ var Food_base = function() {
         this.food = food;
         this.amount = amount;
     }
-
     this.draw = function(ctx){
         this.food.draw(ctx);
     }
 };
-
 Object.defineProperty(Food_base.prototype, 'position', {
     get: function() {
         return this.mapPosition;
     },
-    
     set: function(newValue) {
         this.mapPosition = newValue;
         this.food.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};

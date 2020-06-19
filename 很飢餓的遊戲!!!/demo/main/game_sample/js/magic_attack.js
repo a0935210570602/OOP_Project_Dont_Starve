@@ -2,7 +2,6 @@ var Magic_attack = function(player, monster, mapPosition) {
     this.player = player;
     this.monster = monster;
     this.visitor = new ReduceDurabilityVisitor();
-
     this.attack = function(){
         this.attackSuccess = false;
         for(var i = 0;i < this.monster.length;i++){
@@ -20,4 +19,3 @@ var Magic_attack = function(player, monster, mapPosition) {
         this.player.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
     }
 };
-

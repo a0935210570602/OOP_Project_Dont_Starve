@@ -12,20 +12,16 @@ var Item_wood_armor = function() {
     this.place = "body";
     this.deffense_point = 60;
     this.item_can_be_picked = true;
-
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_wood_armor.draw(ctx);
     }
-
     this.reduceDurability = function(){
         this.durability -= 2;
     }
 };
-
 Object.defineProperty(Item_wood_armor.prototype, 'position', {
     get: function() {
         return this.mapPosition;

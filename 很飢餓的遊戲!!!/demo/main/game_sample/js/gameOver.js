@@ -4,7 +4,6 @@ var GameOver = Framework.Class(Framework.Level , {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
     },
-
     load: function() {
         this.menu = new Framework.Sprite(define.imagePath + 'GameOver.png');
         this.url = define.materialPath + 'gate.png';
@@ -18,13 +17,11 @@ var GameOver = Framework.Class(Framework.Level , {
             }
         });
     },
-
     initialize: function(){
         this.counter = 0;
         this.gameOverCount = 50;
         this.handle_game_over.init();
     },
-
     update:function(){     
         if(this.counter > this.gameOverCount){
             // Framework.Game.goToLevel('menu');
@@ -32,11 +29,9 @@ var GameOver = Framework.Class(Framework.Level , {
         this.counter++;
         this.handle_game_over.update();
     },
-
     click: function(e){
         this.handle_game_over.click(e); 
     },
-
     draw: function(parentCtx) { 
         this.handle_game_over.draw(parentCtx);
     },

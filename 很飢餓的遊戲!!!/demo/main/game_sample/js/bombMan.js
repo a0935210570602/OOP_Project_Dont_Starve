@@ -12,13 +12,10 @@ var BombMan = function(file, options) {
     this.transport = new Framework.AnimationSprite({url:define.skillAnimationPath + 'Cure3.png', col:5, row:6, loop:false, speed:12}); 
     this.transport.position = {x:11.5*64,y:5*64};
     this.transport.scale = 1;
-
     this.hideAnimation = new Player_hide_animation(); 
     this.get_back_number;
-
     this.sprite_dead = new Framework.AnimationSprite({url:define.materialPath + 'Actor_dead.png', col:3 , row:1 , loop:false , speed:4}); 
     this.sprite_dead.scale = 1.4;
-
     this.player_state = "";
     //AnimationSprite當圖片是一整張圖片(連續圖), 而非Array時一定要給col, row三個(url是一定要的)   
     this.sprite = new Framework.AnimationSprite({url:this.url, col:3 , row:4 , loop:true , speed:12}); 
@@ -42,7 +39,6 @@ var BombMan = function(file, options) {
     this.gameClear = false;
     this.mode = "";
     this.beCaught = false;
-    
     //一個格子 = 20
     this.character_descruption_point = [];
     this.character_descruption_point[0] = 0*20;   //"生命";
@@ -54,7 +50,6 @@ var BombMan = function(file, options) {
     this.character_descruption_point[6] = 0*20;  //"智力";
     this.character_descruption_point[7] = 0*20;   //"防禦";
     this.character_descruption_point[8] = 0*20;  //"技巧";
-
     //角色格子轉成數值
     this.character_descruption_total_point = [];
     this.character_descruption_total_point[0] = 0;
@@ -66,15 +61,12 @@ var BombMan = function(file, options) {
     this.character_descruption_total_point[6] = 0;
     this.character_descruption_total_point[7] = 0;
     this.character_descruption_total_point[8] = 0;
-    
     this.experience = 0;
     this.levelup_experience = 4;
     this.level = 1;
     this.is_levelup = false;
     this.capabilityt_point = 0;
     this.level_up_animation = new Level_up_animation();
-
-
     this.totalDefense = 10;
     this.plantIndex = -1;
     this.hunger_total_point = 200;
@@ -85,11 +77,9 @@ var BombMan = function(file, options) {
         this.player_state = "alive";
         this.decreaseHunger();
     }
-
     this.attack = function(attackMode){
         attackMode.attack();
     }
-
     this.hidePlayer = function(){
         this.equipmentBar.equipmentList[2].reduceDurability();
         this.hide = true;
@@ -97,12 +87,10 @@ var BombMan = function(file, options) {
             this.hide = false;
         },10000);
     }
-
     this.transportPlayer = function(){
         this.equipmentBar.equipmentList[2].reduceDurability();
         this.transport.start({from:0,to:6,loop:false});
     }
-
     this.decreaseHunger = function(){
         var hungerInterval = setInterval(()=>{
             this.hunger_current_point -= 1;
@@ -116,7 +104,6 @@ var BombMan = function(file, options) {
             }
         }, 1500);
     }
-
     this.decreaseHealth = function(){
         var healthInterval = setInterval(()=>{
             this.character_descruption_point[0] -= 4;
@@ -131,7 +118,6 @@ var BombMan = function(file, options) {
             }
         }, 1500);
     }
-
     this.getExperience= function(experience){
         this.experience += experience;
         if(this.experience >=this.levelup_experience){
@@ -156,10 +142,8 @@ var BombMan = function(file, options) {
             this.audio.play({name: 'kick', loop: false});
         }
     }
-
     this.gethurt = function(attack_point){
         var damage = attack_point - (this.character_descruption_total_point[7]/2);
-
         if(this.equipmentBar.getEquipment(0) != null)
             this.equipmentBar.getEquipment(0).reduceDurability();
         if(this.equipmentBar.getEquipment(1) != null)
@@ -171,11 +155,9 @@ var BombMan = function(file, options) {
                 this.character_descruption_point[0] = 0;
         }
     }
-
     this.getBackPack = function(){
         return this.backpack;
     }
-
     this.getHeadDeffensePointEquipment = function(){
         var bodyEquipment = this.equipmentBar.getEquipment(0);
         if(bodyEquipment != null)
@@ -183,7 +165,6 @@ var BombMan = function(file, options) {
         else
             return 0;
     }
-
     this.getBodyDeffensePointEquipment = function(){
         var bodyEquipment = this.equipmentBar.getEquipment(1);
         if(bodyEquipment != null)
@@ -191,7 +172,6 @@ var BombMan = function(file, options) {
         else
             return 0;
     }
-
     this.getHandAttackPointEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null)
@@ -199,7 +179,6 @@ var BombMan = function(file, options) {
         else
             return 0;
     }
-
     this.getHandMagicAttackPointEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null)
@@ -207,7 +186,6 @@ var BombMan = function(file, options) {
         else
             return 0;
     }
-
     this.getHandArrorAttackPointEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null)
@@ -215,7 +193,6 @@ var BombMan = function(file, options) {
         else
             return 0;
     }
-
     this.getHandEquipment = function(){
         var handEquipment = this.equipmentBar.getEquipment(2);
         if(handEquipment != null){
@@ -247,7 +224,6 @@ var BombMan = function(file, options) {
             this.mode = "";
         }
     }
-
     this.dieEvent = function(position){
         this.player_state = "dead";
         this.character_descruption_point[0] = 0;
@@ -255,38 +231,31 @@ var BombMan = function(file, options) {
         this.sprite_dead.position = {x: position.x*64, y: position.y*64};
         this.sprite_dead.start({ from: 0 , to: 2, loop: true});
     }
-
     this.walk = function(moveStep){
         if(this.isWalking === false){
             if(moveStep.x > 0)
                 this.playerDirection = this.constants.DirectionEnum.RIGHT;
             else if(moveStep.x <0)
                 this.playerDirection = this.constants.DirectionEnum.LEFT;
-
             if(moveStep.y > 0)
                 this.playerDirection = this.constants.DirectionEnum.DOWN;
             else if(moveStep.y < 0)
                 this.playerDirection = this.constants.DirectionEnum.UP;
-
             this.isWalking = true;
             this.sprite.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
         }
     }
-
     this.die = function(){
         Framework.Game.goToLevel('gameOver');
     }
-
     this.walkEnd = function(){  
         this.sprite.stop();
     }
-
     this.setCapibility = function(capability){
         for(var i=0;i<9;i++)
             this.character_descruption_point[i] = capability[i]*20;
         this.character_descruption_point[0] = capability[5]*20;
     }
-
     this.capibility = function(){
         for(var i=0;i<9;i++)
             this.character_descruption_total_point[i] = this.character_descruption_point[i];
@@ -295,7 +264,6 @@ var BombMan = function(file, options) {
         this.character_descruption_total_point[4] += this.getHandArrorAttackPointEquipment();
         this.character_descruption_total_point[7] += this.getBodyDeffensePointEquipment()+this.getHeadDeffensePointEquipment();
     }
-
     this.update = function(){
         //更新升級動畫
         this.level_up_animation.update();
@@ -316,7 +284,6 @@ var BombMan = function(file, options) {
         this.sprite.update();
         this.transport.update();
     }
-
     this.draw = function(ctx){
         if(this.hideAnimation.hideAnimation._start)
             this.hideAnimation.draw(ctx);
@@ -335,7 +302,6 @@ var BombMan = function(file, options) {
         else if(this.hide)
             this.item_bush.draw(ctx);
     }
-
     this.equipFromBackpack = function(indexForBackpack, indexForEquipment){
         var obj = this.backpack.getItem(indexForBackpack);
         if(obj.item_num == 32){
@@ -351,7 +317,6 @@ var BombMan = function(file, options) {
             this.backpack.addItemByObject(equipment_obj);
         }
     }
-
     this.clickInBackPack = function(index){
         this.plantIndex = -1;
         var obj = this.backpack.getItem(index);
@@ -375,19 +340,16 @@ var BombMan = function(file, options) {
         if(obj.type == "plant")
             this.plantIndex = index;
     }
-
     this.increaseStatusByEat = function(hunger, health){
         if(this.character_descruption_point[0]  + health >= this.character_descruption_point[5])
             this.character_descruption_point[0] = this.character_descruption_point[5];
         else
             this.character_descruption_point[0] += health;
-
         if(this.hunger_current_point + hunger >= this.hunger_total_point)
             this.hunger_current_point = this.hunger_total_point;
         else
             this.hunger_current_point += hunger;
     }
-
     this.removeEquipment = function(index){
         if(this.backpack.getItemListLength() < 17 && this.equipmentBar.getEquipment(index) != null){
             if(this.equipmentBar.getEquipment(index).item_num == 32)
@@ -396,7 +358,6 @@ var BombMan = function(file, options) {
             this.equipmentBar.setEquipment(null, index);
         }
     }
-
     this.mousemove = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);
@@ -404,12 +365,10 @@ var BombMan = function(file, options) {
         this.equipmentBar.selectedIndex = equipmentIndex;
         // this.get_back_number = this.backpack.mousemove(e);
     }
-
     this.isChangeCapability = function(which_capability){
         this.character_descruption_point[which_capability] += 20;
         this.capabilityt_point--;
     }
-
     this.characterAbilityClick = function(e){
         if(e.x >= 470 && e.x <=510){
             if(e.y >=540 && e.y<= 560)
@@ -427,7 +386,6 @@ var BombMan = function(file, options) {
                 this.isChangeCapability(8);
         }   
     }
-
     this.click = function(e){
         var index = this.getBackPackIndex(e);
         var equipmentIndex = this.getEquipmentIndex(e);
@@ -436,7 +394,6 @@ var BombMan = function(file, options) {
         if(equipmentIndex != -1)
             this.removeEquipment(equipmentIndex);
     }
-
     this.getBackPackIndex = function(e){
         var index = -1;
         if(e.y >= 800 && e.y <=860){
@@ -475,10 +432,8 @@ var BombMan = function(file, options) {
             else if(e.x >= 1310 && e.x < 1370)
                 index = 16;
         }
-
         return index;
     }
-
     this.getEquipmentIndex = function(e){
         var equipmentIndex = -1;
         if(e.x >= 1443 && e.x <= 1498){
@@ -489,12 +444,9 @@ var BombMan = function(file, options) {
             if(e.y >= 667 && e.y <= 733)
                 equipmentIndex = 2;
         }
-
         return equipmentIndex;
     }
-
 };
-
 Object.defineProperty(BombMan.prototype, 'position', {
     get: function() {
         return this.canvasPosition;

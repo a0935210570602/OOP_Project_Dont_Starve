@@ -14,7 +14,6 @@ var Character_description = function() {
     this.character_descruption[7] = new Framework.Sprite(define.characterDescriptionPath + 'defense.png'); 
     this.character_descruption[8] = new Framework.Sprite(define.characterDescriptionPath + 'skill.png'); 
     this.push_button = new Framework.Sprite(define.characterDescriptionPath + 'push_button.png'); 
-    
     this.character_descruption_point = [];
     this.character_descruption_point[0] = 0;
     this.character_descruption_point[1] = 0;
@@ -25,7 +24,6 @@ var Character_description = function() {
     this.character_descruption_point[6] = 0;
     this.character_descruption_point[7] = 0;
     this.character_descruption_point[8] = 0;
-
     this.character_descruption_text = [];
     this.character_descruption_text[0] = "生命";
     this.character_descruption_text[1] = "魔力";
@@ -55,7 +53,6 @@ var Character_description = function() {
             this.character_descruption[i].position = {x: 14*64, y:i*80};
         }
     }
-
     this.draw = function(ctx){
         if(this.is_character_description_open){
                 this.back_ground_picture.draw(ctx);
@@ -89,7 +86,6 @@ var Character_description = function() {
                 experience_scale = -1;
             else
                 experience_scale = 15/(this.character_levelup_experience/this.experience);
-
             for(var i=0;i<=experience_scale;i++){
                 ctx.beginPath();
                 ctx.rect(729+i*23, 98, 20, 30);
@@ -123,13 +119,11 @@ var Character_description = function() {
             ctx.fill();
         }
     }
-
     this.isChangeCapability = function(which_capability){
         this.character_descruption_point[which_capability] ++;
         this.capabilityt_point--;
         this.draw(Framework.Game._context);
     }
-
     this.update = function(player){
         this.experience = player.experience;
         this.character_level = player.level;

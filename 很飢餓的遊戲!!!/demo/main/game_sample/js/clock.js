@@ -17,7 +17,6 @@ var Clock = function() {
     this.currentTime = 192;
     this.regeneration_time = 200;
     this.day = 1;
-    
     this.init = function(){
         var audio = new Framework.Audio({
             morning:{
@@ -56,7 +55,6 @@ var Clock = function() {
                         audio.stopAll();
                         audio.play({name: 'morning', loop: true});
                     }
-
                     this.status ++;
                     if(this.status >=3){
                         this.status = 0;
@@ -69,32 +67,25 @@ var Clock = function() {
             audio.stopAll();
         }
     }
-
     this.stopMusic = function(music_stop){
         this.music_stop = music_stop;
     }
-
     this.draw = function(ctx){
         ctx.beginPath();
         ctx.rect(1290, 20, 300, 290);
         ctx.fillStyle = "#BEBEBE";
         ctx.fill();
-
         this.day_board.draw(ctx);
-
         ctx.beginPath();
         ctx.rect(23.6*64, 0.5*64, 16, 192);
         ctx.fillStyle = "yellow";
         ctx.fill();
-
         ctx.beginPath();
         ctx.rect(23.6*64, 0.5*64, 16, this.currentTime);
         ctx.fillStyle = "black";
         ctx.fill();
-
         this.timelevel.draw(ctx);
         this.clock[this.status].draw(ctx);
-
         ctx.font = '25pt Times New Roman';
         ctx.fillStyle = 'yellow';
         ctx.strokeStyle = 'black';
@@ -102,4 +93,3 @@ var Clock = function() {
         ctx.strokeText("Day: " + this.day, 22.2*64, 4.1*64+20);
     }
 };
-

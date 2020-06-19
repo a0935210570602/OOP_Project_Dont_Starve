@@ -4,7 +4,6 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
     },
-
     //在initialize時會觸發的事件
     loadingProgress: function(ctx, requestInfo) {
         this.loading.draw(ctx);
@@ -13,7 +12,6 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         ctx.fillStyle = 'white';
         ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
     },
-
     load: function() {
         this.go_back_menu = new Framework.Sprite(define.welcomimgPath + 'go_back_menu.png');
         this.audio = new Framework.Audio({
@@ -27,7 +25,6 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         });
         this.audio.play({name: 'song2', loop: true});
     },
-
     initialize: function() {
         this.go_back_menu.position = {
             x: Framework.Game.getCanvasWidth() *0.75,
@@ -35,13 +32,11 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         };
         this.go_back_menu.scale = 4;
         this.rootScene.attach(this.go_back_menu);
-
         this.rectPosition = { 
             x: Framework.Game.getCanvasWidth() / 2 - 130,
             y: 0
         };
     },
-
     draw: function(parentCtx) { 
         parentCtx.font = '24pt Algerian';
         parentCtx.textAlign = 'left';
@@ -78,7 +73,6 @@ var MyMenu_tutorial = Framework.exClass(Framework.GameMainMenu , {
         this.rootScene.draw(parentCtx); 
         this.go_back_menu.draw(parentCtx);
     },
-
     click:function(e){ 
         this.audio.play({name: 'keyup', loop: false});
         if(e.x<1329 && e.x>1078 && e.y<348 && e.y>83){

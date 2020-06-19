@@ -13,13 +13,10 @@ var Item_snow_ball = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_snow_ball.draw(ctx);
     }
-
 };
-
 Object.defineProperty(Item_snow_ball.prototype, 'position', {
     get: function() {
         return this.mapPosition;

@@ -13,16 +13,13 @@ var Item_grass = function() {
     this.amount = 1;
     this.item_can_be_picked = true;
     this.regeneration_time = 3000;
-
     this.reset = function(){
         setTimeout(()=>{  this.status = true}, this.regeneration_time);
     }
-
     this.update = function(){
         this.status = false;
         this.reset();
     }
-
     this.draw = function(ctx){
         if(this.status){
             this.item_grass.draw(ctx);
@@ -31,7 +28,6 @@ var Item_grass = function() {
         }
     }
 };
-
 Object.defineProperty(Item_grass.prototype, 'position', {
     get: function() {
         return this.mapPosition;

@@ -53,7 +53,6 @@
 			value: mainPath + 'npc/',
 			writable: true
 		}
-
 	});
 	window.define = define;
 })(window)

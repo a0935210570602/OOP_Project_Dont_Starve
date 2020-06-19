@@ -10,23 +10,18 @@ var Item_helmat = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "head";
-
     this.deffense_point = 40;
-
     this.item_can_be_picked = true;
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_helmat.draw(ctx);
     }
-
     this.reduceDurability = function(){
         this.durability -= 2;
     }
 };
-
 Object.defineProperty(Item_helmat.prototype, 'position', {
     get: function() {
         return this.mapPosition;

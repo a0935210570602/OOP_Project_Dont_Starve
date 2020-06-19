@@ -15,21 +15,18 @@ var Monster_base = function(){
     this.walkVector = {x:0, y:0};
     this.hurt = new Framework.AnimationSprite({url:define.materialPath + 'Absorb.png', col:5, row:5, loop:false, speed:12}); 
     this.hurt.scale = 2;
-
     this.init = function(map, monster, monsterDie,walkSpeed){
         this.map = map;
         this.monster = monster;
         this.walkSpeed = walkSpeed;
         this.monsterDie = monsterDie;
     }
-
     this.walk = function(moveStep){
         if(this.isWalking === false){
             this.isWalking = true;
             this.walkTarget = {x:this.mapPosition.x + moveStep.x, y:this.mapPosition.y + moveStep.y};
         }
     }
-
     this.die = function(){
         this.isHurt = true;
         this.monsterDie.start({ from: 0, to: 2, loop: false});
@@ -37,7 +34,6 @@ var Monster_base = function(){
             this.isdead = true;
         },500);
     }
-
     this.getHurt = function(){
         if(!this.isHurt){
             this.isHurt = true;
@@ -48,7 +44,6 @@ var Monster_base = function(){
             },300);
         }
     }
-
     this.walkAlittle = function(){
         if(this.playerDirection === this.constants.DirectionEnum.DOWN){
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y + this.walkSpeed};
@@ -63,7 +58,6 @@ var Monster_base = function(){
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - this.walkSpeed};
         }
     }
-
     this.update = function(){
         this.checkIsMonsterOutCanvus();
         if(!this.is_start){ return; }
@@ -90,7 +84,6 @@ var Monster_base = function(){
             }
         }
     }
-
     this.draw = function(ctx){
         if(!this.is_start){ return; }
         var xx = 13*64 + this.spritePosition.x - this.map.playerPositionOnMap.x*64;
@@ -105,7 +98,6 @@ var Monster_base = function(){
             this.hurt.draw(ctx);
         }
     }
-
     this.checkIsMonsterOutCanvus = function(){
         if( Math.abs((this.mapPosition.x-this.map.playerPositionOnMap.x)) <6 &&　Math.abs((this.mapPosition.y-this.map.playerPositionOnMap.y)) <6){
             this.is_start = true;
@@ -113,7 +105,6 @@ var Monster_base = function(){
             this.is_start = false;
         }
     }
-
     this.howToWalk = function(restriction, thirdDirection){
         this.audio = new Framework.Audio({
             cow: {
@@ -171,20 +162,16 @@ var Monster_base = function(){
             }
         }
     }
-
     this.isAttack = function(){
         if(this.monsterDirection.x + this.mapPosition.x == this.map.playerPositionOnMap.x && this.monsterDirection.y + this.mapPosition.y == this.map.playerPositionOnMap.y && !this.isHurt){
             return true;
         }
         return false;
     }
-
     this.rushToYou = function()
     {
-        
         var walkStep = {x:0,y:0};
         this.walkVector = {x:this.mapPosition.x-this.map.playerPositionOnMap.x, y:this.mapPosition.y-this.map.playerPositionOnMap.y};
-        
         if(this.walkVector.x == 0){
             walkStep = this.walkVector.y > 0 ? {x:0,y:-1} : {x:0,y:1};
         }else if(this.walkVector.y == 0){
@@ -210,7 +197,6 @@ var Monster_base = function(){
                     walkStep = this.howToWalk(2,1);
                 else
                     walkStep = this.howToWalk(2,0);
-
             }else{
                 // {x:0,y:1}
                 if(this.walkVector.x>0)
@@ -229,7 +215,6 @@ var Monster_base = function(){
             this.walk(walkStep);
         }
     }
-
     this.changeWalkDirection = function(walkStep){
         this.walkStep = walkStep;
         if(walkStep.x > 0){
@@ -239,7 +224,6 @@ var Monster_base = function(){
             this.playerDirection = this.constants.DirectionEnum.LEFT;
             this.monsterDirection = this.constants.Direction.LEFT;
         }
-
         if(walkStep.y > 0){
             this.playerDirection = this.constants.DirectionEnum.DOWN;
             this.monsterDirection = this.constants.Direction.DOWN;
@@ -249,12 +233,10 @@ var Monster_base = function(){
         }
         this.monster.start({ from: this.playerDirection * 3, to: this.playerDirection * 3 + 2, loop: true});
     }
-
     this.randomWalk = function()
     {
         var randNum = Framework.Game._currentLevel.cycleCount % 553;
         var walkStep = {x:0,y:0};
-
         if(randNum % 117 == 0)
         {
             walkStep.x = 1
@@ -288,7 +270,6 @@ Object.defineProperty(Monster_base.prototype, 'position', {
         this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
-
 Object.defineProperty(Monster_base.prototype, 'isDead', {
     get: function() {
         return this.isdead;

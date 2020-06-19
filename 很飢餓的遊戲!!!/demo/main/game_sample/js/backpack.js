@@ -2,7 +2,6 @@ var Backpack = function() {
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
     this.objectFactory = new Object_factory();
-
     this.backpackPosition = [];
     this.objectPosition = [];
     var berry = new Item_berry();
@@ -26,14 +25,11 @@ var Backpack = function() {
     );
     this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,branch,flint,gold,grass,pix,new Item_space_wand()];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
-    
     this.selectedIndex = -1;
-
     for(var j = 0; j < 17; j++){
         this.backpackPosition.push({x: (j+5)*64, y: 13*64});
         this.objectPosition.push({x: (j+5), y: 13});
     }
-    
     this.getSelectedItem= function(){
         if(this.selectedIndex == -1)
             return null;
@@ -42,12 +38,10 @@ var Backpack = function() {
         else
             return null;
     }
-
     this.dropSelectedItem = function(){
         if(this.selectedIndex != -1)
             this.arrayRemoveByIndex(this.selectedIndex);
     }
-
     this.addItemBySynthesis = function(item_num){
         var check = this.checkIfStackableExist(item_num);
         if(check == -1){
@@ -263,7 +257,6 @@ var Backpack = function() {
             this.itemList[check].amount += 1;
         }
     }
-
     this.addItemByObject = function(object){
         var check = this.checkIfStackableExist(object.item_num);
         if(check != -1)
@@ -271,7 +264,6 @@ var Backpack = function() {
         else
             this.itemList.push(object);
     }
-
     this.checkIfPickAvailable = function(item_num){
         if(this.itemList.length < 17)
             return true;
@@ -301,10 +293,8 @@ var Backpack = function() {
         }
         else if(this.checkIfStackableExist(item_num) != -1)
             return true;
-
         return false;
     }
-
     //1:可合成 -1:材料夠沒空間 0:材料不夠
     this.checkIfSynthesisAvailable = function(material){
         if(this.checkIfMaterialEnough(material)){
@@ -318,7 +308,6 @@ var Backpack = function() {
             return 0;
         }
     }
-
     this.checkIfSpaceEnoughAfterSynthesis = function(material){
         var check = false;
         for(var i = 0;i < material.length-1;i++){
@@ -329,7 +318,6 @@ var Backpack = function() {
         }
         return check;
     }
-
     this.checkIfMaterialEnough = function(material){
         var check = false;
         for(var i = 0;i < material.length-1;i++){
@@ -343,7 +331,6 @@ var Backpack = function() {
         }
         return true;
     }
-
     this.checkIfStackableExist = function(item_num){
         if(this.stackableList.indexOf(item_num) != -1){
             for(var i = 0;i < this.itemList.length;i++){
@@ -353,15 +340,12 @@ var Backpack = function() {
         }
         return -1;
     }
-
     this.getItem = function(index){
         return this.itemList[index];
     }
-
     this.getItemListLength = function(){
         return this.itemList.length;
     }
-
     this.update = function(material){
         for(var i = 0;i < material.length-1;i++){
             for(var j = 0;j <　this.itemList.length;j++){
@@ -371,17 +355,14 @@ var Backpack = function() {
         }
         this.arrayRemoveEmpty();
     }
-
     this.updateByEat = function(index){
         this.itemList[index].amount -= 1;
         if(this.itemList[index].amount == 0)
             this.arrayRemoveByIndex(index);
     }
-
     this.arrayRemoveByIndex = function(i){
         this.itemList.splice(i, 1);
     }
-
     this.arrayRemoveEmpty = function() {
         var i = 0;
         while(i < this.itemList.length) 
@@ -392,17 +373,14 @@ var Backpack = function() {
     }
     this.mousemove = function(e){
     }
-
     this.itemNameArray = [
         "小花", "蜘蛛網", "石頭", "樹枝", "偉凱的作業簿", "草", "木頭", "燧石", "黃金", "豬皮",
         "蜂刺", "雪球", "繩索", "露水", "十字鎬", "斧頭", "釣魚竿", "鏟子", "黃金斧頭", "黃金鏟子", 
         "黃金十字鎬", "頭盔", "草製盔甲", "木製盔甲", "長矛", "吹箭", "國王法杖", "空間法杖", "火法杖", "冰法杖",
         "黃金提燈", "火把", "帳篷", "篝火", "冰塊", "漿果叢"
     ];
-
     this.mousemove = function(e){
         this.mousePosition = e;
-
         if(e.x<=290+64 && e.x>= 290 && e.y<=860 && e.y>= 807){
             return this.itemList[0].item_num;
         }else if(e.x<=290+64*2 && e.x>= 290+64*1 && e.y<=860 && e.y>= 807){
@@ -440,7 +418,6 @@ var Backpack = function() {
         }
         return null;
     }
-
     //1:小花 2:蜘蛛網 3:石頭 4:樹枝 5:偉凱的作業簿 6:草 7:木頭 8:燧石 9:黃金 10:豬皮
     //11:蜂刺 12:雪球 13:繩索 14:露水 15:十字鎬 16:斧頭 17:釣魚竿 18:鏟子 19:黃金斧頭 20:黃金鏟子 
     //21:黃金十字鎬 22:頭盔 23:草製盔甲 24:木製盔甲 25:長矛 26:吹箭 27:國王法杖 28:空間法杖 29:火法杖 30:冰法杖
@@ -450,7 +427,6 @@ var Backpack = function() {
             this.backpack.position = this.backpackPosition[j];
             this.backpack.draw(ctx);
         }
-
         for(var i = 0; i < this.itemList.length; i++){
             this.itemList[i].position = this.objectPosition[i];
             this.itemList[i].draw(ctx);

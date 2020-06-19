@@ -40,8 +40,6 @@ var Framework = (function (Framework) {
             this.maxIndex = 0;       
             this.speedCounter = 0;     
             this.finishPlaying = function(){};
-
-
             // 建構子參數判斷
             if(!Framework.Util.isUndefined(options.url)){
                 if(Framework.Util.isString(options.url)){
@@ -67,8 +65,6 @@ var Framework = (function (Framework) {
             }
             this.speed = options.speed || 24;
             this.loop = (Framework.Util.isUndefined(options.loop) ? true : options.loop);
-
-
             if(Framework.Util.isString(options.url)){
                 //單張圖片切割
                 Framework.ResourceManager.loadImage({id:this._id, url:this._id});
@@ -85,7 +81,6 @@ var Framework = (function (Framework) {
             }else if(!Framework.Util.isUndefined(options)){
                 Framework.DebugInfo.Log.error('AnimationSprite 不支援的參數 ' + options);
             }
-
             this.pushSelfToLevel();
         },
         _nextFrame: function(){
@@ -119,7 +114,6 @@ var Framework = (function (Framework) {
             }
         },
         initTexture:function(){},
-
         /**
         * 
         * 開始播放設定好的AnimationSprite
@@ -141,7 +135,6 @@ var Framework = (function (Framework) {
             this.to = (Framework.Util.isUndefined(option.to) ? this.maxIndex : option.to);
             this.speed = (Framework.Util.isUndefined(option.speed) ? this.speed : option.speed);
             this.loop = (Framework.Util.isUndefined(option.loop) ? this.loop : option.loop);
-            
             this._start = true;
             this._previousTime = (new Date()).getTime();
             this.finishPlaying = option.finishPlaying || function() {};
@@ -156,7 +149,6 @@ var Framework = (function (Framework) {
             }
             this.index = this.from;
         },
-
         /**
         * 停止播放AnimationSprite, 若已經停止, 則不會發生任何事情
         * @method stop       
@@ -164,7 +156,6 @@ var Framework = (function (Framework) {
         stop: function() {
             this._start = false;
         },
-
         /**
         * 繼續播放AnimationSprite, 若未曾停止, 則不會發生任何事情
         * @method resume       
@@ -175,7 +166,6 @@ var Framework = (function (Framework) {
                 this._start = true;
             }            
         },
-
         load: function() {
             if(this._type === 'one') {
                 Framework.ResourceManager.loadImage({id:this._id, url:this._id});
@@ -185,7 +175,6 @@ var Framework = (function (Framework) {
                 }, this);
             }
         },
-
         initialize: function() {
             //if(this._type === 'one') {              
                 // 故意用 closures 隔離變數的scope
@@ -219,16 +208,11 @@ var Framework = (function (Framework) {
                             this._sprites.push(new Framework.Sprite(tmpCanvas));
                         }, this);
                         this.texture = this._sprites[this.index];
-                        
                     }
-
                 //}).call(this);
                 this._isLoadSprite = true;
-                
            // }
-
         },
-
         update: function(){  
             if(this._start) {
                 var addFrame = this.speed / 50;
@@ -238,9 +222,7 @@ var Framework = (function (Framework) {
                     this.speedCounter -= 1;
                 }
             }
-
         },
-
         draw: function(painter){
             var painter = painter || Framework.Game._context;
             if(Framework.Util.isUndefined(this._sprites) || this._sprites.length == 0)
@@ -249,32 +231,25 @@ var Framework = (function (Framework) {
             }
             //if(this.isObjectChanged) {
                 this.texture = this._sprites[this.index];
-                
                  //if(this._isMove) {
                     this.texture.position = this.position;
                     this.texture.absolutePosition = this.absolutePosition;
                 //}
-
                 //if(this._isRotate) {
                     this.texture.rotation = this.rotation;
                     this.texture.absoluteRotation = this.absoluteRotation;
                 //}
-
                 //if(this._isScale) {
                     this.texture.scale = this.scale;
                     this.texture.absoluteScale = this.absoluteScale;
                 //}
-
                 this.texture.spriteParent = this.spriteParent;                
                 this.texture.layer = this.layer;
                 this.texture.isDrawBoundry = this.isDrawBoundry;
                 this.texture.isDrawPace = this.isDrawPace;
                 this.texture._changeFrame = this._changeFrame;
-            
                 this.texture.draw(painter); 
             //} 
-                         
-            
         },
         toString:function(){
             return '[AnimationSprite Object]';
@@ -298,7 +273,6 @@ var Framework = (function (Framework) {
             this._index = newValue;
             this._changeFrame = true;
         }
-    
     });
     return Framework;
 })(Framework || {});

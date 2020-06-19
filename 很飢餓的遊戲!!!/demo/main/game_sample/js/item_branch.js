@@ -10,12 +10,10 @@ var Item_branch = function() {
     this.type = "material";
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
-    
     this.draw = function(ctx){
         this.item_branch.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_branch.prototype, 'position', {
     get: function() {
         return this.mapPosition;

@@ -7,7 +7,6 @@ Object_factory.prototype.createObject = function(options){
     this.objectClass = Weapon;
   else
     return;
-    
   return new this.objectClass(options);
 };
 Object_factory.prototype.createMonster = function(map){

@@ -3,7 +3,6 @@ var Creation_blood_status = function() {
     this.character_tocan = new Framework.Sprite(define.materialPath + 'character_tocan.png'); 
     this.character_tocan.scale = 0.35;
     this.character_tocan.position = {x: 64*3+64, y:64*3};
-
     this.character_blood_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.character_blood_chart.scale = 1.75;
     this.character_blood_chart.position = {x: 64*6, y: 64*3-20}
@@ -16,7 +15,6 @@ var Creation_blood_status = function() {
     this.character_blood_ratio = 1;
     this.character_magic_ratio = 1;
     this.character_hunger_ratio = 1;
-
     this.blood_chart = new Framework.Sprite(define.materialPath + 'blood_chart.png'); 
     this.blood_chart.scale = 1.5;
     this.blood_ratio = [];
@@ -59,29 +57,23 @@ var Creation_blood_status = function() {
                 ctx.fillStyle = "red";
                 ctx.fill();
                 ctx.closePath();
-
                 this.blood_chart.draw(ctx);
             }
             this.monsterarray = [];
             this.blood_ratio = [];
         }
     }
-
     this.characterHungryUpdate = function(player){
         this.character_hunger_ratio = player.hunger_current_point / player.hunger_total_point;
     }
-
     this.characterMagicUpdate = function(player){
         this.character_magic_ratio = player.character_descruption_point[1] / player.character_descruption_point[6];
     }
-
     this.characterBloodUpdate = function(player){
         this.character_blood_ratio = player.character_descruption_point[0] / player.character_descruption_point[5];
-        
         if(this.character_blood_ratio<0)
             this.character_blood_ratio=0;
     }
-    
     this.monsterUpdate = function(monsterarray){
         for(var i=0,j=0;i<monsterarray.length;i++){
             if(monsterarray[i].is_start && monsterarray[i].health > 0){

@@ -13,13 +13,11 @@ var Item_spider_web = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         if(this.status)
             this.item_spider_web.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_spider_web.prototype, 'position', {
     get: function() {
         return this.mapPosition;

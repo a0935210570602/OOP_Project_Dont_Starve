@@ -13,12 +13,10 @@ var Item_gold = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_gold.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_gold.prototype, 'position', {
     get: function() {
         return this.mapPosition;

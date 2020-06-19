@@ -13,12 +13,10 @@ var Item_ice = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_ice.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_ice.prototype, 'position', {
     get: function() {
         return this.mapPosition;

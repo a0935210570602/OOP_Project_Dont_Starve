@@ -6,7 +6,6 @@ var Item_fake = function() {
     this.draw = function(ctx){
     }
 };
-
 Object.defineProperty(Item_fake.prototype, 'position', {
     set: function(newValue) {
         this.mapPosition = newValue;

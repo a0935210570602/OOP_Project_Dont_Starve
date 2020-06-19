@@ -10,12 +10,10 @@ var Item_tree_dig = function() {
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = true;
-
     this.draw = function(ctx){
         this.item_tree_dig.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_tree_dig.prototype, 'position', {
     get: function() {
         return this.mapPosition;

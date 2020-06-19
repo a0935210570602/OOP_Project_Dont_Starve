@@ -17,7 +17,6 @@ var Handle_initial_character = function(){
             this.character_description.character_descruption_point[i] = 5;
         }
     }
-
     this.update = function(){
         if(this.character_description.capabilityt_point == 0)
             this.is_initial = true;

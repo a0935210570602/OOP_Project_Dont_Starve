@@ -9,7 +9,6 @@ var Framework = (function (Framework) {
         }
         // 宣告變數......
         var parent, props, childClass , i;
-
         // 抓取parent & child object
         if(arguments.length === 1){
             if(Framework.Util.isObject(arguments[0])){
@@ -30,7 +29,6 @@ var Framework = (function (Framework) {
                 throw 'must be use new keyword';
             }
             var that = this.prototype;
-            
             var recursionRunConstruction = function r(a , b , arg){
                 // 不明原因無法使用isUndefined 判斷所以只好用Try了
                 try{
@@ -59,7 +57,6 @@ var Framework = (function (Framework) {
         }
         return childClass;
     };
-
     Framework.Class = function() {        
         if(this instanceof Framework.Class){
             Framework.DebugInfo.Log.error('不能在Framework.Class之前使用new關鍵字');
@@ -72,7 +69,6 @@ var Framework = (function (Framework) {
             parent = arguments[0];
             props = arguments[1];
         }
-
         // 1. new constructor
         child = function(){
             if(Framework.Util.isUndefined(this)){
@@ -87,7 +83,6 @@ var Framework = (function (Framework) {
                 child.prototype.__construct.apply(this, arguments);
             }
         };
-
         // 2. inherit
         parent = parent || Object;
         f = function(){};
@@ -95,7 +90,6 @@ var Framework = (function (Framework) {
         child.prototype = new f();
         child.uber = parent.prototype;
         child.prototype.constructor = child;
-
         // 3. add implementation methods
         for(i in props){
             if(props.hasOwnProperty(i)){
@@ -104,7 +98,6 @@ var Framework = (function (Framework) {
         }
         return child;
     };
-
     // Framework.class.create (simulator Inheritance class)
     Framework.inheritance = function (createObj, options) {
         var emptyObj = function () {};
@@ -120,6 +113,5 @@ var Framework = (function (Framework) {
         }
         return newObj;
     };
-
     return Framework;
  })(Framework || {});
