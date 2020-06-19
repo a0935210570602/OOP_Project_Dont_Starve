@@ -74,7 +74,6 @@ var World_map = function()
         this.creation_blood_status = new Creation_blood_status();
         this.music_stop = false;
         this.clock = new Clock();
-        this.clock.scale = 2;
         this.game_object_detail = new Game_object_detail();
         this.item_flower_growed_dig = new Framework.Sprite(define.materialPath + 'item_flower_growed_dig.png'); 
         this.item_flower_growed_dig.scale = 2;

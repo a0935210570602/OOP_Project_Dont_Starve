@@ -22,7 +22,6 @@ var BombMan = function(file, options) {
     this.sprite.scale = 1.4;
     this.sprite.index = 1;
     var PIXEL_CONST = 64;
-    //this.sprite.start({ from: 0, to: 2, loop: true});
     this.canvasPosition = {x:0, y:0};
     this.spritePosition = {x:0, y:0};
     this.constants = new Constants();
@@ -73,7 +72,6 @@ var BombMan = function(file, options) {
     this.hunger_current_point = 100;
     this.handEquipmentId;
     this.init = function(){
-        // this.characterStatus.init();
         this.player_state = "alive";
         this.decreaseHunger();
     }
@@ -363,7 +361,6 @@ var BombMan = function(file, options) {
         var equipmentIndex = this.getEquipmentIndex(e);
         this.backpack.selectedIndex = index;
         this.equipmentBar.selectedIndex = equipmentIndex;
-        // this.get_back_number = this.backpack.mousemove(e);
     }
     this.isChangeCapability = function(which_capability){
         this.character_descruption_point[which_capability] += 20;

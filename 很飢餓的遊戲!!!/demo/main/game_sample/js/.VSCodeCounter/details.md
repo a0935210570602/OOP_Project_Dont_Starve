@@ -1,10 +1,10 @@
 # Details
 
-Date : 2020-06-19 21:29:59
+Date : 2020-06-19 21:37:19
 
 Directory d:\OOP實習\OOP_Project_Dont_Starve_2\OOP_Project_Dont_Starve\OOP_Project_Dont_Starve\很飢餓的遊戲!!!\demo\main\game_sample\js
 
-Total : 103 files,  20347 codes, 458 comments, 0 blanks, all 20805 lines
+Total : 103 files,  20326 codes, 458 comments, 0 blanks, all 20784 lines
 
 [summary](results.md)
 
@@ -113,6 +113,6 @@ Total : 103 files,  20347 codes, 458 comments, 0 blanks, all 20805 lines
 | [synthesisBar.js](/synthesisBar.js) | JavaScript | 473 | 7 | 0 | 480 |
 | [tool.js](/tool.js) | JavaScript | 31 | 0 | 0 | 31 |
 | [weapon.js](/weapon.js) | JavaScript | 32 | 0 | 0 | 32 |
-| [world_map.js](/world_map.js) | JavaScript | 1,245 | 5 | 0 | 1,250 |
+| [world_map.js](/world_map.js) | JavaScript | 1,224 | 5 | 0 | 1,229 |
 
 [summary](results.md)

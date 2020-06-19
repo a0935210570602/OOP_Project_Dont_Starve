@@ -105,7 +105,6 @@ var loadGameEnd;
         { src: 'game_sample/js/character_description.js', lookFor: 'Character_description' },
         { src: 'game_sample/js/synthesisBar.js', lookFor: 'SynthesisBar' },
         { src: 'game_sample/js/equipmentBar.js', lookFor: 'EquipmentBar' },
-        { src: 'game_sample/js/characterStatus.js', lookFor: 'CharacterStatus' },
         { src: 'game_sample/js/clock.js', lookFor: 'Clock' },
         { src: 'game_sample/js/backpack.js', lookFor: 'Backpack' },
         { src: 'game_sample/js/level2_change.js', lookFor: 'Level2_change' },
