@@ -1,13 +1,8 @@
 # Details
-
 Date : 2020-06-19 00:09:11
-
 Directory : ./demo\main\game_sample\js
-
 Total : 103 files,  20383 codes, 463 comments, 2041 blanks, all 22887 lines, 2.22% comment rate
-
 [summary](results.md)
-
 ## Files
 | filename | language | code | comment | blank | total | comment rate |
 | :--- | :--- | ---: | ---: | ---: | ---: | ---: |
@@ -114,5 +109,4 @@ Total : 103 files,  20383 codes, 463 comments, 2041 blanks, all 22887 lines, 2.2
 | [tool.js](../demo\main\game_sample\js\tool.js) | JavaScript | 31 | 0 | 7 | 38 | 0.00% |
 | [weapon.js](../demo\main\game_sample\js\weapon.js) | JavaScript | 32 | 0 | 4 | 36 | 0.00% |
 | [world_map.js](../demo\main\game_sample\js\world_map.js) | JavaScript | 1,274 | 5 | 128 | 1,407 | 0.39% |
-
 [summary](results.md)

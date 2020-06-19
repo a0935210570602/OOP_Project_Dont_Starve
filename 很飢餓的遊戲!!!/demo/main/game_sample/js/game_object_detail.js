@@ -66,7 +66,6 @@ var Game_object_detail = function() {
                 {key:54,name:"黑漿果", des:"上面長滿了黴菌，好臭，不能吃了。"},
             ];
     }
-    
     this.title_string = "";
     this.des_string = "";
     this.showUpdate = function(item_number){
@@ -83,7 +82,6 @@ var Game_object_detail = function() {
             this.des_string = "";
         }
     }
-    
     this.draw = function(ctx){
         if(this.title_string != ""){
             ctx.beginPath();
@@ -91,7 +89,6 @@ var Game_object_detail = function() {
             ctx.fillStyle = "brown";
             ctx.fill();
             this.back_ground_picture.draw(ctx);
-    
             ctx.font = "25px Arial";
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';

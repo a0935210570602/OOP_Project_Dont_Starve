@@ -13,12 +13,10 @@ var Item_waikei_homework = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_waikei_homework.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_waikei_homework.prototype, 'position', {
     get: function() {
         return this.mapPosition;

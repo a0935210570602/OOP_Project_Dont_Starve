@@ -3,7 +3,6 @@ var Item_sapling = function() {
     this.item_sapling_pulled = new Framework.Sprite(define.materialPath + 'item_sapling_pulled.png'); 
     this.item_sapling.scale = 0.6;
     this.item_sapling_pulled.scale = 0.4;
-
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = true;
@@ -18,7 +17,6 @@ var Item_sapling = function() {
         this.status = false;
         setTimeout(()=>{  this.status = true}, this.regeneration_time);
     }
-
     this.draw = function(ctx){
         if(this.status)
             this.item_sapling.draw(ctx);
@@ -26,7 +24,6 @@ var Item_sapling = function() {
             this.item_sapling_pulled.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_sapling.prototype, 'position', {
     get: function() {
         return this.mapPosition;

@@ -19,7 +19,6 @@ var Npc_event = function(map) {
     this.npc1.scale =  1.3;
     this.npc1.position = {x: 800, y:450};
     this.npc.push(this.npc1);
-
     this.npc_name = "";
     this.drama = "";
     this.taking_is_start = false;
@@ -75,7 +74,6 @@ var Npc_event = function(map) {
                 {key:"商人莉莉", des:"好啦，介紹就到這邊，你可以走了"},
                 {key:"商人莉莉", des:"記得要贏得遊戲，不但要生存下來，還要打倒魔王喔。"},
                 {key:"商人莉莉", des:"魔王就住在最右下角的岩漿那裡，快去吧。"},
-                
             ],
             "說了":false
         },
@@ -92,7 +90,6 @@ var Npc_event = function(map) {
             {key:3, des:"難不成我被綁架了！！！！！！"},
             {key:4, des:"啊那邊有一個看起來很好心的人"},
             {key:5, des:"去問問他好了"},]
-        
         },
         "小丑哥哥":{
             "picture":[
@@ -134,7 +131,6 @@ var Npc_event = function(map) {
     this.characterHasMission();
     this.checkMissionBlockHasStart = function(){
         if( Math.abs(this.npc_position.x - map.playerPositionOnMap.x)<=5 &&  Math.abs(this.npc_position.y - map.playerPositionOnMap.y)<=5){
-           
             return true;;
         }else{
             return false;
@@ -149,7 +145,6 @@ var Npc_event = function(map) {
             this.drama = drama_name;
         this.amount = -1;
     }
-
     this.talking = function(){
         this.amount ++;
         if(this.drama == -999){
@@ -165,13 +160,11 @@ var Npc_event = function(map) {
                             this.mission_chain[0]["劇本"][0].finish = true;
                     else
                         this.taking_is_start = false;
-                    
                     if(this.mission_chain.length > 1)
                         this.mission_chain.splice(0, 1);
                     else
                         this.mission_block.stop();
                     this.characterHasMission();
-                    
                 }else
                     this.talk_des = this.mission_chain[0]["劇本"][this.amount].des;
             }
@@ -185,7 +178,6 @@ var Npc_event = function(map) {
                     if(!this.description[this.npc_name][this.drama][0].finish){
                         if(!this.description[this.npc_name][this.drama][0].loop)
                             this.description[this.npc_name][this.drama][0].finish = true;
-                            
                     }else
                         this.taking_is_start = false;
                 }else
@@ -193,11 +185,9 @@ var Npc_event = function(map) {
             }
         }
     }
-
     this.returnSayLong = function(){
         return this.description[this.npc_name][this.drama].length;
     }
-
     this.update = function(){
         this.mission_block.update();
     }
@@ -210,7 +200,6 @@ var Npc_event = function(map) {
             if(this.mission_block._start)
                 this.mission_block.draw(ctx); 
         }
-
         if(this.taking_is_start){
             ctx.textAlign = 'center';
             ctx.font = "40px Arial";
@@ -238,7 +227,6 @@ var Npc_event = function(map) {
         }
     }
 };
-
 Object.defineProperty(Npc_event.prototype, 'position', {
     get: function() {
         return this.mapPosition;

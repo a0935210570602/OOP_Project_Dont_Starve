@@ -9,7 +9,6 @@ var Weapon = function(option) {
         this.weapon.scale = constructOption.scale;
     }
     this.constructor(option);
-
     this.mapPosition = {x:0, y:0};
     this.type = "equipment";
     this.place = "hand";
@@ -18,12 +17,10 @@ var Weapon = function(option) {
     this.status = true;
     this.isRegenerate = false;
     this.item_can_be_picked = true;
-
     this.draw = function(ctx){
         this.weapon.draw(ctx);
     }
 };
-
 Object.defineProperty(Weapon.prototype, 'position', {
     get: function() {
         return this.mapPosition;

@@ -18,12 +18,10 @@ var Score = function() {
         this.score += 2;
         this.synthesis += 1;
     }
-
     this.scoreAddByKillMonster = function(){
         this.score += 4;
         this.kill += 1;
     }
-    
     this.drawScore = function(){
         var interval = setInterval(()=>{
             if(this.scoreToDraw <= this.score){
@@ -39,11 +37,9 @@ var Score = function() {
                 clearInterval(stateInterval);
         },350);
     }
-
     this.draw = function(ctx){
         this.background.draw(ctx);
         this.frame.draw(ctx);
-        
         ctx.font = '90pt Algerian';
         ctx.fillStyle = 'yellow';
         ctx.strokeStyle = 'blue';
@@ -75,4 +71,3 @@ var Score = function() {
         }    
     }
 };
-

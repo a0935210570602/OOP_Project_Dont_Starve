@@ -13,12 +13,10 @@ var Item_flint = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_flint.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_flint.prototype, 'position', {
     get: function() {
         return this.mapPosition;

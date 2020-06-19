@@ -1,17 +1,11 @@
 // By Raccoon
 // include namespace
-
 var Framework = (function (Framework) {    
     'use strict'
-
-
     Framework.EqualCondition = function(targetProperty,targetValue,delta){
-        
-
         var EqualConditionClass = {},
             EqualConditionInstance,
             _infoString;
-
         var isFitCondition = function(){
             var objectValue = Framework.Replay.evaluate(targetProperty);
             if(Framework.Util.isNumber(targetValue)){
@@ -25,7 +19,6 @@ var Framework = (function (Framework) {
                 }
             }
         };
-
         var setInfoString = function(info)
         {
             _infoString = info;
@@ -34,7 +27,6 @@ var Framework = (function (Framework) {
         {
             return _infoString;
         };
-
         EqualConditionClass = function() {
         };
         EqualConditionClass.prototype = {
@@ -42,10 +34,8 @@ var Framework = (function (Framework) {
             setInfoString : setInfoString,
             getInfoString : getInfoString
         }
-
         EqualConditionInstance = new EqualConditionClass();
         return EqualConditionInstance;
-
     };
     return Framework;
     })(Framework || {});

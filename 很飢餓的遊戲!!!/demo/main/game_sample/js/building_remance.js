@@ -17,7 +17,6 @@ var Building_remance = function(number) {
         this.building_remance[number].draw(ctx);
     }
 };
-
 Object.defineProperty(Building_remance.prototype, 'position', {
     get: function() {
         return this.mapPosition;

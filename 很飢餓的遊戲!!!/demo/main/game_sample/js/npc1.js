@@ -1,5 +1,4 @@
 var Npc1 = function(map) {
-    
     this.npc1 = new Framework.AnimationSprite({url:define.materialPath + 'character1.png', 
         col:3 , row:4 , loop:true , speed:12}); 
     this.npc1.scale = 1.5;
@@ -7,7 +6,6 @@ var Npc1 = function(map) {
     this.item_num = -10;
     var PIXEL_CONST = 64;
     this.name = "小丑哥哥";
-
     this.mapPosition = {x:0, y:0};
     this.walkTarget = {x:0, y:0};
     this.spritePosition = {x:0, y:0};
@@ -16,16 +14,12 @@ var Npc1 = function(map) {
     this.isdieing = false;
     this.isdead = false;
     this.dieingCounter = 0;
-    
     this.is_start = false;
-
     this.canWalking = true;
     this.isWalking = false;
-
     this.health = 200;
     this.attack = 5;
     var m_monster = this;
-
     this.monsterDirection = {x:0, y:0};
     this.walk = function(moveStep){
         if(this.isWalking === false){
@@ -42,7 +36,6 @@ var Npc1 = function(map) {
             this.playerDirection = this.constants.DirectionEnum.LEFT;
             this.monsterDirection = this.constants.Direction.LEFT;
         }
-
         if(walkStep.y > 0){
             this.playerDirection = this.constants.DirectionEnum.DOWN;
             this.monsterDirection = this.constants.Direction.DOWN;
@@ -55,14 +48,11 @@ var Npc1 = function(map) {
     this.die = function(){
         this.isdead = true;
     }
-
     this.stopWalk = function()
     {
         this.canWalking = false;
     }
-
     this.walkEnd = function(){    }
-
     var walkSpeed = 8;
     this.walkAlittle = function(){
         if(this.playerDirection === this.constants.DirectionEnum.DOWN)
@@ -74,7 +64,6 @@ var Npc1 = function(map) {
         else if(this.playerDirection === this.constants.DirectionEnum.UP)
             this.spritePosition = {x:this.spritePosition.x, y:this.spritePosition.y - walkSpeed};
     }
-
     this.update = function(){
         if(this.isdead ){ return; }
         this.checkIsMonsterOutCanvus();
@@ -95,8 +84,6 @@ var Npc1 = function(map) {
             }
         }
     }
-
-
     this.draw = function(ctx){
         if(this.isdead){ return; }
         if(!this.is_start){ return; }
@@ -112,13 +99,11 @@ var Npc1 = function(map) {
         else
             this.is_start = false;
     }
-
     this.randomWalk = function()
     {
         var randNum = Framework.Game._currentLevel.cycleCount % 553;
         walkDir++;
         var walkStep = {x:0,y:0};
-
         if(randNum % 133 == 0)
             walkStep.y = 1
         else if(randNum % 157 == 0)
@@ -127,12 +112,10 @@ var Npc1 = function(map) {
             walkDir = 0;
             return;
         }
-        
         if(this.map.checkMonsterIsWalkAble( {x: this.mapPosition.x + walkStep.x, y:this.mapPosition.y + walkStep.y} ))
             this.walk(walkStep);
     }
 };
-
 Object.defineProperty(Npc1.prototype, 'position', {
     get: function() {
         return this.mapPosition;
@@ -142,7 +125,6 @@ Object.defineProperty(Npc1.prototype, 'position', {
         this.spritePosition = {x:this.mapPosition.x * 64, y: this.mapPosition.y * 64};
     }
 }); 
-
 Object.defineProperty(Npc1.prototype, 'isDead', {
     get: function() {
         return this.isdead;

@@ -7,7 +7,6 @@ var Item_blank = function() {
     this.draw = function(ctx){
     }
 };
-
 Object.defineProperty(Item_blank.prototype, 'position', {
     set: function(newValue) {
         this.mapPosition = newValue;

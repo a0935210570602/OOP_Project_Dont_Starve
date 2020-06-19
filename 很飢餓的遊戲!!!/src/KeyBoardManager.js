@@ -11,7 +11,6 @@ var Framework = (function (Framework) {
 			userKeydownEvent = function() {},
 			userKeyupEvent = function() {},
 			_subject;
-
 		var keydownEvent = function(e) {
 			e.preventDefault();
 			var keyCode = _keyCodeToChar[e.which || e.keyCode], i;
@@ -22,11 +21,7 @@ var Framework = (function (Framework) {
 				_keydownList[keyCode] = { key:keyCode, firstTimeStamp: e.timeStamp, ctrlKey: e.ctrlKey,  shiftKey: e.shiftKey, altKey: e.altKey, lastTimeDiff: 0 };
 				userKeydownEvent.call(_subject, _keydownList[keyCode], _keydownList, e);
 			}
-
-			
-			
 		};
-
 		var keyupEvent = function(e) {
 			e.preventDefault();
 			var keyCode = _keyCodeToChar[e.which || e.keyCode], temp = {};
@@ -37,21 +32,15 @@ var Framework = (function (Framework) {
 				if(!Framework.Util.isUndefined(_keydownList[temp][keyCode])) {
 					_keydownList[temp][keyCode] = false;
 				}
-				
 			}
-
 			userKeyupEvent.call(_subject, _keypressHistory[_keypressHistory.length - 1], _keypressHistory);
-			
 		};
-
 		var setKeydownEvent = function(userFunction) {
 			userKeydownEvent = userFunction;
 		};
-
 		var setKeyupEvent = function(userFunction) {
 			userKeyupEvent = userFunction;
 		};
-
 		/**
 		* 設定需要多久清除一次曾被按壓過key的紀錄, 預設值為一秒
 		* 該設定與 {{#crossLink "Level/keyup:event"}}{{/crossLink}} 有關		
@@ -62,21 +51,17 @@ var Framework = (function (Framework) {
 		var setClearHistoryTime = function(userClearHistoryTime) {
 			_clearHistoryTime = userClearHistoryTime;
 		};
-
 		var asciiToChar = function(ascii, str) {
 			return String.fromCharCode(ascii) ===  str.toUpperCase();
 		};
-
 		var clearHistory = function() {
 			_keypressHistory.length = 0; //empty array
 			clearTimeout(_timeountID);
 			_timeountID = setTimeout(clearHistory, _clearHistoryTime);
 		};
-
 		var setSubject = function(subject) {
 			_subject = subject;
 		};
-
 		/**
 		 * 管理KeyBoard所有的事件, 一般來說, 不會在此處處理相關邏輯
 		 * 而會在Level進行設定, 請參照
@@ -90,8 +75,6 @@ var Framework = (function (Framework) {
 			window.addEventListener('keyup', keyupEvent, false);
 			clearHistory();
 		};
-
-
 		KeyBoardManagerClass.prototype = {
 			setSubject: setSubject,
 			setClearHistoryTime: setClearHistoryTime,
@@ -101,7 +84,6 @@ var Framework = (function (Framework) {
 			mappingTable: _keyCodeToChar,
 			keypressHistory: _keypressHistory,	
 		}
-
 		KeyBoardManagerInstance = new KeyBoardManagerClass();
 		return KeyBoardManagerInstance;
 	})();

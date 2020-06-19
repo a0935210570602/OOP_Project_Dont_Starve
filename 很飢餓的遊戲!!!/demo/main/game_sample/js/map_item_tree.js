@@ -5,7 +5,6 @@ var Map_item_tree = function(map) {
     this.map_item_tree_growed.scale = 2;
     this.map_item_tree_cutted = new Framework.Sprite(define.materialPath + 'map_item_tree_cutted.png'); 
     this.map_item_tree_cutted.scale = 2;
-
     this.mapPosition = {x:0, y:0};
     this.status = true;
     this.isRegenerate = true;
@@ -20,7 +19,6 @@ var Map_item_tree = function(map) {
     this.dropWood = false;
     this.regeneration_time = 5000;
     this.growing = false;
-
     this.grow = function(){
         setTimeout(()=>{
             if(this.treeStatus != 0){
@@ -30,7 +28,6 @@ var Map_item_tree = function(map) {
             }
         }, this.regeneration_time);
     }
-
     this.tryGrow = function(){
         var interval = setInterval(()=>{
             if(!this.growing){
@@ -40,7 +37,6 @@ var Map_item_tree = function(map) {
             }
         },1000);
     }
-
     this.update = function(){
         this.false_count += 1;
         if(this.false_count == 2){
@@ -54,7 +50,6 @@ var Map_item_tree = function(map) {
             this.dropWood = false;
         }
     }
-
     this.draw = function(ctx){
         switch(this.treeStatus){
             case 0:
@@ -71,7 +66,6 @@ var Map_item_tree = function(map) {
         }
     }
 };
-
 Object.defineProperty(Map_item_tree.prototype, 'position', {
     get: function() {
         return this.mapPosition;
@@ -81,6 +75,5 @@ Object.defineProperty(Map_item_tree.prototype, 'position', {
         this.map_item_tree.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.map_item_tree_growed.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
         this.map_item_tree_cutted.position = {x: this.mapPosition.x * 64, y: this.mapPosition.y * 64};
-        
     }
 }); 

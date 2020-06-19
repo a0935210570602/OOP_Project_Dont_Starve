@@ -15,11 +15,9 @@ var Item_firebundle = function() {
     this.inEquipmentbar = false;
     this.item_can_be_picked = true;
     this.amount = 1;
-    
     this.attack_point = 1;
     this.magic_attack_point = 0;
     this.arror_attack_point = 0;
-
     this.reduceDurability = function(){
         if(this.inEquipmentbar){
             this.durability -= 1;
@@ -28,16 +26,13 @@ var Item_firebundle = function() {
             },1000);
         }
     }
-
     this.draw = function(ctx){
         if(this.inEquipmentbar)
             this.item_firebundle.draw(ctx);
         else
             this.item_firebundle_no.draw(ctx);
     }
-
 };
-
 Object.defineProperty(Item_firebundle.prototype, 'position', {
     get: function() {
         return this.mapPosition;

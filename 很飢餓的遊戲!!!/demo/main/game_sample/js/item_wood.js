@@ -13,12 +13,10 @@ var Item_wood = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_wood.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_wood.prototype, 'position', {
     get: function() {
         return this.mapPosition;

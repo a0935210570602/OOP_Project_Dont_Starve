@@ -10,25 +10,20 @@ var Item_space_wand = function() {
     //可疊加物件有amount 不可疊加有durability
     this.durability = 100;
     this.place = "hand";
-
     this.attack_point = 0;
     this.magic_attack_point = 60;
     this.arror_attack_point = 0;
     this.item_can_be_picked = true;
-
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_space_wand.draw(ctx);
     }
-
     this.reduceDurability = function(){
-        this.durability -= 20;
+        this.durability -= 100;
     }
 };
-
 Object.defineProperty(Item_space_wand.prototype, 'position', {
     get: function() {
         return this.mapPosition;

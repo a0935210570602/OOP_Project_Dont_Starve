@@ -10,7 +10,6 @@ var Arror_attack = function(player, monster) {
         this.playerWalkDirection = playerWalkDirection;
         this.playerPositionOnMap = playerPositionOnMap;
     }
-
     this.attack = function(){
         this.attackSuccess = false;
         var arror = new Flying_arror(this.playerWalkDirection, this.playerPositionOnMap, this.monster, this.player.character_descruption_total_point[4]);
@@ -18,7 +17,6 @@ var Arror_attack = function(player, monster) {
         this.arrorHandle.push(arror);
         this.player.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
     }
-
     this.update = function(){
         if(this.arrorHandle.length != 0){
             for(var i = 0;i < this.arrorHandle.length;i++){
@@ -35,7 +33,6 @@ var Arror_attack = function(player, monster) {
             }
         }
     }
-
     this.draw = function(ctx){
         if(this.arrorHandle.length != 0){
             for(var i = 0;i < this.arrorHandle.length;i++){

@@ -5,14 +5,12 @@ var Constants = function() {
         RIGHT : 2,
         UP : 3
     };
-
     this.Direction = {
         DOWN : {x:0, y:1},
         LEFT : {x:-1,y:0},
         RIGHT : {x:1,y:0},
         UP : {x:0,y:-1}
     };
-
     this.ItemEnum = {
         NONE : 0,
         INCREASE_BOMB : -1,
@@ -21,7 +19,6 @@ var Constants = function() {
         Terrain_PLAIN : -4,
         Terrain_WATER : -5
     };
-    
     this.Items = {
         NONE : 0,
         ITEM_1 : 1,

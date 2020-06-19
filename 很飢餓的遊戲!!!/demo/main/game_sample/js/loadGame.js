@@ -13,7 +13,6 @@ var loadGameEnd;
             jsConf.splice(0, 1);
             if(jsConf.length > 0) {
                 importJS(jsConf, lookFor);
-
 				if(typeof blanket != "undefined"){
 					blanket.utils.cache[jsConf[0].src] = {};
 					blanket.utils.attachScript({url: jsConf[0].src}, function (content) {
@@ -30,13 +29,11 @@ var loadGameEnd;
             }
         });
     }
-
     var wait_for_script_load = function(jsConf, callback) {
         var interval = setInterval(function() {
             if (typeof jsConf[0].lookFor === 'undefined') {
                 jsConf[0].lookFor = '';
             }
-
             if (jsConf[0].lookFor === '') {
                 clearInterval(interval);
                 callback();
@@ -46,13 +43,11 @@ var loadGameEnd;
                 }
             }, 50);
     }
-
     //陣列和載入JS檔的順序相同, lookFor為在要載入的檔案中, 
     //有用到的全域變數, importJS這個function, 會在找到lookFor的變數後
     //才會繼續loading下一個檔案, 如果沒有需要lookFor, 則以空字串代表
     var listScript = 
     [
-
         { src: 'game_sample/js/define.js', lookFor: 'define' },
         { src: 'game_sample/js/myMenu.js', lookFor: 'MyMenu' },
         { src: 'game_sample/js/myMenu_tutorial.js', lookFor: 'MyMenu_tutorial' },
@@ -62,9 +57,7 @@ var loadGameEnd;
         { src: 'game_sample/js/bombMan.js', lookFor: 'BombMan' },
         { src: 'game_sample/js/food_base.js', lookFor: 'Food_base' },
         { src: 'game_sample/js/item_lamp.js', lookFor: 'Item_lamp' },
-
         { src: 'game_sample/js/map_item_tree.js', lookFor: 'Map_item_tree' },
-
         { src: 'game_sample/js/item_grass.js', lookFor: 'Item_grass' },
         { src: 'game_sample/js/item_grass_picked.js', lookFor: 'Item_grass_picked' },
         { src: 'game_sample/js/item_rope.js', lookFor: 'Item_rope' },
@@ -96,7 +89,6 @@ var loadGameEnd;
         { src: 'game_sample/js/item_honey.js', lookFor: 'Item_honey' },
         { src: 'game_sample/js/item_meat.js', lookFor: 'Item_meat' },
         { src: 'game_sample/js/item_monster_meat.js', lookFor: 'Item_monster_meat' },
-
         { src: 'game_sample/js/item_flower_growed_dig.js', lookFor: 'Item_flower_growed_dig' },
         { src: 'game_sample/js/item_sapling.js', lookFor: 'Item_sapling' },
         { src: 'game_sample/js/item_grass_growed_dig.js', lookFor: 'Item_grass_growed_dig' },
@@ -104,7 +96,6 @@ var loadGameEnd;
         { src: 'game_sample/js/item_sapling_growed_dig.js', lookFor: 'Item_sapling_growed_dig' },
         { src: 'game_sample/js/item_sapling_dig.js', lookFor: 'Item_sapling_dig' },
         { src: 'game_sample/js/drama0.js', lookFor: 'Drama0' },
-
         { src: 'game_sample/js/item_blank.js', lookFor: 'Item_blank' },
         { src: 'game_sample/js/item_tree_dig.js', lookFor: 'Item_tree_dig' },
         { src: 'game_sample/js/item_bush_dig.js', lookFor: 'Item_bush_dig' },
@@ -144,7 +135,6 @@ var loadGameEnd;
         { src: 'game_sample/js/monster_bee.js', lookFor: 'Monster_bee' },
         { src: 'game_sample/js/monster_cute_little_eye.js', lookFor: 'Monster_cute_little_eye' },
         { src: 'game_sample/js/monster_boss.js', lookFor: 'Monster_boss' },
-
         { src: 'game_sample/js/map_selector.js', lookFor: 'Map_selector' },
         { src: 'game_sample/js/local_map_0.js', lookFor: 'Local_map_0' },
         { src: 'game_sample/js/fishing.js', lookFor: 'Fishing' },
@@ -154,17 +144,12 @@ var loadGameEnd;
         { src: 'game_sample/js/npc2.js', lookFor: 'Npc2' },
         { src: 'game_sample/js/npc_event.js', lookFor: 'Npc_event' },
         { src: 'game_sample/js/building_remance.js', lookFor: 'Building_remance' },
-        
         { src: 'game_sample/js/creation_blood_status.js', lookFor: 'Creation_blood_status' },
         { src: 'game_sample/js/game_object_detail.js', lookFor: 'Game_object_detail' },
         { src: 'game_sample/js/level_up_animation.js', lookFor: 'Level_up_animation' },
         { src: 'game_sample/js/world_map.js', lookFor: 'World_map' },
-
         { src: 'game_sample/js/gameOver.js', lookFor: 'GameOver' },
         { src: 'game_sample/js/mainGame.js'}
     ]
     importJS(listScript);
 })();
-
-
-    

@@ -14,7 +14,6 @@ var Framework = (function (Framework) {
 		_debugInfo.style.right = '10px';
 		_debugInfo.style.zIndex = '99999';
 		_debugInfo.style.overflowY = 'scroll';
-
 		var _prepareLog = function (state, str) {
 			var newLog = document.createElement('p');
 			newLog.style.margin = '0';
@@ -26,44 +25,34 @@ var Framework = (function (Framework) {
 			_debugInfo.scrollTop = _debugInfo.scrollHeight;
 			return newLog;
 		};
-
 		that.Log = {};
-
 		that.Log.info = function (str) {
 			_prepareLog('Info', str).style.backgroundColor = '#80ffff';
 		};
-
 		that.Log.error = function (str) {
 			_prepareLog('Error', str).style.backgroundColor = '#ff8080';
 		};
-
 		that.Log.warning = function (str) {
 			_prepareLog('Warning', str).style.backgroundColor = '#ffff80';
 		};
-
 		that.Log.console = function (str) {
 			if (_showDebugInfo) {
 				console.Log(str);
 			}
 		};
-
 		/*that.showDebugInfo = function (isShowDebug) {
 			_showDebugInfo = isShowDebug;
 		};*/
-
 		that.show = function (dom) {				
-			
 			_debugInfo.style.visibility = 'visible';
 			_debugInfo.style.width = '500px';
 			_debugInfo.style.height = '200px';
 			_debugInfo.style.border = '1px solid #000';
-			
 			if(!_containerAppended) {
 				var container = dom || document.body;
 				container.appendChild(_debugInfo)
 			}
 		};
-
 		that.hide = function (dom) {
 			var zeroPxStr = '0px';
 			_debugInfo.style.visibility = 'hidden';
@@ -71,10 +60,7 @@ var Framework = (function (Framework) {
 			_debugInfo.style.width = zeroPxStr;
 			_debugInfo.style.height = zeroPxStr;
 		};
-
-
 		return that;
 	})();
-
 	return Framework;
 })(Framework || {});

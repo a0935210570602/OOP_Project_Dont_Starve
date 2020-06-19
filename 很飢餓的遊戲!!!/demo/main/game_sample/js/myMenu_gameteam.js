@@ -4,7 +4,6 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         this.loading = new Framework.Sprite(define.imagePath + 'loading.jpg');
         this.loading.position = {x: Framework.Game.getCanvasWidth() / 2 , y: Framework.Game.getCanvasHeight() / 2};
     },
-
     //在initialize時會觸發的事件
     loadingProgress: function(ctx, requestInfo) {
         this.loading.draw(ctx);
@@ -13,7 +12,6 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         ctx.fillStyle = 'white';
         ctx.fillText(Math.round(requestInfo.percent) + '%' , ctx.canvas.width / 2 , ctx.canvas.height / 2 + 300);
     },
-
     load: function() {
         this.go_back_menu = new Framework.Sprite(define.welcomimgPath + 'go_back_menu.png');
         this.audio = new Framework.Audio({
@@ -27,7 +25,6 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         });
         this.audio.play({name: 'song2', loop: true});
     },
-
     initialize: function() {
         this.go_back_menu.position = {
             x: Framework.Game.getCanvasWidth() / 2,
@@ -40,11 +37,9 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
             y: 0
         };
     },
-
     update:function(){     
         this.rootScene.update(); 
     },
-
     draw: function(parentCtx) { 
         parentCtx.textAlign = 'center';
         parentCtx.fillStyle = 'black';
@@ -55,9 +50,7 @@ var MyMenu_gameteam = Framework.exClass(Framework.GameMainMenu , {
         parentCtx.fillText("PS.偉凱好帥", 750, 800);
         this.rootScene.draw(parentCtx); 
         this.go_back_menu.draw(parentCtx);
-        
     },
-
     click:function(e){      
         this.audio.play({name: 'keyup', loop: false});
         if(e.x<915 && e.x>682 && e.y<573 && e.y>285){

@@ -4,7 +4,6 @@ var EquipmentBar = function(backpackList) {
     this.backpack.position = {x: 23*64, y: 8*64};    
     this.equipmentList = [null,null,null];
     this.selectedIndex = -1;
-
     this.draw = function(ctx){
         this.backpack.position = {x: 23*64, y: 8*64};    
         for(var i = 0;i < 3;i++){
@@ -22,7 +21,6 @@ var EquipmentBar = function(backpackList) {
             }
         }
     }
-
     this.getSelectedEquipment = function(){
         if(this.selectedIndex == -1 || this.equipmentList[this.selectedIndex] == null)
             return null;
@@ -32,21 +30,17 @@ var EquipmentBar = function(backpackList) {
             return this.equipmentList[this.selectedIndex];
         }
     }
-
     this.dropSelectedEquipment = function(){
         if(this.selectedIndex != -1)
             this.equipmentList[this.selectedIndex] = null;
     }
-
     //0:head 1:body 2:hand
     this.getEquipment = function(index){
         return this.equipmentList[index];
     }
-
     this.setEquipment = function(obj, index){
         this.equipmentList[index] = obj;
     }
-
     this.update = function(){
         for(var i = 0;i < 3;i++){
             if(this.equipmentList[i] != null && this.equipmentList[i].durability <= 0){

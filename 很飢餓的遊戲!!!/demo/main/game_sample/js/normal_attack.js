@@ -3,7 +3,6 @@ var Normal_attack = function(player, monster, playerWalkDirection, playerPositio
     this.monster = monster;
     this.attackSuccess = false;
     this.visitor = new ReduceDurabilityVisitor();
-
     this.attack = function(){
         this.attackSuccess = false;
         for(var i = 0;i < this.monster.length;i++){
@@ -16,9 +15,7 @@ var Normal_attack = function(player, monster, playerWalkDirection, playerPositio
                 }
             }
         }
-        
         if(this.attackSuccess && this.player.equipmentBar.equipmentList[2] != null)
             this.player.equipmentBar.equipmentList[2].reduceDurability(this.visitor);
     }
 };
-

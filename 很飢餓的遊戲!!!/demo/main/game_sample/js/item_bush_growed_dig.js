@@ -10,12 +10,10 @@ var Item_bush_growed_dig = function() {
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = true;
-
     this.draw = function(ctx){
         this.item_bush_growed_dig.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_bush_growed_dig.prototype, 'position', {
     get: function() {
         return this.mapPosition;

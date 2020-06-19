@@ -10,16 +10,13 @@ var Item_bee_sting = function() {
     //可疊加物件有amount 不可疊加有durability
     this.amount = 1;
     this.item_can_be_picked = true;
-
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_bee_sting.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_bee_sting.prototype, 'position', {
     get: function() {
         return this.mapPosition;

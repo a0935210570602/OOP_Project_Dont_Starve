@@ -1,6 +1,5 @@
 // By Raccoon
 // include namespace
-
 var Framework = (function (Framework) {
     'use strict'
     Framework.Level = Framework.exClass({
@@ -34,31 +33,24 @@ var Framework = (function (Framework) {
             this.timelist = [];
             this.updatetimelist = [];
             this.cycleCount = 0;
-
             this.config = new Framework.Config();  // 2017.02.20, from V3.1.1
-
         },
-
         _traversalAllElement: function(func) {
             this._allGameElement.forEach(func);
         },
-
         _initializeProgressResource: function() {            
             this.initializeProgressResource();
         },
-
         _load: function() {
             this.load();
             this._traversalAllElement(function(ele) {
                 ele.load();
             });            
         },
-
         _loadingProgress: function(ctx, requestInfo) {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);   
             this.loadingProgress(ctx, requestInfo);
         },
-
         _initialize: function() { 
             this.cycleCount = 0;          
             this.initialize();
@@ -67,19 +59,15 @@ var Framework = (function (Framework) {
             }); 
             //this.rootScene.initTexture();
         },
-
         _update: function() {
             this.rootScene.clearDirtyFlag();
             this._traversalAllElement(function(ele) {
                 ele.clearDirtyFlag();
             }); 
-
             var preDraw = Date.now();
-
             this.rootScene.update();
             this.cycleCount++;
             this.update();
-
             var drawTime = Date.now() - preDraw;
             this.updatetimelist.push(drawTime);
             if(this.updatetimelist.length >= 30)
@@ -88,23 +76,16 @@ var Framework = (function (Framework) {
                 this.updatetimelist = [];
                 //console.log("update time average " + average);
             }
-
-            
         },
-
         _draw: function(ctx) { 
             this.rootScene.countAbsoluteProperty();
             /*this._traversalAllElement(function(ele) {
                 ele.countAbsoluteProperty();
             });*/
-			
             if(this.canvasChanged) {  
                 var rect = this._getChangedRect(ctx.canvas.width, ctx.canvas.height);
-       
-			
                 ctx.save();             
                 ctx.beginPath();
-
                 if(!this.config.isOptimize || this._firstDraw) {  // 2017.02.20, from V3.1.1
                     rect.x = 0;
                     rect.y = 0;
@@ -112,17 +93,12 @@ var Framework = (function (Framework) {
                     rect.height = ctx.canvas.height;
                     this._firstDraw = false;
                 }
-
                 ctx.rect(rect.x, rect.y, rect.width, rect.height);               
                 ctx.clip(); 
-
                 ctx.clearRect(rect.x, rect.y, rect.width, rect.height); 
-
                 var preDraw = Date.now();  
-
                 this.rootScene.draw(ctx);
                 this.draw(ctx);
-
                 var drawTime = Date.now() - preDraw;
                 this.timelist.push(drawTime);
                 if(this.timelist.length >= 30)
@@ -131,12 +107,9 @@ var Framework = (function (Framework) {
                     this.timelist = [];
                     //console.log("draw time average " + average);
                 }
-
                 ctx.restore();                
             } 
-
         },
-
         countAverage: function(list){
                 var sum = 0;
                 for(var i=0;i<list.length;i++){
@@ -144,7 +117,6 @@ var Framework = (function (Framework) {
                 }
                 return sum / list.length;
             },
-
         _teardown: function() {
             for(var i in this._allGameElement){
                 var deleteObj = this._allGameElement[i]
@@ -157,10 +129,8 @@ var Framework = (function (Framework) {
             this._allGameElement.length = 0;
             this.teardown();
         },
-
         _getChangedRect: function(maxWidth, maxHeight) {
             var rect = { x: maxWidth, y: maxHeight, x2: 0, y2: 0 };       
-            
             this._traversalAllElement(function(ele) {
                 if(ele.isObjectChanged) {
                     var nowDiagonal = Math.ceil(Math.sqrt(ele.width * ele.width + ele.height * ele.height)),
@@ -177,37 +147,29 @@ var Framework = (function (Framework) {
                         y = (nowY < preY)? nowY:preY,
                         x2 = (nowX2 > preX2)? nowX2:preX2,
                         y2 = (nowY2 > preY2)? nowY2:preY2;
-
                     if(x < rect.x) {
                         rect.x = x;
                     }
-
                     if(y < rect.y) {
                         rect.y = y;                     
                     }
-
                     if(x2 > rect.x2) {
                         rect.x2 = x2;                       
                     }
-
                     if(y2 > rect.y2) {
                         rect.y2 = y2;                       
                     }
                 }
             });
-
             rect.width = rect.x2 - rect.x;
             rect.height= rect.y2 - rect.y;
-
             return rect;
         },
-
         _showAllElement: function() {
             this._traversalAllElement(function(ele) {
                 console.log(ele, "ele.isMove", ele._isMove, "ele.isRotate", ele._isRotate, "ele.isScale", ele._isScale, "ele.changeFrame", ele._changeFrame, "ele.isObjectChanged", ele.isObjectChanged);
             });
         },
-        
         /**
         * 初始化loadingProgress事件中會用到的圖片素材, 
         * 建議降低此處要載入的圖片數量, 主要Game要用的圖片可以等到initialize再載入
@@ -215,10 +177,8 @@ var Framework = (function (Framework) {
         */
         initializeProgressResource: function () {
         },
-
         load: function() {            
         },
-
         /**
         * 在載入圖片資源時, 要被繪製的畫面, 當不設定時, 會有預設的顯示畫面
         * 若不想要有該畫面, 可以override一個空的function
@@ -232,14 +192,12 @@ var Framework = (function (Framework) {
             context.font = '90px Arial';
             context.fillText(Math.floor(Framework.ResourceManager.getFinishedRequestPercent()) + '%' , context.canvas.width / 2 - 50 , context.canvas.height / 2);
         },
-
         /**
         * 初始化整個Level, 並載入所有圖片資源
         * @method initialize   
         */
         initialize: function () {
         },
-
         /**
         * 用來撰寫遊戲邏輯, 不會去處理繪製的工作
         * 第一行必須撰寫 this.rootScene.update();
@@ -247,7 +205,6 @@ var Framework = (function (Framework) {
         */
         update: function () {
         },
-
         /**
         * 用來繪製需要被繪製的GameObject
         * 第一行必須撰寫 this.rootScene.draw(context);
@@ -256,7 +213,6 @@ var Framework = (function (Framework) {
         */
         draw: function (context) {
         },
-
         /**
         * 處理點擊的事件, 當mousedown + mouseup 都成立時才會被觸發
         * @event click
@@ -265,7 +221,6 @@ var Framework = (function (Framework) {
         */
         click: function (e) {
         },
-
         /**
         * 處理滑鼠點下的事件
         * @event mousedown
@@ -274,7 +229,6 @@ var Framework = (function (Framework) {
         */
         mousedown: function (e) {
         },
-
         /**
         * 處理滑鼠放開的事件
         * @event mouseup
@@ -283,7 +237,6 @@ var Framework = (function (Framework) {
         */
         mouseup: function (e) {
         },
-
         /**
         * 處理滑鼠移動的事件(不論是否有點下, 都會觸發該事件)
         * @event mousemove
@@ -292,7 +245,6 @@ var Framework = (function (Framework) {
         */
         mousemove: function (e) {
         },
-
         /**
         * 處理觸控到螢幕時的事件, 若是在一般電腦上跑, 是不會觸發此事件的
         * (除非使用debugger模擬, https://developers.google.com/chrome-developer-tools/docs/mobile-emulation?hl=zh-TW)
@@ -305,7 +257,6 @@ var Framework = (function (Framework) {
         },
         touchend: function (e) {
         },
-
         /**
         * 處理觸控到螢幕並移動時的事件, 若是在一般電腦上跑, 是不會觸發此事件的
         * (除非使用debugger模擬, https://developers.google.com/chrome-developer-tools/docs/mobile-emulation?hl=zh-TW)
@@ -316,7 +267,6 @@ var Framework = (function (Framework) {
         */
         touchmove: function (e) {
         },
-
         /**
         * 處理鍵盤被壓下按鈕的事件
         * @event keydown
@@ -363,7 +313,6 @@ var Framework = (function (Framework) {
         */
         keydown: function (e) {
         },
-
         /**
         * 處理鍵盤被壓下按鈕的事件, 除了W3C定義的參數外, 
         * Framework尚支援進階的功能history
@@ -390,11 +339,9 @@ var Framework = (function (Framework) {
         },
         keypress: function (e) {
         },
-
         resetCycleCount: function () {
             this._cycleCount = 0;
         },
-
         teardown:function(){},
         autodelete : function(){
             for(var i in this.rootScene.attachArray){
@@ -408,7 +355,6 @@ var Framework = (function (Framework) {
             this._teardown();
         }
     });
-
     Object.defineProperty(Framework.Level.prototype, 'canvasChanged', {
         get: function() {
             var isCanvasChanged = false;
@@ -419,8 +365,6 @@ var Framework = (function (Framework) {
             });
             return isCanvasChanged;
         } 
-
     });
-
     return Framework;
 })(Framework || {});

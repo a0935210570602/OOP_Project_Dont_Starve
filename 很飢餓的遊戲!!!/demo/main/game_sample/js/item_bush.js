@@ -13,25 +13,20 @@ var Item_bush = function() {
     this.amount = 1;
     this.item_can_be_picked = false;
     this.regeneration_time = 3000;
-
     this.reset = function(){
         setTimeout(()=>{  this.status = true }, this.regeneration_time);
     }
-
     this.update = function(){
         this.status = false;
         this.reset();
     }
-
     this.draw = function(ctx){
         if(this.status)
             this.item_bush.draw(ctx);
         else
             this.item_bush_picked.draw(ctx);
     }
-
 };
-
 Object.defineProperty(Item_bush.prototype, 'position', {
     get: function() {
         return this.mapPosition;

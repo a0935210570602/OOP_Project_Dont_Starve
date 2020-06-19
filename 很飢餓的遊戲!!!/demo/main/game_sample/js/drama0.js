@@ -22,11 +22,9 @@ var Drama0 = Framework.Class(Framework.Level , {
         this.npc_event.trigger("主角", "drama0");
         this.npc_event.talking();
     },
-
     draw:function(parentCtx){
         this.npc_event.draw(parentCtx);
     },
-
     keydown:function(e, list){
         if(e.key === 'F11') {
             if(!this.isFullScreen) {
@@ -42,7 +40,6 @@ var Drama0 = Framework.Class(Framework.Level , {
                 this.audio.stopAll();
                 Framework.Game.goToLevel('level1');  
             }
-            
             this.draw(Framework.Game._context);
         }else if(e.key === 'Z'){
             this.npc_event.amount -= 2;
@@ -53,7 +50,6 @@ var Drama0 = Framework.Class(Framework.Level , {
             this.draw(Framework.Game._context);
         }
     },
-
     click: function (e) {  
     },
 });

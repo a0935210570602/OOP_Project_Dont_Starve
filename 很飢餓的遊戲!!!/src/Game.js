@@ -1,6 +1,5 @@
 // By Raccoon
 // include namespace
-
 var Framework = (function (Framework) {
 	'use strict'
 	/**
@@ -16,16 +15,13 @@ var Framework = (function (Framework) {
 		that.canvasWidth = that._config.canvasWidth;
 		that.canvasHeight = that._config.canvasHeight;
 		that.isBackwardCompatiable = true;
-
 		that._widthRatio = 1;
 		that._heightRatio = 1;
-
 		that._isRecording = false;
 		that._isRecordMode = _isRecordMode;  // 來自入口的 .html 檔所呼叫的 load.js 或 recordLoad.js 
 		that._isTestMode = _isTestMode;      // 同上
 		that._isTestReady = false;
 		that._isReplay = false;
-		
 		that.isContinue = false;
 		that._isInit = false;
 		// gameloop is running ?
@@ -45,16 +41,12 @@ var Framework = (function (Framework) {
 		that._context = null;
 		that._currentTestScript = undefined;
 		that._currentReplay = undefined;
-
 		that._ideaWidth = 16;
 		that._ideaHeight = 9;
 		that.timelist = [];
 		that._record = new Framework.Record();
-
-
 		that._tempUpdate = function() {};
 		that._tempDraw = function(context) {};
-		
 		that.recordStart = function() {
 		    if (document.getElementById("start_btn").getAttribute("enable") == "true") {
 			    if (that._isRecordMode) {
@@ -122,7 +114,6 @@ var Framework = (function (Framework) {
 		that.recordInput = function(){
 		    if (document.getElementById("type_btn").getAttribute("enable") == "true") {
   			    var command = prompt("Please enter comment", "");
-    
 		        if (command != null) {
 				    that._record.inputCommand("//"+command);
 		        }
@@ -141,7 +132,6 @@ var Framework = (function (Framework) {
 			    Framework.Replay.resetWaitingCounter();
 			    var replayScript = document.getElementById("record_div").innerText;
 			    document.getElementById("record_div").innerText = "";
-			
 			    that.getReplayScript(replayScript);
 			    that._record.start();
 			    that._isRecording = true;
@@ -206,7 +196,6 @@ var Framework = (function (Framework) {
 			}
 			listMember("Framework.Game._currentLevel", "&nbsp", "variable_list");
 		};
-		
 		that.btnMouseOver = function(button){
 			if(button.getAttribute('enable') === "true"){
 				if(button.id == "start_btn")
@@ -244,27 +233,22 @@ var Framework = (function (Framework) {
 				document.getElementById("start_btn").src = "../../src/image/play.png";
 			else
 				document.getElementById("start_btn").src = "../../src/image/play_disable.png";
-			
 			if(document.getElementById("pause_btn").getAttribute("enable") === "true")
 				document.getElementById("pause_btn").src = "../../src/image/pause.png";
 			else
 				document.getElementById("pause_btn").src = "../../src/image/pause_disable.png";
-			
 			if(document.getElementById("stop_btn").getAttribute("enable") === "true")
 				document.getElementById("stop_btn").src = "../../src/image/stop.png";
 			else
 				document.getElementById("stop_btn").src = "../../src/image/stop_disable.png";
-			
 			if(document.getElementById("type_btn").getAttribute("enable") === "true")
 				document.getElementById("type_btn").src = "../../src/image/addComment.png";
 			else
 				document.getElementById("type_btn").src = "../../src/image/addComment_disable.png";
-			
 			if(document.getElementById("replay_btn").getAttribute("enable") === "true")
 				document.getElementById("replay_btn").src = "../../src/image/replay.png";
 			else
 				document.getElementById("replay_btn").src = "../../src/image/replay_disable.png";
-			
 			if(document.getElementById("variable_btn").getAttribute("enable") === "true")
 				document.getElementById("variable_btn").src = "../../src/image/variable.png";
 			else
@@ -310,7 +294,6 @@ var Framework = (function (Framework) {
 		that.touchmove = function (e) {
             that._currentLevel.touchmove(e);
 		};
-
 		//keyboard Event
 		that.keydown = function (e) {
             that._currentLevel.keydown(e);
@@ -334,7 +317,6 @@ var Framework = (function (Framework) {
             	that._record.keypress(e);
             }
 		};
-
 		that._mainContainer = document.createElement('div');
 		if(that._isRecordMode){
 			that._mainContainer.style.position = "relative";
@@ -354,8 +336,6 @@ var Framework = (function (Framework) {
 			that._mainContainer.style.height = '100%';
 			that._mainContainer.style.display = 'table';
 		}
-
-
 		that._mainContainer.style.backgroundColor = '#000';
 		that._canvasContainer = document.createElement('div');		
 		that._canvasContainer.style.display = 'table-cell';
@@ -369,7 +349,6 @@ var Framework = (function (Framework) {
 		that._canvasContainer.appendChild(that._canvas);
 		that._mainContainer.appendChild(that._canvasContainer);
 		that._context = that._canvas.getContext('2d');
-
 		that.initializeProgressResource = function() {
             that._currentLevel._initializeProgressResource();
 		};
@@ -407,7 +386,6 @@ var Framework = (function (Framework) {
 		that.draw = function () {					
             that._currentLevel._draw();
 		};
-
         that._teardown = function(){
           	//if(this._currentLevel.autoDelete){
                 that._currentLevel.autodelete();
@@ -415,24 +393,19 @@ var Framework = (function (Framework) {
             //    that._allGameElement.length = 0;
            // }
         };
-
         that.stop = function()
         {
         	that.pause();
         	that._teardown();
         };
-
         that.getCanvasWidth = function() {
         	return that._canvas.width;
         };
-
         that.getCanvasHeight = function() {
         	return that._canvas.height;
         };
-
         that._findLevel = function(name){
             var result = Framework.Util.findValueByKey(that._levels,name);
-
         	if(result === null){
         		return null;
         	}
@@ -440,10 +413,8 @@ var Framework = (function (Framework) {
 				return result.level;
         	}
         };
-
         that._findScript = function(name){
         	var result = Framework.Util.findValueByKey(that._testScripts,name);
-
         	if(result === null){
         		return null;
         	}
@@ -451,7 +422,6 @@ var Framework = (function (Framework) {
 				return result.script;
         	}
         };
-
         that._findLevelNameByLevel = function(level){
 			for(var i= 0,l=that._levels.length;i<l;i++){
 	            if(that._levels[i].level === level ){
@@ -459,7 +429,6 @@ var Framework = (function (Framework) {
 	            }
         	}
         }
-
         /**
 		* 加入一個新的關卡	
 		* @method addNewLevel
@@ -481,14 +450,10 @@ var Framework = (function (Framework) {
                 }
             }
         };
-
         that.addNewTestScript = function(levelName,scriptName,scriptInstance){
-
         	var levelName = levelName;
         	var scriptName = scriptName;
         	var scriptInstance = scriptInstance;
-
-
             	if(Framework.Util.isNull(that._findScript(scriptName))){
                         that._testScripts.push({targetLevel: levelName,name : scriptName , script : scriptInstance});
                     }else{
@@ -496,7 +461,6 @@ var Framework = (function (Framework) {
                         throw new Error('Game: already has same script name');
                     }
         }
-        
         /**
 		* 前往另一個關卡(前後皆可), 若沒有該關卡, 會throw exception	
 		* @method goToLevel
@@ -524,7 +488,6 @@ var Framework = (function (Framework) {
             that.start();
 //            console.log(Framework.Game._currentLevel.cycleCount + ' , ' + that._record.waitCounter + ' , ' + Framework.Replay.getCycleCount());
         };
-
         /**
 		* 前往下一個關卡, 若沒有下一個關卡, 會throw exception	
 		* @method goToNextLevel
@@ -559,7 +522,6 @@ var Framework = (function (Framework) {
             Framework.DebugInfo.Log.error('Game : 無下一關');
             throw new Error('Game : can\'t goto next level.');
         };
-
         /**
 		* 前往前一個關卡, 若沒有前一個關卡, 會throw exception	
 		* @method goToPreviousLevel
@@ -596,8 +558,6 @@ var Framework = (function (Framework) {
             Framework.DebugInfo.Log.error('Game : 無前一關');
             throw new Error('Game : can\'t goto previous level.');
         };
-
-
         /**
 		* 讓遊戲開始執行
 		* @method start
@@ -617,18 +577,15 @@ var Framework = (function (Framework) {
             }
             var self = that;
 //            console.log("start : cycleCount(current_level, Replay) : " + that._currentLevel.cycleCount + ' , ' + Framework.Replay.getCycleCount() );
-
             if (!that._isInit) {
                 that.resizeEvent();
                 document.body.appendChild(that._mainContainer);
                 window.addEventListener("resize", that.resizeEvent, false);
             }
-
 			that._tempDraw = self._currentLevel._draw;
 			that._tempUpdate = self._currentLevel._update;
 			that.initializeProgressResource();
             // 在這裡看看第一次進入game, record, replay 時的 _currentLevel.cycleCount 是否一致, 或者對 _currentLevel 進行reset/initialize
-
 			var runFunction = function() {
 				self._isRun = true;
 				self.pause();
@@ -639,7 +596,6 @@ var Framework = (function (Framework) {
 				Framework.Replay.setGameReady();
 				self.run();
 			};
-
 			var	initFunction = function() {
 				if (Framework.ResourceManager.getRequestCount() !==  Framework.ResourceManager.getResponseCount()) {
 					return;
@@ -654,7 +610,6 @@ var Framework = (function (Framework) {
 					runFunction();
 				}
 			};
-
 			Framework.ResourceManager.setSubjectFunction(function() {			
 				if(!self._isInit) {
 					initFunction();
@@ -664,31 +619,24 @@ var Framework = (function (Framework) {
 					runFunction();
 				}
 			});
-
-			
 			//if(Framework.ResourceManager.getRequestCount() === 0) {
 			initFunction();
 			//}
 			//
-			
 			Framework.TouchManager.setSubject(self._currentLevel);
 			Framework.TouchManager.setTouchstartEvent(self._currentLevel.touchstart);
 			Framework.TouchManager.setTouchendEvent(self._currentLevel.touchend);
 			Framework.TouchManager.setTouchmoveEvent(self._currentLevel.touchmove);			
-
 			Framework.MouseManager.setSubject(self._currentLevel);
 			Framework.MouseManager.setClickEvent(self.click);
 			Framework.MouseManager.setMousedownEvent(self.mousedown);
 			Framework.MouseManager.setMouseUpEvent(self.mouseup);
 			Framework.MouseManager.setMouseMoveEvent(self._currentLevel.mousemove);
 			//Framework.MouseManager.setContextmenuEvent(self._currentLevel.contextmenu);
-
 			Framework.KeyBoardManager.setSubject(self._currentLevel);
 			Framework.KeyBoardManager.setKeyupEvent(self.keyup);
 			Framework.KeyBoardManager.setKeydownEvent(self.keydown);
-			
 		};
-
 		that.run = function() {	
 			var self = that,	
 				nowFunc = function() { return (new Date()).getTime(); },		
@@ -697,11 +645,9 @@ var Framework = (function (Framework) {
 				previousUpdateTime = nowFunc(),
 				previousDrawTime = previousUpdateTime,
 				now = previousDrawTime;
-
 			var nextGameTick = now,
 				nextGameDrawTick = now;
 			that.skipTicks = Math.round(1000 / that.fps);
-
 			var updateFunc = function() {	
 				now = nowFunc();						
 				if (now > nextGameTick) {
@@ -713,7 +659,6 @@ var Framework = (function (Framework) {
 					}							
 					// run Game's update
 					that.update();
-					
 		            if (that._isRecording) {
 		                if ((that._isReplay == false) || (Framework.Replay.getWaitingCounter() > 0))  {  // ok, 但game的cycleCount還是不一致
 		            	   that._record.update();  // 哪裡會多做一次呢? 怎麼知道是 game 啟動時第一次的update嗎? 來跳過去?
@@ -730,7 +675,6 @@ var Framework = (function (Framework) {
 					nextGameTick += that.skipTicks;
 				}						
 			};
-
 			var drawFunc = function() {
 				if (now >= nextGameDrawTick) {					
 					that.draw(that._context);
@@ -741,13 +685,10 @@ var Framework = (function (Framework) {
 					nextGameDrawTick += that.skipTicks;
 				}
 			};
-
 			var gameLoopFunc = function() {
-
                 var preDraw = Date.now();
 				updateFunc();
 				drawFunc();		
-
                 var drawTime = Date.now() - preDraw;
                 if(drawTime > 5)
                 {
@@ -760,11 +701,9 @@ var Framework = (function (Framework) {
                     //console.log("game loop time average " + average);
                 }						
 			}
-
 			that._isRun = true;
 			that.runAnimationFrame(gameLoopFunc);
 		};
-
         that.countAverage = function(list){
                 var sum = 0;
                 for(var i=0;i<list.length;i++){
@@ -772,15 +711,12 @@ var Framework = (function (Framework) {
                 }
                 return sum / list.length;
             };
-
 		that.stopInterval = function() {
 			clearInterval(that._runInstance);
 		};
-
 		that.stopAnimationFrame = function() {
 			cancelAnimationFrame(that._runInstance);
 		};
-		
 		that.runAnimationFrame = function (gameLoopFunc) {
 			/*if(!Framework.Util.isUndefined(that._runInstance)) {
 				that.stopAnimationFrame();
@@ -799,7 +735,6 @@ var Framework = (function (Framework) {
 			_run();
 			that.stopLoop = that.stopAnimationFrame;
 		};	/**/			
-
 		that.runInterval = function (gameLoopFunc) {
 			/*if(!Framework.Util.isUndefined(that._runInstance)) {
 				that.stopInterval();
@@ -810,13 +745,10 @@ var Framework = (function (Framework) {
 			var _run = gameLoopFunc/*function () {
 					gameLoopFunc.call(this);
 				};*/
-
 			that._runInstance = setInterval(gameLoopFunc, drawTicks);
 			that.stopLoop = that.stopInterval;
 		};
-
 		that.stopLoop = that.stopAnimationFrame;
-
 		that.pause = function () {
 			if (that._isRun) {
 				that.stopLoop();
@@ -824,13 +756,11 @@ var Framework = (function (Framework) {
 				that._isRun = false;
 			}
 		};
-
 		that.resume = function() {
 			if(!that._isRun) {
 				that.run();
 			}
 		};
-
 		// propetity
 		that.setUpdateFPS = function (fps) {
 			if (fps > 60) {
@@ -843,11 +773,9 @@ var Framework = (function (Framework) {
 			that.pause();
 			that.run();
 		};
-
 		that.getUpdateFPS = function () {
 			return that.fps;
 		};
-
 		that.setDrawFPS = function (fps) {
 			if (fps > 60) {
 				Framework.DebugInfo.Log.warring('FPS must be smaller than 60.');
@@ -858,11 +786,9 @@ var Framework = (function (Framework) {
 			that.pause();
 			that.run();
 		};
-
 		that.getDrawFPS = function () {
 			return that.fps;
 		};
-
 		that.setCanvas = function (canvas) {
 			if (canvas) {
 				that._canvas = null;
@@ -873,7 +799,6 @@ var Framework = (function (Framework) {
 				that._context = that._canvas.getContext('2d');
 			}
 		};
-
 		that.setContext = function (context) {
 			if (!Framework.Util.isUndefined(context)) {
 				that.context = null;
@@ -883,12 +808,9 @@ var Framework = (function (Framework) {
 				Framework.DebugInfo.Log.error('Game SetContext Error')
 			}
 		};
-
 		that.getContext = function () {
 			return that.context;
 		};
-
-
 		/**
 		* 讓任何一個在網頁上的元件得以全螢幕, 一定要在有使用者可以觸發的事件內撰寫, 例如: 
 		* {{#crossLink "Level/click:event"}}{{/crossLink}},
@@ -925,7 +847,6 @@ var Framework = (function (Framework) {
 				//ele.style.height = '100%'//window.innerHeight;			
 			} 
 		};
-
 		/**
 		* 退出全螢幕	
 		* @method exitFullScreen
@@ -944,7 +865,6 @@ var Framework = (function (Framework) {
 			  document.webkitExitFullscreen();
 			}
 		};
-
 		that.resizeEvent = function() {
 			var base = 0,
 				baseWidth = window.innerWidth / that._ideaWidth,
@@ -961,7 +881,6 @@ var Framework = (function (Framework) {
 			} else {
 				base = baseHeight;
 			}
-
 			scaledWidth = Math.round(base * that._ideaWidth);
 			scaledHeight = Math.round(base * that._ideaHeight);
 			that._widthRatio = scaledWidth / that._canvas.width;
@@ -970,23 +889,17 @@ var Framework = (function (Framework) {
 			//that._canvasContainer.style.height = scaledHeight;
 			that._canvas.style.width = scaledWidth + 'px';    // 2017.02.20, from V3.1.1
 			that._canvas.style.height = scaledHeight + 'px';  // 2017.02.20, from V3.1.1
-	
 		};
-
 		that._pushGameObj = function(ele) {
 			that._currentLevel._allGameElement.push(ele);
 		};
-
 		that._showAllElement = function() {
 			that._currentLevel._showAllElement();
 		};
-
 		return that;
 	})();
-
 	return Framework;
 })(Framework || {});
-
 listMember = function(main, space, divId) {
 	if(document.getElementById(divId+"_check")){
 		if(document.getElementById(divId+"_check").src.match("../../src/image/arrow_over.png")){
@@ -1042,13 +955,11 @@ listMember = function(main, space, divId) {
 					}
 				}
 			}catch(e){
-			
 			}
 		}
 		space += "&nbsp&nbsp&nbsp";
 	}
 };
-
 addAssertion = function(assertTarget, assertValue){
 	// var s = assertTarget.indexOf("Framework.Game._currentLevel.")
 	assertTarget = assertTarget.substring(29, assertTarget.length);

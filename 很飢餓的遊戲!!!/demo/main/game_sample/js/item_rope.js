@@ -13,12 +13,10 @@ var Item_rope = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_rope.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_rope.prototype, 'position', {
     get: function() {
         return this.mapPosition;

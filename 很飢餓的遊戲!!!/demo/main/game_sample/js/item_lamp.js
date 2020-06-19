@@ -14,12 +14,10 @@ var Item_lamp = function() {
     this.update = function(){
         this.status = false;
     }
-
     this.draw = function(ctx){
         this.item_lamp.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_lamp.prototype, 'position', {
     get: function() {
         return this.mapPosition;

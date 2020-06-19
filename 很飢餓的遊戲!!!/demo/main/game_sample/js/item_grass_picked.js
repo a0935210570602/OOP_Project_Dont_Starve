@@ -14,7 +14,6 @@ var Item_grass_picked = function() {
         this.item_grass_picked.draw(ctx);
     }
 };
-
 Object.defineProperty(Item_grass_picked.prototype, 'position', {
     get: function() {
         return this.mapPosition;
