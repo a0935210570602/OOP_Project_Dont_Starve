@@ -112,7 +112,6 @@ var loadGameEnd;
         { src: 'game_sample/js/skill_handler.js', lookFor: 'Skill_handler' },
         { src: 'game_sample/js/spear_handler.js', lookFor: 'Spear_handler' },
         { src: 'game_sample/js/skill_timer.js', lookFor: 'Skill_timer' },
-        { src: 'game_sample/js/monster_damage_handler.js', lookFor: 'Monster_damage_handler' },
         { src: 'game_sample/js/flying_arror.js', lookFor: 'Flying_arror' },
         { src: 'game_sample/js/player_hide_animation.js', lookFor: 'Player_hide_animation' },
         { src: 'game_sample/js/proxy.js', lookFor: 'Proxy' },
