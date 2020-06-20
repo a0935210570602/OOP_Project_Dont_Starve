@@ -1,4 +1,4 @@
-var EquipmentBar = function(backpackList) {
+var EquipmentBar = function() {
     this.backpack = new Framework.Sprite(define.materialPath + 'backpack.png'); 
     this.backpack.scale = 2;
     this.backpack.position = {x: 23*64, y: 8*64};    
