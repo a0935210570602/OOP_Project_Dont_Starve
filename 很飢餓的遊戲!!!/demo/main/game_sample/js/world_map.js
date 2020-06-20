@@ -477,6 +477,7 @@ var World_map = function()
             ctx.fillStyle = "black";
             ctx.textAlign = 'center';
             this.player1.backpack.draw(ctx);
+            this.player1.equipmentBar.draw(ctx);
             if(this.handle_initial_character.name == "請輸入名字"){
                 this.handle_initial_character.name = "";
             }
