@@ -97,7 +97,6 @@ var Framework = (function (Framework) {
 				tempSource.src= song[tempName];
 				audio.appendChild(tempSource);
 			}
-			//audio.addEventListener('canplaythrough', this.playMusic, true);
 			//audio.load(); 
 			audio.play(); 
 		};
