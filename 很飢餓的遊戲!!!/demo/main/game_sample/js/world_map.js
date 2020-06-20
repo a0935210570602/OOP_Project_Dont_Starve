@@ -458,6 +458,18 @@ var World_map = function()
             ctx.rect(242, 256, 225, 600);
             ctx.fillStyle = "#BEBEBE";
             ctx.fill();
+            ctx.beginPath();
+            ctx.rect(480, 0, 700, 96);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(1180, 426, 414, 470);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(258, 870, 1257, 26);
+            ctx.fillStyle = "#BEBEBE";
+            ctx.fill();
             this.synthesisBar.draw(ctx);
             this.npc1.draw(ctx);
             this.npc2.draw(ctx);
@@ -468,14 +480,21 @@ var World_map = function()
             if(this.handle_initial_character.name == "請輸入名字"){
                 this.handle_initial_character.name = "";
             }
-            ctx.fillText(this.handle_initial_character.name, 252 ,250);
+            if(this.npc_event.taking_is_start){
+                ctx.beginPath();
+                ctx.rect(201, 98, 272, 196);
+                ctx.fillStyle = "#BEBEBE";
+                ctx.fill();
+            }
             if(!this.is_character_description_open){
                 this.npc_event.draw(ctx);
             }    
+            
             if(!this.npc_event.taking_is_start)
                 this.character_description.draw(ctx);
             if(!this.npc_event.taking_is_start){
                 this.creation_blood_status.draw(ctx);
+                ctx.fillText(this.handle_initial_character.name, 252 ,250);
             }
         }else
             this.handle_initial_character.draw(ctx);
@@ -870,6 +889,7 @@ var World_map = function()
                 }
                 else
                     this.npc_event.talking();
+                this.draw(Framework.Game._context);
         }
         if(this.playerPositionOnMap.x + this.playerWalkDirection.x == this.npc2.position.x &&  this.on_map_name == "House1" &&
             this.playerPositionOnMap.y + this.playerWalkDirection.y == this.npc2.position.y ){
@@ -880,6 +900,7 @@ var World_map = function()
                 else{
                     this.npc_event.talking();
                 }
+                this.draw(Framework.Game._context);
         }
         if(this.player1.mode == "fishing" && this.fishing.fishBeCaught){
             this.handleFishing();
@@ -1167,6 +1188,7 @@ var World_map = function()
         }
     }
     this.click = function(e){   
+        console.log(e);
         if(this.playerInitial){
             if(this.character_description.is_character_description_open){
                 if(this.player1.capabilityt_point !=0){

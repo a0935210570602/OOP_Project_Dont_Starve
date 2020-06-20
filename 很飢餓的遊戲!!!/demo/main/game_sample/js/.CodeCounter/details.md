@@ -1,0 +1,118 @@
+# Details
+
+Date : 2020-06-20 11:47:42
+
+Directory : ./
+
+Total : 103 files,  20230 codes, 449 comments, 14 blanks, all 20693 lines, 2.17% comment rate
+
+[summary](results.md)
+
+## Files
+| filename | language | code | comment | blank | total | comment rate |
+| :--- | :--- | ---: | ---: | ---: | ---: | ---: |
+| [.VSCodeCounter\details.md](../.VSCodeCounter\details.md) | Markdown | 112 | 0 | 6 | 118 | 0.00% |
+| [.VSCodeCounter\results.md](../.VSCodeCounter\results.md) | Markdown | 14 | 0 | 7 | 21 | 0.00% |
+| [Local_map_0.js](../Local_map_0.js) | JavaScript | 4,253 | 102 | 0 | 4,355 | 2.34% |
+| [arror_attack.js](../arror_attack.js) | JavaScript | 43 | 0 | 0 | 43 | 0.00% |
+| [backpack.js](../backpack.js) | JavaScript | 395 | 5 | 0 | 400 | 1.25% |
+| [bat_wing.js](../bat_wing.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [bombMan.js](../bombMan.js) | JavaScript | 447 | 8 | 0 | 455 | 1.76% |
+| [building_remance.js](../building_remance.js) | JavaScript | 28 | 0 | 0 | 28 | 0.00% |
+| [character_description.js](../character_description.js) | JavaScript | 142 | 0 | 0 | 142 | 0.00% |
+| [clock.js](../clock.js) | JavaScript | 95 | 0 | 0 | 95 | 0.00% |
+| [constants.js](../constants.js) | JavaScript | 14 | 0 | 0 | 14 | 0.00% |
+| [creation_blood_status.js](../creation_blood_status.js) | JavaScript | 88 | 0 | 0 | 88 | 0.00% |
+| [define.js](../define.js) | JavaScript | 58 | 0 | 0 | 58 | 0.00% |
+| [drama0.js](../drama0.js) | JavaScript | 55 | 0 | 0 | 55 | 0.00% |
+| [equipmentBar.js](../equipmentBar.js) | JavaScript | 50 | 1 | 0 | 51 | 1.96% |
+| [fishing.js](../fishing.js) | JavaScript | 48 | 0 | 0 | 48 | 0.00% |
+| [flying_arror.js](../flying_arror.js) | JavaScript | 111 | 0 | 0 | 111 | 0.00% |
+| [food_base.js](../food_base.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [game.min.js](../game.min.js) | JavaScript | 1 | 0 | 0 | 1 | 0.00% |
+| [gameOver.js](../gameOver.js) | JavaScript | 34 | 1 | 0 | 35 | 2.86% |
+| [game_object_detail.js](../game_object_detail.js) | JavaScript | 108 | 5 | 0 | 113 | 4.42% |
+| [handle_game_over.js](../handle_game_over.js) | JavaScript | 67 | 0 | 0 | 67 | 0.00% |
+| [handle_initial_character.js](../handle_initial_character.js) | JavaScript | 242 | 0 | 0 | 242 | 0.00% |
+| [item_armor.js](../item_armor.js) | JavaScript | 32 | 2 | 0 | 34 | 5.88% |
+| [item_bee_sting.js](../item_bee_sting.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_berry.js](../item_berry.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_black_berry.js](../item_black_berry.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_blank.js](../item_blank.js) | JavaScript | 15 | 0 | 0 | 15 | 0.00% |
+| [item_branch.js](../item_branch.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_bush.js](../item_bush.js) | JavaScript | 37 | 2 | 0 | 39 | 5.13% |
+| [item_bush_dig.js](../item_bush_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_bush_growed_dig.js](../item_bush_growed_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_camp.js](../item_camp.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_campfire.js](../item_campfire.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_droplet.js](../item_droplet.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_eyeball.js](../item_eyeball.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_fake.js](../item_fake.js) | JavaScript | 13 | 0 | 0 | 13 | 0.00% |
+| [item_firebundle.js](../item_firebundle.js) | JavaScript | 43 | 2 | 0 | 45 | 4.44% |
+| [item_fish.js](../item_fish.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_flint.js](../item_flint.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_flower.js](../item_flower.js) | JavaScript | 34 | 2 | 0 | 36 | 5.56% |
+| [item_flower_dig.js](../item_flower_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_flower_growed_dig.js](../item_flower_growed_dig.js) | JavaScript | 25 | 2 | 0 | 27 | 7.41% |
+| [item_flower_picked.js](../item_flower_picked.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_gold.js](../item_gold.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_grass.js](../item_grass.js) | JavaScript | 38 | 2 | 0 | 40 | 5.00% |
+| [item_grass_dig.js](../item_grass_dig.js) | JavaScript | 25 | 2 | 0 | 27 | 7.41% |
+| [item_grass_growed_dig.js](../item_grass_growed_dig.js) | JavaScript | 25 | 2 | 0 | 27 | 7.41% |
+| [item_grass_picked.js](../item_grass_picked.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_helmat.js](../item_helmat.js) | JavaScript | 31 | 2 | 0 | 33 | 6.06% |
+| [item_honey.js](../item_honey.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_ice.js](../item_ice.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_king_wand.js](../item_king_wand.js) | JavaScript | 33 | 2 | 0 | 35 | 5.71% |
+| [item_lamp.js](../item_lamp.js) | JavaScript | 27 | 2 | 0 | 29 | 6.90% |
+| [item_meat.js](../item_meat.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_monster_meat.js](../item_monster_meat.js) | JavaScript | 9 | 1 | 0 | 10 | 10.00% |
+| [item_pigskin.js](../item_pigskin.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_rope.js](../item_rope.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_sapling.js](../item_sapling.js) | JavaScript | 34 | 2 | 0 | 36 | 5.56% |
+| [item_sapling_dig.js](../item_sapling_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_sapling_growed_dig.js](../item_sapling_growed_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_snow_ball.js](../item_snow_ball.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_space_wand.js](../item_space_wand.js) | JavaScript | 33 | 2 | 0 | 35 | 5.71% |
+| [item_spider_web.js](../item_spider_web.js) | JavaScript | 27 | 2 | 0 | 29 | 6.90% |
+| [item_stone.js](../item_stone.js) | JavaScript | 33 | 2 | 0 | 35 | 5.71% |
+| [item_tree_dig.js](../item_tree_dig.js) | JavaScript | 23 | 2 | 0 | 25 | 8.00% |
+| [item_waikei_homework.js](../item_waikei_homework.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_wood.js](../item_wood.js) | JavaScript | 26 | 2 | 0 | 28 | 7.14% |
+| [item_wood_armor.js](../item_wood_armor.js) | JavaScript | 31 | 2 | 0 | 33 | 6.06% |
+| [level2_change.js](../level2_change.js) | JavaScript | 50 | 0 | 0 | 50 | 0.00% |
+| [level_up_animation.js](../level_up_animation.js) | JavaScript | 15 | 0 | 0 | 15 | 0.00% |
+| [loadGame.js](../loadGame.js) | JavaScript | 147 | 6 | 0 | 153 | 3.92% |
+| [magic_attack.js](../magic_attack.js) | JavaScript | 21 | 0 | 0 | 21 | 0.00% |
+| [mainGame.js](../mainGame.js) | JavaScript | 11 | 2 | 0 | 13 | 15.38% |
+| [map_item_tree.js](../map_item_tree.js) | JavaScript | 76 | 3 | 0 | 79 | 3.80% |
+| [map_selector.js](../map_selector.js) | JavaScript | 66 | 0 | 0 | 66 | 0.00% |
+| [monster_base.js](../monster_base.js) | JavaScript | 273 | 0 | 0 | 273 | 0.00% |
+| [monster_bat.js](../monster_bat.js) | JavaScript | 22 | 1 | 0 | 23 | 4.35% |
+| [monster_bee.js](../monster_bee.js) | JavaScript | 22 | 1 | 0 | 23 | 4.35% |
+| [monster_boss.js](../monster_boss.js) | JavaScript | 494 | 0 | 0 | 494 | 0.00% |
+| [monster_cow.js](../monster_cow.js) | JavaScript | 22 | 1 | 0 | 23 | 4.35% |
+| [monster_cute_little_eye.js](../monster_cute_little_eye.js) | JavaScript | 22 | 1 | 0 | 23 | 4.35% |
+| [monster_pig.js](../monster_pig.js) | JavaScript | 22 | 1 | 0 | 23 | 4.35% |
+| [myMenu.js](../myMenu.js) | JavaScript | 127 | 2 | 0 | 129 | 1.55% |
+| [myMenu_gameteam.js](../myMenu_gameteam.js) | JavaScript | 59 | 2 | 0 | 61 | 3.28% |
+| [myMenu_tutorial.js](../myMenu_tutorial.js) | JavaScript | 80 | 3 | 0 | 83 | 3.61% |
+| [normal_attack.js](../normal_attack.js) | JavaScript | 21 | 0 | 0 | 21 | 0.00% |
+| [npc1.js](../npc1.js) | JavaScript | 131 | 1 | 0 | 132 | 0.76% |
+| [npc2.js](../npc2.js) | JavaScript | 127 | 1 | 0 | 128 | 0.78% |
+| [npc_event.js](../npc_event.js) | JavaScript | 238 | 0 | 0 | 238 | 0.00% |
+| [null_attack.js](../null_attack.js) | JavaScript | 6 | 0 | 0 | 6 | 0.00% |
+| [object_factory.js](../object_factory.js) | JavaScript | 34 | 0 | 0 | 34 | 0.00% |
+| [player_hide_animation.js](../player_hide_animation.js) | JavaScript | 16 | 0 | 0 | 16 | 0.00% |
+| [proxy.js](../proxy.js) | JavaScript | 8,625 | 208 | 0 | 8,833 | 2.35% |
+| [reduceDurabilityVisitor.js](../reduceDurabilityVisitor.js) | JavaScript | 25 | 0 | 0 | 25 | 0.00% |
+| [score.js](../score.js) | JavaScript | 73 | 0 | 0 | 73 | 0.00% |
+| [skill_handler.js](../skill_handler.js) | JavaScript | 46 | 0 | 0 | 46 | 0.00% |
+| [skill_timer.js](../skill_timer.js) | JavaScript | 39 | 0 | 0 | 39 | 0.00% |
+| [spear_handler.js](../spear_handler.js) | JavaScript | 20 | 0 | 0 | 20 | 0.00% |
+| [synthesisBar.js](../synthesisBar.js) | JavaScript | 473 | 7 | 0 | 480 | 1.46% |
+| [tool.js](../tool.js) | JavaScript | 31 | 0 | 0 | 31 | 0.00% |
+| [weapon.js](../weapon.js) | JavaScript | 32 | 0 | 0 | 32 | 0.00% |
+| [world_map.js](../world_map.js) | JavaScript | 1,223 | 4 | 1 | 1,228 | 0.33% |
+
+[summary](results.md)
