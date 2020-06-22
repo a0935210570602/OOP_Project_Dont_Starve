@@ -8,8 +8,8 @@ var Monster_cow = function(map) {
     this.monster_tocan.scale = 0.8; 
     this.name = "閃耀魔眼";
     this.attack = 100;
-    this.health = 200;
-    this.maxHealth = 200;
+    this.health = 1000;
+    this.maxHealth = 1000;
     //地圖，圖片，walkSpeed
     this.init(map, this.monster_cow, this.monster_cow_die, 8);
     this.drop = function(){

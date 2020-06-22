@@ -4,35 +4,7 @@ var Backpack = function() {
     this.objectFactory = new Object_factory();
     this.backpackPosition = [];
     this.objectPosition = [];
-    var berry = new Item_berry();
-    berry.amount = 100;
-    var branch = new Item_branch();
-    branch.amount = 100;
-    var flint = new Item_flint();
-    flint.amount = 100;
-    var gold = new Item_gold();
-    gold.amount = 100;
-    var grass = new Item_grass_picked();
-    grass.amount = 100;
-    var pix = this.objectFactory.createObject(
-        {
-            type: "Tool",
-            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_shovel.png'),
-            attackPoint: 2,
-            itemNumber: 20,
-            reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
-        }
-    );
-    var fishingRod = this.objectFactory.createObject(
-        {
-            type: "Tool",
-            imagePath: new Framework.Sprite(define.materialPath + 'item_fishing_rod.png'),
-            attackPoint: 1,
-            itemNumber: 17,
-            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
-        }
-    )
-    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,branch,flint,gold,grass,pix,new Item_space_wand(),new Item_king_wand(),fishingRod];
+    this.itemList = [];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
     this.selectedIndex = -1;
     for(var j = 0; j < 17; j++){
