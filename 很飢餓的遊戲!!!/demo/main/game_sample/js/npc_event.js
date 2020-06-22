@@ -98,8 +98,8 @@ var Npc_event = function(map) {
             "dialog":[
                 {loop:true, des:"你知道", finish:false},
                 {key:1, des:"偉凱的課很難修"},
-                {key:2, des:"很多人都會當了"},
-                {key:3, des:"你要不要放棄"},
+                {key:2, des:"很多人都被當了"},
+                {key:3, des:"你要不要放棄?"},
             ]
         },
         "商人莉莉":{

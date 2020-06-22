@@ -17,13 +17,22 @@ var Backpack = function() {
     var pix = this.objectFactory.createObject(
         {
             type: "Tool",
-            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_pixilart.png'),
+            imagePath: new Framework.Sprite(define.materialPath + 'item_gold_shovel.png'),
             attackPoint: 2,
-            itemNumber: 21,
+            itemNumber: 20,
             reduceDurability: function(visitor){visitor.visitGoldenTool(this)}
         }
     );
-    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,branch,flint,gold,grass,pix,new Item_space_wand()];
+    var fishingRod = this.objectFactory.createObject(
+        {
+            type: "Tool",
+            imagePath: new Framework.Sprite(define.materialPath + 'item_fishing_rod.png'),
+            attackPoint: 1,
+            itemNumber: 17,
+            reduceDurability: function(visitor){visitor.visitBasicTool(this)}
+        }
+    )
+    this.itemList = [new Item_wood_armor(),new Item_helmat(),berry,branch,flint,gold,grass,pix,new Item_space_wand(),new Item_king_wand(),fishingRod];
     this.stackableList = [1,2,4,5,6,7,8,9,10,11,12,13,14,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54];
     this.selectedIndex = -1;
     for(var j = 0; j < 17; j++){

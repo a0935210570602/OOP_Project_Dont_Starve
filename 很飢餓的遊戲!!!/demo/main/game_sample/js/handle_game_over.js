@@ -46,9 +46,13 @@ var Handle_game_over = function(){
         if(this.open._start)
             this.open.draw(ctx);
         else{
-            if(Framework.Game._levels[2].level.map.player1.character_descruption_point[0] <= 0)
+            if(!Framework.Game._levels[2].level.map.player1.gameClear){
+                console.log(Framework.Game._levels[2].level.map.player1.character_descruption_point[0]);
                 this.menu.draw(ctx);
+            }
             else{
+                console.log(Framework.Game._levels[2].level.map.player1.character_descruption_point[0]);
+                
                 this.gameClear.draw(ctx);
                 ctx.font = '90pt Algerian';
                 ctx.globalAlpha=1;

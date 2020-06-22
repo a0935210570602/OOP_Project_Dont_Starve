@@ -188,6 +188,7 @@ var World_map = function()
 	this.update = function()
 	{   
         if(this.monster[0].isdead){
+            this.score.scoreAddByKillMonster();
             this.gameClear();
             Framework.Game.goToLevel('gameOver');
         }
@@ -571,6 +572,7 @@ var World_map = function()
         this.audio.stopAll();
         this.capture_key = [];
         this.clear = true;
+        this.player1.character_descruption_point[0] = 10;
         this.clock.stopMusic(true);
         this.player1.gameClear = true;
         this.clock.stopMusic(true);
